@@ -48,5 +48,13 @@ public class HelloWorldController {
 
         return bestSellers;
 
+<<<<<<< HEAD
+=======
+    @PostMapping("/home")
+    public String home(@RequestParam("movieTitle") String movieTitle) {
+        System.out.println("movieTitle = " + movieTitle);
+        System.out.println("잠시 빌릴게요...");
+        return movieTitle;
+>>>>>>> 334b414e974fdbebb014eb75eed1ca9ea129d3d8
     }
 }
