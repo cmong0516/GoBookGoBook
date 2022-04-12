@@ -29,8 +29,8 @@ function App() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/">베스트셀러</Nav.Link>
-                        <Nav.Link as={Link} to="/new">신간도서</Nav.Link>
+                        <Nav.Link as={Link} to="/bestseller">베스트셀러</Nav.Link>
+                        <Nav.Link as={Link} to="/newbook">신간도서</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -38,12 +38,12 @@ function App() {
             <hr/>
 
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/bestseller">
                     <bookContext.Provider value={books}>
                         <BestSeller />
                     </bookContext.Provider>
                 </Route>
-                <Route path="/new">
+                <Route path="/newbook">
                     <NewBooks />
                 </Route>
             </Switch>
