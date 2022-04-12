@@ -13,7 +13,7 @@ public class HelloWorldController {
     private final String Url = "http://book.interpark.com/api/bestSeller.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
 
     @GetMapping("/home")
-    public ArrayList<BestSeller> home(){
+    public ArrayList<BestSeller> home() {
 
         String result = WebClient.create(Url)
                 .get()
@@ -21,7 +21,8 @@ public class HelloWorldController {
                 .bodyToMono(String.class)
                 .block();
         JSONObject jsonObject = new JSONObject(result);
-        JSONArray test1 = jsonObject.getJSONArray("item");;
+        JSONArray test1 = jsonObject.getJSONArray("item");
+        ;
 
         ArrayList<BestSeller> bestSellers = new ArrayList<>();
         for (int i = 0; i < test1.length(); i++) {
@@ -48,13 +49,13 @@ public class HelloWorldController {
 
         return bestSellers;
 
-<<<<<<< HEAD
-=======
+
+    }
+
     @PostMapping("/home")
     public String home(@RequestParam("movieTitle") String movieTitle) {
         System.out.println("movieTitle = " + movieTitle);
         System.out.println("잠시 빌릴게요...");
         return movieTitle;
->>>>>>> 334b414e974fdbebb014eb75eed1ca9ea129d3d8
     }
 }
