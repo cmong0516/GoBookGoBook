@@ -4,8 +4,8 @@ function App() {
     return (
         <div className="App">
            <div>
-               <a href="/bestSeller">Best</a>
-               <a href="/newBook">New</a>
+               <a href="/bestseller">Best</a>
+               <a href="/newbook">New</a>
            </div>
         </div>
     );

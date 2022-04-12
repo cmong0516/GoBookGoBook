@@ -14,7 +14,7 @@ public class APIController {
     private final String bestUrl = "http://book.interpark.com/api/bestSeller.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
     private final String newUrl = "http://book.interpark.com/api/newBook.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
 
-    @GetMapping("/bestSeller")
+    @GetMapping("/bestseller")
     public ArrayList<BestSeller> bestSellers() {
 
         String result = WebClient.create(bestUrl)
@@ -26,9 +26,10 @@ public class APIController {
         JSONArray test1 = jsonObject.getJSONArray("item");
 
         ArrayList<BestSeller> bestSellers = new ArrayList<>();
-        BestSeller bestSeller = new BestSeller();
+
 
         for (int i = 0; i < test1.length(); i++) {
+            BestSeller bestSeller = new BestSeller();
             JSONObject obj = test1.getJSONObject(i);
             bestSeller.setItemId((long) obj.getInt("itemId"));
             bestSeller.setTitle(obj.getString("title"));
@@ -48,7 +49,7 @@ public class APIController {
         }
         return bestSellers;
     }
-    @GetMapping("/newBook")
+    @GetMapping("/newbook")
 
     public ArrayList<NewBook> newBooks() {
 
@@ -62,11 +63,11 @@ public class APIController {
         ;
 
         ArrayList<NewBook> newBooks = new ArrayList<>();
-        NewBook newBook = new NewBook();
+
         for (int i = 0; i < test1.length(); i++) {
 
             JSONObject obj = test1.getJSONObject(i);
-
+            NewBook newBook = new NewBook();
             newBook.setItemId((long) obj.getInt("itemId"));
             newBook.setTitle(obj.getString("title"));
             newBook.setDescription(obj.getString("description"));
@@ -80,7 +81,6 @@ public class APIController {
             newBook.setAuthor(obj.getString("author"));
             newBook.setTranslator(obj.getString("translator"));
             newBook.setIsbn(obj.getLong("isbn"));
-            newBook.setRank(obj.getInt("rank"));
             newBooks.add(newBook);
         }
 
