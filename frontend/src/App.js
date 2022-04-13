@@ -39,15 +39,22 @@ function App() {
         <span> | </span>
         <span>마이페이지</span>
       </UserStyle>
-      <InputGroup className="p-5">
-        <FormControl
-          size="lg"
-          type="search"
-          placeholder="제목, 저자, 출판사로 검색"
-          aria-label="Search"
-        />
-        <Button variant="outline-secondary" >검색</Button>
-      </InputGroup>
+      {/*<InputGroup className="p-5">*/}
+      {/*  <FormControl*/}
+      {/*    size="lg"*/}
+      {/*    type="search"*/}
+      {/*    placeholder="제목, 저자, 출판사로 검색"*/}
+      {/*    aria-label="Search"*/}
+      {/*  />*/}
+      {/*  <Button variant="outline-secondary" >검색</Button>*/}
+      {/*</InputGroup>*/}
+      <div>
+      <form action="/kakao/search" method="GET">
+        <label for="searching">검색을 원하는 책 , 저자 를 입력해주세요.</label>
+        <input type="text" name="query" id="searching"></input>
+          <button type="submit">검색</button>
+      </form>
+      </div>
       <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand>도서</Navbar.Brand>
