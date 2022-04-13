@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "com.example.demo.properties.ApiKeyProperties",
+      "sourceType": "com.example.demo.properties.ApiKeyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "kakao-rest-api",
+      "type": "java.lang.String",
+      "sourceType": "com.example.demo.properties.ApiKeyProperties"
+    }
+  ],
+  "hints": []
+}
