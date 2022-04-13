@@ -5,7 +5,7 @@ import Book from './Book.js';
 function BestSeller() {
 
     let books = useContext(bookContext);
-    console.log(books[0]);
+    
     return (
         <div>
             <Book />
