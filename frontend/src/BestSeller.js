@@ -8,8 +8,8 @@ function BestSeller() {
     useEffect(() => {
         axios.get('/bestseller')
             .then((res) => {
-                console.log(res.data);
-                console.log(Array.isArray(res.data));
+                // console.log(res.data);
+                // console.log(Array.isArray(res.data));
 
                 setBooks(res.data);
 

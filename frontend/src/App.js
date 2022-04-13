@@ -13,22 +13,32 @@ import NewBooks from "./NewBooks.js";
 import "./App.css";
 import styled from 'styled-components';
 
+// const GlobalStyle  =  createGlobalStyle`
+//   font-family: 'Pretendard-Medium';
+// `
+
 let Wrapper = styled.div`
   width : 80%;
   margin : auto;
+`;
+let UserStyle = styled.div`
+  text-align: right;
+  padding : 20pt;
 `;
 
 function App() {
 
   return (
     <div className="App">
-      <div>
+
+      {/* <GlobalStyle/> */}
+      <UserStyle>
         <span>로그인</span>
         <span> | </span>
         <span>회원가입</span>
         <span> | </span>
         <span>마이페이지</span>
-      </div>
+      </UserStyle>
       <InputGroup className="p-5">
         <FormControl
           size="lg"
@@ -36,7 +46,7 @@ function App() {
           placeholder="제목, 저자, 출판사로 검색"
           aria-label="Search"
         />
-        <Button variant="outline-secondary">검색</Button>
+        <Button variant="outline-secondary" >검색</Button>
       </InputGroup>
       <Navbar bg="light" expand="lg">
         <Container>
@@ -59,7 +69,7 @@ function App() {
       <Switch>
         <Wrapper>
           <Route exact path="/bestseller">
-              <BestSeller />
+            <BestSeller />
           </Route>
           <Route path="/newbook">
             <NewBooks />
