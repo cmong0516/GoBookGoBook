@@ -64,6 +64,7 @@ function App() {
     <div className="App">
 
       {/* <GlobalStyle/> */}
+<<<<<<< HEAD
         <UserStyle>
             <span>로그인</span>
             <span> | </span>
@@ -89,6 +90,48 @@ function App() {
         </Nav>
       </Container>
     </Navbar>
+=======
+      <UserStyle>
+        <span>로그인</span>
+        <span> | </span>
+        <span>회원가입</span>
+        <span> | </span>
+        <span>마이페이지</span>
+      </UserStyle>
+      {/*<InputGroup className="p-5">*/}
+      {/*  <FormControl*/}
+      {/*    size="lg"*/}
+      {/*    type="search"*/}
+      {/*    placeholder="제목, 저자, 출판사로 검색"*/}
+      {/*    aria-label="Search"*/}
+      {/*  />*/}
+      {/*  <Button variant="outline-secondary" >검색</Button>*/}
+      {/*</InputGroup>*/}
+      <div>
+      <form action="/kakao/search" method="GET">
+        <label for="searching">검색을 원하는 책 , 저자 를 입력해주세요.</label>
+        <input type="text" name="query" id="searching"></input>
+          <button type="submit">검색</button>
+      </form>
+      </div>
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand>도서</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/bestseller">
+                베스트셀러
+              </Nav.Link>
+              <Nav.Link as={Link} to="/newbook">
+                신간도서
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <hr />
+>>>>>>> 30a422fd0d683aeeb8553272a87a8357be2d0b25
 
       <Switch>
         <Wrapper>
