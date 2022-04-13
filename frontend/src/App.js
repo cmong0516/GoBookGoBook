@@ -52,7 +52,7 @@ function App() {
       <form action="/kakao/search" method="GET">
         <label for="searching">검색을 원하는 책 , 저자 를 입력해주세요.</label>
         <input type="text" name="query" id="searching"></input>
-          <button type="submit">검색</button>
+          <Button type="submit" variant="secondary">검색</Button>
       </form>
       </div>
       <Navbar bg="light" expand="lg">
