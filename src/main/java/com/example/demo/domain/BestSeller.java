@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-
 public class BestSeller {
     private Long itemId;
     private String title;
