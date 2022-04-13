@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.netty:netty-codec-dns:4.1.67.Final">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-dns/4.1.67.Final/a849f74bda42b709355011cf7c3e19f0ab672588/netty-codec-dns-4.1.67.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-dns/4.1.67.Final/2b920a8f02978f885d1e91452162979fb12b7873/netty-codec-dns-4.1.67.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

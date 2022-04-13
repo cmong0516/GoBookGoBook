@@ -9,6 +9,7 @@ function Book() {
     useEffect(() => {
         axios.get('/bestseller')
             .then((res) => {
+                
                 console.log(res.data);
             }).catch((error) => {
                 alert('도서 데이터를 받아오는 데 실패했습니다.');
