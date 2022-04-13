@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {BookWrapper} from './App.js'
+import {BookImageWrapper} from './App.js'
+import {Card} from "react-bootstrap";
 
 function BestSeller() {
 
@@ -21,11 +24,15 @@ function BestSeller() {
 
     return (
         <div className='row'>
+            
             {books && books.map((book, i) => (
-                <div className="col-lg-2 col-md-3 col-sm-4" key={book.itemId}>
-                    <img src={book.coverLargeUrl} width="90%"/>
-                    <p>{book.title}</p>
-                    {book.author} | {book.publisher}
+                <div className="col-lg-3 col-sm-4" key={book.itemId}>
+                    <BookWrapper>
+                        <h3>{i+1}</h3>
+                        <BookImageWrapper><img src={book.coverLargeUrl}/></BookImageWrapper>
+                        <p>{book.title}</p>
+                        {book.author} / {book.publisher}
+                    </BookWrapper>
                 </div>
             ))}
         </div>

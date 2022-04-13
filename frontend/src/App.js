@@ -18,16 +18,45 @@ import styled from 'styled-components';
 // `
 
 let Wrapper = styled.div`
-  width : 80%;
+  width : 70%;
   margin : auto;
 `;
 let UserStyle = styled.div`
   text-align: right;
-  padding : 20pt;
+  padding : 2rem;
   font-size : 13pt;
   background-color: hsl(146, 45%, 36%);
   color: floralwhite;
 `;
+export let BookWrapper = styled.div`
+  width: 80%;
+  margin-top: 2rem;
+  text-align: left;
+
+  p {
+    font-size: 13pt;
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+
+  h3 {
+    color: yellowgreen;
+    text-shadow: 1px 1px 1px darkgreen;
+    font-style: italic;
+    font-weight: bolder;
+  }
+`
+
+export let BookImageWrapper = styled.div`
+  width: 12rem;
+  height: 17rem;
+
+  img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+  }
+`
 
 function App() {
 
@@ -45,7 +74,7 @@ function App() {
             <FormControl
               size="lg"
               type="search"
-              placeholder="제목, 저자, 출판사로 검색"
+              placeholder="검색을 원하는 책, 저자를 입력해주세요."
               aria-label="Search"
             />
             <Button variant="outline-light" >검색</Button>
@@ -54,7 +83,7 @@ function App() {
     <Navbar bg="success" variant="dark">
       <Container>
         <Navbar.Brand className="fs-3">도서</Navbar.Brand>
-        <Nav className="me-auto fs-4">
+        <Nav className="me-auto fs-5">
           <Nav.Link as={Link} to="/bestseller">베스트셀러</Nav.Link>
           <Nav.Link as={Link} to="/newbook">신간도서</Nav.Link>
         </Nav>
