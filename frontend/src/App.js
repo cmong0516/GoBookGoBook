@@ -13,7 +13,7 @@ import NewBooks from "./NewBooks.js";
 import "./App.css";
 import styled from 'styled-components';
 
-let BestSellerWrapper = styled.div`
+let Wrapper = styled.div`
   width : 80%;
   margin : auto;
 `;
@@ -44,10 +44,10 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/bestseller">
                 베스트셀러
               </Nav.Link>
-              <Nav.Link as={Link} to="/new">
+              <Nav.Link as={Link} to="/newbook">
                 신간도서
               </Nav.Link>
             </Nav>
@@ -57,14 +57,14 @@ function App() {
       <hr />
 
       <Switch>
-        <Route exact path="/">
-          <BestSellerWrapper>
-            <BestSeller />
-          </BestSellerWrapper>
-        </Route>
-        <Route path="/new">
-          <NewBooks />
-        </Route>
+        <Wrapper>
+          <Route exact path="/bestseller">
+              <BestSeller />
+          </Route>
+          <Route path="/newbook">
+            <NewBooks />
+          </Route>
+        </Wrapper>
       </Switch>
     </div>
   );
