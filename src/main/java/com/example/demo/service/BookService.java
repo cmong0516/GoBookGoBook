@@ -1,10 +1,10 @@
-package apitest.study.service;
+package com.example.demo.service;
 
-import apitest.study.domain.SearchBook;
-import apitest.study.properties.KakaoProperties;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import com.example.demo.domain.SearchBook;
+import com.example.demo.properties.ApiKeyProperties;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -14,9 +14,9 @@ import java.util.ArrayList;
 @Service
 public class BookService {
 
-    private final KakaoProperties properties;
+    private final ApiKeyProperties properties;
 
-    public BookService(KakaoProperties properties) {
+    public BookService(ApiKeyProperties properties) {
         this.properties = properties;
     }
 
@@ -29,7 +29,7 @@ public class BookService {
 //                        .queryParam("page",page)
                                 .build()
                 )
-                .header("Authorization", "KakaoAK "+properties.getRestapi()) //원래 키는 프로퍼티에서 꺼내오도록 하자
+                .header("Authorization", "KakaoAK "+properties.getKakaoRestApi()) //원래 키는 프로퍼티에서 꺼내오도록 하자
                 .exchangeToMono(resp -> {
                     return resp.bodyToMono(String.class);
                 });
@@ -66,12 +66,13 @@ public class BookService {
             String isbn = (String) obj.get("isbn"); //string으로 뽑기
             String[] split = isbn.split(" "); //공백 기준으로 분리
 //            Long s = Long.valueOf(split[1]); //long으로 변환 isbn 알파벳도 있음
-
             searchBook.setIsbn(split[1]);
+
             searchBook.setPublisher(obj.getString("publisher"));
             searchBook.setThumbnail(obj.getString("thumbnail"));
             searchBook.setTitle(obj.getString("title"));
-            searchBook.setTranslator(obj.getString("translators")); //없는 경우도 많다..
+            //테스트는 되는데 여기서 안된다..
+//            searchBook.setTranslator(obj.getString("translators")); //없는 경우도 많다..
 
             searchBooks.add(searchBook);
         }

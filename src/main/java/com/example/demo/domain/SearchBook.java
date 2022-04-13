@@ -1,4 +1,4 @@
-package apitest.study.domain;
+package com.example.demo.domain;
 
 import lombok.Data;
 
@@ -12,6 +12,6 @@ public class SearchBook {
     private String dateTime; //발행일
     private String publisher; //카테고리
     private String authors; //작가
-    private String translator;
+    private String translator; //필요없으면 뺄 예정
     private String isbn;
 }
