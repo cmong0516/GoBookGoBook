@@ -1,4 +1,10 @@
 package com.example.demo.domain;
 
+import lombok.Data;
+
+@Data
 public class RentBook {
+    private Long rentId;
+    private String putDate;
+
 }
