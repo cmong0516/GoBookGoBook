@@ -24,6 +24,9 @@ let Wrapper = styled.div`
 let UserStyle = styled.div`
   text-align: right;
   padding : 20pt;
+  font-size : 13pt;
+  background-color: hsl(146, 45%, 36%);
+  color: floralwhite;
 `;
 
 function App() {
@@ -32,39 +35,31 @@ function App() {
     <div className="App">
 
       {/* <GlobalStyle/> */}
-      <UserStyle>
-        <span>로그인</span>
-        <span> | </span>
-        <span>회원가입</span>
-        <span> | </span>
-        <span>마이페이지</span>
-      </UserStyle>
-      <InputGroup className="p-5">
-        <FormControl
-          size="lg"
-          type="search"
-          placeholder="제목, 저자, 출판사로 검색"
-          aria-label="Search"
-        />
-        <Button variant="outline-secondary" >검색</Button>
-      </InputGroup>
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand>도서</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/bestseller">
-                베스트셀러
-              </Nav.Link>
-              <Nav.Link as={Link} to="/newbook">
-                신간도서
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <hr />
+        <UserStyle>
+            <span>로그인</span>
+            <span> | </span>
+            <span>회원가입</span>
+            <span> | </span>
+            <span>마이페이지</span>
+          <InputGroup className="my-5 w-50 mx-auto">
+            <FormControl
+              size="lg"
+              type="search"
+              placeholder="제목, 저자, 출판사로 검색"
+              aria-label="Search"
+            />
+            <Button variant="outline-light" >검색</Button>
+          </InputGroup>
+        </UserStyle>
+    <Navbar bg="success" variant="dark">
+      <Container>
+        <Navbar.Brand className="fs-3">도서</Navbar.Brand>
+        <Nav className="me-auto fs-4">
+          <Nav.Link as={Link} to="/bestseller">베스트셀러</Nav.Link>
+          <Nav.Link as={Link} to="/newbook">신간도서</Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
 
       <Switch>
         <Wrapper>
