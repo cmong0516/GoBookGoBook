@@ -6,7 +6,7 @@ function NewBooks() {
     let [books, setBooks] = useState()
     
     useEffect(() => {
-        axios.get('/newbook')
+        axios.get('/api/newbook')
             .then((res) => {
                 console.log(res.data);
                 console.log(Array.isArray(res.data));
