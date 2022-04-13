@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @RestController
 public class APIController {
     private final String bestUrl = "http://book.interpark.com/api/bestSeller.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
-    private final String newUrl = "http://book.interpark.com/api/newBook.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
+    private final String newUrl = "http://book.interpark.com/api/newBook.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=103&output=json";
 
     @GetMapping("/bestseller")
     public ArrayList<BestSeller> bestSellers() {
