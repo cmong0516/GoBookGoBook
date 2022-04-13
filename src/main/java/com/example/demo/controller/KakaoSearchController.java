@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.properties.ApiKeyProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +12,12 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@RequestMapping("/kakao")
 @RequiredArgsConstructor
 public class KakaoSearchController {
 
+    private final ApiKeyProperties properties;
     //검색기능
-    //http://localhost:8080/kakao/search?query=책제목
+    //http://localhost:8080/kakao/search?query=책제목&page=1
     @GetMapping("/search")
     public String search(@RequestParam String query, @RequestParam Integer page){
         Mono<String> stringMono = WebClient.builder().baseUrl("https://dapi.kakao.com") //호스트
@@ -27,7 +28,7 @@ public class KakaoSearchController {
                         .queryParam("page",page)
                         .build()
                 )
-                .header("Authorization", "KakaoAK ${key}") //원래 키는 프로퍼티에서 꺼내오도록 하자
+                .header("Authorization", "KakaoAK "+properties.getKakaoRestApi()) //원래 키는 프로퍼티에서 꺼내오도록 하자
                 .exchangeToMono(resp -> {
                     return resp.bodyToMono(String.class);
                 });
