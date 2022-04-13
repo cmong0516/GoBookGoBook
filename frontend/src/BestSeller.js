@@ -6,7 +6,7 @@ function BestSeller() {
     let [books, setBooks] = useState()
     
     useEffect(() => {
-        axios.get('/bestseller')
+        axios.get('/api/bestseller')
             .then((res) => {
                 console.log(res.data);
                 console.log(Array.isArray(res.data));
@@ -23,7 +23,6 @@ function BestSeller() {
         <div className='row'>
             {books && books.map((book, i) => (
                 <div className="col-lg-2 col-md-3 col-sm-4" key={book.itemId}>
-                    {i+1}
                     <img src={book.coverLargeUrl} width="90%"/>
                     <p>{book.title}</p>
                     {book.author} | {book.publisher}
