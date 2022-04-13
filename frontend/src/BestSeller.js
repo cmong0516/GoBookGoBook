@@ -20,10 +20,13 @@ function BestSeller() {
     },[]);
 
     return (
-        <div>
+        <div className='row'>
             {books && books.map((book, i) => (
-                <div key={book.itemId}>
-                    {book.title}
+                <div className="col-md-3 col-sm-6" key={book.itemId}>
+                    {i+1}
+                    <img src={book.coverLargeUrl} width="80%"/>
+                    <p>{book.title}</p>
+                    {book.author} | {book.publisher}
                 </div>
             ))}
         </div>

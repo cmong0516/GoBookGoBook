@@ -11,6 +11,12 @@ import { Link, Route, Switch } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import "./App.css";
+import styled from 'styled-components';
+
+let BestSellerWrapper = styled.div`
+  width : 80%;
+  margin : auto;
+`;
 
 function App() {
 
@@ -52,7 +58,9 @@ function App() {
 
       <Switch>
         <Route exact path="/">
+          <BestSellerWrapper>
             <BestSeller />
+          </BestSellerWrapper>
         </Route>
         <Route path="/new">
           <NewBooks />
