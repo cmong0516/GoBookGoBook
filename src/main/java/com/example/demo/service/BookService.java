@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.SearchBook;
 import com.example.demo.properties.ApiKeyProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
