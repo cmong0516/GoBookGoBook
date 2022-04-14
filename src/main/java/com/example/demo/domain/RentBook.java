@@ -6,5 +6,5 @@ import lombok.Data;
 public class RentBook {
     private Long rentId;
     private String putDate;
-
+    private Long isbn;
 }
