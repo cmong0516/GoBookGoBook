@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {
-  InputGroup,
-  FormControl,
-  Button,
-  Nav,
-  Navbar,
-  Container,
+    InputGroup,
+    FormControl,
+    Button,
+    Nav,
+    Navbar,
+    Container,
 } from "react-bootstrap";
 import { Link, Route, Switch } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
@@ -35,6 +35,7 @@ export let BookContext = React.createContext();
 
 function App() {
 
+<<<<<<< HEAD
   let [books, setBooks] = useState();
 
   let getBooks = (booksData) => {
@@ -70,7 +71,37 @@ function App() {
         </Nav>
       </Container>
     </Navbar>
+=======
+    return (
+        <div className="App">
+>>>>>>> e91f3ffa22264d97c0a7673b826f69c4a75adea9
 
+            {/* <GlobalStyle/> */}
+            <UserStyle>
+                <span>로그인</span>
+                <span> | </span>
+                <span>회원가입</span>
+                <span> | </span>
+                <span>마이페이지</span>
+                <InputGroup className="my-5 w-50 mx-auto">
+                    <FormControl
+                        size="lg"
+                        type="search"
+                        placeholder="검색을 원하는 책, 저자를 입력해주세요."
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-light" >검색</Button>
+                </InputGroup>
+            </UserStyle>
+            <Navbar bg="success" variant="dark">
+                <Container>
+                    <Navbar.Brand className="fs-3">도서</Navbar.Brand>
+                    <Nav className="me-auto fs-5">
+                        <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
+                        <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">
