@@ -38,6 +38,7 @@ public class APIController {
             bestSeller.setPubDate(obj.getString("pubDate"));
             bestSeller.setCoverSmallUrl(obj.getString("coverSmallUrl"));
             bestSeller.setCoverLargeUrl(obj.getString("coverLargeUrl"));
+//            bestSeller.setCategoryId(obj.getInt("categoryId"));
             bestSeller.setCategoryName(obj.getString("categoryName"));
             bestSeller.setPublisher(obj.getString("publisher"));
             bestSeller.setCustomerReviewRank(obj.getLong("customerReviewRank"));

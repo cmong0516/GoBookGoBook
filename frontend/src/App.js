@@ -8,10 +8,12 @@ import {
     Container,
 } from "react-bootstrap";
 import { Link, Route, Switch } from "react-router-dom";
-import BestSeller from "./BestSeller.js";
+import BestSeller,{BestSellerContext} from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
+import Detail from "./Detail.js"
 import "./App.css";
 import styled from 'styled-components';
+
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -28,34 +30,6 @@ let UserStyle = styled.div`
   background-color: hsl(146, 45%, 36%);
   color: floralwhite;
 `;
-export let BookWrapper = styled.div`
-  width: 80%;
-  margin-top: 2rem;
-  text-align: left;
-
-  p {
-    font-size: 13pt;
-    font-weight: 600;
-    margin: 0.5rem 0;
-  }
-
-  h3 {
-    color: yellowgreen;
-    text-shadow: 1px 1px 1px darkgreen;
-    font-style: italic;
-    font-weight: bolder;
-  }
-`
-export let BookImageWrapper = styled.div`
-  width: 12rem;
-  height: 17rem;
-
-  img {
-    width: 100%; 
-    height: 100%;
-    object-fit: cover;
-  }
-`
 
 function App() {
 
@@ -88,19 +62,23 @@ function App() {
                     </Nav>
                 </Container>
             </Navbar>
-
-            <Switch>
-                <Wrapper>
-                    <Route exact path="/api/bestseller">
-                        <BestSeller />
-                    </Route>
-                    <Route path="/api/newbook">
-                        <NewBooks />
-                    </Route>
-                </Wrapper>
-            </Switch>
-        </div>
-    );
+      <Switch>
+        <Wrapper>
+          <Route exact path="/api/bestseller">
+            <BestSeller />
+          </Route>
+          <Route path="/api/newbook">
+            <NewBooks />
+          </Route>
+          <Route path="/detail/:isbn">
+            <BestSellerContext.Provider value={books}>
+              <Detail books={books}/>
+            </BestSellerContext.Provider>
+          </Route>
+        </Wrapper>
+      </Switch>
+    </div>
+  );
 
 }
 
