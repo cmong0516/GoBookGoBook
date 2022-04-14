@@ -35,7 +35,6 @@ export let BookContext = React.createContext();
 
 function App() {
 
-<<<<<<< HEAD
   let [books, setBooks] = useState();
 
   let getBooks = (booksData) => {
@@ -71,10 +70,6 @@ function App() {
         </Nav>
       </Container>
     </Navbar>
-=======
-    return (
-        <div className="App">
->>>>>>> e91f3ffa22264d97c0a7673b826f69c4a75adea9
 
             {/* <GlobalStyle/> */}
             <UserStyle>
