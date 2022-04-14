@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {BookWrapper} from './App.js'
-import {BookImageWrapper} from './App.js'
+import Book from './Book.js'
+
+export let NewBooksContext = React.createContext();
 
 function NewBooks() {
 
-    let [books, setBooks] = useState()
+    let [books, setBooks] = useState();
     
     useEffect(() => {
         axios.get('/api/newbook')
@@ -19,15 +20,9 @@ function NewBooks() {
 
     return (
         <div className='row'>
-            {books && books.map((book, i) => (
-                <div className="col-lg-3 col-sm-4" key={book.itemId}>
-                    <BookWrapper>
-                        <BookImageWrapper><img src={book.coverLargeUrl}/></BookImageWrapper>
-                        <p>{book.title}</p>
-                        {book.author} / {book.publisher}
-                    </BookWrapper>
-                </div>
-            ))}
+            <NewBooksContext.Provider value={books}>
+                <Book />
+            </NewBooksContext.Provider>
         </div>
     )
 }

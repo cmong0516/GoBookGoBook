@@ -1,22 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {useContext} from 'react';
+import {useParams} from 'react-router-dom';
+import {BestSellerContext} from './BestSeller.js'
+import {NewBooksContext} from './NewBooks.js'
+import "./App.css";
 
 function Detail() {
 
-    let [books, setBooks] = useState()
+    let bestSeller = useContext(BestSellerContext);
+    let newBook = useContext(NewBooksContext);
     
-    useEffect(() => {
-        axios.get('')
-            .then((res) => {
-                
-            }).catch((error) => {
-                console.log(error);
-            });
-    },[]);
-
     return (
         <div>
-           
+            {
+                bestSeller
+                ? <DetailView books={bestSeller}/>
+                : <DetailView books={newBook}/>
+            }
+        </div>
+    )
+}
+
+function DetailView(props) {
+
+    let { isbn } = useParams();
+
+    let book = props.books && props.books.find(x => x.isbn == isbn);
+    return (
+        <div>
+            <img src={book.coverLargeUrl}/>
+            {book.title}
+            {book.author}
+            {book.publisher}
         </div>
     )
 }
