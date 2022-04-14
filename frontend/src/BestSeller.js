@@ -4,7 +4,7 @@ import Book from './Book.js'
 
 export let BestSellerContext = React.createContext();
 
-function BestSeller() {
+function BestSeller(props) {
     
     let [books, setBooks] = useState();
     
@@ -25,6 +25,7 @@ function BestSeller() {
     return (
         <div className='row'>
             <BestSellerContext.Provider value={books}>
+                {props.getBooks(books)}
                 <Book />
             </BestSellerContext.Provider>
         </div>

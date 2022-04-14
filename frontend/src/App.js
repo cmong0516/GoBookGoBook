@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   InputGroup,
   FormControl,
@@ -8,7 +8,7 @@ import {
   Container,
 } from "react-bootstrap";
 import { Link, Route, Switch } from "react-router-dom";
-import BestSeller,{BestSellerContext} from "./BestSeller.js";
+import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import Detail from "./Detail.js"
 import "./App.css";
@@ -31,7 +31,15 @@ let UserStyle = styled.div`
   color: floralwhite;
 `;
 
+export let BookContext = React.createContext();
+
 function App() {
+
+  let [books, setBooks] = useState();
+
+  let getBooks = (booksData) => {
+    setBooks(booksData);
+  }
 
   return (
     <div className="App">
@@ -66,18 +74,15 @@ function App() {
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">
-            <BestSeller />
+            <BestSeller getBooks={getBooks}/>
           </Route>
           <Route path="/api/newbook">
-            <NewBooks />
+            <NewBooks getBooks={getBooks}/>
           </Route>
           <Route path="/detail/:isbn">
-            {/* <BestSeller> */}
-              {/* <BestSellerContext.Provider value={books}> */}
-                <Detail/>
-                {/* <Detail books={books}/> */}
-              {/* </BestSellerContext.Provider> */}
-            {/* </BestSeller> */}
+            <BookContext.Provider value={books}>
+              <Detail />
+            </BookContext.Provider>
           </Route>
         </Wrapper>
       </Switch>

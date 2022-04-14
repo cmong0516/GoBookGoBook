@@ -1,20 +1,18 @@
 import React, {useContext} from 'react';
 import {useParams} from 'react-router-dom';
-import {BestSellerContext} from './BestSeller.js'
-import {NewBooksContext} from './NewBooks.js'
 import "./App.css";
+import {BookContext} from './App.js';
 
 function Detail() {
 
-    let bestSeller = useContext(BestSellerContext);
-    let newBook = useContext(NewBooksContext);
-    
+    let book = useContext(BookContext);
+
     return (
         <div>
             {
-                bestSeller
-                ? <DetailView books={bestSeller}/>
-                : <DetailView books={newBook}/>
+                book
+                ? <DetailView books={book}/>
+                : null
             }
         </div>
     )
@@ -27,11 +25,10 @@ function DetailView(props) {
     let book = props.books && props.books.find(x => x.isbn == isbn);
     return (
         <div>
-            테스트중
-            {/* <img src={book.coverLargeUrl}/>
+            <img src={book.coverLargeUrl}/>
             {book.title}
             {book.author}
-            {book.publisher} */}
+            {book.publisher}
         </div>
     )
 }
