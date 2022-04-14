@@ -72,9 +72,10 @@ function App() {
             <NewBooks />
           </Route>
           <Route path="/detail/:isbn">
-            <BestSellerContext.Provider value={books}>
-              <Detail books={books}/>
-            </BestSellerContext.Provider>
+            {/* <BestSellerContext.Provider value={books}> */}
+              <Detail/>
+              {/* <Detail books={books}/> */}
+            {/* </BestSellerContext.Provider> */}
           </Route>
         </Wrapper>
       </Switch>
