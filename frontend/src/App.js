@@ -33,13 +33,8 @@ function App() {
 
   return (
       <div className="App">
-
-<<<<<<< HEAD
-        {/* <GlobalStyle/> */}
-=======
       {/* <GlobalStyle/> */}
-<<<<<<< HEAD
->>>>>>> 6678ffb5abb44c39aa4b59c229e47ee8ce6c67d3
+
         <UserStyle>
           <span>로그인</span>
           <span> | </span>
@@ -56,7 +51,6 @@ function App() {
             <Button variant="outline-light" >검색</Button>
           </InputGroup>
         </UserStyle>
-<<<<<<< HEAD
         <Navbar bg="success" variant="dark">
           <Container>
             <Navbar.Brand className="fs-3">도서</Navbar.Brand>
@@ -66,17 +60,6 @@ function App() {
             </Nav>
           </Container>
         </Navbar>
-=======
-    <Navbar bg="success" variant="dark">
-      <Container>
-        <Navbar.Brand className="fs-3">도서</Navbar.Brand>
-        <Nav className="me-auto fs-4">
-          <Nav.Link as={Link} to="/bestseller">베스트셀러</Nav.Link>
-          <Nav.Link as={Link} to="/newbook">신간도서</Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
-=======
       <UserStyle>
         <span>로그인</span>
         <span> | </span>
@@ -117,9 +100,6 @@ function App() {
         </Container>
       </Navbar>
       <hr />
->>>>>>> 30a422fd0d683aeeb8553272a87a8357be2d0b25
->>>>>>> 6678ffb5abb44c39aa4b59c229e47ee8ce6c67d3
-
         <Switch>
           <Wrapper>
             <Route exact path="/bestseller">
