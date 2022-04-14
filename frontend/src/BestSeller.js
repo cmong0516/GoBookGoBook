@@ -5,9 +5,11 @@ import Book from './Book.js'
 export let BestSellerContext = React.createContext();
 
 function BestSeller() {
-
+    
     let [books, setBooks] = useState();
     
+    // 프론트에서 백단의 데이터 실시간으로 가져오는 방법 : Ajax
+    // 
     useEffect(() => {
         axios.get('/api/bestseller')
             .then((res) => {
