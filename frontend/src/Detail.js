@@ -27,10 +27,10 @@ function DetailView(props) {
     let book = props.books && props.books.find(x => x.isbn == isbn);
     return (
         <div>
-            {/* <img src={book.coverLargeUrl}/>
+            <img src={book.coverLargeUrl}/>
             {book.title}
             {book.author}
-            {book.publisher} */}
+            {book.publisher}
         </div>
     )
 }
