@@ -44,9 +44,6 @@ function Book() {
         <div>
             {
                 bestSeller
-                // 위에조건문 = bestSeller가 값을 갖고있는가? = newBooks의 값이 아닌가?
-                // True : bestSeller가 책데이터를 가지고왔다. 
-                // False : newBooks가 책데이터를 가지고왔다.
                 ? <BookList books={bestSeller}/>
                 : <BookList books={newBooks}/>
             }
@@ -63,7 +60,7 @@ function BookList(props) {
             {props.books && props.books.map((book, i) => (
                 <div className="col-lg-3 col-sm-4" key={book.itemId} onClick={()=>{ history.push('/detail/' + book.isbn)}}>
                     <BookWrapper>
-                        <h3 class="제목">{book.rank}</h3>
+                        <h3>{book.rank}</h3>
                         <BookImageWrapper><img src={book.coverLargeUrl}/></BookImageWrapper>
                         <p>{book.title}</p>
                         {book.author} / {book.publisher}

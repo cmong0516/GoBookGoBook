@@ -8,8 +8,6 @@ function BestSeller(props) {
     
     let [books, setBooks] = useState();
     
-    // 프론트에서 백단의 데이터 실시간으로 가져오는 방법 : Ajax
-    // 
     useEffect(() => {
         axios.get('/api/bestseller')
             .then((res) => {
@@ -23,7 +21,7 @@ function BestSeller(props) {
     },[]);
 
     return (
-        <div className='row'>
+        <div>
             <BestSellerContext.Provider value={books}>
                 {props.getBooks(books)}
                 <Book />
