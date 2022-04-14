@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.SearchBook;
 import com.example.demo.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
