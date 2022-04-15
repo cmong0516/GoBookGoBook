@@ -6,7 +6,9 @@ import { Link, Route, Switch, useHistory } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import Detail from "./Detail.js";
-import Search from "./Search.js"
+import Search from "./Search.js";
+import Login from "./Login.js";
+import Signin from "./Signin.js";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -45,9 +47,13 @@ function App() {
 
       {/* <GlobalStyle/> */}
       <UserStyle>
+          <Link to="/loginpage">
           <span>로그인</span>
+          </Link>
           <span>|</span>
+          <Link to="/signinpage">
           <span>회원가입</span>
+          </Link>
           <span>|</span>
           <span>마이페이지&nbsp;</span>
           <InputGroup className="my-5 w-50 mx-auto">
@@ -95,6 +101,12 @@ function App() {
           <Route path="/search">
             <Search searchWord={searchWord}/>
           </Route>
+            <Route path="/loginpage">
+                <Login />
+            </Route>
+            <Route path="/signinpage">
+                <Signin />
+            </Route>
         </Wrapper>
       </Switch>
     </div>
