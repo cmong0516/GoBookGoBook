@@ -60,7 +60,7 @@ function App() {
               <Button 
                   className="rounded-1" 
                   variant="outline-light" 
-                  onClick={()=>{ history.push('/search?searchWord=' + searchWord)}}>검색</Button>
+                  onClick={()=>{ history.push('/search?query=' + searchWord)}}>검색</Button>
               
               <br/>
               검색값 : {searchWord}

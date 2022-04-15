@@ -7,10 +7,10 @@ function Search(props) {
     let searchWord = props.searchWord
 
     useEffect(() => {
-        axios.get('/search', {params : {searchWord : searchWord}})
+        axios.get('/search', {params : {query : searchWord}})
             .then((res) => {
-                console.log('통신 확인');
-                setResult(res.query);
+                console.log(res.data);
+                setResult(res.data);
             }).catch((error) => {
                 alert('검색결과 데이터를 받아오는 데 실패했습니다.');
                 console.log(error);
@@ -19,7 +19,14 @@ function Search(props) {
 
     return (
         <div>
-            {props.searchWord}
+            {result && result.map((book, i) => (
+                <div key={book.itemId}>
+                    <img src={book.thumbnail}/>
+                    {book.title}<br/>
+                    줄거리 : {book.contents}...<br/>
+                    {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
+                </div>
+            ))} 
         </div>
     )
 }
