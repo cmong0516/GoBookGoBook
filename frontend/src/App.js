@@ -62,7 +62,8 @@ function App() {
                   type="search"
                   placeholder="검색을 원하는 책, 저자를 입력해주세요."
                   aria-label="Search"
-                  onChange={(e) => { searchWordChange(e.target.value) }}/>
+                  onChange={(e) => { searchWordChange(e.target.value) }}
+                  />
               <Button 
                   className="rounded-1" 
                   variant="outline-light" 
