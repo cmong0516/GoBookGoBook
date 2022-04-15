@@ -9,6 +9,7 @@ import Detail from "./Detail.js";
 import Search from "./Search.js";
 import Login from "./Login.js";
 import Signin from "./Signin.js";
+import SearchBar from "./SearchBar";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -40,13 +41,14 @@ function App() {
     }
 
     let [searchWord, searchWordChange] = useState('');
-    let history = useHistory();
+    
 
     return (
         <div className="App">
 
       {/* <GlobalStyle/> */}
       <UserStyle>
+
           <Link to="/loginpage">
           <span>로그인</span>
           </Link>
@@ -56,6 +58,7 @@ function App() {
           </Link>
           <span>|</span>
           <span>마이페이지&nbsp;</span>
+<<<<<<< HEAD
           <InputGroup className="my-5 w-50 mx-auto">
               <FormControl
                   size="lg"
@@ -73,6 +76,11 @@ function App() {
               검색값 : {searchWord}
               <br/>
           </InputGroup>
+=======
+
+          <SearchBar searchWord={searchWord} searchWordChange={searchWordChange}/>
+          
+>>>>>>> 4cbe93045a765b4e4908d35703b37e1b1a6e598a
       </UserStyle>
 
       <Navbar bg="success" variant="dark">
@@ -99,15 +107,17 @@ function App() {
               <Detail />
             </BookContext.Provider>
           </Route>
+
           <Route path="/search">
             <Search searchWord={searchWord}/>
           </Route>
-            <Route path="/loginpage">
-                <Login />
-            </Route>
-            <Route path="/signinpage">
-                <Signin />
-            </Route>
+
+          <Route path="/loginpage">
+              <Login />
+          </Route>
+          <Route path="/signinpage">
+              <Signin />
+          </Route>
         </Wrapper>
       </Switch>
     </div>
