@@ -1,40 +1,58 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import {
-  InputGroup,
-  FormControl,
-  Button,
-  Nav,
-  Navbar,
-  Container,
+    InputGroup,
+    FormControl,
+    Button,
+    Nav,
+    Navbar,
+    Container,
 } from "react-bootstrap";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
+import Detail from "./Detail.js";
+import Search from "./Search.js";
 import "./App.css";
 import styled from 'styled-components';
+
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
 // `
 
 let Wrapper = styled.div`
-  width : 80%;
+  width : 70%;
   margin : auto;
 `;
 let UserStyle = styled.div`
   text-align: right;
-  padding : 20pt;
+  padding : 2rem;
   font-size : 13pt;
   background-color: hsl(146, 45%, 36%);
   color: floralwhite;
+
+  span {
+    margin: 0.5rem;
+  }
 `;
 
+export let BookContext = React.createContext();
+
 function App() {
+
+  let [books, setBooks] = useState();
+  let getBooks = (booksData) => {
+    setBooks(booksData);  
+  }
+
+  let [search, searchChange] = useState('');
+  let history = useHistory();
 
   return (
     <div className="App">
 
       {/* <GlobalStyle/> */}
+<<<<<<< HEAD
 <<<<<<< HEAD
         <UserStyle>
             <span>로그인</span>
@@ -103,14 +121,57 @@ function App() {
       </Navbar>
       <hr />
 >>>>>>> 30a422fd0d683aeeb8553272a87a8357be2d0b25
+=======
+      <UserStyle>
+          <span>로그인</span>
+          <span>|</span>
+          <span>회원가입</span>
+          <span>|</span>
+          <span>마이페이지&nbsp;</span>
+          
+        <InputGroup className="my-5 w-50 mx-auto">
+          <FormControl
+            size="lg"
+            type="search"
+            placeholder="검색을 원하는 책, 저자를 입력해주세요."
+            aria-label="Search"
+            onChange={(e) => { searchChange(e.target.value) }}/>
+          <Button className="rounded-1" variant="outline-light" onClick={()=>{ history.push('/kakao/search')}}>검색</Button>
+          
+          <br/>
+          검색값 : {search}
+
+          {/* 리액트부트스트랩 - Custom Dropdown Components에서 가져오기 */}
+          
+        </InputGroup>
+      </UserStyle>
+
+      <Navbar bg="success" variant="dark">
+        <Container>
+          <Navbar.Brand className="fs-3">도서</Navbar.Brand>
+          <Nav className="me-auto fs-5">
+            <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
+            <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+>>>>>>> 8234dd320796ffbc0c83e63bcda695a096263964
 
       <Switch>
         <Wrapper>
-          <Route exact path="/bestseller">
-            <BestSeller />
+          <Route exact path="/api/bestseller">
+            <BestSeller getBooks={getBooks}/>
           </Route>
-          <Route path="/newbook">
-            <NewBooks />
+          <Route path="/api/newbook">
+            <NewBooks getBooks={getBooks}/>
+          </Route>
+          <Route path="/detail/:isbn">
+            <BookContext.Provider value={books}>
+              <Detail />
+            </BookContext.Provider>
+          </Route>
+          <Route path="/kakao/search">
+            <Search/>
           </Route>
         </Wrapper>
       </Switch>
