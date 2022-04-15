@@ -1,45 +1,23 @@
 {
   "files": {
-<<<<<<< HEAD
-    "main.css": "/static/css/main.8a525a21.chunk.css",
-    "main.js": "/static/js/main.e1038748.chunk.js",
-    "main.js.map": "/static/js/main.e1038748.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.f95d2cd6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.f95d2cd6.js.map",
-    "static/js/2.e379b792.chunk.js": "/static/js/2.e379b792.chunk.js",
-    "static/js/2.e379b792.chunk.js.map": "/static/js/2.e379b792.chunk.js.map",
-    "static/js/3.0f54c81b.chunk.js": "/static/js/3.0f54c81b.chunk.js",
-    "static/js/3.0f54c81b.chunk.js.map": "/static/js/3.0f54c81b.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.8a525a21.chunk.css.map": "/static/css/main.8a525a21.chunk.css.map",
-    "static/js/2.e379b792.chunk.js.LICENSE.txt": "/static/js/2.e379b792.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/static/media/Pretendard-Medium.59b075f0.woff2"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.f95d2cd6.js",
-    "static/js/2.e379b792.chunk.js",
-    "static/css/main.8a525a21.chunk.css",
-    "static/js/main.e1038748.chunk.js"
-=======
     "main.css": "/static/css/main.648de65d.chunk.css",
-    "main.js": "/static/js/main.42ccb0ef.chunk.js",
-    "main.js.map": "/static/js/main.42ccb0ef.chunk.js.map",
+    "main.js": "/static/js/main.9876878b.chunk.js",
+    "main.js.map": "/static/js/main.9876878b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.29b72a3a.js",
     "runtime-main.js.map": "/static/js/runtime-main.29b72a3a.js.map",
-    "static/js/2.e9a639f0.chunk.js": "/static/js/2.e9a639f0.chunk.js",
-    "static/js/2.e9a639f0.chunk.js.map": "/static/js/2.e9a639f0.chunk.js.map",
+    "static/js/2.fe10a1d2.chunk.js": "/static/js/2.fe10a1d2.chunk.js",
+    "static/js/2.fe10a1d2.chunk.js.map": "/static/js/2.fe10a1d2.chunk.js.map",
     "static/js/3.6614230f.chunk.js": "/static/js/3.6614230f.chunk.js",
     "static/js/3.6614230f.chunk.js.map": "/static/js/3.6614230f.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.648de65d.chunk.css.map": "/static/css/main.648de65d.chunk.css.map",
-    "static/js/2.e9a639f0.chunk.js.LICENSE.txt": "/static/js/2.e9a639f0.chunk.js.LICENSE.txt",
+    "static/js/2.fe10a1d2.chunk.js.LICENSE.txt": "/static/js/2.fe10a1d2.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/Pretendard-Medium.59b075f0.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.29b72a3a.js",
-    "static/js/2.e9a639f0.chunk.js",
+    "static/js/2.fe10a1d2.chunk.js",
     "static/css/main.648de65d.chunk.css",
-    "static/js/main.42ccb0ef.chunk.js"
->>>>>>> 8234dd320796ffbc0c83e63bcda695a096263964
+    "static/js/main.9876878b.chunk.js"
   ]
 }

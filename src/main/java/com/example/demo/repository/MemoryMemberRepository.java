@@ -26,6 +26,7 @@ public class MemoryMemberRepository implements MemberRepository {
         em.persist(member);
         return member;
     }
+
     @Override
     public Optional<Member> findByUserId(String userId) {
        return findAll().stream()

@@ -32,21 +32,18 @@ export let BookContext = React.createContext();
 
 function App() {
 
-  let [books, setBooks] = useState();
-  let getBooks = (booksData) => {
-    setBooks(booksData);  
-  }
+    let [books, setBooks] = useState();
+    let getBooks = (booksData) => {
+        setBooks(booksData);
+    }
 
-  let [searchWord, searchWordChange] = useState('');
-  let history = useHistory();
+    let [searchWord, searchWordChange] = useState('');
+    let history = useHistory();
 
-  return (
-    <div className="App">
+    return (
+        <div className="App">
 
       {/* <GlobalStyle/> */}
-
-
-
       <UserStyle>
           <span>로그인</span>
           <span>|</span>
