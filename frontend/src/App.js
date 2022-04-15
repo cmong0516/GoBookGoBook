@@ -6,7 +6,9 @@ import { Link, Route, Switch, useHistory } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import Detail from "./Detail.js";
-import Search from "./Search.js"
+import Search from "./Search.js";
+import Login from "./Login.js";
+import Signin from "./Signin.js";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -43,65 +45,72 @@ function App() {
     return (
         <div className="App">
 
-            {/* <GlobalStyle/> */}
+      {/* <GlobalStyle/> */}
+      <UserStyle>
+          <Link to="/loginpage">
+          <span>로그인</span>
+          </Link>
+          <span>|</span>
+          <Link to="/signinpage">
+          <span>회원가입</span>
+          </Link>
+          <span>|</span>
+          <span>마이페이지&nbsp;</span>
+          <InputGroup className="my-5 w-50 mx-auto">
+              <FormControl
+                  size="lg"
+                  type="search"
+                  placeholder="검색을 원하는 책, 저자를 입력해주세요."
+                  aria-label="Search"
+                  onChange={(e) => { searchWordChange(e.target.value) }}/>
+              <Button 
+                  className="rounded-1" 
+                  variant="outline-light" 
+                  onClick={()=>{ history.push('/search?searchWord=' + searchWord)}}>검색</Button>
+              
+              <br/>
+              검색값 : {searchWord}
+              <br/>
+          </InputGroup>
+      </UserStyle>
+
+      <Navbar bg="success" variant="dark">
+        <Container>
+          <Navbar.Brand className="fs-3">도서</Navbar.Brand>
+          <Nav className="me-auto fs-5">
+            <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
+            <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
 
 
-
-            <UserStyle>
-                <span>로그인</span>
-                <span>|</span>
-                <span>회원가입</span>
-                <span>|</span>
-                <span>마이페이지&nbsp;</span>
-                <InputGroup className="my-5 w-50 mx-auto">
-                    <FormControl
-                        size="lg"
-                        type="search"
-                        placeholder="검색을 원하는 책, 저자를 입력해주세요."
-                        aria-label="Search"
-                        onChange={(e) => { searchWordChange(e.target.value) }}/>
-                    <Button
-                        className="rounded-1"
-                        variant="outline-light"
-                        onClick={()=>{ history.push('/search/'+ searchWord)}}>검색</Button>
-
-                    <br/>
-                    검색값 : {searchWord}
-                    <br/>
-                </InputGroup>
-            </UserStyle>
-
-            <Navbar bg="success" variant="dark">
-                <Container>
-                    <Navbar.Brand className="fs-3">도서</Navbar.Brand>
-                    <Nav className="me-auto fs-5">
-                        <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
-                        <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
-                    </Nav>
-                </Container>
-            </Navbar>
-
-
-            <Switch>
-                <Wrapper>
-                    <Route exact path="/api/bestseller">
-                        <BestSeller getBooks={getBooks}/>
-                    </Route>
-                    <Route path="/api/newbook">
-                        <NewBooks getBooks={getBooks}/>
-                    </Route>
-                    <Route path="/detail/:isbn">
-                        <BookContext.Provider value={books}>
-                            <Detail />
-                        </BookContext.Provider>
-                    </Route>
-                    <Route path="/search">
-                        <Search searchWord={searchWord}/>
-                    </Route>
-                </Wrapper>
-            </Switch>
-        </div>
-    );
+      <Switch>
+        <Wrapper>
+          <Route exact path="/api/bestseller">
+            <BestSeller getBooks={getBooks}/>
+          </Route>
+          <Route path="/api/newbook">
+            <NewBooks getBooks={getBooks}/>
+          </Route>
+          <Route path="/detail/:isbn">
+            <BookContext.Provider value={books}>
+              <Detail />
+            </BookContext.Provider>
+          </Route>
+          <Route path="/search">
+            <Search searchWord={searchWord}/>
+          </Route>
+            <Route path="/loginpage">
+                <Login />
+            </Route>
+            <Route path="/signinpage">
+                <Signin />
+            </Route>
+        </Wrapper>
+      </Switch>
+    </div>
+  );
 
 }
 
