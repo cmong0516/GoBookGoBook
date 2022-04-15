@@ -9,6 +9,7 @@ import Detail from "./Detail.js";
 import Search from "./Search.js";
 import Login from "./Login.js";
 import Signin from "./Signin.js";
+import SearchBar from "./SearchBar";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -40,13 +41,14 @@ function App() {
     }
 
     let [searchWord, searchWordChange] = useState('');
-    let history = useHistory();
+    
 
     return (
         <div className="App">
 
       {/* <GlobalStyle/> */}
       <UserStyle>
+
           <Link to="/loginpage">
           <span>로그인</span>
           </Link>
@@ -56,22 +58,9 @@ function App() {
           </Link>
           <span>|</span>
           <span>마이페이지&nbsp;</span>
-          <InputGroup className="my-5 w-50 mx-auto">
-              <FormControl
-                  size="lg"
-                  type="search"
-                  placeholder="검색을 원하는 책, 저자를 입력해주세요."
-                  aria-label="Search"
-                  onChange={(e) => { searchWordChange(e.target.value) }}/>
-              <Button 
-                  className="rounded-1" 
-                  variant="outline-light" 
-                  onClick={()=>{ history.push('/search?query=' + searchWord)}}>검색</Button>
-              
-              <br/>
-              검색값 : {searchWord}
-              <br/>
-          </InputGroup>
+
+          <SearchBar searchWord={searchWord} searchWordChange={searchWordChange}/>
+          
       </UserStyle>
 
       <Navbar bg="success" variant="dark">
@@ -98,15 +87,17 @@ function App() {
               <Detail />
             </BookContext.Provider>
           </Route>
+
           <Route path="/search">
             <Search searchWord={searchWord}/>
           </Route>
-            <Route path="/loginpage">
-                <Login />
-            </Route>
-            <Route path="/signinpage">
-                <Signin />
-            </Route>
+
+          <Route path="/loginpage">
+              <Login />
+          </Route>
+          <Route path="/signinpage">
+              <Signin />
+          </Route>
         </Wrapper>
       </Switch>
     </div>
