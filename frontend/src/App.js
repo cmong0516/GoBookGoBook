@@ -58,9 +58,13 @@ function App() {
                         </a>
                     </div>
                     <div>
+                        <Link to="/loginpage">
                         <span>로그인</span>
+                        </Link>
                         <span>|</span>
+                        <Link to="/signinpage">
                         <span>회원가입</span>
+                        </Link>
                         <span>|</span>
                         <span>마이페이지&nbsp;</span>
                     </div>
