@@ -1,29 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-function Search() {
-    
+function Search(props) {
+
+    let [result, setResult] = useState();
+
     useEffect(() => {
         axios.get('/kakao/search')
             .then((res) => {
-
+                console.log('통신 확인');
+                setResult(res.query);
             }).catch((error) => {
-                alert('검색 데이터를 받아오는 데 실패했습니다.');
+                alert('검색결과 데이터를 받아오는 데 실패했습니다.');
                 console.log(error);
             });
     },[]);
 
     return (
         <div>
-            itemId
-            title
-            contents
-            thumbnail
-            dateTime
-            publisher
-            authors
-            translator
-            isbn
+            {props.searchWord}
         </div>
     )
 }

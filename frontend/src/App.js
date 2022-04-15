@@ -1,20 +1,12 @@
-import React, {useState,useEffect} from "react";
-import {
-    InputGroup,
-    FormControl,
-    Button,
-    Nav,
-    Navbar,
-    Container,
-} from "react-bootstrap";
+import React, {useState} from "react";
+import {Nav, Navbar, Container, InputGroup, FormControl, Button} from "react-bootstrap";
+import "./App.css";
+import styled from 'styled-components';
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import Detail from "./Detail.js";
-import Search from "./Search.js";
-import "./App.css";
-import styled from 'styled-components';
-
+import Search from "./Search.js"
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -45,7 +37,7 @@ function App() {
     setBooks(booksData);  
   }
 
-  let [search, searchChange] = useState('');
+  let [searchWord, searchWordChange] = useState('');
   let history = useHistory();
 
   return (
@@ -58,22 +50,22 @@ function App() {
           <span>회원가입</span>
           <span>|</span>
           <span>마이페이지&nbsp;</span>
-          
-        <InputGroup className="my-5 w-50 mx-auto">
-          <FormControl
-            size="lg"
-            type="search"
-            placeholder="검색을 원하는 책, 저자를 입력해주세요."
-            aria-label="Search"
-            onChange={(e) => { searchChange(e.target.value) }}/>
-          <Button className="rounded-1" variant="outline-light" onClick={()=>{ history.push('/kakao/search')}}>검색</Button>
-          
-          <br/>
-          검색값 : {search}
-
-          {/* 리액트부트스트랩 - Custom Dropdown Components에서 가져오기 */}
-          
-        </InputGroup>
+          <InputGroup className="my-5 w-50 mx-auto">
+              <FormControl
+                  size="lg"
+                  type="search"
+                  placeholder="검색을 원하는 책, 저자를 입력해주세요."
+                  aria-label="Search"
+                  onChange={(e) => { searchWordChange(e.target.value) }}/>
+              <Button 
+                  className="rounded-1" 
+                  variant="outline-light" 
+                  onClick={()=>{ history.push('/kakao/search/'+ searchWord)}}>검색</Button>
+              
+              <br/>
+              검색값 : {searchWord}
+              <br/>
+          </InputGroup>
       </UserStyle>
 
       <Navbar bg="success" variant="dark">
@@ -100,7 +92,7 @@ function App() {
             </BookContext.Provider>
           </Route>
           <Route path="/kakao/search">
-            <Search/>
+            <Search searchWord={searchWord}/>
           </Route>
         </Wrapper>
       </Switch>
