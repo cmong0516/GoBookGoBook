@@ -10,3 +10,54 @@
   background-color: beige;
   /* ivory lightyellow beige  */
 }
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  src: url('./font/Pretendard-Medium.woff2') format("woff2");
+  font-weight: 400;
+}
+
+.App {
+  text-align: center;
+  font-family: 'Pretendard-Medium';
+  background-color: beige;
+  /* ivory lightyellow beige  */
+}
+
+.loginform{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 69vh;
+}
+
+.loginform div{
+  padding: 5px;
+}
+
+.loginform button{
+  margin: 15px;
+  width: 130px;
+}
+
+.loginform input{
+  width: 300px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.loginformtext{
+  text-align: left;
+  font-weight: bold;
+}
+
+a:hover{
+  color: black;
+  text-decoration: none;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
