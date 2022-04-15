@@ -25,7 +25,6 @@ let UserStyle = styled.div`
   font-size : 13pt;
   background-color: hsl(146, 45%, 36%);
   color: floralwhite;
-
   span {
     margin: 0.5rem;
   }
@@ -41,87 +40,75 @@ function App() {
     }
 
     let [searchWord, searchWordChange] = useState('');
-    
+
 
     return (
         <div className="App">
 
-      {/* <GlobalStyle/> */}
-      <UserStyle>
+            {/* <GlobalStyle/> */}
+            <UserStyle>
 
-          <Link to="/loginpage">
-          <span>로그인</span>
-          </Link>
-          <span>|</span>
-          <Link to="/signinpage">
-          <span>회원가입</span>
-          </Link>
-          <span>|</span>
-          <span>마이페이지&nbsp;</span>
-<<<<<<< HEAD
-          <InputGroup className="my-5 w-50 mx-auto">
-              <FormControl
-                  size="lg"
-                  type="search"
-                  placeholder="검색을 원하는 책, 저자를 입력해주세요."
-                  aria-label="Search"
-                  onChange={(e) => { searchWordChange(e.target.value) }}
-                  />
-              <Button 
-                  className="rounded-1" 
-                  variant="outline-light" 
-                  onClick={()=>{ history.push('/search?query=' + searchWord)}}>검색</Button>
-              
-              <br/>
-              검색값 : {searchWord}
-              <br/>
-          </InputGroup>
-=======
+                <div className="nav">
+                    <div className="titleImg">
+                        <a href="/">
+                            <div>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" />
+                            </div>
+                            <div>Go Book Go Book</div>
+                        </a>
+                    </div>
+                    <div>
+                        <span>로그인</span>
+                        <span>|</span>
+                        <span>회원가입</span>
+                        <span>|</span>
+                        <span>마이페이지&nbsp;</span>
+                    </div>
+                </div>
 
-          <SearchBar searchWord={searchWord} searchWordChange={searchWordChange}/>
-          
->>>>>>> 4cbe93045a765b4e4908d35703b37e1b1a6e598a
-      </UserStyle>
+                <SearchBar searchWord={searchWord} searchWordChange={searchWordChange}/>
 
-      <Navbar bg="success" variant="dark">
-        <Container>
-          <Navbar.Brand className="fs-3">도서</Navbar.Brand>
-          <Nav className="me-auto fs-5">
-            <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
-            <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+            </UserStyle>
+
+            <Navbar bg="success" variant="dark">
+                <Container>
+                    <Navbar.Brand className="fs-3">도서</Navbar.Brand>
+                    <Nav className="me-auto fs-5">
+                        <Nav.Link as={Link} to="/api/bestseller">베스트셀러</Nav.Link>
+                        <Nav.Link as={Link} to="/api/newbook">신간도서</Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
 
 
-      <Switch>
-        <Wrapper>
-          <Route exact path="/api/bestseller">
-            <BestSeller getBooks={getBooks}/>
-          </Route>
-          <Route path="/api/newbook">
-            <NewBooks getBooks={getBooks}/>
-          </Route>
-          <Route path="/detail/:isbn">
-            <BookContext.Provider value={books}>
-              <Detail />
-            </BookContext.Provider>
-          </Route>
+            <Switch>
+                <Wrapper>
+                    <Route exact path="/api/bestseller">
+                        <BestSeller getBooks={getBooks}/>
+                    </Route>
+                    <Route path="/api/newbook">
+                        <NewBooks getBooks={getBooks}/>
+                    </Route>
+                    <Route path="/detail/:isbn">
+                        <BookContext.Provider value={books}>
+                            <Detail />
+                        </BookContext.Provider>
+                    </Route>
 
-          <Route path="/search">
-            <Search searchWord={searchWord}/>
-          </Route>
+                    <Route path="/search">
+                        <Search searchWord={searchWord}/>
+                    </Route>
 
-          <Route path="/loginpage">
-              <Login />
-          </Route>
-          <Route path="/signinpage">
-              <Signin />
-          </Route>
-        </Wrapper>
-      </Switch>
-    </div>
-  );
+                    <Route path="/loginpage">
+                        <Login />
+                    </Route>
+                    <Route path="/signinpage">
+                        <Signin />
+                    </Route>
+                </Wrapper>
+            </Switch>
+        </div>
+    );
 
 }
 

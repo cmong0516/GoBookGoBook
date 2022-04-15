@@ -61,3 +61,17 @@ a{
   color: inherit;
   text-decoration: none;
 }
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav img{
+  width: 100px;
+}
+
+.titleImg{
+  display: flex;
+  text-align: center;
+}
