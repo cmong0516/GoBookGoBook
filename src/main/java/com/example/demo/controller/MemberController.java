@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
 public class MemberController {
 
