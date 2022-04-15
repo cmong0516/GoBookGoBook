@@ -79,6 +79,10 @@ a{
   text-align: center;
 }
 
+.titleImg img{
+  border-radius: 50px;
+}
+
 .mypage{
   height: 66vh;
   margin-top: 60px;
