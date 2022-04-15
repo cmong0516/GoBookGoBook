@@ -4,9 +4,10 @@ import axios from 'axios';
 function Search(props) {
 
     let [result, setResult] = useState();
+    let searchWord = props.searchWord
 
     useEffect(() => {
-        axios.get('/kakao/search')
+        axios.get('/search', {params : {searchWord : searchWord}})
             .then((res) => {
                 console.log('통신 확인');
                 setResult(res.query);
