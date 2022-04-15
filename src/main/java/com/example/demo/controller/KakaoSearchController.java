@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 @Slf4j
 @RestController
-@RequestMapping("/kakao")
 @RequiredArgsConstructor
 public class KakaoSearchController {
 
