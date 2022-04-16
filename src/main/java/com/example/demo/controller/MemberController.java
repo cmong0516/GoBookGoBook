@@ -9,35 +9,26 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
-//@Controller
+@Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping(value = "/members/new")
-    public String createForm(Model model) {
-        model.addAttribute("memberForm", new MemberForm());
-        return "members/addMemberForm";
-    }
+    @PostMapping(value = "/signin")
+    public void create(@Valid @RequestParam(name = "userId")String userId, MemberForm form, BindingResult result) {
 
-    @PostMapping(value = "/members/new")
-    public String create(@Valid MemberForm form, BindingResult result) {
-        if (result.hasErrors()) {
-            return "members/addMemberForm";
-        }
         Member member = new Member();
         member.setUserId(form.getUserId());
-        member.setUserPw(form.getUserPw());
-        member.setUserName(form.getUserName());
-        member.setUserEmail(form.getUserEmail());
+//        member.setUserPw(form.getUserPw());
+//        member.setUserName(form.getUserName());
+//        member.setUserEmail(form.getUserEmail());
 
-        memberService.join(member);
-
-        return "redirect:/";
+        System.out.println("==================userId = " + userId);
     }
 
     /*회원목록 조회*/
