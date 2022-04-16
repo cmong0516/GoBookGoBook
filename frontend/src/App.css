@@ -11,19 +11,6 @@
   /* ivory lightyellow beige  */
 }
 
-@font-face {
-  font-family: 'Pretendard-Medium';
-  src: url('./font/Pretendard-Medium.woff2') format("woff2");
-  font-weight: 400;
-}
-
-.App {
-  text-align: center;
-  font-family: 'Pretendard-Medium';
-  background-color: beige;
-  /* ivory lightyellow beige  */
-}
-
 .loginform{
   display: flex;
   justify-content: center;
@@ -41,7 +28,7 @@
 }
 
 .loginform input{
-  width: 300px;
+  width: 100%;
   height: 50px;
   font-size: 20px;
   text-align: center;

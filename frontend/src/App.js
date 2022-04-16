@@ -49,9 +49,9 @@ function App() {
         <div className="nav">
           <div className="titleImg">
             <a href="/">
-              <div>
+              {/* <div> */}
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" />
-              </div>
+              {/* </div */}
               <div>Go Book Go Book</div>
             </a>
           </div>
