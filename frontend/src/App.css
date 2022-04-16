@@ -37,7 +37,7 @@
 
 .loginform button{
   margin: 15px;
-  width: 130px;
+  width: 300px;
 }
 
 .loginform input{
@@ -45,6 +45,7 @@
   height: 50px;
   font-size: 20px;
   text-align: center;
+  border: solid 1px grey;
 }
 
 .loginformtext{
