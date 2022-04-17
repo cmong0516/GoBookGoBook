@@ -16,8 +16,17 @@ let LoginForm = styled.div`
         height: 3rem;
         margin-bottom: 1rem;
     }
+    input {
+        border: solid 1px lightgrey;
+        border-radius: 4px;
+        padding: 0.7rem;
+    }
     h3 {
         font-weight: bold;
+        text-align: left;
+    }
+    p {
+        text-align: left;
     }
 `
 let Signin = styled.span`
