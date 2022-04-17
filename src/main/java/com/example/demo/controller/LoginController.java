@@ -22,13 +22,9 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
-        return "login/loginForm";
-    }
-
     @PostMapping
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
+        log.warn(String.valueOf(form));
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
