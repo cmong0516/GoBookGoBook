@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.BestSeller;
-import com.example.demo.domain.NewBook;
+import com.example.demo.object.BestSeller;
+import com.example.demo.object.NewBook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
