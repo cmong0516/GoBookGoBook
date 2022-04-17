@@ -41,11 +41,11 @@ function Mypage() {
 
       <Col sm={9}>
         <MyList>
-          <h2>홍길동님, 반가워요!</h2>
+          
           {
             menu == 0 
             ? <MyRent/>
-            : <MyInfo/>
+            : <MyInfo setMenu={setMenu}/>
           }
         </MyList>
       </Col>

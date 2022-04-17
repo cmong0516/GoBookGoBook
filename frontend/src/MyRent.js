@@ -13,6 +13,7 @@ function MyRent() {
 
     return (
         <div>
+            <h2>홍길동님, 반가워요!</h2>
             <p>현재 대여중인 도서는 0/5 권 입니다.</p>
             <ButtonGroup>
                 {radios.map((radio, idx) => (

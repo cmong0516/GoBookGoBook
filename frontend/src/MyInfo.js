@@ -3,18 +3,17 @@ import { Button,Form } from "react-bootstrap";
 import styled from 'styled-components';
 
 let InfoForm = styled.div`
-    width: 22rem;
-    margin: auto;
+    width: 80%;
     padding-bottom: 3rem;
-    text-align: left;
 
     input, button {
-        width: 100%;
-        height: 3rem;
-        // margin-bottom: 1rem;
+      height: 3rem;
+      // margin-bottom: 1rem;
     }
     button {
-        margin-top: 1rem;
+      width: 30%;
+      margin-top: 1rem;
+      margin-right: 1rem;
     }
 `
 let GroupStyle = styled.div`
@@ -27,7 +26,10 @@ let Alarm = styled.div`
     font-weight: bold;   
 `
 
-function Editprofile() {
+function MyInfo(props) {
+
+  // 이메일, 비밀번호 둘중에 하나 안써도 submit되도록 변경 필요...
+  // 안쓴건 어떻게 넘기는가? null? ''?
 
   let [validated, setValidated] = useState(false);
   let [pwAlarm, setPwAlarm] = useState('');
@@ -38,8 +40,6 @@ function Editprofile() {
       userpwCheck: ''
   })
 
-  // 아이디 : 영어/숫자 6-12자
-  let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
   // 비밀번호 : 영어/숫자/특수문자(각 최소 1개씩) 조합 9-20자
   let passwordFormat = RegExp(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[~`!@#$%\^&*()-+=])[A-Za-z0-9~`!@#$%\^&*()-+=]{9,20}$/);
 
@@ -73,7 +73,8 @@ function Editprofile() {
 
   return (
     <div>
-      <p>개인정보 수정</p>
+      <h2>개인정보 수정</h2>
+      <p>고객님의 정보를 정확히 입력해주세요.</p>
       <InfoForm>
         <Form noValidate validated={validated} onSubmit={submitFunc}>
           <GroupStyle>
@@ -122,7 +123,10 @@ function Editprofile() {
           </GroupStyle>
 
           <Button variant="primary" type="submit">
-              수정하기
+              수정
+          </Button>
+          <Button variant="outline-danger" type="button" onClick={() => props.setMenu(0)}>
+              취소
           </Button>
         </Form>
       </InfoForm>
@@ -130,4 +134,4 @@ function Editprofile() {
   );
 }
 
-export default Editprofile;
+export default MyInfo;
