@@ -7,7 +7,7 @@ function Search(props) {
     let searchWord = props.searchWord;
 
     useEffect(() => {
-        axios.get('/search', {params : {query : searchWord}})
+        axios.get('/api/search', {params : {query : searchWord}})
             .then(res => setResult(res.data))
             .catch((error) => {
                 alert('검색결과 데이터를 받아오는 데 실패했습니다.');

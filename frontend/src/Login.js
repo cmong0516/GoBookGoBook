@@ -43,11 +43,10 @@ let Alarm = styled.div`
 
 function Login() {
 
-    let history = useHistory();
     let [alarm, setAlarm] = useState('')
     let [account, setAccount] = useState({
-        id: '',
-        password: ''
+        userId: '',
+        userpw: ''
     })
 
     // 아이디 : 영어/숫자 6-12자
@@ -64,16 +63,17 @@ function Login() {
     let submitFunc = (e) => {
         e.preventDefault();
 
-        if (!account.id) { setAlarm('아이디가 입력되지 않았습니다.') }
-        else if (!account.password) { setAlarm('비밀번호가 입력되지 않았습니다.') }
+        if (!account.userId) { setAlarm('아이디가 입력되지 않았습니다.') }
+        else if (!account.userpw) { setAlarm('비밀번호가 입력되지 않았습니다.') }
         // 유효성체크
-        else if (!idFormat.test(account.id) || !passwordFormat.test(account.password)) {
+        else if (!idFormat.test(account.userId) || !passwordFormat.test(account.userpw)) {
             setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다. 입력하신 내용을 다시 확인해주세요.')
-        } else (
-            alert("Ajax")
-            // axios.get('')
+        } else {
+            alert('콘솔창 확인');
+            console.log(account);
+            // axios.post('')
             // .then((res) => null)
-        )
+        }
     }
 
     return (
@@ -84,13 +84,13 @@ function Login() {
                 <Alarm>{alarm}</Alarm>
                 <input
                     type="text"
-                    name="id"
+                    name="userId"
                     placeholder="아이디를 입력해주세요."
                     onChange={onChangeFunc}
                 ></input>
                 <input
                     type="password"
-                    name="password"
+                    name="userpw"
                     placeholder="비밀번호를 입력해주세요."
                     onChange={onChangeFunc}
                 ></input>

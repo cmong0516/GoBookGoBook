@@ -20,6 +20,7 @@ let Wrapper = styled.div`
   width: 70%;
   margin: auto;
   padding-top: 3rem;
+  min-height: 100%;   
 `;
 let UserStyle = styled.div`
   text-align: right;
@@ -102,7 +103,7 @@ function App() {
             </BookContext.Provider>
           </Route>
 
-          <Route path="/search">
+          <Route path="/api/search">
             <Search searchWord={searchWord} />
           </Route>
 

@@ -40,11 +40,11 @@ function Signin() {
     let [pwAlarm, setPwAlarm] = useState('');
     let [pwMatchAlarm, setPwMatchAlarm] = useState('');
     let [account, setAccount] = useState({
-        name: '',
-        id: '',
-        email: '',
-        password: '',
-        passwordCheck: ''
+        username: '',
+        userId: '',
+        useremail: '',
+        userpw: '',
+        userpwCheck: ''
     })
 
     // 아이디 : 영어/숫자 6-12자
@@ -76,24 +76,24 @@ function Signin() {
         if (form.checkValidity() === false) {
             e.preventDefault();
             setValidated(true);
-        } else if( !nameFormat.test(account.name) || !idFormat.test(account.id) || !passwordFormat.test(account.password) ) {
-            // || !emailFormat.test(account.email) || !passwordFormat.test(account.password) ) {
+        } else if( !nameFormat.test(account.username) || !idFormat.test(account.userId) || !passwordFormat.test(account.userpw) ) {
+            // || !emailFormat.test(account.useremail) || !passwordFormat.test(account.userpw) ) {
             
-            if( !nameFormat.test(account.name) )
+            if( !nameFormat.test(account.username) )
                 setNameAlarm('이름의 형식이 올바르지 않습니다.');
-            if( !idFormat.test(account.id) ) 
+            if( !idFormat.test(account.userId) ) 
                 setIdAlarm('아이디의 형식이 올바르지 않습니다.');
-            // if( !emailFormat.test(account.email) ) 
+            // if( !emailFormat.test(account.useremail) ) 
             //     setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
-            if( !passwordFormat.test(account.password) )
+            if( !passwordFormat.test(account.userpw) )
                 setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
 
-        } else if(account.password != account.passwordCheck) {
+        } else if(account.password != account.userpwCheck) {
             setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
         } else {
             alert('콘솔창 확인');
             console.log(account);
-            // axios.get('')
+            // axios.post('')
             // .then((res) => null)
             
         }
@@ -113,7 +113,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="text"
-                                name="name"
+                                name="username"
                                 placeholder="ex) 홍길동"
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -128,7 +128,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="text"
-                                name="id"
+                                name="userId"
                                 placeholder="영어/숫자 포함 6-12자를 입력해주세요."
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -158,7 +158,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="password"
-                                name="password"
+                                name="userpw"
                                 placeholder="영어/숫자/특수문자 포함 9-20자를 입력해주세요."
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -173,7 +173,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="password"
-                                name="passwordCheck"
+                                name="userpwCheck"
                                 placeholder="확인을 위해 비밀번호를 한번 더 입력해주세요."
                                 onChange={onChangeFunc}
                             ></Form.Control>
