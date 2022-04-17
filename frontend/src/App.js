@@ -25,7 +25,7 @@ let UserStyle = styled.div`
   text-align: right;
   padding: 2rem;
   font-size: 13pt;
-  background-color: hsl(146, 45%, 36%);
+  background-color: rgb(60, 198, 240);
   color: floralwhite;
   span {
     margin: 0.5rem;
@@ -76,7 +76,7 @@ function App() {
         />
       </UserStyle>
 
-      <Navbar bg="success" variant="dark">
+      <Navbar bg="info" variant="dark">
         <Container>
           <Navbar.Brand className="fs-3">도서</Navbar.Brand>
           <Nav className="me-auto fs-5">
