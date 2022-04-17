@@ -26,7 +26,7 @@ let UserStyle = styled.div`
   text-align: right;
   padding: 2rem;
   font-size: 13pt;
-  background-color: rgb(60, 198, 240);
+  background-color: rgb(13, 202, 240);
   color: floralwhite;
   span {
     margin: 0.5rem;

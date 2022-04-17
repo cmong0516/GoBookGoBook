@@ -3,9 +3,7 @@ import { Button,Form } from "react-bootstrap";
 import styled from 'styled-components';
 
 let SigninForm = styled.div`
-
     width: 22rem;
-    margin: auto;
     padding-bottom: 3rem;
     text-align: left;
 
@@ -88,7 +86,7 @@ function Signin() {
             if( !passwordFormat.test(account.userpw) )
                 setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
 
-        } else if(account.password != account.userpwCheck) {
+        } else if(account.userpw != account.userpwCheck) {
             setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
         } else {
             alert('콘솔창 확인');
