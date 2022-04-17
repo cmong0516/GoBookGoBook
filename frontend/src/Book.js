@@ -17,8 +17,8 @@ let BookWrapper = styled.div`
   }
 
   h3 {
-    color: yellowgreen;
-    text-shadow: 1px 1px 1px darkgreen;
+    color: gold;
+    text-shadow: 2px 2px 1px blue;
     font-style: italic;
     font-weight: bolder;
   }
