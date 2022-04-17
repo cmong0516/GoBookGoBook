@@ -41,23 +41,3 @@ a{
 .titleImg img{
   border-radius: 50px;
 }
-
-.mypage{
-  height: 66vh;
-  margin-top: 60px;
-}
-
-.mypagemain{
-  margin-left: 20%;
-  text-align: left;
-  width: 50vw;
-}
-
-.mypagemaincategory{
-  margin-top: 30px;
-  display: flex;
-}
-
-.mypagemaincategory h3{
-  margin-right: 20px;
-}

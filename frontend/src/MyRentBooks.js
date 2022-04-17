@@ -1,20 +1,25 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import styled from 'styled-components';
+
+let CartStyle = styled.div`
+  width: 18rem;
+  margin-top: 1rem;
+`
 
 function MyrentPage() {
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
+    <CartStyle>
+      <Card>
         <Card.Img variant="top" src="./"/>
         <Card.Body>
-          <Card.Title>책이름</Card.Title>
-          <Card.Text>저자</Card.Text>
-          <Card.Text>대여일</Card.Text>
-          <Card.Text>잔여대여일</Card.Text>
+          <Card.Title>도서명</Card.Title>
+          <Card.Text>대여일 : </Card.Text>
+          <Card.Text>반납일 : (D-계산값)</Card.Text>
           <Button variant="outline-danger">반납하기</Button>
         </Card.Body>
       </Card>
-    </div>
+    </CartStyle>
   )
 }
 

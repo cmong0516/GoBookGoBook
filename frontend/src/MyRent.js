@@ -31,7 +31,11 @@ function MyRent() {
                 ))}
             </ButtonGroup>
 
-            <MyRentBooks />
+            {
+                radioValue == 1
+                ? <MyRentBooks />
+                : null
+            }
         </div>
     )
 }

@@ -19,6 +19,7 @@ import Mypage from "./Mypage.js";
 let Wrapper = styled.div`
   width: 70%;
   margin: auto;
+  padding-top: 3rem;
 `;
 let UserStyle = styled.div`
   text-align: right;

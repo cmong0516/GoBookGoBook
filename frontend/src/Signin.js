@@ -6,7 +6,6 @@ let SigninForm = styled.div`
 
     width: 22rem;
     margin: auto;
-    padding-top: 3rem;
     padding-bottom: 3rem;
     text-align: left;
 
