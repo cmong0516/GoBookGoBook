@@ -46,7 +46,7 @@ function Login() {
     let [alarm, setAlarm] = useState('')
     let [account, setAccount] = useState({
         userId: '',
-        userpw: ''
+        userPw: ''
     })
 
     // 아이디 : 영어/숫자 6-12자
@@ -64,9 +64,9 @@ function Login() {
         e.preventDefault();
 
         if (!account.userId) { setAlarm('아이디가 입력되지 않았습니다.') }
-        else if (!account.userpw) { setAlarm('비밀번호가 입력되지 않았습니다.') }
+        else if (!account.userPw) { setAlarm('비밀번호가 입력되지 않았습니다.') }
         // 유효성체크
-        else if (!idFormat.test(account.userId) || !passwordFormat.test(account.userpw)) {
+        else if (!idFormat.test(account.userId) || !passwordFormat.test(account.userPw)) {
             setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다. 입력하신 내용을 다시 확인해주세요.')
         } else {
             alert('콘솔창 확인');
@@ -90,7 +90,7 @@ function Login() {
                 ></input>
                 <input
                     type="password"
-                    name="userpw"
+                    name="userPw"
                     placeholder="비밀번호를 입력해주세요."
                     onChange={onChangeFunc}
                 ></input>
