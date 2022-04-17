@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 let SigninForm = styled.div`
     width: 22rem;
+    margin: auto;
     padding-bottom: 3rem;
     text-align: left;
 

@@ -5,7 +5,6 @@ import { useHistory, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 let LoginForm = styled.div`
-
     width: 22rem;
     margin: auto;
     padding-bottom: 3rem;
