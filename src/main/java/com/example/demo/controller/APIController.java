@@ -2,8 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.object.BestSeller;
 import com.example.demo.object.NewBook;
+import com.example.demo.object.SearchBook;
+import com.example.demo.service.BookService;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -50,8 +54,17 @@ public class APIController {
         }
         return bestSellers;
     }
-    @GetMapping("/newbook")
 
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/search")
+    public ArrayList<SearchBook> search(@RequestParam String query) throws JSONException {
+
+        return bookService.search(query);
+    }
+
+    @GetMapping("/newbook")
     public ArrayList<NewBook> newBooks() {
 
         String result = WebClient.create(newUrl)
