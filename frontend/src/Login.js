@@ -36,7 +36,7 @@ let Signin = styled.span`
 let Alarm = styled.div`
     width: 100%;
     text-align: left;
-    color: orangered;
+    color: red;
     font-weight: bold;
     font-size: 13pt;
    
@@ -98,7 +98,7 @@ function Login() {
                 
                 <Button variant="primary" type="submit" size="lg">로그인</Button>
                 아이디가 없으신가요?&nbsp;&nbsp;&nbsp;
-                <Signin><Link to="/signinpage">회원가입</Link></Signin>
+                <Signin><Link to="/signin">회원가입</Link></Signin>
             </form>
         </LoginForm>
     );

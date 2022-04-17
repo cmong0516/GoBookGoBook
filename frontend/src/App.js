@@ -11,7 +11,6 @@ import Login from "./Login.js";
 import Signin from "./Signin.js";
 import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
-import Editprofile from "./Editprofile.js";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -49,22 +48,20 @@ function App() {
         <div className="nav">
           <div className="titleImg">
             <a href="/">
-              {/* <div> */}
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" />
-              {/* </div */}
+              {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" /> */}
               <div>Go Book Go Book</div>
             </a>
           </div>
           <div>
-            <Link to="/loginpage">
+            <Link to="/login">
               <span>로그인</span>
             </Link>
             <span>|</span>
-            <Link to="/signinpage">
+            <Link to="/signin">
               <span>회원가입</span>
             </Link>
             <span>|</span>
-            <Link to="/myrentlist">
+            <Link to="/mypage">
               <span>마이페이지&nbsp;</span>
             </Link>
           </div>
@@ -108,17 +105,14 @@ function App() {
             <Search searchWord={searchWord} />
           </Route>
 
-          <Route path="/loginpage">
+          <Route path="/login">
             <Login />
           </Route>
-          <Route path="/signinpage">
+          <Route path="/signin">
             <Signin />
           </Route>
-          <Route path="/myrentlist">
+          <Route path="/mypage">
             <Mypage />
-          </Route>
-          <Route path="/editprofile">
-            <Editprofile />
           </Route>
         </Wrapper>
       </Switch>
