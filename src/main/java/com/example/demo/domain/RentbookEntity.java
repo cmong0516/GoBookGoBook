@@ -1,10 +1,11 @@
 package com.example.demo.domain;
 
-import lombok.Data;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@Data
-public class RentBook {
+@Entity(name = "rentbook")
+public class RentbookEntity {
+    @Id
     private Long rentId;
     private String title;
     private String description;
@@ -19,5 +20,5 @@ public class RentBook {
     private String translator;
     private Long isbn;
     private int rank;
-
+    private boolean state;
 }
