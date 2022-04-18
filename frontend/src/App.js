@@ -21,7 +21,7 @@ let Wrapper = styled.div`
   margin: auto;
   padding-top: 3rem;
   min-height: 100%;   
-`;
+`
 let UserStyle = styled.div`
   text-align: right;
   padding: 2rem;
@@ -31,7 +31,7 @@ let UserStyle = styled.div`
   span {
     margin: 0.5rem;
   }
-`;
+`
 
 export let BookContext = React.createContext();
 
@@ -94,9 +94,12 @@ function App() {
           <Route exact path="/api/bestseller">
             <BestSeller getBooks={getBooks} />
           </Route>
-          <Route path="/api/newbook">
+          <Route exact path="/api/newbook">
             <NewBooks getBooks={getBooks} />
           </Route>
+          {/* <Route path="/api/newbook/:categoryId">
+          
+          </Route> */}
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
               <Detail />

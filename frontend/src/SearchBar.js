@@ -15,7 +15,7 @@ function SearchBar(props) {
                     placeholder="검색을 원하는 책, 저자를 입력해주세요."
                     onKeyDown={(e) => { if(e.key ==='Enter') { props.searchWordChange(e.target.value) } }}
                     onKeyUp={(e) => { if(e.key ==='Enter') { history.push('/api/search?query=' + props.searchWord) } }}
-                    />
+                />
                 <Button 
                     className="rounded-1" 
                     variant="outline-light" 
