@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Button} from "react-bootstrap";
 import axios from 'axios';
 
 function Search(props) {
@@ -25,10 +26,23 @@ function Search(props) {
                     {book.title}<br/>
                     줄거리 : {book.contents}<br/>
                     {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
+                    <RentButton/>
                 </div>
             ))} 
         </div>
     )
+}
+
+function RentButton() {
+    let rentStatus = 'return';
+
+    if (rentStatus === 'rentOK') {
+        return <Button variant="success" size="lg">대여하기</Button>
+    } else if (rentStatus === 'return') {
+        return <Button variant="dark" size="lg">반납하기</Button>
+    } else {
+        return <Button variant="danger" size="lg">대여불가</Button>
+    }
 }
 
 export default Search;

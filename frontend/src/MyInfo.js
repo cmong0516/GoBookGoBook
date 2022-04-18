@@ -28,7 +28,6 @@ let Alarm = styled.div`
 
 function MyInfo(props) {
 
-  let [validated, setValidated] = useState(false);
   let [alarm, setAlarm] = useState('')
   let [emailAlarm, setEmailAlarm] = useState('');
   let [pwAlarm, setPwAlarm] = useState('');
@@ -58,20 +57,6 @@ function MyInfo(props) {
     setEmailAlarm('');
     setPwAlarm('');
     setPwMatchAlarm('');
-
-    // if (form.checkValidity() === false) {
-    //   e.preventDefault();
-    //   setValidated(true);
-    // } else if(!passwordFormat.test(account.userpw) ) {
-    //   setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
-    // } else if(account.userpw != account.userpwCheck) {
-    //     setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
-    // } else {
-    //     alert('콘솔창 확인');
-    //     console.log(account);
-    //     // axios.post('')
-    //     // .then((res) => null)
-    // }
 
     // 둘 다 작성하지 않는 경우
     if ( !account.useremail && !account.userpw ) {
@@ -127,7 +112,7 @@ function MyInfo(props) {
       <p>고객님의 정보를 정확히 입력해주세요.</p>
       <Alarm>{alarm}</Alarm>
       <InfoForm>
-        <Form noValidate validated={validated} onSubmit={submitFunc}>
+        <Form noValidate onSubmit={submitFunc}>
           <GroupStyle>
             <Form.Group>
                 <Form.Label>이메일</Form.Label>
