@@ -16,12 +16,12 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/test")
+//@RequestMapping("/test")
 public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping
+    /*@PostMapping
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
         log.warn(String.valueOf(form));
         if (bindingResult.hasErrors()) {
@@ -35,7 +35,9 @@ public class LoginController {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
         }
-        /*로그인 성공처리*/
+        *//*로그인 성공처리*//*
         return "redirect:/";
-    }
+    }*/
+
+
 }

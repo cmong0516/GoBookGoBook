@@ -1,4 +1,7 @@
+/*
 package com.example.demo.domain;
+
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,3 +18,4 @@ public class MemberEntity {
     private String userName;
     private String userEmail;
 }
+..*/
