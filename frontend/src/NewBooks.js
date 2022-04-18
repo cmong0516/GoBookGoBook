@@ -30,8 +30,7 @@ function NewBooks(props) {
     axios
       .get("/api/newbook/" + categoryId)
       .then((res) => {
-        setBooks([...books, ...[]]);
-        setBooks([...res.data]);
+        setBooks(res.data);
         console.log(books);
       })
       .catch((error) => {

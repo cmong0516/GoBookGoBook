@@ -1,24 +1,23 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.Rent;
 import com.example.demo.object.RentBook;
-import com.example.demo.repository.RentBookReposiroty;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.repository.RentReposiroty;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
-@Transactional
 public class RentService {
+    private final RentReposiroty rentReposiroty;
 
-    private final RentBookReposiroty rentBookReposiroty;
+    public Rent insertRent(RentBook rentBook) {
+        Rent rent = new Rent();
+        rent.setTitle("대여테스트");
+        rent.setAuthor("김창모");
+        rent.setDescription("대여테스트 중입니다.");
 
-    @Autowired
-    public RentService(RentBookReposiroty rentBookReposiroty) {
-        this.rentBookReposiroty = rentBookReposiroty;
-    }
-
-    public Long join(RentBook rentBook) {
-        rentBookReposiroty.save(rentBook);
-        return rentBook.getRentId();
+        rentReposiroty.save(rent);
+        return rent;
     }
 }

@@ -94,23 +94,21 @@ function Signin() {
         } else {
             alert('콘솔창 확인');
             console.log(account);
-
-            axios({
-                url: '/signin',
-                method: 'post',
-                data: {
+        
+            axios.post('/signin', 
+                {data: {
                     userId:account.userId,
                     userPw:account.userPw,
                     userName:account.userName,
                     userEmail:account.userEmail
-                }
-            })
-                .then(function a(response) {
-                    console.log(response)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                }})
+            .then(res => {
+                alert('성공')
+                console.log(res) })
+            .catch(error => {
+                alert('회원가입 서버통신에 실패했습니다.');
+                console.log(error);
+            });
         }
 
     }
