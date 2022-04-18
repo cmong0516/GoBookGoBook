@@ -70,7 +70,7 @@ function Login() {
             alert('콘솔창 확인');
             console.log(account);
             
-            axios.post('', {
+            axios.post('/login', {
                     userId:account.userId,
                     userPw:account.userPw
                 })

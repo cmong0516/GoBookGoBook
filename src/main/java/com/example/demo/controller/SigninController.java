@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @Slf4j
 @RestController
@@ -18,9 +16,12 @@ public class SigninController{
 
     //회원가입 로직
     @PostMapping("/signin")
-    public Long join(@RequestBody User user){
+    public boolean join(@RequestBody User user){
 
-        return userService.joinUser(user); //상태코드 넘겨주기
+        boolean b = userService.joinUser(user);
+        System.out.println("b = " + b);
+
+        return b; //상태코드 넘겨주기
     }
 
    /* @GetMapping("/test")
