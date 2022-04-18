@@ -97,9 +97,6 @@ function App() {
           <Route exact path="/api/newbook">
             <NewBooks getBooks={getBooks} />
           </Route>
-          {/* <Route path="/api/newbook/:categoryId">
-          
-          </Route> */}
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
               <Detail />
