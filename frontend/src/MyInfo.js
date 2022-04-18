@@ -28,10 +28,9 @@ let Alarm = styled.div`
 
 function MyInfo(props) {
 
-  // 이메일, 비밀번호 둘중에 하나 안써도 submit되도록 변경 필요...
-  // 안쓴건 어떻게 넘기는가? null? ''?
-
   let [validated, setValidated] = useState(false);
+  let [alarm, setAlarm] = useState('')
+  let [emailAlarm, setEmailAlarm] = useState('');
   let [pwAlarm, setPwAlarm] = useState('');
   let [pwMatchAlarm, setPwMatchAlarm] = useState('');
   let [account, setAccount] = useState({
@@ -40,6 +39,8 @@ function MyInfo(props) {
       userpwCheck: ''
   })
 
+  // 이메일 : (이메일아이디 영어/숫자 하나 이상) + @(필수) + (영어 하나이상) + .(특수문자이므로 \붙임) + (영어 하나이상)
+  let emailFormat = RegExp(/^[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+$/);
   // 비밀번호 : 영어/숫자/특수문자(각 최소 1개씩) 조합 9-20자
   let passwordFormat = RegExp(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[~`!@#$%\^&*()-+=])[A-Za-z0-9~`!@#$%\^&*()-+=]{9,20}$/);
 
@@ -53,21 +54,70 @@ function MyInfo(props) {
     e.preventDefault();
     let form = e.currentTarget;
 
+    setAlarm('');
+    setEmailAlarm('');
     setPwAlarm('');
     setPwMatchAlarm('');
 
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      setValidated(true);
-    } else if(!passwordFormat.test(account.userpw) ) {
-      setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
-    } else if(account.userpw != account.userpwCheck) {
-        setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
-    } else {
+    // if (form.checkValidity() === false) {
+    //   e.preventDefault();
+    //   setValidated(true);
+    // } else if(!passwordFormat.test(account.userpw) ) {
+    //   setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
+    // } else if(account.userpw != account.userpwCheck) {
+    //     setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
+    // } else {
+    //     alert('콘솔창 확인');
+    //     console.log(account);
+    //     // axios.post('')
+    //     // .then((res) => null)
+    // }
+
+    // 둘 다 작성하지 않는 경우
+    if ( !account.useremail && !account.userpw ) {
+      setAlarm('수정하실 정보를 작성해주세요.')
+    }
+    // 이메일만 작성하는 경우
+    if ( account.useremail && !account.userpw ) {
+      // 형식확인
+      if(!emailFormat.test(account.useremail) ) {
+        setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
+      } else {
         alert('콘솔창 확인');
         console.log(account);
-        // axios.post('')
-        // .then((res) => null)
+      }
+    }
+    // 비밀번호만 작성하는 경우
+    if ( !account.useremail && account.userpw ) {
+      // 형식확인
+      if( !passwordFormat.test(account.userpw) ) {
+        setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
+      // 비밀번호 확인란과 일치여부
+      } else if ( account.userpw != account.userpwCheck) {
+        setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
+      } else {
+        alert('콘솔창 확인');
+        console.log(account);
+      }
+    }
+    // 둘 다 작성한 경우
+    if ( account.useremail && account.userpw ) {
+      // 이메일 형식확인
+      if( !emailFormat.test(account.useremail) ) {
+        setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
+      } 
+      // 비밀번호 형식확인
+      // 이메일, 비밀번호 둘 다 형식에 맞지 않는 경우를 위해 if문을 따로 작성
+      if( !passwordFormat.test(account.userpw) ) {
+        setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
+      // 비밀번호 확인란과 일치여부
+      } else if ( account.userpw != account.userpwCheck) {
+        setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
+      // 비밀번호 형식/확인란 맞은 상태에서 이메일형식까지 맞으면 결과 넘어감
+      } else if ( emailFormat.test(account.useremail) ) {
+        alert('콘솔창 확인');
+        console.log(account);
+      }
     }
   }
 
@@ -75,16 +125,17 @@ function MyInfo(props) {
     <div>
       <h2>개인정보 수정</h2>
       <p>고객님의 정보를 정확히 입력해주세요.</p>
+      <Alarm>{alarm}</Alarm>
       <InfoForm>
         <Form noValidate validated={validated} onSubmit={submitFunc}>
           <GroupStyle>
             <Form.Group>
                 <Form.Label>이메일</Form.Label>
-                {/* <Alarm>{emailAlarm}</Alarm> */}
+                <Alarm>{emailAlarm}</Alarm>
                 <Form.Control
                     required
                     type="email"
-                    name="email"
+                    name="useremail"
                     placeholder="ex) GoBook@naver.com"
                     onChange={onChangeFunc}
                 ></Form.Control>

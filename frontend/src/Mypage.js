@@ -5,14 +5,15 @@ import { Col, Row, ListGroup } from "react-bootstrap";
 import styled from 'styled-components';
 
 let MyMenu = styled.div`
-  border-radius: 0.5rem;
   h4 {
     margin: 0;
+    padding: 0.5rem; 
   }
 `
 let MyList = styled.div`
   text-align: left;
-  margin-left: 3rem;
+  padding-left: 3rem;
+  border-left: dashed 2px Silver;
 
   h2 {
     margin-bottom: 1rem;
@@ -26,10 +27,8 @@ function Mypage() {
   return (
     <Row>
       <Col sm={3}>
-        <MyMenu>
-          <ListGroup.Item variant="primary">
-            <h4>마이페이지</h4>
-          </ListGroup.Item>
+      <MyMenu>
+          <h4>마이페이지</h4>
           <ListGroup.Item action variant="light" onClick={() => setMenu(0)}>
             나의 대여 관리
           </ListGroup.Item>
