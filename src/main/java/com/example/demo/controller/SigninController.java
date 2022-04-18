@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.web.MemberForm;
+import com.example.demo.object.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 public class SigninController{
 
     @PostMapping(value = "/signin")
-    public String create(@RequestBody MemberForm memberForm){
-        System.out.println("memberForm = " + memberForm.getUserId());
-        System.out.println("memberForm = " + memberForm.getUserPw());
-        System.out.println("memberForm = " + memberForm.getUserName());
-        System.out.println("memberForm = " + memberForm.getUserEmail());
+    public String create(@RequestBody Member member){
+        System.out.println("member = " + member.getUserId());
+        System.out.println("member = " + member.getUserPw());
+        System.out.println("member = " + member.getUserName());
+        System.out.println("member = " + member.getUserEmail());
         return ".";
     }
 
