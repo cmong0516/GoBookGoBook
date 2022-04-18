@@ -46,8 +46,9 @@ function DetailView(props) {
 function RentButton(props) {
     let rentStatus = 'return';
     let rentFunc = () => {
-        axios.post('/rent/add', 
-        {data: props.book})
+        axios.post('/rent/add', {
+            data: props.book
+        })
         .then(res => {
             alert('대여 성공!')
             console.log(res) })

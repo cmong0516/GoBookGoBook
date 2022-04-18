@@ -104,6 +104,7 @@ function Signin() {
                     alert('회원가입이 완료되었습니다😇');
                     history.push("/login");
                 } else {
+                    console.log(res.data.code)
                     alert('이미 가입된 정보입니다😰');
                     history.push("/signin");
                 }
