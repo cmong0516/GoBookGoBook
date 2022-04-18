@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Button,Form } from "react-bootstrap";
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
 let SigninForm = styled.div`
@@ -32,6 +33,8 @@ let Alarm = styled.div`
 
 function Signin() {
 
+    let history = useHistory();
+
     let [validated, setValidated] = useState(false);
     let [nameAlarm, setNameAlarm] = useState('');
     let [idAlarm, setIdAlarm] = useState('');
@@ -45,7 +48,6 @@ function Signin() {
         userPw: '',
         userPwCheck: ''
     })
-
 
     // 아이디 : 영어/숫자 6-12자
     let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
@@ -63,8 +65,6 @@ function Signin() {
             ...account, [e.target.name]: e.target.value
         })
     }
-
-
     let submitFunc = (e) => {
         e.preventDefault();
         let form = e.currentTarget;
@@ -92,21 +92,24 @@ function Signin() {
         } else if(account.userPw != account.userPwCheck) {
             setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
         } else {
-            alert('콘솔창 확인');
             console.log(account);
-        
-            axios.post('/signin', 
-                {data: {
-                    userId:account.userId,
-                    userPw:account.userPw,
-                    userName:account.userName,
-                    userEmail:account.userEmail
-                }})
+            axios.post('/signin', {
+                    userId: account.userId,
+                    userPw: account.userPw,
+                    userName: account.userName,
+                    userEmail: account.userEmail
+                })
             .then(res => {
-                alert('성공')
-                console.log(res) })
+                if (res.data) {
+                    alert('회원가입이 완료되었습니다😇');
+                    history.push("/login");
+                } else {
+                    alert('이미 가입된 정보입니다😰');
+                    history.push("/signin");
+                }
+            })
             .catch(error => {
-                alert('회원가입 서버통신에 실패했습니다.');
+                alert('통신실패!');
                 console.log(error);
             });
         }

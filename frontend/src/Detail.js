@@ -49,7 +49,7 @@ function RentButton(props) {
         axios.post('/rent/add', 
         {data: props.book})
         .then(res => {
-            alert('성공')
+            alert('대여 성공!')
             console.log(res) })
         .catch(error => {
             alert('대여 통신에 실패했습니다.');

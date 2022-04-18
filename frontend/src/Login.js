@@ -64,21 +64,22 @@ function Login() {
 
         if (!account.userId) { setAlarm('아이디가 입력되지 않았습니다.') }
         else if (!account.userPw) { setAlarm('비밀번호가 입력되지 않았습니다.') }
-        // 유효성체크
         else if (!idFormat.test(account.userId) || !passwordFormat.test(account.userPw)) {
             setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다. 입력하신 내용을 다시 확인해주세요.')
         } else {
             alert('콘솔창 확인');
             console.log(account);
             
-            axios.post('', 
-                {data: {
+            axios.post('', {
                     userId:account.userId,
                     userPw:account.userPw
-                }})
-            .then(res => console.log(res))
+                })
+            .then(res => {
+                // 
+                console.log(res)
+            })
             .catch(error => {
-                alert('회원가입 서버통신에 실패했습니다.');
+                alert('통신실패!');
                 // console.log(searchWord);
                 console.log(error);
             });
