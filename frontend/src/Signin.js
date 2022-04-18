@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import { Button,Form } from "react-bootstrap";
 import styled from 'styled-components';
+import axios from "axios";
 
 let SigninForm = styled.div`
     width: 22rem;
     margin: auto;
     padding-bottom: 3rem;
     text-align: left;
-
     input, button {
         width: 100%;
         height: 3rem;
@@ -39,12 +39,13 @@ function Signin() {
     let [pwAlarm, setPwAlarm] = useState('');
     let [pwMatchAlarm, setPwMatchAlarm] = useState('');
     let [account, setAccount] = useState({
-        username: '',
+        userName: '',
         userId: '',
-        useremail: '',
-        userpw: '',
-        userpwCheck: ''
+        userEmail: '',
+        userPw: '',
+        userPwCheck: ''
     })
+
 
     // 아이디 : 영어/숫자 6-12자
     let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
@@ -63,6 +64,7 @@ function Signin() {
         })
     }
 
+
     let submitFunc = (e) => {
         e.preventDefault();
         let form = e.currentTarget;
@@ -75,28 +77,42 @@ function Signin() {
         if (form.checkValidity() === false) {
             e.preventDefault();
             setValidated(true);
-        } else if( !nameFormat.test(account.username) || !idFormat.test(account.userId) || !passwordFormat.test(account.userpw) ) {
+        } else if( !nameFormat.test(account.userName) || !idFormat.test(account.userId) || !passwordFormat.test(account.userPw) ) {
             // || !emailFormat.test(account.useremail) || !passwordFormat.test(account.userpw) ) {
-            
-            if( !nameFormat.test(account.username) )
+
+            if( !nameFormat.test(account.userName) )
                 setNameAlarm('이름의 형식이 올바르지 않습니다.');
-            if( !idFormat.test(account.userId) ) 
+            if( !idFormat.test(account.userId) )
                 setIdAlarm('아이디의 형식이 올바르지 않습니다.');
-            // if( !emailFormat.test(account.useremail) ) 
+            // if( !emailFormat.test(account.useremail) )
             //     setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
-            if( !passwordFormat.test(account.userpw) )
+            if( !passwordFormat.test(account.userPw) )
                 setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
 
-        } else if(account.userpw != account.userpwCheck) {
+        } else if(account.userPw != account.userPwCheck) {
             setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
         } else {
             alert('콘솔창 확인');
             console.log(account);
-            // axios.post('')
-            // .then((res) => null)
-            
+
+            axios({
+                url: '/signin',
+                method: 'post',
+                data: {
+                    userId:account.userId,
+                    userPw:account.userPw,
+                    userName:account.userName,
+                    userEmail:account.userEmail
+                }
+            })
+                .then(function a(response) {
+                    console.log(response)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
-        
+
     }
 
     return (
@@ -107,12 +123,12 @@ function Signin() {
 
                     <GroupStyle>
                         <Form.Group>
-                        <Form.Label>이름</Form.Label>
+                            <Form.Label>이름</Form.Label>
                             <Alarm>{nameAlarm}</Alarm>
                             <Form.Control
                                 required
                                 type="text"
-                                name="username"
+                                name="userName"
                                 placeholder="ex) 홍길동"
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -142,14 +158,14 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="email"
-                                name="email"
+                                name="userEmail"
                                 placeholder="ex) GoBook@naver.com"
                                 onChange={onChangeFunc}
                             ></Form.Control>
                             <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>
                         </Form.Group>
                     </GroupStyle>
-                    
+
                     <GroupStyle>
                         <Form.Group>
                             <Form.Label>비밀번호</Form.Label>
@@ -157,7 +173,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="password"
-                                name="userpw"
+                                name="userPw"
                                 placeholder="영어/숫자/특수문자 포함 9-20자를 입력해주세요."
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -172,7 +188,7 @@ function Signin() {
                             <Form.Control
                                 required
                                 type="password"
-                                name="userpwCheck"
+                                name="userPwCheck"
                                 placeholder="확인을 위해 비밀번호를 한번 더 입력해주세요."
                                 onChange={onChangeFunc}
                             ></Form.Control>
@@ -184,7 +200,7 @@ function Signin() {
                         회원가입하기
                     </Button>
                 </Form>
-                
+
             </div>
         </SigninForm>
     );
