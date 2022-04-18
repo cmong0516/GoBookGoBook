@@ -88,7 +88,6 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">

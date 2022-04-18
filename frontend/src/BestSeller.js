@@ -9,7 +9,7 @@ function BestSeller(props) {
     let [books, setBooks] = useState();
     
     useEffect(() => {
-        axios.get('/api/bestseller')
+        axios.post('/api/bestseller')
             .then((res) => {
                 // console.log(res.data);
                 // console.log(Array.isArray(res.data));

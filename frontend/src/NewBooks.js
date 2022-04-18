@@ -16,7 +16,7 @@ function NewBooks(props) {
 
   useEffect(() => {
     axios
-      .get("/api/newbook")
+      .post("/api/newbook")
       .then((res) => {
         setBooks(res.data);
       })

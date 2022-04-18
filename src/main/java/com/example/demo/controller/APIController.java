@@ -19,7 +19,7 @@ public class APIController {
     private final String bestUrl = "http://book.interpark.com/api/bestSeller.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
     private String newUrl = "http://book.interpark.com/api/newBook.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=100&output=json";
 
-    @GetMapping("/bestseller")
+    @PostMapping("/bestseller")
     public ArrayList<BestSeller> bestSellers() {
 
         String result = WebClient.create(bestUrl)
@@ -64,7 +64,7 @@ public class APIController {
         return bookService.search(query);
     }
 
-    @GetMapping("/newbook")
+    @PostMapping("/newbook")
     public ArrayList<NewBook> newBooks() {
 
         String result = WebClient.create(newUrl)
