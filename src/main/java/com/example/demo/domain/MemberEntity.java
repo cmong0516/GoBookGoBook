@@ -1,3 +1,4 @@
+/*
 package com.example.demo.domain;
 
 import javax.persistence.Entity;
@@ -15,3 +16,4 @@ public class MemberEntity {
     private String userName;
     private String userEmail;
 }
+..*/

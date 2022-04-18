@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.object.Member;
+import com.example.demo.domain.User;
+import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -9,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class SigninController{
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping(value = "/signin")
-    public String create(@RequestBody Member member){
-        System.out.println("member = " + member.getUserId());
-        System.out.println("member = " + member.getUserPw());
-        System.out.println("member = " + member.getUserName());
-        System.out.println("member = " + member.getUserEmail());
-        return ".";
+    public Long create(@RequestBody User memberForm){
+
+        return userService.joinUser(memberForm);
     }
 
     /*회원목록 조회*/
