@@ -16,5 +16,4 @@ public interface MemberRepository {
     Member findById(long id);
 
     List<Member> findAll();
-
 }
