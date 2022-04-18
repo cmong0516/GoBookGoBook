@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Book from "./Book.js";
 import NewBooksCategory from "./NewBooksCategory.js";
-import {Nav, Col} from "react-bootstrap";
-import styled from 'styled-components';
+import { Nav, Col } from "react-bootstrap";
+import styled from "styled-components";
 
 export let NewBooksContext = React.createContext();
 
 let CategoryStyle = styled.div`
   text-align: left;
-`
+`;
 
 function NewBooks(props) {
-
   let [books, setBooks] = useState();
 
   useEffect(() => {
-    axios.get("/api/newbook")
+    axios
+      .get("/api/newbook")
       .then((res) => {
         setBooks(res.data);
       })
@@ -27,45 +27,79 @@ function NewBooks(props) {
   }, []);
 
   function categoryNewbooks(categoryId) {
-    axios.get('/api/newbook/'+ categoryId)
+    axios
+      .get("/api/newbook/" + categoryId)
       .then((res) => {
-          alert('성공');
-          setBooks({
-            ...books,
-            ...res.data
-          });
-          console.log(books)
-      }).catch((error) => {
-          console.log(error)
-          alert('카테고리 신간 데이터를 받을 수 없습니다.');
-          console.log(error);
+        setBooks([...books, ...[]]);
+        setBooks([...res.data]);
+        console.log(books);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("카테고리 신간 데이터를 받을 수 없습니다.");
+        console.log(error);
       });
   }
-
-  // 리렌더링
-  // useEffect(() => {
-  //   axios.get('/api/newbook/'+ categoryId)
-  //     .then((res) => {
-  //         alert('성공');
-  //         setBooks(res.data);
-  //     }).catch((error) => {
-  //         alert(categoryId)
-  //         alert('카테고리 신간 데이터를 받을 수 없습니다.');
-  //         console.log(error);
-  //     });
-  // },[categoryId]);
 
   return (
     <div className="row">
       <Col>
         <CategoryStyle>
           <Nav variant="tabs">
-              <Nav.Item><Nav.Link onClick={() => {categoryNewbooks('101')}}>소설</Nav.Link></Nav.Item>
-              {/* <Nav.Item><Nav.Link onClick={()=>{ setCategoryId(102)}}>시/에세이</Nav.Link></Nav.Item> */}
-              <Nav.Item><Nav.Link eventKey="103">예술/대중문화</Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link eventKey="110">아동</Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link eventKey="117">경제경영</Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link eventKey="118">자기계발</Nav.Link></Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("101");
+                }}
+              >
+                소설
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("102");
+                }}
+              >
+                시/에세이
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("103");
+                }}
+              >
+                예술/대중문화
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("110");
+                }}
+              >
+                아동
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("117");
+                }}
+              >
+                경제경영
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("118");
+                }}
+              >
+                자기계발
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </CategoryStyle>
 
