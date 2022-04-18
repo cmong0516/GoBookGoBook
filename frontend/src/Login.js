@@ -70,8 +70,18 @@ function Login() {
         } else {
             alert('콘솔창 확인');
             console.log(account);
-            // axios.post('')
-            // .then((res) => null)
+            
+            axios.post('', 
+                {data: {
+                    userId:account.userId,
+                    userPw:account.userPw
+                }})
+            .then(res => console.log(res))
+            .catch(error => {
+                alert('회원가입 서버통신에 실패했습니다.');
+                // console.log(searchWord);
+                console.log(error);
+            });
         }
     }
 

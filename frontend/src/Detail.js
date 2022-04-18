@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import {Button} from "react-bootstrap";
 import "./App.css";
 import {BookContext} from './App.js';
+import axios from "axios";
 
 function Detail() {
 
@@ -22,8 +23,8 @@ function Detail() {
 function DetailView(props) {
 
     let { isbn } = useParams();
-
     let book = props.books && props.books.find(x => x.isbn == isbn);
+
     return (
         <div>
             <img src={book.coverLargeUrl} width="300rem"/>
@@ -42,11 +43,24 @@ function DetailView(props) {
     )
 }
 
-function RentButton() {
+function RentButton(props) {
     let rentStatus = 'return';
+    let rentFunc = () => {
+        axios.post('/rent/add', 
+        {data: props.book})
+        .then(res => {
+            alert('성공')
+            console.log(res) })
+        .catch(error => {
+            alert('대여 통신에 실패했습니다.');
+            console.log(error);
+        });
+    }
+    
 
-    if (rentStatus === 'rentOK') {
-        return <Button variant="success" size="lg">대여하기</Button>
+    // 로그인 안되있는 경우 로그인화면으로?
+    if (rentStatus === 'rent') {
+        return <Button variant="success" size="lg" onClick={rentFunc}>대여하기</Button>
     } else if (rentStatus === 'return') {
         return <Button variant="dark" size="lg">반납하기</Button>
     } else {
