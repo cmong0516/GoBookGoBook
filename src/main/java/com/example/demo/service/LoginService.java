@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.Member;
+import com.example.demo.object.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;

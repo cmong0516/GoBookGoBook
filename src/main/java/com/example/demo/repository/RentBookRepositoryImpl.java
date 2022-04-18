@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.domain.RentBook;
+import com.example.demo.object.RentBook;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.List;

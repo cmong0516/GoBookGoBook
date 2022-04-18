@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.RentBook;
+import com.example.demo.object.RentBook;
 import com.example.demo.repository.RentBookReposiroty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
