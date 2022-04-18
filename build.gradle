@@ -23,6 +23,9 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	//시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	//프로퍼티사용
 
 	//테스트에서 lombok 사용
