@@ -5,19 +5,20 @@ import { Nav, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 function NewBooksCategory() {
 
+    // useEffect(() => {
+    //     axios.get('/api/newbook/'+ categoryId)
+    //     .then((res) => {
+    //         setBooks(res.data);
+    //     }).catch((error) => {
+    //         alert(categoryId)
+    //         alert('카테고리 신간 데이터를 받을 수 없습니다.');
+    //         console.log(error);
+    //     });
+    // }, [categoryId]);
+
+    
     let [categoryId, setCategoryId] = useState(null);
     let [books, setBooks] = useState();
-
-    useEffect(() => {
-        axios.get('/api/newbook/'+ categoryId)
-        .then((res) => {
-            setBooks(res.data);
-        }).catch((error) => {
-            alert(categoryId)
-            alert('카테고리 신간 데이터를 받을 수 없습니다.');
-            console.log(error);
-        });
-    }, [categoryId]);
 
     return (
         <div>
@@ -41,6 +42,12 @@ function NewBooksCategory() {
             </Nav>
         </div>
     )
+}
+
+function SelectCategoryId() {
+
+
+   
 }
 
 export default NewBooksCategory;
