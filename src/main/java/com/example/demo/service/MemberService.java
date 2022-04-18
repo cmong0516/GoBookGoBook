@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.object.Member;
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.repository.MemoryMemberRepository;
+import com.example.demo.repository.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository = new MemberRepositoryImpl();
 
     /*회원가입*/
     public Long join(Member member) {

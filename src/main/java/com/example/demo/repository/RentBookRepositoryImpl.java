@@ -29,7 +29,7 @@ public class RentBookRepositoryImpl implements RentBookReposiroty{
 
     @Override
     public Optional<RentBook> findByUserId(String userId) {
-        List<RentBook> result = em.createQuery("select m from member m where m.userId = :userId", RentBook.class)
+        List<RentBook> result = em.createQuery("select r from rentbook r where r = :userId", RentBook.class)
                 .setParameter("userId", userId)
                 .getResultList();
         return result.stream().findAny();

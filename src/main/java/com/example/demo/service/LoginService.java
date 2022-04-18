@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.object.Member;
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.repository.MemoryMemberRepository;
+import com.example.demo.repository.MemberRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository = new MemberRepositoryImpl();
 
     /*@return null이면 로그인 실패*/
     public Member login(String userId, String userPw) {
