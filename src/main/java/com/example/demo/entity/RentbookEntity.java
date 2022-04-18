@@ -1,14 +1,11 @@
-package com.example.demo.domain;
-
-import lombok.Data;
+package com.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
 
-@Data
-public class RentBook {
-
+@Entity(name = "rentbook")
+public class RentbookEntity {
+    @Id
     private Long rentId;
     private String title;
     private String description;

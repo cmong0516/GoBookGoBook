@@ -1,16 +1,14 @@
-package com.example.demo.domain;
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+package com.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Data
-public class Member {
+@Entity(name = "member")
+public class MemberEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userId;
     private String userPw;
