@@ -4,15 +4,15 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Data
 public class RentBook {
 
-    private Long rentId;
     private String title;
     private String description;
-    private String pubDate;
+    private LocalDate pubDate;
     private String coverSmallUrl;
     private String coverLargeUrl;
     private int categoryId;
@@ -21,7 +21,7 @@ public class RentBook {
     private Long customerReviewRank;
     private String author;
     private String translator;
-    private Long isbn;
+    private String isbn;
     private int rank;
     private boolean state;
 }

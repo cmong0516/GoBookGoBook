@@ -2,8 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.object.Member;
 import com.example.demo.repository.MemberRepository;
-import com.example.demo.repository.MemberRepositoryImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,11 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true) //쓸지 말지. 정확히 이해 후 사용.
-@RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemberRepositoryImpl();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /*회원가입*/
     @Transactional
