@@ -1,10 +1,11 @@
-package apitest.study.cofig;
+package com.example.demo.cofig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,12 +23,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.DataSource = DataSource;
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception{
+        web.ignoring().antMatchers("/","/api/**","/signin","/login",
+                "/**/*.js","/**/*.css","/**/*.json","/**/*.png","/**/*.woff2");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests()
-                    .antMatchers("/","/css/**")   //접근 가능 페이지?
-                    .permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/mypage/**").hasRole("MEMBER")
+                    .antMatchers("/**").permitAll()   //접근 가능 페이지?
+//                    .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
@@ -48,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication()
                 .dataSource(DataSource)
-//                .passwordEncoder(passwordEncoder()) //비밀번호 암호화 관리
+                .passwordEncoder(passwordEncoder()) //비밀번호 암호화 관리
                 //인증처리
                 .usersByUsernameQuery("select user_id, user_pw, enabled "
                         + "from user "
@@ -61,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){ //암호화
+    public static PasswordEncoder passwordEncoder(){ //암호화
         return new BCryptPasswordEncoder();
     }
 }

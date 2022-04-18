@@ -1,9 +1,9 @@
-package apitest.study.domain;
+package com.example.demo.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +28,19 @@ public class User {
     )
 
     private List<Role> roles = new ArrayList<>();
+
+    @Builder
+    public User(String userId, String userPw, String userName, String userEmail, boolean enabled) {
+        this.userId = userId;
+        this.userPw = userPw;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.enabled = enabled;
+    }
+
+    public User() {
+
+    }
     //상태엔터티 추가 예정
 
     /*Mapping 종류
