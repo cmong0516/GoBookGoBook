@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-<<<<<<<< HEAD:src/main/java/com/example/demo/controller/UserController.java
 public class UserController {
-========
-public class MemberController {
->>>>>>>> pooh:src/main/java/com/example/demo/controller/MemberController.java
 
     @Autowired
     private UserService userService;
