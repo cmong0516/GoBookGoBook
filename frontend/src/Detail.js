@@ -38,20 +38,21 @@ function DetailView(props) {
             {book.isbn}<br/>
             {book.customerReviewRank}<br/>
             {book.description}<br/>
-            <RentButton/>
+            <RentButton book={book}/>
         </div>
     )
 }
 
 function RentButton(props) {
-    let rentStatus = 'return';
+    let rentStatus = 'rent';
     let rentFunc = () => {
         axios.post('/rent/add', {
             data: props.book
         })
         .then(res => {
             alert('대여 성공!')
-            console.log(res) })
+            console.log(res) 
+        })
         .catch(error => {
             alert('대여 통신에 실패했습니다.');
             console.log(error);

@@ -34,8 +34,15 @@ let UserStyle = styled.div`
 `
 
 export let BookContext = React.createContext();
+export let IsLoginContext = React.createContext();
 
 function App() {
+
+  let [isLogin, setIsLogin] = useState({
+    userName: '',
+    userId: ''
+  })
+
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
     setBooks(booksData);
@@ -107,7 +114,9 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <Login />
+            <IsLoginContext.Provider value={setIsLogin}>
+              <Login />
+            </IsLoginContext.Provider>
           </Route>
           <Route path="/signin">
             <Signin />
