@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -43,28 +42,30 @@ public class UserService {
         return true;
     }
 
-    public boolean loginUser(User user) {
+    public User loginUser(User user) {
         System.out.println("user.getUserId() = " + user.getUserId());
 
         //유효성 검사
         List<User> byId = userRepository.findById(user.getUserId());
-        User loginUser = byId.get(0);//잘 찾음
+        User loginUser = byId.get(0);//잘 찾음.
 
+//        System.out.println("loginUser = " + loginUser);
 
         //비밀번호 복호화
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
         //post로 넘어온 데이터 == db에서 찾은 데이터 => 로그인 성공
-        if(user.getUserId().equals(loginUser.getUserId()) & encoder.matches(user.getUserPw(),loginUser.getUserPw())){
-            System.out.println("로그인 가능");
-            return true;
+        if(user.getUserId().equals(loginUser.getUserId()) && encoder.matches(user.getUserPw(),loginUser.getUserPw())){
+            System.out.println("찾음 loginUser = " + loginUser);
+            return loginUser;
         }
 
         /*  String s1 = byId.stream()
                 .filter(s -> s.getUserId().equals(user.getUserId()))
                 .findAny()*/
 
-         return false;
+        System.out.println("못찾음");
+         return null;
     }
 }
