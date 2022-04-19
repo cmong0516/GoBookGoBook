@@ -41,4 +41,12 @@ public class UserService {
 
         return true;
     }
+
+    public boolean loginUser(User user){
+        System.out.println("user.getUserId() = " + user.getUserId());
+
+        //유효성 검사
+
+        return true;
+    }
 }

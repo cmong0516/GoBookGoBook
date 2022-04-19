@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,18 +15,35 @@ public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rent_id")
     private Long rentId;
+    @Column(name = "author")
     private String author;
+    @Column(name = "category_name")
     private String categoryName;
+    @Column(name = "cover_large_url")
     private String coverLargeUrl;
+    @Column(name = "cover_small_url")
     private String coverSmallUrl;
+    @Column(name = "customer_review_rank")
     private int customerReviewRank;
+    @Column(name = "description")
     private String description;
+    @Column(name = "isbn")
     private String isbn;
+    @Column(name = "item_id")
     private Double itemId;
+    @Column(name = "pub_date")
     private Date pubDate;
+    @Column(name = "publisher")
     private String publisher;
+    @Column(name = "ranking")
     private int rank;
+    @Column(name = "title")
     private String title;
-    private Date rentDate;
+    @Column(name = "state")
+    private boolean state;
+    @Column(name = "rent_date")
+    private LocalDate rentDate;
+
 }

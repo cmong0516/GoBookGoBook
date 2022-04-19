@@ -18,10 +18,9 @@ public class RentBookController {
 
     @PostMapping("/add")
     @ResponseBody
-    public RentBook rentBookAdd(RentBook rentBook) {
-        log.warn(rentBook.toString());
+    public RentBook rentBookAdd(@RequestBody RentBook rentBook) {
 
-//        rentService.insertRent(rentBook);
+        rentService.insertRent(rentBook);
         return rentBook;
     }
 
