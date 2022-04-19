@@ -4,10 +4,13 @@ import com.example.demo.domain.Rent;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class RentRepositoryImpl implements RentReposiroty{
+public class RentRepositoryImpl implements RentRepository {
+
+    @PersistenceContext
     private final EntityManager em;
 
     public RentRepositoryImpl(EntityManager em) {
@@ -25,6 +28,7 @@ public class RentRepositoryImpl implements RentReposiroty{
         List<Rent> result = em.createQuery("select r from Rent r where r.userId = :userId", Rent.class)
                 .setParameter("userId",userId)
                 .getResultList();
+
         return result;
     }
 

@@ -33,7 +33,7 @@ public class RentBookController {
     public List<Rent> rentBookInfo(@RequestBody Rent rent) {
         String userId = rent.getUserId();
         List<Rent> rentlist = rentService.findByUserId(userId);
-        log.warn(rentlist.toString());
+        log.warn("뭐지{}",rentlist.toString());
         return rentlist;
     }
 }
