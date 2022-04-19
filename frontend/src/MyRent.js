@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import MyRentBooks from './MyRentBooks.js'
+import axios from "axios";
 
 function MyRent() {
+    useEffect(() => {
+        axios
+            .post("/rent/info",{
+                userId:userId})
+            .then((res) => {
+                console.log(res.data);
+                setRentBooks(res.data);
+            })
+            .catch((error) => {
+                alert("도서 데이터를 받아오는 데 실패했습니다.");
+                console.log(error);
+            });
+    }, []);
 
     const [radioValue, setRadioValue] = useState("1");
     let userName = JSON.parse(localStorage.getItem('userName'));
-    
+    let userId = JSON.parse(localStorage.getItem('userId'));
+    let [rentBooks,setRentBooks] = useState();
 
     const radios = [
         { name: "현재 대여중인 도서", value: "1" },
