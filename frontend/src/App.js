@@ -63,6 +63,7 @@ function App() {
             </a>
           </div>
           <div>
+            {/* 로그인, 회원가입도 수정하기 */}
             <Link to="/login">
               <span>로그인</span>
             </Link>
