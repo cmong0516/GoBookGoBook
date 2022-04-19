@@ -42,6 +42,8 @@ let Alarm = styled.div`
 
 function Login() {
 
+    let history = useHistory();
+
     let [alarm, setAlarm] = useState('')
     let [account, setAccount] = useState({
         userId: '',
@@ -77,11 +79,18 @@ function Login() {
             .then(res => {
                 // 
                 console.log(res)
+                if(res.success === true) {
+                    alert('로그인되었습니다🐢');
+                    // response로 회원정보 전체(이름,아이디,이메일,비밀번호)가 들어와야 localStorage에 회원정보 모두 저장가능?
+                    // 어짜피 갖고있는 회원정보는 대여에만 쓰이므로 이름, 아이디만 가져와도 되는거?
+                    localStorage.setItem('userInfo', JSON.stringify(res));
+                    history.push("/");
+                } else {
+                    setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
+                }
             })
             .catch(error => {
-                alert('통신실패!');
-                // console.log(searchWord);
-                console.log(error);
+                alert('통신실패! 에러명 : ' + error);
             });
         }
     }

@@ -106,11 +106,11 @@ function Signin() {
                 } else {
                     console.log(res.data.code)
                     alert('이미 가입된 정보입니다😰');
-                    history.push("/signin");
+                    history.push("/login");
                 }
             })
             .catch(error => {
-                alert('통신실패!');
+                alert('통신실패! 에러명 : ' + error);
                 console.log(error);
             });
         }
