@@ -1,17 +1,17 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 let CartStyle = styled.div`
   width: 18rem;
   margin-top: 1rem;
-`
+`;
 
-function MyrentPage() {
+function MyrentPage(props) {
   return (
     <CartStyle>
       <Card>
-        <Card.Img variant="top" src="./"/>
+        <Card.Img variant="top" src="./" />
         <Card.Body>
           <Card.Title>도서명</Card.Title>
           <Card.Text>대여일 : </Card.Text>
@@ -20,7 +20,7 @@ function MyrentPage() {
         </Card.Body>
       </Card>
     </CartStyle>
-  )
+  );
 }
 
 export default MyrentPage;

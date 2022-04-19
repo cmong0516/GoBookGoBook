@@ -1,67 +1,69 @@
 import axios from "axios";
-import React, {useState, useContext} from "react";
-import {IsLoginContext} from "./App.js";
+import React, { useState, useContext } from "react";
+import { IsLoginContext } from "./App.js";
 import { Button } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 let LoginForm = styled.div`
-    width: 22rem;
-    margin: auto;
-    padding-bottom: 3rem;
+  width: 22rem;
+  margin: auto;
+  padding-bottom: 3rem;
 
-    input, button {
-        width: 100%;
-        height: 3rem;
-        margin-bottom: 1rem;
-    }
-    input {
-        border: solid 1px lightgrey;
-        border-radius: 4px;
-        padding: 0.7rem;
-    }
-    h3 {
-        font-weight: bold;
-        text-align: left;
-    }
-    p {
-        text-align: left;
-    }
-`
+  input,
+  button {
+    width: 100%;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+  input {
+    border: solid 1px lightgrey;
+    border-radius: 4px;
+    padding: 0.7rem;
+  }
+  h3 {
+    font-weight: bold;
+    text-align: left;
+  }
+  p {
+    text-align: left;
+  }
+`;
 let Signin = styled.span`
   font-size: 13pt;
   text-decoration: underline;
-`
+`;
 let Alarm = styled.div`
-    width: 100%;
-    text-align: left;
-    color: red;
-    font-weight: bold;
-    font-size: 13pt;
-   
-`
+  width: 100%;
+  text-align: left;
+  color: red;
+  font-weight: bold;
+  font-size: 13pt;
+`;
 
 function Login() {
-
     let history = useHistory();
 
-    let [alarm, setAlarm] = useState('')
+    let [alarm, setAlarm] = useState("");
     let [account, setAccount] = useState({
-        userId: '',
-        userPw: ''
-    })
+        userId: "",
+        userPw: "",
+    });
     let setIsLogin = useContext(IsLoginContext);
 
     // 아이디 : 영어/숫자 6-12자
     let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
     // 비밀번호 : 영어/숫자/특수문자(각 최소 1개씩) 조합 9-20자
-    let passwordFormat = RegExp(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[~`!@#$%\^&*()-+=])[A-Za-z0-9~`!@#$%\^&*()-+=]{9,20}$/);
+    let passwordFormat = RegExp(
+        /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[~`!@#$%\^&*()-+=])[A-Za-z0-9~`!@#$%\^&*()-+=]{9,20}$/
+    );
 
     let onChangeFunc = (e) => {
         setAccount({
-            ...account, [e.target.name]: e.target.value
-        })
-    }
+        ...account,
+        [e.target.name]: e.target.value,
+        });
+    };
 
     let submitFunc = (e) => {
         e.preventDefault();

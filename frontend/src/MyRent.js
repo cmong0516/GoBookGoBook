@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
-import MyRentBooks from './MyRentBooks.js'
+import MyRentBooks from "./MyRentBooks.js";
 import axios from "axios";
 
 function MyRent() {
@@ -11,22 +11,27 @@ function MyRent() {
     let userId = localStorage.getItem('userId');
     let [rentBooks,setRentBooks] = useState();
 
-    const radios = [
-        { name: "현재 대여중인 도서", value: "1" },
-        { name: "지난 대여 내역", value: "2" },
-    ];
+  const radios = [
+    { name: "현재 대여중인 도서", value: "1" },
+    { name: "지난 대여 내역", value: "2" },
+  ];
+  // const radios = [
+  //     { name: "현재 대여중인 도서", value: "1" },
+  //     { name: "지난 대여 내역", value: "2" },
+  //   ];
 
-    useEffect(() => {
-        axios.post( "/rent/info", {userId: userId} )
-            .then((res) => {
-                console.log(res.data);
-                setRentBooks(res.data);
-            })
-            .catch((error) => {
-                alert("도서 데이터를 받아오는 데 실패했습니다.");
-                console.log(error);
-            });
-    }, []);
+  useEffect(() => {
+    axios
+      .post("/rent/info", { userId: userId })
+      .then((res) => {
+        console.log(res.data);
+        setRentBooks(res.data);
+      })
+      .catch((error) => {
+        alert("도서 데이터를 받아오는 데 실패했습니다.");
+        console.log(error);
+      });
+  }, []);
 
     return (
         <div>
@@ -49,13 +54,9 @@ function MyRent() {
                 ))}
             </ButtonGroup>
 
-            {
-                radioValue == 1
-                ? <MyRentBooks />
-                : null
-            }
-        </div>
-    )
+      {radioValue == 1 ? <MyRentBooks /> : null}
+    </div>
+  );
 }
 
 export default MyRent;
