@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.object.RentBook;
 import com.example.demo.service.RentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/rent")
+@Slf4j
+@RestController
+@RequestMapping(value = "/rent",produces = "application/text; charset=utf8")
 public class RentBookController {
     private final RentService rentService;
 
@@ -14,10 +16,10 @@ public class RentBookController {
         this.rentService = rentService;
     }
 
-    @PostMapping("/add")
-    @ResponseBody
-    public RentBook rentBookAdd(RentBook rentBook) {
-        rentService.insertRent(rentBook);
+    @PostMapping(value = "/add")
+    public RentBook rentBookAdd(@RequestBody RentBook rentBook) {
+        log.warn(rentBook.toString());
+        //rentService.insertRent(rentBook);
         return rentBook;
     }
 

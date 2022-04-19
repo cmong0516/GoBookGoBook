@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -13,10 +14,18 @@ public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rent_id")
     private Long rentId;
-    private String title;
-    private String description;
     private String author;
-
+    private String categoryName;
+    private String coverLargeUrl;
+    private String coverSmallUrl;
+    private int customerReviewRank;
+    private String description;
+    private String isbn;
+    private Double itemId;
+    private Date pubDate;
+    private String publisher;
+    private int rank;
+    private String title;
+    private Date rentDate;
 }
