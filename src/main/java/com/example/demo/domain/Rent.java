@@ -1,15 +1,12 @@
 package com.example.demo.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Entity
-@Getter
-@Setter
+@Entity(name = "Rent")
+@Data
 @Table(name = "rent")
 public class Rent {
 
@@ -29,7 +26,7 @@ public class Rent {
     private String coverSmallUrl;
     @Column(name = "customer_review_rank")
     private int customerReviewRank;
-    @Column(name = "description",length = 1000)
+    @Column(name = "description",length = 2000)
     private String description;
     @Column(name = "isbn")
     private String isbn;
@@ -45,5 +42,4 @@ public class Rent {
     private boolean state;
     @Column(name = "rent_date")
     private LocalDate rentDate;
-
 }
