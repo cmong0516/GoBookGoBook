@@ -57,7 +57,8 @@ function DetailView(props) {
 function RentButton(props) {
   
   let userName = localStorage.getItem('userName');
-    let userId = JSON.parse(localStorage.getItem('userId'));
+  // let userId = JSON.parse(localStorage.getItem('userId'));
+  let userId = localStorage.getItem('userId');
   let rentStatus = "rent";
   JSON.stringify(props.book);
 
