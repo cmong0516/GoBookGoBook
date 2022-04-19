@@ -42,6 +42,7 @@ function App() {
     userName: '',
     userId: ''
   })
+  let token = localStorage.getItem('accessToken');
 
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
@@ -70,6 +71,15 @@ function App() {
               <span>회원가입</span>
             </Link>
             <span>|</span>
+            {/* {
+              !token
+              ? <Link to="/login">
+                 <span>마이페이지&nbsp;</span>
+                </Link>
+              : <Link to="/mypage">
+                 <span>마이페이지&nbsp;</span>
+                </Link>
+            } */}
             <Link to="/mypage">
               <span>마이페이지&nbsp;</span>
             </Link>

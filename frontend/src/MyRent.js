@@ -5,6 +5,8 @@ import MyRentBooks from './MyRentBooks.js'
 function MyRent() {
 
     const [radioValue, setRadioValue] = useState("1");
+    let user = JSON.parse(localStorage.getItem('user'));
+    
 
     const radios = [
         { name: "현재 대여중인 도서", value: "1" },
@@ -13,6 +15,7 @@ function MyRent() {
 
     return (
         <div>
+            {/* <h2>{user.userName}, 반가워요!</h2> */}
             <h2>홍길동님, 반가워요!</h2>
             <p>현재 대여중인 도서는 0/5 권 입니다.</p>
             <ButtonGroup>

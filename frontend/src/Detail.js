@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./App.css";
 import { BookContext } from "./App.js";
@@ -22,6 +22,7 @@ function Detail() {
 }
 
 function DetailView(props) {
+
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
 
@@ -54,9 +55,17 @@ function DetailView(props) {
 }
 
 function RentButton(props) {
+  
+  let token = localStorage.getItem('accessToken');
   let rentStatus = "rent";
   JSON.stringify(props.book);
+  
   let rentFunc = () => {
+
+    if(!token) {
+      return <Link to="/login"/>
+    }
+
     axios
       .post("/rent/add", {
         author: props.book.author,
