@@ -56,13 +56,13 @@ function DetailView(props) {
 
 function RentButton(props) {
   
-  let token = localStorage.getItem('accessToken');
+  let userName = localStorage.getItem('userName');
   let rentStatus = "rent";
   JSON.stringify(props.book);
   
   let rentFunc = () => {
 
-    if(!token) {
+    if(!userName) {
       return <Link to="/login"/>
     }
 
