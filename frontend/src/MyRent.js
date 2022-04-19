@@ -7,7 +7,7 @@ function MyRent() {
     
     const [radioValue, setRadioValue] = useState("1");
     let userName = JSON.parse(localStorage.getItem('userName'));
-    let userId = JSON.parse(localStorage.getItem('userId'));
+    let userId = localStorage.getItem('userId');
     let [rentBooks,setRentBooks] = useState();
 
     const radios = [
