@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-public class SigninController{
+public class MemberController {
 
     @Autowired
     private UserService userService;
@@ -18,17 +18,13 @@ public class SigninController{
     @PostMapping("/signin")
     public boolean join(@RequestBody User user){
 
-        boolean b = userService.joinUser(user);
-        System.out.println("b = " + b);
-
-        return b; //상태코드 넘겨주기
+        return userService.joinUser(user); //상태코드 넘겨주기
     }
+    
+    //로그인 로직
+    @PostMapping("/login")
+    public boolean login(@RequestBody User user){
 
-   /* @GetMapping("/test")
-    public List<User> find(@RequestBody User user){
-        return userService.validateDuplicateUser(user);
-    }*/
-
-    /*회원목록 조회*/
-    //일단 나중에 form도 만들어야 함 0414지원석
+        return userService.loginUser(user);
+    }
 }
