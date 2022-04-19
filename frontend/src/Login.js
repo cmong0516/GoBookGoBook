@@ -77,10 +77,10 @@ function Login() {
                 })
             .then(res => {
                 if(res) {
-                    console.log(res)
-                    // alert('님, 로그인되었습니다🐢');
+                    console.log(res);
+                    alert(res.data.userName + '님, 로그인되었습니다🐢');
                     // localStorage.setItem('accessToken', res.token);
-                    localStorage.setItem('user', JSON.stringify(res));
+                    localStorage.setItem('userName', JSON.stringify(res.data.userName));
                     
                     // 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
                     // setIsLogin({
