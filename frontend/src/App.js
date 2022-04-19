@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Nav, Navbar, Container} from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
@@ -38,12 +38,10 @@ export let IsLoginContext = React.createContext();
 
 function App() {
 
-  let [isLogin, setIsLogin] = useState({
-    userName: '',
-    userId: ''
-  })
+  let [isLogin, setIsLogin] = useState(false)
+  
   let userName = JSON.parse(localStorage.getItem('userName'));
-
+  
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
     setBooks(booksData);

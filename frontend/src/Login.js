@@ -81,12 +81,8 @@ function Login() {
                     alert(res.data.userName + '님, 로그인되었습니다🐢');
                     // localStorage.setItem('accessToken', res.token);
                     localStorage.setItem('userName', JSON.stringify(res.data.userName));
-                    
-                    // 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
-                    // setIsLogin({
-                    //     userName: '서버에서 갖고온 회원정보.유저이름',  // res['user'].userName
-                    //     userId: '서버에서 갖고온 회원정보.유저아이디'   // res['user'].userId
-                    // });
+                    // 리렌더링을 위해 상위컴포넌트로부터 받은 state변경
+                    setIsLogin(true);
                     history.push("/");
                 } else {
                     setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
