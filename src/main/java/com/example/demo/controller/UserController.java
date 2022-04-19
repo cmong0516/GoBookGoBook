@@ -23,7 +23,7 @@ public class UserController {
     
     //로그인 로직
     @PostMapping("/login")
-    public boolean login(@RequestBody User user){
+    public User login(@RequestBody User user){
 
         return userService.loginUser(user);
     }
