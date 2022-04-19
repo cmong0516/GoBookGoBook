@@ -34,11 +34,12 @@ let UserStyle = styled.div`
 `;
 
 export let BookContext = React.createContext();
-export let IsLoginContext = React.createContext();
+export let SetBookContext = React.createContext();
 
 function App() {
-  let [isLogin, setIsLogin] = useState(true);
 
+  let userId = localStorage.getItem('userId');
+  let [isLogin, setIsLogin] = useState();
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
     setBooks(booksData);
@@ -59,13 +60,13 @@ function App() {
           </div>
           <div>
             {
-              isLogin 
+              userId
               ? (<div>
                   <Link to="/">
                     <span
                       onClick={() => {
                         localStorage.clear();
-                        setIsLogin(false);
+                        setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
                       }}
                     >
                       로그아웃
@@ -118,20 +119,20 @@ function App() {
           </Route>
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
-            <IsLoginContext.Provider value={isLogin}>
-                <Detail />
-            </IsLoginContext.Provider>
+              <Detail />
             </BookContext.Provider>
           </Route>
 
           <Route path="/api/search">
-            <Search searchWord={searchWord} />
+            <BookContext.Provider value={books}>
+            <SetBookContext.Provider value={setBooks}>
+              <Search searchWord={searchWord} />
+            </SetBookContext.Provider>
+            </BookContext.Provider>
           </Route>
 
           <Route path="/login">
-            <IsLoginContext.Provider value={setIsLogin}>
-              <Login />
-            </IsLoginContext.Provider>
+            <Login setIsLogin={setIsLogin}/>
           </Route>
           <Route path="/signin">
             <Signin />

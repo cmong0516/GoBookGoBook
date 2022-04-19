@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
-import { IsLoginContext } from "./App.js";
 import { Button } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -41,7 +40,7 @@ let Alarm = styled.div`
   font-size: 13pt;
 `;
 
-function Login() {
+function Login(props) {
     let history = useHistory();
 
     let [alarm, setAlarm] = useState("");
@@ -49,7 +48,6 @@ function Login() {
         userId: "",
         userPw: "",
     });
-    let setIsLogin = useContext(IsLoginContext);
 
     // 아이디 : 영어/숫자 6-12자
     let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
@@ -84,8 +82,8 @@ function Login() {
                     localStorage.setItem('userName', JSON.stringify(res.data.userName));
                     // localStorage.setItem('userId', JSON.stringify(res.data.userId));
                     localStorage.setItem('userId', res.data.userId);
+                    props.setIsLogin(true)
                      // 리렌더링을 위해 상위컴포넌트로부터 받은 state변경
-                    setIsLogin(true);
                     history.push("/");
                 } else {
                     setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
