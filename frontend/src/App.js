@@ -71,6 +71,15 @@ function App() {
               <span>회원가입</span>
             </Link>
             <span>|</span>
+            {/* {
+              !token
+              ? <Link to="/login">
+                 <span>마이페이지&nbsp;</span>
+                </Link>
+              : <Link to="/mypage">
+                 <span>마이페이지&nbsp;</span>
+                </Link>
+            } */}
             <Link to="/mypage">
               <span>마이페이지&nbsp;</span>
             </Link>
@@ -123,12 +132,8 @@ function App() {
             <Signin />
           </Route>
           <Route path="/mypage">
-            {
-              token
-              ? <Mypage />
-              : <Login />
-            }
-            </Route>
+            <Mypage />
+          </Route>
         </Wrapper>
       </Switch>
     </div>

@@ -85,8 +85,8 @@ function Login() {
                 if(res) {
                     alert('로그인되었습니다🐢');
                     // 서버에서 response로 accessToken과 user정보가 넘어온다고 가정
-                    localStorage.setItem('accessToken', res['accessToken']);
-                    localStorage.setItem('user', JSON.stringify(res['user']));
+                    // localStorage.setItem('accessToken', res['accessToken']);
+                    localStorage.setItem('user', JSON.stringify(res.data));
                     // 갖고있는 회원정보는 대여/로그인여부/마이페이지출입가능여부/마이페이지'~님'에만 쓰이므로 이름, 아이디만 가져와도 되는가?
                     
                     // 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
