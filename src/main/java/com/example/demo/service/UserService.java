@@ -31,6 +31,7 @@ public class UserService {
             //throw new GeneralSecurityException();
         }
 
+        //저장 로직 따로 빼도 될 듯
         User user1 = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user1.setUserPw(passwordEncoder.encode(user.getUserPw())); //암호화
@@ -38,6 +39,22 @@ public class UserService {
         user1.setUserName(user.getUserName());
         user1.setUserEmail(user.getUserEmail());
         userRepository.save(user1);
+
+        return true;
+    }
+
+    public boolean loginUser(User user) {
+
+        System.out.println("user.getUserId() = " + user.getUserId());
+        System.out.println("user.getUserPw() = " + user.getUserPw());
+
+        List<User> findId = userRepository.findById(user.getUserId());
+
+        System.out.println("findId = " + findId); //id찾는 거 확인
+
+        if (user.getUserId() == findId.stream().findAny().toString()){
+            System.out.println("아이디 비교");
+        } //아이디 비번 일치하면
 
         return true;
     }
