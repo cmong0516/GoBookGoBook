@@ -7,7 +7,8 @@ function MyRent() {
     
     const [radioValue, setRadioValue] = useState("1");
     let userName = JSON.parse(localStorage.getItem('userName'));
-    let userId = JSON.parse(localStorage.getItem('userId'));
+    // let userId = JSON.parse(localStorage.getItem('userId'));
+    let userId = localStorage.getItem('userId');
     let [rentBooks,setRentBooks] = useState();
 
     const radios = [
@@ -40,7 +41,7 @@ function MyRent() {
                     variant={idx % 2 ? "outline-primary" : "outline-primary"}
                     name="radio"
                     value={radio.value}
-                    checked={radioValue === radio.value}
+                    checked={radioValue == radio.value}
                     onChange={(e) => setRadioValue(e.currentTarget.value)}
                 >
                 {radio.name}

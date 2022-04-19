@@ -42,7 +42,7 @@ function Mypage() {
         <MyList>
           
           {
-            menu == 0 
+            menu === 0 
             ? <MyRent/>
             : <MyInfo setMenu={setMenu}/>
           }

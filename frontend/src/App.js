@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
-import { Link, Route, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import BestSeller from "./BestSeller.js";
 import NewBooks from "./NewBooks.js";
 import Detail from "./Detail.js";

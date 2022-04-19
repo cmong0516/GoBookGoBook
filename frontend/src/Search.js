@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from "react-bootstrap";
 import axios from 'axios';
+import RentButton from "./RentButton.js"
 
 function Search(props) {
 
     let [result, setResult] = useState();
     let searchWord = props.searchWord;
+    let [book, setBook] = useState();
+    let userId = localStorage.getItem('userId');
 
     useEffect(() => {
         axios.get('/api/search', {params : {query : searchWord}})
-        .then(res => setResult(res.data))
+        .then(res => {
+            setResult(res.data);
+            console.log(res.data);
+        })
         .catch(error => {
             alert('검색결과 데이터를 받아오는 데 실패했습니다.');
             // console.log(searchWord);
@@ -26,23 +31,25 @@ function Search(props) {
                     {book.title}<br/>
                     줄거리 : {book.contents}<br/>
                     {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
-                    <RentButton/>
+                    {() => setBook({
+                        author: book.authors,
+                        categoryName: book.categoryName,
+                        coverLargeUrl: book.coverLargeUrl,
+                        coverSmallUrl: book.thumbnail,
+                        customerReviewRank: book.customerReviewRank,
+                        description: book.contents,
+                        isbn: book.isbn,
+                        pubDate: book.dateTime,
+                        publisher: book.publisher,
+                        rank: book.rank,
+                        title: book.title,
+                        userId: userId
+                    })}
+                    <RentButton book={book} />
                 </div>
             ))} 
         </div>
     )
-}
-
-function RentButton() {
-    let rentStatus = 'return';
-
-    if (rentStatus === 'rentOK') {
-        return <Button variant="success" size="lg">대여하기</Button>
-    } else if (rentStatus === 'return') {
-        return <Button variant="dark" size="lg">반납하기</Button>
-    } else {
-        return <Button variant="danger" size="lg">대여불가</Button>
-    }
 }
 
 export default Search;
