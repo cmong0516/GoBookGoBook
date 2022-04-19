@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class RentRepositoryImpl implements RentReposiroty{
+public class RentRepositoryImpl implements RentRepository {
     private final EntityManager em;
 
     public RentRepositoryImpl(EntityManager em) {
