@@ -16,7 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional //변경되는 값이라?
-    public boolean joinUser(User user){
+    public boolean joinUser(User user) {
         System.out.println("memberForm = " + user.getUserId());
         System.out.println("memberForm = " + user.getUserPw());
         System.out.println("memberForm = " + user.getUserName());
@@ -25,13 +25,12 @@ public class UserService {
         //아이디로 유효성 검사
         List<User> findId = userRepository.findById(user.getUserId());
 
-        if(!findId.isEmpty()){  //이메일이 존재하면(비어있지 않으면)
+        if (!findId.isEmpty()) {  //이메일이 존재하면(비어있지 않으면)
             return false;
 //            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
             //throw new GeneralSecurityException();
         }
 
-        //저장 로직 따로 빼도 될 듯
         User user1 = new User();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user1.setUserPw(passwordEncoder.encode(user.getUserPw())); //암호화
@@ -39,22 +38,6 @@ public class UserService {
         user1.setUserName(user.getUserName());
         user1.setUserEmail(user.getUserEmail());
         userRepository.save(user1);
-
-        return true;
-    }
-
-    public boolean loginUser(User user) {
-
-        System.out.println("user.getUserId() = " + user.getUserId());
-        System.out.println("user.getUserPw() = " + user.getUserPw());
-
-        List<User> findId = userRepository.findById(user.getUserId());
-
-        System.out.println("findId = " + findId); //id찾는 거 확인
-
-        if (user.getUserId() == findId.stream().findAny().toString()){
-            System.out.println("아이디 비교");
-        } //아이디 비번 일치하면
 
         return true;
     }
