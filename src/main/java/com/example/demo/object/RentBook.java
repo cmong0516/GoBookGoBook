@@ -1,27 +1,22 @@
 package com.example.demo.object;
 
 import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class RentBook {
 
-    private String title;
-    private String description;
-    private LocalDate pubDate;
-    private String coverSmallUrl;
-    private String coverLargeUrl;
-    private int categoryId;
-    private String categoryName;
-    private String publisher;
-    private Long customerReviewRank;
+    private Long rentId;
     private String author;
-    private String translator;
+    private String categoryName;
+    private String coverLargeUrl;
+    private String coverSmallUrl;
+    private int customerReviewRank;
+    private String description;
     private String isbn;
+    private Double itemId;
+    private Date pubDate;
+    private String publisher;
     private int rank;
-    private boolean state;
+    private String title;
 }
