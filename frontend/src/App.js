@@ -42,6 +42,7 @@ function App() {
     userName: '',
     userId: ''
   })
+  let token = localStorage.getItem('accessToken');
 
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
@@ -122,8 +123,12 @@ function App() {
             <Signin />
           </Route>
           <Route path="/mypage">
-            <Mypage />
-          </Route>
+            {
+              token
+              ? <Mypage />
+              : <Login />
+            }
+            </Route>
         </Wrapper>
       </Switch>
     </div>

@@ -54,8 +54,10 @@ function DetailView(props) {
 }
 
 function RentButton(props) {
+
   let rentStatus = "rent";
   JSON.stringify(props.book);
+  
   let rentFunc = () => {
     axios
       .post("/rent/add", {

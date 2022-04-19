@@ -43,14 +43,14 @@ let Alarm = styled.div`
 
 function Login() {
 
-    let history = useHistory(IsLoginContext);
+    let history = useHistory();
 
     let [alarm, setAlarm] = useState('')
     let [account, setAccount] = useState({
         userId: '',
         userPw: ''
     })
-    let setIsLogin = useContext();
+    let setIsLogin = useContext(IsLoginContext);
 
     // 아이디 : 영어/숫자 6-12자
     let idFormat = RegExp(/^[A-Za-z0-9]{6,12}$/);
@@ -71,7 +71,7 @@ function Login() {
         else if (!idFormat.test(account.userId) || !passwordFormat.test(account.userPw)) {
             setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다. 입력하신 내용을 다시 확인해주세요.')
         } else {
-            alert('콘솔창 확인');
+            alert('유효성검사 완료. Ajax를 시도합니다!');
             console.log(account);
             
             axios.post('/login', {
@@ -84,15 +84,17 @@ function Login() {
                 // 서버에서 보내준 유저정보가 없으면 (아이디/비밀번호 틀리거나 회원정보 없는 경우)
                 if(res) {
                     alert('로그인되었습니다🐢');
-                    localStorage.setItem('user', JSON.stringify(res));
-                    // 서버에서 유저정보를 보내주면 이름,아이디만 가공해서 setUser에 담는다.
-                    // 어짜피 갖고있는 회원정보는 대여/로그인여부/마이페이지출입가능여부/마이페이지'~님'에만 쓰이므로 이름, 아이디만 가져와도 되는가?
-                    // 아니면 어짜피 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
-                    // 토큰도 저장해야함
-                    setIsLogin({
-                        userName: '서버에서 갖고온 회원정보.유저이름',
-                        userId: '서버에서 갖고온 회원정보.유저아이디'
-                    });
+                    // 서버에서 response로 accessToken과 user정보가 넘어온다고 가정
+                    localStorage.setItem('accessToken', res['accessToken']);
+                    localStorage.setItem('user', JSON.stringify(res['user']));
+                    // 갖고있는 회원정보는 대여/로그인여부/마이페이지출입가능여부/마이페이지'~님'에만 쓰이므로 이름, 아이디만 가져와도 되는가?
+                    
+                    // 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
+                    // setIsLogin({
+                    //     userName: '서버에서 갖고온 회원정보.유저이름',  // res['user'].userName
+                    //     userId: '서버에서 갖고온 회원정보.유저아이디'   // res['user'].userId
+                    // });
+
                     // 추가할일 : getItem이든 state값 확인이든 해서 App.js의 로그인/회원가입이 로그아웃으로 변경되도록 해야함
                     // 추가할일2 : 로그인 여부에 따른 회원가입창 출입관리
                     history.push("/");
