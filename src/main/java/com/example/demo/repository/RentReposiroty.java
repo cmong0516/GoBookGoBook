@@ -1,8 +1,18 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Rent;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RentReposiroty extends JpaRepository<Rent,Long> {
+import java.util.List;
+
+@Repository
+public interface RentReposiroty {
+    Rent save(Rent rent);
+
+    List<Rent> findAllByUserId(String userId);
+
+    List<Rent> findAll();
+
+    Rent returnbook(Rent rent);
 
 }

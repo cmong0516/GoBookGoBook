@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Nav, Navbar, Container} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
@@ -20,8 +20,8 @@ let Wrapper = styled.div`
   width: 70%;
   margin: auto;
   padding-top: 3rem;
-  min-height: 100%;   
-`
+  min-height: 100%;
+`;
 let UserStyle = styled.div`
   text-align: right;
   padding: 2rem;
@@ -31,18 +31,15 @@ let UserStyle = styled.div`
   span {
     margin: 0.5rem;
   }
-`
+`;
 
 export let BookContext = React.createContext();
 export let IsLoginContext = React.createContext();
 
 function App() {
+  let [isLogin, setIsLogin] = useState(false);
 
-  let [isLogin, setIsLogin] = useState({
-    userName: '',
-    userId: ''
-  })
-  let userName = JSON.parse(localStorage.getItem('userName'));
+  let userName = JSON.parse(localStorage.getItem("userName"));
 
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
@@ -64,23 +61,35 @@ function App() {
           </div>
           <div>
             {/* 로그인, 회원가입도 수정하기 */}
-            <Link to="/login">
-              <span>로그인</span>
-            </Link>
-            <span>|</span>
-            <Link to="/signin">
-              <span>회원가입</span>
-            </Link>
-            <span>|</span>
-            {
-              (!userName)
-              ? <Link to="/login">
-                 <span>마이페이지&nbsp;</span>
+
+            {!isLogin ? (
+              <div>
+                <Link to="/login">
+                  <span>로그인</span>
                 </Link>
-              : <Link to="/mypage">
-                 <span>마이페이지&nbsp;</span>
+                <span>|</span>
+                <Link to="/signin">
+                  <span>회원가입</span>
                 </Link>
-            }
+              </div>
+            ) : (
+              <div>
+                <Link to="/">
+                  <span
+                    onClick={() => {
+                      localStorage.clear();
+                      setIsLogin(false);
+                    }}
+                  >
+                    로그아웃
+                  </span>
+                </Link>
+                <span>|</span>
+                <Link to="/mypage">
+                  <span>마이페이지&nbsp;</span>
+                </Link>
+              </div>
+            )}
             {/* <Link to="/mypage">
               <span>마이페이지&nbsp;</span>
             </Link> */}

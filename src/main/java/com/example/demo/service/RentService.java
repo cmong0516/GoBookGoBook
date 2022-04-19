@@ -5,9 +5,12 @@ import com.example.demo.object.RentBook;
 import com.example.demo.repository.RentReposiroty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class RentService {
@@ -16,6 +19,7 @@ public class RentService {
     public Rent insertRent(RentBook rentBook) {
         Rent rent = new Rent();
         LocalDate now = LocalDate.now();
+        rent.setUserId(rentBook.getUserId());
         rent.setAuthor(rentBook.getAuthor());
         rent.setCategoryName(rentBook.getCategoryName());
         rent.setCoverLargeUrl(rentBook.getCoverLargeUrl());
@@ -32,5 +36,8 @@ public class RentService {
         rentReposiroty.save(rent);
 
         return rent;
+    }
+    public List<Rent> findByUserId(String userId) {
+        return rentReposiroty.findAllByUserId(userId);
     }
 }
