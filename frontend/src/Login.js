@@ -81,6 +81,7 @@ function Login() {
                     alert(res.data.userName + '님, 로그인되었습니다🐢');
                     // localStorage.setItem('accessToken', res.token);
                     localStorage.setItem('userName', JSON.stringify(res.data.userName));
+                    localStorage.setItem('userId', JSON.stringify(res.data.userId));
                     
                     // 로컬스토리지에서 getItem하면 되니까 굳이 state에 담을 필요가 없는가?
                     // setIsLogin({
