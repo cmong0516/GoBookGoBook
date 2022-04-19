@@ -61,6 +61,12 @@ public class UserService {
             return loginUser;
         }
 
+
+        /*public Member login(String userId, String userPw) {
+            return memberRepository.findByUserId(userId)
+                    .filter(m -> m.getUserPw().equals(userPw))
+                    .orElse(null);
+        }*/
         /*  String s1 = byId.stream()
                 .filter(s -> s.getUserId().equals(user.getUserId()))
                 .findAny()*/

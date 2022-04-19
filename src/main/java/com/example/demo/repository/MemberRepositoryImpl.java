@@ -1,3 +1,4 @@
+/*
 package com.example.demo.repository;
 import com.example.demo.object.Member;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +12,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     private static Map<Long, Member> store = new HashMap<>();//static사용
     private static long sequence = 0L;//static //JPA 활용 x
 
-/*    @PersistenceContext
-    private EntityManager em;*/
+    @PersistenceContext
+    private EntityManager em;
+
 
 
     public Member save(Member member) {
@@ -21,7 +23,8 @@ public class MemberRepositoryImpl implements MemberRepository {
         store.put(member.getId(), member);
         return member; //JPA 활용 x
 
-        /* em.persist(member);*/
+ em.persist(member);
+
     }
 
 
@@ -29,24 +32,28 @@ public class MemberRepositoryImpl implements MemberRepository {
         return findAll().stream()
                 .filter(m -> m.getUserId().equals(userId))
                 .findFirst();
-/*        //JPA 활용
+        //JPA 활용
         return em.createQuery("select m from Member m where m.userId = :userId", Member.class)
                 .setParameter("userId", userId)
-                .getResultList(); *//*jpql???이용*/
+                .getResultList();
+
 
     }
 
     public Member findById(long id) {
         return store.get(id); //JPA 활용 x
-        /*return em.find(Member.class, id);*/
+return em.find(Member.class, id);
+
     }
 
 
     public List<Member> findAll() {
         return new ArrayList<>(store.values()); //JPA 활용 x
-/*        return em.createQuery("select m from Member m", Member.class)
-                .getResultList();*/
+        return em.createQuery("select m from Member m", Member.class)
+                .getResultList();
+
     }
 
 
 }
+*/

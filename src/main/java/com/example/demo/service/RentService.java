@@ -16,6 +16,7 @@ public class RentService {
     public Rent insertRent(RentBook rentBook) {
         Rent rent = new Rent();
         LocalDate now = LocalDate.now();
+        rent.setUserId(rentBook.getUserId());
         rent.setAuthor(rentBook.getAuthor());
         rent.setCategoryName(rentBook.getCategoryName());
         rent.setCoverLargeUrl(rentBook.getCoverLargeUrl());

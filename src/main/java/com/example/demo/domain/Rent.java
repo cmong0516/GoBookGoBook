@@ -17,6 +17,8 @@ public class Rent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rent_id")
     private Long rentId;
+    @Column(name="user_id")
+    private String userId;
     @Column(name = "author")
     private String author;
     @Column(name = "category_name")
