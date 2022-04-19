@@ -13,10 +13,16 @@ public class RentService {
 
     public Rent insertRent(RentBook rentBook) {
         Rent rent = new Rent();
-        rent.setTitle("대여테스트");
-        rent.setAuthor("김창모");
-        rent.setDescription("대여테스트 중입니다.");
-
+        rent.setAuthor(rentBook.getAuthor());
+        rent.setCategoryName(rentBook.getCategoryName());
+        rent.setCoverLargeUrl(rentBook.getCoverLargeUrl());
+        rent.setCoverSmallUrl(rentBook.getCoverSmallUrl());
+        rent.setDescription(rentBook.getDescription());
+        rent.setIsbn(rentBook.getIsbn());
+        rent.setPubDate(rentBook.getPubDate());
+        rent.setPublisher(rentBook.getPublisher());
+        rent.setRank(rentBook.getRank());
+        rent.setTitle(rentBook.getTitle());
         rentReposiroty.save(rent);
         return rent;
     }
