@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
-@RequestMapping(value = "/rent",produces = "application/text; charset=utf8")
+@Controller
+@RequestMapping( "/rent")
 public class RentBookController {
     private final RentService rentService;
 
@@ -16,10 +16,11 @@ public class RentBookController {
         this.rentService = rentService;
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping("/add")
+    @ResponseBody
     public RentBook rentBookAdd(@RequestBody RentBook rentBook) {
-        log.warn(rentBook.toString());
-        //rentService.insertRent(rentBook);
+
+        rentService.insertRent(rentBook);
         return rentBook;
     }
 
