@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class RentService {
-    private final RentRepository rentReposiroty;
+    private final RentRepository rentRepository;
 
     public Rent insertRent(RentBook rentBook) {
         Rent rent = new Rent();
@@ -33,11 +33,11 @@ public class RentService {
         rent.setState(true);
         rent.setCustomerReviewRank(rentBook.getCustomerReviewRank());
         rent.setRentDate(now);
-        rentReposiroty.save(rent);
+        rentRepository.save(rent);
 
         return rent;
     }
     public List<Rent> findByUserId(String userId) {
-        return rentReposiroty.findAllByUserId(userId);
+        return rentRepository.findAllByUserId(userId);
     }
 }
