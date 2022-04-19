@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Book from "./Book.js";
-import NewBooksCategory from "./NewBooksCategory.js";
 import { Nav, Col } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -31,7 +30,6 @@ function NewBooks(props) {
       .get("/api/newbook/" + categoryId)
       .then((res) => {
         setBooks(res.data);
-        console.log(books);
       })
       .catch((error) => {
         console.log(error);

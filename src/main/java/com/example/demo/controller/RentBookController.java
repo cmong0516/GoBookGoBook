@@ -22,14 +22,12 @@ public class RentBookController {
     @PostMapping("/add")
     @ResponseBody
     public RentBook rentBookAdd(@RequestBody RentBook rentBook) {
-
         rentService.insertRent(rentBook);
         return rentBook;
     }
-    //Post 로 변경예정.
+
     @PostMapping("/info")
     @ResponseBody
-    //요청받은 Id 정보를 받아서 findByUserId 에 줄 예정.
     public List<Rent> rentBookInfo(@RequestBody Rent rent) {
         String userId = rent.getUserId();
         System.out.println("userId1 = " + userId);
