@@ -1,3 +1,4 @@
+/*
 package com.example.demo.service;
 
 import com.example.demo.object.Member;
@@ -17,7 +18,9 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    /*회원가입*/
+    */
+/*회원가입*//*
+
     @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);// 중복회원 검증
@@ -33,7 +36,9 @@ public class MemberService {
         }
     }
 
-    /*전체 회원 조회*/
+    */
+/*전체 회원 조회*//*
+
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }
@@ -43,3 +48,4 @@ public class MemberService {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.object.Member;
@@ -21,7 +22,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    /*@PostMapping
+    @PostMapping
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
         log.warn(String.valueOf(form));
         if (bindingResult.hasErrors()) {
@@ -35,9 +36,10 @@ public class LoginController {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
         }
-        *//*로그인 성공처리*//*
+
         return "redirect:/";
-    }*/
+    }
 
 
 }
+*/
