@@ -37,9 +37,7 @@ export let BookContext = React.createContext();
 export let IsLoginContext = React.createContext();
 
 function App() {
-  let [isLogin, setIsLogin] = useState(false);
-
-  let userName = JSON.parse(localStorage.getItem("userName"));
+  let [isLogin, setIsLogin] = useState(true);
 
   let [books, setBooks] = useState();
   let getBooks = (booksData) => {
@@ -60,39 +58,34 @@ function App() {
             </a>
           </div>
           <div>
-            {/* 로그인, 회원가입도 수정하기 */}
-
-            {!isLogin ? (
-              <div>
-                <Link to="/login">
-                  <span>로그인</span>
-                </Link>
-                <span>|</span>
-                <Link to="/signin">
-                  <span>회원가입</span>
-                </Link>
-              </div>
-            ) : (
-              <div>
-                <Link to="/">
-                  <span
-                    onClick={() => {
-                      localStorage.clear();
-                      setIsLogin(false);
-                    }}
-                  >
-                    로그아웃
-                  </span>
-                </Link>
-                <span>|</span>
-                <Link to="/mypage">
-                  <span>마이페이지&nbsp;</span>
-                </Link>
-              </div>
-            )}
-            {/* <Link to="/mypage">
-              <span>마이페이지&nbsp;</span>
-            </Link> */}
+            {
+              isLogin 
+              ? (<div>
+                  <Link to="/">
+                    <span
+                      onClick={() => {
+                        localStorage.clear();
+                        setIsLogin(false);
+                      }}
+                    >
+                      로그아웃
+                    </span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/mypage">
+                    <span>마이페이지&nbsp;</span>
+                  </Link>
+                </div>) 
+              : (<div>
+                  <Link to="/login">
+                    <span>로그인</span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/signin">
+                    <span>회원가입</span>
+                  </Link>
+                </div>)
+            }
           </div>
         </div>
 
@@ -125,7 +118,9 @@ function App() {
           </Route>
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
-              <Detail />
+            <IsLoginContext.Provider value={isLogin}>
+                <Detail />
+            </IsLoginContext.Provider>
             </BookContext.Provider>
           </Route>
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./App.css";
-import { BookContext } from "./App.js";
+import { BookContext, IsLoginContext } from "./App.js";
 import axios from "axios";
 
 function Detail() {
@@ -10,13 +10,11 @@ function Detail() {
 
   return (
     <div>
-      {book ? (
-        <DetailView books={book} />
-      ) : (
-        alert(
-          "새로고침으로 인해 state가 유지되지 않아 도서데이터 수신에 실패했습니다."
-        )
-      )}
+      {
+        book 
+        ? <DetailView books={book} />
+        : alert("새로고침으로 인해 state가 유지되지 않아 도서데이터 수신에 실패했습니다.")
+      }
     </div>
   );
 }
@@ -56,18 +54,20 @@ function DetailView(props) {
 
 function RentButton(props) {
   
-  let userName = localStorage.getItem('userName');
-  // let userId = JSON.parse(localStorage.getItem('userId'));
+  let isLogin = useContext(IsLoginContext);
   let userId = localStorage.getItem('userId');
+
+  let history = useHistory();
   let rentStatus = "rent";
-  JSON.stringify(props.book);
 
   let rentFunc = () => {
 
-    if(!userName) {
-      return <Link to="/login"/>
+    if(!isLogin) {
+      alert('로그인 후 이용할 수 있습니다.');
+      return history.push("/login");
     }
 
+    // 같은 책 이미 빌린상태면 대여불가로 떠야 하니까 프론트에서 처리
     axios
       .post("/rent/add", {
         author: props.book.author,
@@ -81,7 +81,7 @@ function RentButton(props) {
         publisher: props.book.publisher,
         rank: props.book.rank,
         title: props.book.title,
-          userId:userId
+        userId:userId
       })
       .then((res) => {
         alert("대여 성공!");
