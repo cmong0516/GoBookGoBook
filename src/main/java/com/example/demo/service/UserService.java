@@ -16,7 +16,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional //변경되는 값이라?
-    public boolean joinUser(User user){
+    public boolean joinUser(User user) {
         System.out.println("memberForm = " + user.getUserId());
         System.out.println("memberForm = " + user.getUserPw());
         System.out.println("memberForm = " + user.getUserName());
@@ -25,7 +25,7 @@ public class UserService {
         //아이디로 유효성 검사
         List<User> findId = userRepository.findById(user.getUserId());
 
-        if(!findId.isEmpty()){  //이메일이 존재하면(비어있지 않으면)
+        if (!findId.isEmpty()) {  //이메일이 존재하면(비어있지 않으면)
             return false;
 //            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
             //throw new GeneralSecurityException();
