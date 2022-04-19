@@ -29,12 +29,10 @@ public class Rent {
     private String coverSmallUrl;
     @Column(name = "customer_review_rank")
     private int customerReviewRank;
-    @Column(name = "description")
+    @Column(name = "description",length = 1000)
     private String description;
     @Column(name = "isbn")
     private String isbn;
-    @Column(name = "item_id")
-    private Double itemId;
     @Column(name = "pub_date")
     private Date pubDate;
     @Column(name = "publisher")
