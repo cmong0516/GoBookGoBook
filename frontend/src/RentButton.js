@@ -8,8 +8,10 @@ function RentButton(props) {
   
     let userId = localStorage.getItem('userId');
   
+    // myBook은 전역state로 관리??
     let history = useHistory();
     let [rentStatus, setRentStatus] = useState("rent");
+    let [myBook, setMyBook] = useState([]);
     let [booksNum, setBooksNum] = useState(0);
 
     // 이미 빌린 책인지 체크
@@ -22,24 +24,16 @@ function RentButton(props) {
             res.data.map(() => {
               setBooksNum(++booksNum);
             })
-            
-            // 이미 대여한 책이 5개인지 확인
-            booksNum == 5 
-            ? setRentStatus("forbidden")
-            // 빌릴 수 있는 책 개수가 남아있다면 이 책이 이미 빌린 책인지 확인 
-            : (
-              res.data.find((x) => x.title == props.book.title)
-              ? setRentStatus("return")
-              : setRentStatus("rent")
-              
-            // 여기서는 돌면서 맞는 타이틀나오면 바로 뽑아야 하니까 map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
-            // res.data && res.data.map((mybook, i) => (
-            //   mybook.title == props.book.title
-            //   ? console.log(mybook.title + " / " + props.book.title)
-            //   : setRentStatus("rent")
-            // ))
-            )
+            // 반납 시 서버에 줄 대여책 setState
+            setMyBook( res.data.find((x) => x.title == props.book.title) );
 
+            if ( res.data.find((x) => x.title == props.book.title) ) {
+              setRentStatus("return")
+            } else {
+              booksNum == 5
+              ? setRentStatus("forbidden")
+              : setRentStatus("rent")
+            }
           })
           .catch((error) => {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
@@ -82,8 +76,30 @@ function RentButton(props) {
           console.log(error);
         });
     };
+
+    let returnFunc = () => {
+
+      if(!userId) {
+        alert('로그인 후 이용할 수 있습니다.');
+        return history.push("/login");
+      }
+
+      // console.log(myBook);
+      axios.post("/rent/return", {
+        rentId : myBook.rentId
+        })
+        .then((res) => {
+          // props.book가 리렌더링되어야 함
+          // 그래야 반납 누르자마자 다시 대여버튼으로 바뀌니까..
+          console.log(res.data);
+
+        })
+        .catch((error) => {
+          alert("반납 서버와의 통신에 실패했습니다.")
+          console.log(error);
+        });
+    }
   
-    // 로그인 안되있는 경우 로그인화면으로?
     if (rentStatus == "rent") {
       return (
         <Button variant="success" size="lg" onClick={rentFunc}>
@@ -92,7 +108,7 @@ function RentButton(props) {
       );
     } else if (rentStatus == "return") {
       return (
-        <Button variant="dark" size="lg">
+        <Button variant="dark" size="lg" onClick={returnFunc}>
           반납하기
         </Button>
       );

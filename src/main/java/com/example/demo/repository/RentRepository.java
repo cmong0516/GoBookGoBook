@@ -15,6 +15,6 @@ public interface RentRepository{
 
     List<Rent> findAll();
 
-    Rent returnbook(Long rentId);
+    Rent returnBook(Long rentId);
 
 }

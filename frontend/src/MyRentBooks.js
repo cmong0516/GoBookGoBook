@@ -16,13 +16,15 @@ function MyrentPage(props) {
     <Row>{rentBooks && rentBooks.map((book) => <CardComp book={book} />)}</Row>
   );
 }
-function returnBook(rentId) {
+
+function returnFunc(rentId, props) {
   axios
     .post("/rent/return", {
       rentId: rentId,
     })
     .then((res) => {
       console.log(res);
+      props?.setReturnCheck(...1);
     })
     .catch((error) => {
       console.log(error);
@@ -49,7 +51,7 @@ function CardComp({ book }) {
           {book.state == true ? (
             <Button
               variant="outline-danger"
-              onClick={() => returnBook(book.rentId)}
+              onClick={() => returnFunc(book.rentId)}
             >
               반납하기
             </Button>
