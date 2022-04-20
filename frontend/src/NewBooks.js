@@ -36,7 +36,7 @@ function NewBooks() {
       })
       .catch((error) => {
         console.log(error);
-        alert("카테고리 신간 데이터를 받을 수 없습니다.");
+        alert("카테고리별 신간 데이터를 받을 수 없습니다.");
       });
   }
 

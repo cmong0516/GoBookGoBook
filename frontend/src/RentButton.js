@@ -20,7 +20,7 @@ function RentButton(props) {
       axios.post( "/rent/info", {userId: userId} )
           .then((res) => {
 
-            // 아깐 분명 안됐는데...
+            // 아깐 분명 안됐는데...map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
             // res.data && res.data.map((mybook, i) => (
             //   mybook.title == props.book.title
             //   ? console.log(mybook.title + " / " + props.book.title)

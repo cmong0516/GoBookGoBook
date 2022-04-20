@@ -28,6 +28,10 @@ let Alarm = styled.div`
 
 function MyInfo(props) {
 
+  let userName = localStorage.getItem('userName');
+  let userId = localStorage.getItem('userId');
+  let userEmail = localStorage.getItem('userEmail');
+
   let [alarm, setAlarm] = useState('')
   let [emailAlarm, setEmailAlarm] = useState('');
   let [pwAlarm, setPwAlarm] = useState('');
@@ -113,6 +117,34 @@ function MyInfo(props) {
       <Alarm>{alarm}</Alarm>
       <InfoForm>
         <Form noValidate onSubmit={submitFunc}>
+        <GroupStyle>
+            <Form.Group>
+                <Form.Label>이름</Form.Label>
+                <Form.Control
+                    required
+                    type="text"
+                    placeholder={userName}
+                    onChange={onChangeFunc}
+                    disabled
+                    readOnly
+                ></Form.Control>
+            </Form.Group>
+          </GroupStyle>
+
+          <GroupStyle>
+            <Form.Group>
+                <Form.Label>아이디</Form.Label>
+                <Form.Control
+                    required
+                    type="text"
+                    placeholder={userId}
+                    onChange={onChangeFunc}
+                    disabled
+                    readOnly
+                ></Form.Control>
+            </Form.Group>
+          </GroupStyle>
+
           <GroupStyle>
             <Form.Group>
                 <Form.Label>이메일</Form.Label>
@@ -121,7 +153,7 @@ function MyInfo(props) {
                     required
                     type="email"
                     name="useremail"
-                    placeholder="ex) GoBook@naver.com"
+                    placeholder={userEmail}
                     onChange={onChangeFunc}
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>

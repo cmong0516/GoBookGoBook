@@ -6,7 +6,7 @@ import axios from "axios";
 function MyRent() {
     
   const [radioValue, setRadioValue] = useState("1");
-  let userName = JSON.parse(localStorage.getItem('userName'));
+  let userName = localStorage.getItem('userName');
   // let userId = JSON.parse(localStorage.getItem('userId'));
   let userId = localStorage.getItem('userId');
   let [rentBooks, setRentBooks] = useState();
@@ -21,7 +21,7 @@ function MyRent() {
     axios
       .post("/rent/info", { userId: userId })
       .then((res) => {
-
+        console.log(res.data)
         setRentBooks(res.data);
 
         res.data.map(() => {

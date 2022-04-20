@@ -32,7 +32,6 @@ function CardComp({book}) {
           ? <BookImg><Card.Img variant="top" src={book.coverLargeUrl} /></BookImg>
           : <BookImg><Card.Img variant="top" src={book.coverSmallUrl} /></BookImg>
         }
-        {/* <Card.Img variant="top" src={book.coverSmallUrl} /> */}
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>대여일 : {book.rentDate}</Card.Text>
