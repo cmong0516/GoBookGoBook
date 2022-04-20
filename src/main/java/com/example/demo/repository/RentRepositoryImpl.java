@@ -42,6 +42,10 @@ public class RentRepositoryImpl implements RentRepository {
 
     @Override
     public Rent returnbook(Rent rent) {
-        return null;
+        Long rentId = rent.getRentId();
+        Rent byRentId = findByRentId(rentId);
+        byRentId.setState(false);
+        save(byRentId);
+        return rent;
     }
 }
