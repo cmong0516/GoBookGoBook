@@ -29,6 +29,12 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
+    public Rent findByRentId(Long rentId) {
+        Rent rent = em.find(Rent.class, rentId);
+        return rent;
+    }
+
+    @Override
     public List<Rent> findAll() {
         return em.createQuery("select r from Rent r", Rent.class)
                 .getResultList();

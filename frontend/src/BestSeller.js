@@ -6,6 +6,7 @@ export let BestSellerContext = React.createContext();
 
 function BestSeller(props) {
     
+    // 아래 state App.js에서 Context API로 받아오는걸로 바꾸고 getBooks삭제
     let [books, setBooks] = useState();
     
     useEffect(() => {

@@ -11,6 +11,8 @@ public interface RentRepository {
 
     List<Rent> findAllByUserId(String userId);
 
+    Rent findByRentId(Long rentId);
+
     List<Rent> findAll();
 
     Rent returnbook(Rent rent);

@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import RentButton from "./RentButton.js"
+import {BookContext, SetBookContext} from "./App.js";
 
 function Search(props) {
 
+    let books = useContext(BookContext);
+    let setBooks = useContext(SetBookContext);
+
     let [result, setResult] = useState();
     let searchWord = props.searchWord;
-    let [book, setBook] = useState();
     let userId = localStorage.getItem('userId');
 
     useEffect(() => {
@@ -31,7 +34,7 @@ function Search(props) {
                     {book.title}<br/>
                     줄거리 : {book.contents}<br/>
                     {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
-                    {() => setBook({
+                    {() => setBooks({
                         author: book.authors,
                         categoryName: book.categoryName,
                         coverLargeUrl: book.coverLargeUrl,
@@ -45,7 +48,7 @@ function Search(props) {
                         title: book.title,
                         userId: userId
                     })}
-                    <RentButton book={book} />
+                    <RentButton book={books} />
                 </div>
             ))} 
         </div>
