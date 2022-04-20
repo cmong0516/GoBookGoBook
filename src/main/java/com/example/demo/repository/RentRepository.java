@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RentRepository {
+public interface RentRepository{
     Rent save(Rent rent);
 
     List<Rent> findAllByUserId(String userId);
