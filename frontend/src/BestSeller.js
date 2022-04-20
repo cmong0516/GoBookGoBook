@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useContext} from 'react';
 import axios from 'axios';
 import Book from './Book.js'
+import {BookContext, SetBookContext} from "./App.js";
 
 export let BestSellerContext = React.createContext();
 
-function BestSeller(props) {
+function BestSeller() {
     
-    // 아래 state App.js에서 Context API로 받아오는걸로 바꾸고 getBooks삭제
-    let [books, setBooks] = useState();
+    let books = useContext(BookContext);
+    let setBooks = useContext(SetBookContext);
     
     useEffect(() => {
         axios.post('/api/bestseller')
@@ -24,7 +25,6 @@ function BestSeller(props) {
     return (
         <div>
             <BestSellerContext.Provider value={books}>
-                {props.getBooks(books)}
                 <Book />
             </BestSellerContext.Provider>
         </div>

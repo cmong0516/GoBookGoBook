@@ -11,21 +11,36 @@ function RentButton(props) {
   
     let history = useHistory();
     let [rentStatus, setRentStatus] = useState("rent");
-  
+    let [booksNum, setBooksNum] = useState(0);
+
     // 이미 빌린 책인지 체크
-    
-    // 버튼을 누르지 않고도 detail페이지에 왔을 때 아래 useEffect가 실행(리렌더링)되어야 한다.
-    // 따라서 상위컴포넌트(Detail, Search로부터 props를 받아 리렌더링 되도록...)
+    // 버튼을 누르지 않고도 detail, Search페이지에 왔을 때 아래 useEffect가 실행(리렌더링)되어야 한다.
+    // 따라서 상위컴포넌트(Detail, Search)로부터 props.book를 받아 useEffect하단 []에 넣어 리렌더링 되도록 한다.
     useEffect(() => {
       axios.post( "/rent/info", {userId: userId} )
           .then((res) => {
-              // console.log(res.data);
-              res.data && res.data.map((mybook, i) => (
-                // 검색에서 책 하나를 빌리면 하단 책들까지 모두 반납하기 버튼으로 변경되는 문제 해결 필요
-                mybook.title == props.book.title
-                ? setRentStatus("return")
-                : setRentStatus("rent")
-              ))
+
+            // 아깐 분명 안됐는데...map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
+            // res.data && res.data.map((mybook, i) => (
+            //   mybook.title == props.book.title
+            //   ? console.log(mybook.title + " / " + props.book.title)
+            //   : setRentStatus("rent") 
+            // ))
+
+            res.data.map(() => {
+              setBooksNum(++booksNum);
+            })
+            
+            // 이미 대여한 책이 5개인지 확인
+            booksNum == 5 
+            ? setRentStatus("forbidden")
+            // 빌릴 수 있는 책 개수가 남아있다면 이 책이 이미 빌린 책인지 확인 
+            : (
+              res.data.find((x) => x.title == props.book.title)
+              ? setRentStatus("return")
+              : setRentStatus("rent")
+            )
+
           })
           .catch((error) => {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
@@ -36,7 +51,7 @@ function RentButton(props) {
     let rentFunc = () => {
   
       // 리렌더링되면 isLogin도 false로 초기화
-      // 이미 로그인상태인데 아래에 걸려버리는 이슈
+      // 이미 로그인상태인데 if(!isLogin)에 걸려버리는 이슈
       // 로컬스토리지 이용 필요하므로 여기서는 userId를 통해 확인
       if(!userId) {
         alert('로그인 후 이용할 수 있습니다.');

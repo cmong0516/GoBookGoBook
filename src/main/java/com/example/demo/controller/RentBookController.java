@@ -41,7 +41,6 @@ public class RentBookController {
 
     @PostMapping("/return")
     public Rent rentBookReturn(Rent rent) {
-
-        return rent;
+        return rentService.returnBook(rent);
     }
 }

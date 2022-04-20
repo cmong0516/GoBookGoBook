@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import Book from "./Book.js";
 import { Nav, Col } from "react-bootstrap";
 import styled from "styled-components";
+import {BookContext, SetBookContext} from "./App.js";
 
 export let NewBooksContext = React.createContext();
 
@@ -10,8 +11,10 @@ let CategoryStyle = styled.div`
   text-align: left;
 `;
 
-function NewBooks(props) {
-  let [books, setBooks] = useState();
+function NewBooks() {
+  
+  let books = useContext(BookContext);
+  let setBooks = useContext(SetBookContext);
 
   useEffect(() => {
     axios
@@ -33,8 +36,7 @@ function NewBooks(props) {
       })
       .catch((error) => {
         console.log(error);
-        alert("카테고리 신간 데이터를 받을 수 없습니다.");
-        console.log(error);
+        alert("카테고리별 신간 데이터를 받을 수 없습니다.");
       });
   }
 
@@ -101,7 +103,6 @@ function NewBooks(props) {
         </CategoryStyle>
 
         <NewBooksContext.Provider value={books}>
-          {props.getBooks(books)}
           <Book />
         </NewBooksContext.Provider>
       </Col>
