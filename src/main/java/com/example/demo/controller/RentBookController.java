@@ -40,7 +40,9 @@ public class RentBookController {
     }
 
     @PostMapping("/return")
-    public Rent rentBookReturn(Rent rent) {
-        return rentService.returnBook(rent);
+    @ResponseBody
+    public String rentBookReturn(@RequestBody Rent rent) {
+        rentService.returnBook(rent.getRentId());
+        return "성공";
     }
 }

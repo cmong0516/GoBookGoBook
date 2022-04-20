@@ -28,4 +28,11 @@ public class UserRepository {
                 .setParameter("userId",userId)
                 .getResultList();
     }
+
+    //이메일, 비밀번호 수정
+    public List<User> update(User user){
+        List<User> userList = findById(user.getUserId());
+
+        return null;
+    }
 }
