@@ -44,7 +44,7 @@ public class RentService {
         return rentRepository.findAll();
     }
 
-    public Rent returnBook(Rent rent) {
-        return rentRepository.returnbook(rent);
+    public Rent returnBook(Long rentId) {
+        return rentRepository.returnbook(rentId);
     }
 }

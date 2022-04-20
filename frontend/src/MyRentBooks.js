@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import axios from "axios";
 
 let CartStyle = styled.div`
   width: 300px;
@@ -14,6 +15,18 @@ function MyrentPage(props) {
   return (
     <Row>{rentBooks && rentBooks.map((book) => <CardComp book={book} />)}</Row>
   );
+}
+function returnBook(rentId) {
+  axios
+    .post("/rent/return", {
+      rentId: rentId,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function CardComp({ book }) {
@@ -34,7 +47,12 @@ function CardComp({ book }) {
           <Card.Text>대여일 : {book.rentDate}</Card.Text>
           <Card.Text>반납일 : (D-계산값)</Card.Text>
           {book.state == true ? (
-            <Button variant="outline-danger">반납하기</Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => returnBook(book.rentId)}
+            >
+              반납하기
+            </Button>
           ) : null}
         </Card.Body>
       </Card>
