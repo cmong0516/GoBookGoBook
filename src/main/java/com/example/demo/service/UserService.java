@@ -32,8 +32,8 @@ public class UserService {
         }
 
         User user1 = new User();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user1.setUserPw(passwordEncoder.encode(user.getUserPw())); //암호화
+        String passwordEncoding = passwordEncoding(user.getUserPw());
+        user1.setUserPw(passwordEncoding); //암호화
         user1.setUserId(user.getUserId());
         user1.setUserName(user.getUserName());
         user1.setUserEmail(user.getUserEmail());
@@ -73,5 +73,41 @@ public class UserService {
 
         System.out.println("못찾음");
          return null;
+    }
+
+    //회원 수정
+    @Transactional
+    public User updateUser(User user){
+        List<User> userList = userRepository.findById(user.getUserId());
+
+        if(userList.isEmpty()){ //유효성 X
+            return null;
+        }
+
+
+        User user1 = userList.get(0);
+//        System.out.println("userId로 찾아온 user 정보 = " + user1);
+
+        //정보 변경 개수 나누기
+        if(user.getUserPw() == null){ //email만 변경하면
+            user1.setUserEmail(user.getUserEmail());
+        }else if(user.getUserEmail() == null){ //password만 변경하면
+            user1.setUserPw(passwordEncoding(user.getUserPw()));
+        }else{ //둘다 변경하면
+            user1.setUserEmail(user.getUserEmail());
+            user1.setUserPw(passwordEncoding(user.getUserPw()));
+        }
+
+        userRepository.save(user1); //저장
+
+//        System.out.println("수정 후 user1 = " + user1);
+
+        return user1;
+    }
+
+    //암호화 함수
+    public String passwordEncoding(String password){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(password);
     }
 }
