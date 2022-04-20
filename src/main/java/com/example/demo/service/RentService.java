@@ -34,7 +34,6 @@ public class RentService {
         rent.setCustomerReviewRank(rentBook.getCustomerReviewRank());
         rent.setRentDate(now);
         rentRepository.save(rent);
-
         return rent;
     }
     public List<Rent> findByUserId(String userId) {
@@ -43,5 +42,9 @@ public class RentService {
 
     public List<Rent> findAll() {
         return rentRepository.findAll();
+    }
+
+    public Rent returnBook(Rent rent) {
+        return rentRepository.returnbook(rent);
     }
 }

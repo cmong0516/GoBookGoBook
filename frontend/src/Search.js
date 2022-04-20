@@ -1,12 +1,8 @@
 import React, {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import RentButton from "./RentButton.js"
-import {BookContext, SetBookContext} from "./App.js";
 
 function Search(props) {
-
-    let books = useContext(BookContext);
-    let setBooks = useContext(SetBookContext);
 
     let [result, setResult] = useState();
     let searchWord = props.searchWord;
@@ -16,11 +12,10 @@ function Search(props) {
         axios.get('/api/search', {params : {query : searchWord}})
         .then(res => {
             setResult(res.data);
-            console.log(res.data);
+            // console.log(res.data);
         })
         .catch(error => {
             alert('검색결과 데이터를 받아오는 데 실패했습니다.');
-            // console.log(searchWord);
             console.log(error);
         });
     },[searchWord]);
@@ -34,7 +29,27 @@ function Search(props) {
                     {book.title}<br/>
                     줄거리 : {book.contents}<br/>
                     {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
+                    
+                    {/* books state를 만들어 버튼에 넣으면 이미 books값을 가져오기 전에 RentButton으로 넘어가버려서 undefined가 출력되는 것으로 추정
                     {() => setBooks({
+                        author: book.authors,
+                        categoryName: book.categoryName,
+                        coverLargeUrl: book.coverLargeUrl,
+                        coverSmallUrl: book.thumbnail,
+                        customerReviewRank: book.customerReviewRank,
+                        description: book.contents,
+                        isbn: book.isbn,
+                        pubDate: book.dateTime,
+                        publisher: book.publisher,
+                        rank: book.rank,
+                        // title: book.title,
+                        title: "체크",
+                        userId: userId
+                    })} 
+                    
+                    <RentButton book={books} />*/}
+                    
+                    <RentButton book={{
                         author: book.authors,
                         categoryName: book.categoryName,
                         coverLargeUrl: book.coverLargeUrl,
@@ -47,8 +62,8 @@ function Search(props) {
                         rank: book.rank,
                         title: book.title,
                         userId: userId
-                    })}
-                    <RentButton book={books} />
+                    }} />
+                    
                 </div>
             ))} 
         </div>
