@@ -27,4 +27,11 @@ public class UserController {
 
         return userService.loginUser(user);
     }
+
+    @PutMapping("/mypage")
+    public User update(@RequestBody User user){
+
+        return userService.updateUser(user);
+
+    }
 }
