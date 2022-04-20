@@ -30,9 +30,18 @@ public class RentBookController {
     @ResponseBody
     public List<Rent> rentBookInfo(@RequestBody Rent rent) {
         String userId = rent.getUserId();
-        System.out.println("userId1 = " + userId);
         List<Rent> rentlist = rentService.findByUserId(userId);
-        log.warn("뭐지{}",rentlist.toString());
         return rentlist;
+    }
+
+    @PostMapping("/infoall")
+    public List<Rent> rentBooksAll() {
+        return rentService.findAll();
+    }
+
+    @PostMapping("/return")
+    public Rent rentBookReturn(Rent rent) {
+
+        return rent;
     }
 }

@@ -40,4 +40,8 @@ public class RentService {
     public List<Rent> findByUserId(String userId) {
         return rentRepository.findAllByUserId(userId);
     }
+
+    public List<Rent> findAll() {
+        return rentRepository.findAll();
+    }
 }

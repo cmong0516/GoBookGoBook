@@ -21,7 +21,7 @@ function MyRent() {
     axios
       .post("/rent/info", { userId: userId })
       .then((res) => {
-        // console.log(res.data);
+
         setRentBooks(res.data);
 
         res.data.map(() => {
