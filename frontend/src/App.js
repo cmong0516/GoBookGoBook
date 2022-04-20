@@ -41,10 +41,6 @@ function App() {
   let userId = localStorage.getItem('userId');
   let [isLogin, setIsLogin] = useState();
   let [books, setBooks] = useState();
-  let getBooks = (booksData) => {
-    setBooks(booksData);
-  };
-
   let [searchWord, searchWordChange] = useState("");
 
   return (
@@ -112,10 +108,18 @@ function App() {
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">
-            <BestSeller getBooks={getBooks} />
+            <BookContext.Provider value={books}>
+            <SetBookContext.Provider value={setBooks}>
+             <BestSeller />
+            </SetBookContext.Provider>
+            </BookContext.Provider>
           </Route>
           <Route exact path="/api/newbook">
-            <NewBooks getBooks={getBooks} />
+          <BookContext.Provider value={books}>
+            <SetBookContext.Provider value={setBooks}>
+              <NewBooks />
+            </SetBookContext.Provider>
+            </BookContext.Provider>
           </Route>
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
@@ -124,11 +128,7 @@ function App() {
           </Route>
 
           <Route path="/api/search">
-            <BookContext.Provider value={books}>
-            <SetBookContext.Provider value={setBooks}>
-              <Search searchWord={searchWord} />
-            </SetBookContext.Provider>
-            </BookContext.Provider>
+            <Search searchWord={searchWord} />
           </Route>
 
           <Route path="/login">
