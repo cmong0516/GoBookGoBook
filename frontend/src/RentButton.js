@@ -6,7 +6,6 @@ import axios from "axios";
 
 function RentButton(props) {
   
-    // let userId = JSON.parse(localStorage.getItem('userId'));
     let userId = localStorage.getItem('userId');
   
     let history = useHistory();
@@ -20,13 +19,6 @@ function RentButton(props) {
       axios.post( "/rent/info", {userId: userId} )
           .then((res) => {
 
-            // 아깐 분명 안됐는데...map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
-            // res.data && res.data.map((mybook, i) => (
-            //   mybook.title == props.book.title
-            //   ? console.log(mybook.title + " / " + props.book.title)
-            //   : setRentStatus("rent") 
-            // ))
-
             res.data.map(() => {
               setBooksNum(++booksNum);
             })
@@ -39,6 +31,13 @@ function RentButton(props) {
               res.data.find((x) => x.title == props.book.title)
               ? setRentStatus("return")
               : setRentStatus("rent")
+              
+            // 여기서는 돌면서 맞는 타이틀나오면 바로 뽑아야 하니까 map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
+            // res.data && res.data.map((mybook, i) => (
+            //   mybook.title == props.book.title
+            //   ? console.log(mybook.title + " / " + props.book.title)
+            //   : setRentStatus("rent")
+            // ))
             )
 
           })
