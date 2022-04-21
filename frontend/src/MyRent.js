@@ -15,7 +15,7 @@ function MyRent() {
   let [returnCheck, setReturnCheck] = useState(0);
   // let [nowRent, setNowRent] = useState([]);
   // let [returnBook, setReturnBook] = useState([]);
-  let nowRent = [0];
+  let nowRent = [];
   let returnBook = [];
 
   const radios = [
@@ -29,13 +29,13 @@ function MyRent() {
 
         setRentBooks(res.data);
 
+        // booksNum은 RentButton.js에서 갖고오기
         // 대여중 : 개수 확인 + 대여
         res.data.map((myBook) => {
           if (myBook.state == true) {
             setBooksNum(++booksNum);
             // setNowRent([...nowRent, ...myBook])
             console.log('====확인===')
-            // console.log(myBook)
             nowRent.push(myBook);
           } else {
             // setReturnBook([...returnBook, ...myBook])

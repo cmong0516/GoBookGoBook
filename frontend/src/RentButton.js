@@ -15,21 +15,29 @@ function RentButton(props) {
     let [booksNum, setBooksNum] = useState(0);
 
     // 이미 빌린 책인지 체크
-    // 버튼을 누르지 않고도 detail, Search페이지에 왔을 때 아래 useEffect가 실행(리렌더링)되어야 한다.
-    // 따라서 상위컴포넌트(Detail, Search)로부터 props.book를 받아 useEffect하단 []에 넣어 리렌더링 되도록 한다.
     useEffect(() => {
       axios.post( "/rent/info", {userId: userId} )
           .then((res) => {
 
-            res.data.map(() => {
-              setBooksNum(++booksNum);
+            res.data.map((mybooks) => {
+              if (mybooks.state == true) {
+                setBooksNum(++booksNum)
+              }
             })
-            // 반납 시 서버에 줄 대여책 setState
-            setMyBook( res.data.find((x) => x.title == props.book.title) );
+
+            // 반납 시 서버에 줄 대여책정보 (한번더 빌리는 경우 state가 true인 데이터로 주기)
+            setMyBook( 
+              res.data
+                .filter((x) => x.title == props.book.title) 
+                .filter((x) => x.state == true) );
 
             // 빌렸던 DB테이블에 도서명이 있고
-            // 그중에서 state가 true일 때만 반납하기 버튼 보이기
-            if ( res.data.find((x) => x.title == props.book.title && x.state == true) ) {
+            // 그중에서 state가 true인 것만 반납하기 버튼 보이기
+            // 해당하지 않는 값은 null인줄 알았으나 콘솔찍어보니 빈배열이어서 .length로 빈배열판단
+            if ( res.data
+              .filter(x => x.title == props.book.title)
+              .filter(x => x.state==true)
+              .length !== 0 ) {
               setRentStatus("return")
             } else {
               booksNum == 5
@@ -41,7 +49,7 @@ function RentButton(props) {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
               console.log(error);
           });
-    }, [props.book]);
+    }, [rentStatus]);
 
     let rentFunc = () => {
   
@@ -71,7 +79,6 @@ function RentButton(props) {
         .then((res) => {
           setRentStatus("return")
           alert("대여 성공!");
-          console.log(res);
         })
         .catch((error) => {
           alert("대여 통신에 실패했습니다.");
@@ -80,14 +87,15 @@ function RentButton(props) {
     };
 
     let returnFunc = () => {
-      
-      // console.log(myBook);
+
+      console.log(myBook);
+
       axios.post("/rent/return", {
           rentId : myBook.rentId
         })
         .then((res) => {
-          // props.book가 리렌더링되어야 함
-          // 그래야 반납 누르자마자 다시 대여버튼으로 바뀌니까..
+          setRentStatus("rent")
+          alert("반납성공!");
           console.log(res.data);
 
         })
