@@ -41,7 +41,7 @@ function RentButton(props) {
                 setRentStatus("return");
            
               } else {
-              booksNum == 5
+              booksNum >= 5
               ? setRentStatus("forbidden")
               : setRentStatus("rent")
             }
