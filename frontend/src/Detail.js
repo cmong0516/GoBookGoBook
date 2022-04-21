@@ -1,8 +1,14 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import "./App.css";
 import {BookContext} from "./App.js";
 import RentButton from "./RentButton.js"
+import styled from 'styled-components';
+
+let bookView = styled.div`
+  text-align: left;
+`
 
 function Detail() {
   let book = useContext(BookContext);
@@ -25,28 +31,36 @@ function DetailView(props) {
 
   return (
     <div>
-      <img src={book.coverLargeUrl} width="300rem" />
-      {book.title}
-      <br />
-      {book.author}
-      <br />
-      {book.translator}
-      <br />
-      {book.pubDate}
-      <br />
-      {book.publisher}
-      <br />
-      {book.categoryId}
-      <br />
+      <img src={book.coverLargeUrl} width="350rem" />
       {book.categoryName}
       <br />
-      {book.isbn}
+      카테고리 번호 : {
+        book.categoryId
+        ? book.categoryId
+        : null
+      } <br />
+      인터파크평점 : 
+      {
+        book.customerReviewRank == 0
+        ? <span></span>
+        : book.customerReviewRank
+      }
+      <h1>{book.title}</h1>
       <br />
-      {book.customerReviewRank}
+      작가 <b>{book.author}</b>
+      <br />
+      번역가 {book.translator}
+      <br />
+      출간일 : {book.pubDate}
+      <br />
+      출판사 : {book.publisher}
+      <br />
+      isbn : {book.isbn}
       <br />
       {book.description}
       <br />
       <RentButton book={book} />
+      <Button variant="info" size="lg">뒤로가기</Button>
     </div>
   );
 }

@@ -132,7 +132,8 @@ function MyInfo(props) {
   }
 
   let deleteUser = () => {
-    axios
+    if(window.confirm('정말로... 탈퇴하실건가요?')) {
+      axios
       .delete("/delete", {
         userId: myuserId,
       })
@@ -146,6 +147,10 @@ function MyInfo(props) {
         alert("회원 탈퇴에 실패하셨습니다.");
         console.log(error);
       });
+    } else {
+      return false;
+    }
+    
   };
 
   return (
