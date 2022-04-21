@@ -110,6 +110,26 @@ public class UserService {
         return user1;
     }
 
+    //회원 삭제
+    @Transactional
+    public boolean deleteUser(String id){
+        System.out.println("id = " + id);
+        List<User> byId = userRepository.findById(id);
+        System.out.println("byId = " + byId);
+
+        if(byId.isEmpty()){
+            System.out.println("찾을 수 없음");
+            return false;
+        }
+
+        User user1 = byId.get(0);
+        System.out.println("user1 = " + user1);
+
+        userRepository.delete(user1); //key로 삭제하는게 안전
+
+        return true;
+    }
+
     //암호화 함수
     public String passwordEncoding(String password){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

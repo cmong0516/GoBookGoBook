@@ -31,9 +31,16 @@ public class UserController {
     @PutMapping("/mypage")
     public User update(@RequestBody User user){
 
-        System.out.println("user.getUserId() = " + user.getUserId());
-        System.out.println("user.getUserEmail() = " + user.getUserEmail());
+//        System.out.println("user.getUserId() = " + user.getUserId());
+//        System.out.println("user.getUserEmail() = " + user.getUserEmail());
         return userService.updateUser(user);
 
+    }
+
+    @DeleteMapping("/delete")
+    public boolean delete(@RequestBody User user){
+//        System.out.println("id = " + id); //확인
+
+        return userService.deleteUser(user.getUserId());
     }
 }
