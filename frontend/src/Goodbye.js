@@ -1,6 +1,9 @@
 import ReactPlayer from "react-player";
 
-function Goodbye() {
+function Goodbye(props) {
+
+  props.setIsLogin(true)
+  
   let goodbye = `It's been a long day without you, my friend
     And I'll tell you all about it when I see you again
     We've come a long way from where we began
