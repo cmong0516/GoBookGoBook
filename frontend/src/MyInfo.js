@@ -135,21 +135,22 @@ function MyInfo(props) {
   };
 
   let deleteUser = () => {
+    console.log(myuserId)
     if(window.confirm('정말로... 탈퇴하실건가요?')) {
       axios
       .delete("/delete", {
-        userId: myuserId,
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.clear();
-        alert("탈퇴에 성공하셨습니다🙂");
-        history.push("/goodbye");
-      })
-      .catch((error) => {
-        alert("회원 탈퇴에 실패하셨습니다.");
-        console.log(error);
-      });
+        data:{userId: myuserId}
+      },)
+        .then((res) => {
+          console.log(res);
+          localStorage.clear();
+          alert("탈퇴에 성공하셨습니다🙂");
+          history.push("/goodbye");
+        })
+        .catch((error) => {
+          alert("회원 탈퇴에 실패하셨습니다.");
+          console.log(error);
+        });
     } else {
       return false;
     }
