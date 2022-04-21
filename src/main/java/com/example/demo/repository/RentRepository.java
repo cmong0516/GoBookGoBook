@@ -17,4 +17,5 @@ public interface RentRepository{
 
     Rent returnBook(Long rentId);
 
+    boolean deleteRent(String userId);
 }

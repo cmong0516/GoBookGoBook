@@ -51,12 +51,18 @@ function Goodbye(props) {
     See you again (yeah, yeah, yeah)
     When I see you again`;
   return (
-    <div>
-      <ReactPlayer url="https://www.youtube.com/watch?v=RgKAFK5djSk" playing />
-      <br></br>
-      <br></br>
-      <br></br>
-      {goodbye}
+    <div className="goodbye">
+      <div>
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=RgKAFK5djSk"
+          playing
+        />
+      </div>
+      <div>
+        <br></br>
+        {goodbye}
+        <hr></hr>
+      </div>
     </div>
   );
 }

@@ -137,8 +137,7 @@ function MyInfo(props) {
   let deleteUser = () => {
     console.log(myuserId)
     if(window.confirm('정말로... 탈퇴하실건가요?')) {
-      axios
-      .delete("/delete", {
+      axios.delete("/delete", {
         data:{userId: myuserId}
       },)
         .then((res) => {
