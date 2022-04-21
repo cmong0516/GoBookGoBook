@@ -10,7 +10,7 @@ function MyRent() {
   // let userId = JSON.parse(localStorage.getItem('userId'));
   let userId = localStorage.getItem("userId");
   let [booksNum, setBooksNum] = useState(0);
-  let [returnCheck, setReturnCheck] = useState(null);
+  let [returnCheck, setReturnCheck] = useState(false);
 
   let [nowRent, setNowRent] = useState([]);
   let [returnBook, setReturnBook] = useState([]);
@@ -36,14 +36,12 @@ function MyRent() {
             setBooksNum(++booksNum);
           }
         });
-
       })
       .catch((error) => {
         alert("도서 데이터를 받아오는 데 실패했습니다.");
         console.log(error);
       });
-
-      // 렌더링이 왜 안될까?
+    // console.log(returnCheck);
   }, [returnCheck]);
 
   

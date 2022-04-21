@@ -11,7 +11,7 @@ function RentButton(props) {
     // myBook은 전역state로 관리??
     let history = useHistory();
     let [rentStatus, setRentStatus] = useState("rent");
-    let [myBook, setMyBook] = useState([]);
+    let [myBook, setMyBook] = useState();
     let [booksNum, setBooksNum] = useState(0);
 
     // 이미 빌린 책인지 체크
@@ -26,10 +26,9 @@ function RentButton(props) {
             })
 
             // 반납 시 서버에 줄 대여책정보 (한번더 빌리는 경우 state가 true인 데이터로 주기)
-            setMyBook( 
-              res.data
-                .filter((x) => x.title == props.book.title) 
-                .filter((x) => x.state == true) );
+            setMyBook( res.data
+              .filter((x) => x.title == props.book.title) 
+              .filter((x) => x.state == true) );
 
             // 빌렸던 DB테이블에 도서명이 있고
             // 그중에서 state가 true인 것만 반납하기 버튼 보이기
@@ -52,7 +51,7 @@ function RentButton(props) {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
               console.log(error);
           });
-    }, []);
+    }, [rentStatus]);
 
     // function으로 따로 빼기
     let rentFunc = () => {
@@ -93,15 +92,12 @@ function RentButton(props) {
     // function으로 따로 빼기
     let returnFunc = () => {
 
-      console.log(myBook);
-
       axios.post("/rent/return", {
-          rentId : myBook.rentId
+          rentId : myBook[0].rentId
         })
         .then((res) => {
           setRentStatus("rent")
           alert("반납하셨습니다.");
-          console.log(res.data);
         })
         .catch((error) => {
           alert("반납 서버와의 통신에 실패했습니다.")

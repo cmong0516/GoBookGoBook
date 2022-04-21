@@ -11,7 +11,7 @@ let CartStyle = styled.div`
 let BookImg = styled.span``;
 
 
-function MyRentBooks(props, {setReturnCheck}) {
+function MyRentBooks(props) {
 
   let history = useHistory();
   let rentBooks = props.rentBooks;
@@ -27,11 +27,9 @@ function MyRentBooks(props, {setReturnCheck}) {
     })
     .then((res) => {
       alert("반납하셨습니다.");
-      // 리렌더링이 되지 않아 새로고침으로 변경
-      setReturnCheck(true);
-    // setReturnCheck(true);
-      history.push("/mypage");
-      window.location.reload();
+      props.setReturnCheck(true);
+      // history.push("/mypage");
+      // window.location.reload();
     })
     .catch((error) => {
       alert("반납 서버와의 통신에 실패했습니다.")
