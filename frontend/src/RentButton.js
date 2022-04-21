@@ -6,47 +6,50 @@ import axios from "axios";
 
 function RentButton(props) {
   
-    // let userId = JSON.parse(localStorage.getItem('userId'));
     let userId = localStorage.getItem('userId');
   
+    // myBook은 전역state로 관리??
     let history = useHistory();
     let [rentStatus, setRentStatus] = useState("rent");
+    let [myBook, setMyBook] = useState([]);
     let [booksNum, setBooksNum] = useState(0);
 
     // 이미 빌린 책인지 체크
-    // 버튼을 누르지 않고도 detail, Search페이지에 왔을 때 아래 useEffect가 실행(리렌더링)되어야 한다.
-    // 따라서 상위컴포넌트(Detail, Search)로부터 props.book를 받아 useEffect하단 []에 넣어 리렌더링 되도록 한다.
     useEffect(() => {
       axios.post( "/rent/info", {userId: userId} )
           .then((res) => {
 
-            // 아깐 분명 안됐는데...map보다 find가 더 빠른 로딩에 유리하므로 find로 실행
-            // res.data && res.data.map((mybook, i) => (
-            //   mybook.title == props.book.title
-            //   ? console.log(mybook.title + " / " + props.book.title)
-            //   : setRentStatus("rent") 
-            // ))
-
-            res.data.map(() => {
-              setBooksNum(++booksNum);
+            res.data.map((mybooks) => {
+              if (mybooks.state == true) {
+                setBooksNum(++booksNum)
+              }
             })
-            
-            // 이미 대여한 책이 5개인지 확인
-            booksNum == 5 
-            ? setRentStatus("forbidden")
-            // 빌릴 수 있는 책 개수가 남아있다면 이 책이 이미 빌린 책인지 확인 
-            : (
-              res.data.find((x) => x.title == props.book.title)
-              ? setRentStatus("return")
-              : setRentStatus("rent")
-            )
 
+            // 반납 시 서버에 줄 대여책정보 (한번더 빌리는 경우 state가 true인 데이터로 주기)
+            setMyBook( 
+              res.data
+                .filter((x) => x.title == props.book.title) 
+                .filter((x) => x.state == true) );
+
+            // 빌렸던 DB테이블에 도서명이 있고
+            // 그중에서 state가 true인 것만 반납하기 버튼 보이기
+            // 해당하지 않는 값은 null인줄 알았으나 콘솔찍어보니 빈배열이어서 .length로 빈배열판단
+            if ( res.data
+              .filter(x => x.title == props.book.title)
+              .filter(x => x.state==true)
+              .length !== 0 ) {
+              setRentStatus("return")
+            } else {
+              booksNum == 5
+              ? setRentStatus("forbidden")
+              : setRentStatus("rent")
+            }
           })
           .catch((error) => {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
               console.log(error);
           });
-    }, [props.book]);
+    }, [rentStatus]);
 
     let rentFunc = () => {
   
@@ -76,15 +79,32 @@ function RentButton(props) {
         .then((res) => {
           setRentStatus("return")
           alert("대여 성공!");
-          console.log(res);
         })
         .catch((error) => {
           alert("대여 통신에 실패했습니다.");
           console.log(error);
         });
     };
+
+    let returnFunc = () => {
+
+      console.log(myBook);
+
+      axios.post("/rent/return", {
+          rentId : myBook.rentId
+        })
+        .then((res) => {
+          setRentStatus("rent")
+          alert("반납성공!");
+          console.log(res.data);
+
+        })
+        .catch((error) => {
+          alert("반납 서버와의 통신에 실패했습니다.")
+          console.log(error);
+        });
+    }
   
-    // 로그인 안되있는 경우 로그인화면으로?
     if (rentStatus == "rent") {
       return (
         <Button variant="success" size="lg" onClick={rentFunc}>
@@ -93,7 +113,7 @@ function RentButton(props) {
       );
     } else if (rentStatus == "return") {
       return (
-        <Button variant="dark" size="lg">
+        <Button variant="dark" size="lg" onClick={returnFunc}>
           반납하기
         </Button>
       );
