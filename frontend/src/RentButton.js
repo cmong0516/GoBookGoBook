@@ -38,7 +38,10 @@ function RentButton(props) {
               .filter(x => x.title == props.book.title)
               .filter(x => x.state==true)
               .length !== 0 ) {
-              setRentStatus("return")
+
+              setRentStatus("return");
+              
+              
             } else {
               booksNum == 5
               ? setRentStatus("forbidden")
@@ -49,8 +52,9 @@ function RentButton(props) {
               alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
               console.log(error);
           });
-    }, [rentStatus]);
+    }, []);
 
+    // function으로 따로 빼기
     let rentFunc = () => {
   
       // 리렌더링되면 isLogin도 false로 초기화
@@ -86,6 +90,7 @@ function RentButton(props) {
         });
     };
 
+    // function으로 따로 빼기
     let returnFunc = () => {
 
       console.log(myBook);
@@ -95,9 +100,8 @@ function RentButton(props) {
         })
         .then((res) => {
           setRentStatus("rent")
-          alert("반납성공!");
+          alert("반납하셨습니다.");
           console.log(res.data);
-
         })
         .catch((error) => {
           alert("반납 서버와의 통신에 실패했습니다.")

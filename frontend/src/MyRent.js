@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import MyRentBooks from "./MyRentBooks.js";
 import axios from "axios";
@@ -10,13 +9,14 @@ function MyRent() {
   let userName = localStorage.getItem("userName");
   // let userId = JSON.parse(localStorage.getItem('userId'));
   let userId = localStorage.getItem("userId");
-  let [rentBooks, setRentBooks] = useState();
   let [booksNum, setBooksNum] = useState(0);
-  let [returnCheck, setReturnCheck] = useState(0);
-  // let [nowRent, setNowRent] = useState([]);
-  // let [returnBook, setReturnBook] = useState([]);
-  let nowRent = [];
-  let returnBook = [];
+  let [returnCheck, setReturnCheck] = useState(null);
+
+  let [nowRent, setNowRent] = useState([]);
+  let [returnBook, setReturnBook] = useState([]);
+  // 일반 배열은 useEffect에서 push한 값이 사라지고 초기화된 상태로 return으로 들어감
+  // let nowRent = [];
+  // let returnBook = [];
 
   const radios = [
     { name: "현재 대여중인 도서", value: "1" },
@@ -26,20 +26,14 @@ function MyRent() {
   useEffect(() => {
     axios.post("/rent/info", { userId: userId })
       .then((res) => {
-
-        setRentBooks(res.data);
-
+        console.log(returnCheck)
         // booksNum은 RentButton.js에서 갖고오기
-        // 대여중 : 개수 확인 + 대여
+        setNowRent(res.data.filter(x => x.state == true))
+        setReturnBook(res.data.filter(x => x.state == false))
+
         res.data.map((myBook) => {
           if (myBook.state == true) {
             setBooksNum(++booksNum);
-            // setNowRent([...nowRent, ...myBook])
-            console.log('====확인===')
-            nowRent.push(myBook);
-          } else {
-            // setReturnBook([...returnBook, ...myBook])
-            returnBook.push(myBook);
           }
         });
 
@@ -49,8 +43,10 @@ function MyRent() {
         console.log(error);
       });
 
+      // 렌더링이 왜 안될까?
   }, [returnCheck]);
 
+  
   return (
     <div>
       <h2>{userName}님, 반가워요!</h2>
@@ -76,10 +72,9 @@ function MyRent() {
       </ButtonGroup>
 
       {
-        console.log(nowRent)
-        // radioValue == 1 
-        // ? <MyRentBooks rentBooks={nowRent} setReturnCheck={setReturnCheck}/>
-        // : <MyRentBooks rentBooks={returnBook}/>
+        radioValue == 1 
+        ? <MyRentBooks rentBooks={nowRent} setReturnCheck={setReturnCheck}/>
+        : <MyRentBooks rentBooks={returnBook}/>
       }
     </div>
   );

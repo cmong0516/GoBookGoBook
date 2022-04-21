@@ -1,65 +1,130 @@
 import React from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Card, Button, Row } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
 
 let CartStyle = styled.div`
-  width: 300px;
+  width: 250px;
   margin-top: 1rem;
 `;
 let BookImg = styled.span``;
 
-function MyrentPage(props) {
+
+function MyRentBooks(props, {setReturnCheck}) {
+
+  let history = useHistory();
   let rentBooks = props.rentBooks;
-
-  return (
-    <Row>{rentBooks && rentBooks.map((book) => <CardComp book={book} />)}</Row>
+  // 이미 2번이상 빌려본 책은 지난 대여내역에서 한번만 나오도록 중복제거
+  let rentBook = rentBooks.filter(
+    (item, i, arr) => i === arr.findIndex(b => (item.title === b.title))
   );
-}
 
-function returnFunc(rentId, props) {
-  axios
-    .post("/rent/return", {
+  let returnFunc = (rentId) => {
+
+    axios.post("/rent/return", {
       rentId: rentId,
     })
     .then((res) => {
-      console.log(res);
-      props?.setReturnCheck(...1);
+      alert("반납하셨습니다.");
+      // 리렌더링이 되지 않아 새로고침으로 변경
+      setReturnCheck(true);
+    // setReturnCheck(true);
+      history.push("/mypage");
+      window.location.reload();
     })
     .catch((error) => {
+      alert("반납 서버와의 통신에 실패했습니다.")
       console.log(error);
     });
-}
-
-function CardComp({ book }) {
+  }
 
   return (
-    <CartStyle>
-      <Card key={book.rentId}>
-        {
-          book.coverLargeUrl 
-          ? <BookImg>
-              <Card.Img variant="top" src={book.coverLargeUrl} />
-            </BookImg>
-          : <BookImg>
-              <Card.Img variant="top" src={book.coverSmallUrl} />
-            </BookImg>
-        }
-        <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
-          <Card.Text>대여일 : {book.rentDate}</Card.Text>
-          <Card.Text>반납일 : (D-계산값)</Card.Text>
-          {
-            book.state == true 
-            ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
-                반납하기
-              </Button>
-            : null
-          }
-        </Card.Body>
-      </Card>
-    </CartStyle>
-  );
+    <Row>
+      {
+        // rentBook && rentBook.map( book => <CardComp book={book} /> )
+        rentBook && rentBook.map( book => 
+          <CartStyle>
+            <Card key={book.rentId}>
+              {
+                book.coverLargeUrl
+                ? <BookImg>
+                    <Card.Img variant="top" src={book.coverLargeUrl} />
+                  </BookImg>
+                : 
+                  <BookImg>
+                    <Card.Img variant="top" src={book.coverSmallUrl} />
+                  </BookImg>
+              }
+              <Card.Body>
+                <Card.Title>{book.title}</Card.Title>
+                <Card.Text>대여일 : {book.rentDate}</Card.Text>
+                <Card.Text>반납일 : (D-계산값)</Card.Text>
+                {
+                  book.state == true 
+                  ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+                      반납하기
+                    </Button>
+                  : null
+                }
+              </Card.Body>
+            </Card>
+          </CartStyle>
+        )
+      }
+    </Row>
+  )
+  
 }
 
-export default MyrentPage;
+// function returnFunc(rentId, props) {
+
+//   let history = useHistory();
+
+//   axios.post("/rent/return", {
+//       rentId: rentId,
+//     })
+//     .then((res) => {
+//       alert("반납하셨습니다.");
+//       props?.setReturnCheck(...1);
+//       history.push("/mypage");
+//     })
+//     .catch((error) => {
+//       alert("반납 서버와의 통신에 실패했습니다.")
+//       console.log(error);
+//     });
+// }
+
+// function CardComp({ book }) {
+
+//   return (
+//     <CartStyle>
+//       <Card key={book.rentId}>
+//         {
+//           book.coverLargeUrl
+//           ? <BookImg>
+//               <Card.Img variant="top" src={book.coverLargeUrl} />
+//             </BookImg>
+//           : 
+//             <BookImg>
+//               <Card.Img variant="top" src={book.coverSmallUrl} />
+//             </BookImg>
+//         }
+//         <Card.Body>
+//           <Card.Title>{book.title}</Card.Title>
+//           <Card.Text>대여일 : {book.rentDate}</Card.Text>
+//           <Card.Text>반납일 : (D-계산값)</Card.Text>
+//           {
+//             book.state == true 
+//             ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+//                 반납하기
+//               </Button>
+//             : null
+//           }
+//         </Card.Body>
+//       </Card>
+//     </CartStyle>
+//   );
+// }
+
+export default MyRentBooks;

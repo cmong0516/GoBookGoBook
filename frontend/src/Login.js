@@ -78,16 +78,19 @@ function Login(props) {
             .then(res => {
                 if(res) {
                     console.log(res);
-                    alert(res.data.userName + '님, 로그인되었습니다🐢');
-                    localStorage.setItem('userName', res.data.userName);
-                    // localStorage.setItem('userId', JSON.stringify(res.data.userId));
-                    localStorage.setItem('userId', res.data.userId);
-                    localStorage.setItem('userEmail', res.data.userEmail);
-                    props.setIsLogin(true)
-                     // 리렌더링을 위해 상위컴포넌트로부터 받은 state변경
-                    history.push("/");
-                } else {
-                    setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
+                    
+                    if (res.data.userName) {
+                        alert(res.data.userName + '님, 로그인되었습니다🐢');
+                        localStorage.setItem('userName', res.data.userName);
+                        // localStorage.setItem('userId', JSON.stringify(res.data.userId));
+                        localStorage.setItem('userId', res.data.userId);
+                        localStorage.setItem('userEmail', res.data.userEmail);
+                        props.setIsLogin(true)
+                        // 리렌더링을 위해 상위컴포넌트로부터 받은 state변경
+                        history.push("/"); 
+                    } else {
+                        setAlarm('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
+                    }
                 }
             })
             .catch(error => {
