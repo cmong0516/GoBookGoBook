@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
 import { Link, Route, Switch } from "react-router-dom";
@@ -11,6 +11,7 @@ import Login from "./Login.js";
 import Signin from "./Signin.js";
 import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
+import Goodbye from "./Goodbye.js";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -38,8 +39,7 @@ export let SetBookContext = React.createContext();
 export let DueDateContext = React.createContext();
 
 function App() {
-
-  let userId = localStorage.getItem('userId');
+  let userId = localStorage.getItem("userId");
   let [isLogin, setIsLogin] = useState();
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
@@ -57,41 +57,41 @@ function App() {
             </a>
           </div>
           <div>
-            {
-              userId
-              ? (<div>
-                  <Link to="/">
-                    <span onClick={() => {
-                        localStorage.clear();
-                        setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                    }}>
-                      로그아웃
-                    </span>
-                  </Link>
-                  <span>|</span>
-                  <Link to="/mypage">
-                    <span>마이페이지&nbsp;</span>
-                  </Link>
-                </div>) 
-              : (<div>
-                  <Link to="/login">
-                    <span>로그인</span>
-                  </Link>
-                  <span>|</span>
-                  <Link to="/signin">
-                    <span>회원가입</span>
-                  </Link>
-                </div>)
-            }
+            {userId ? (
+              <div>
+                <Link to="/">
+                  <span
+                    onClick={() => {
+                      localStorage.clear();
+                      setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
+                    }}
+                  >
+                    로그아웃
+                  </span>
+                </Link>
+                <span>|</span>
+                <Link to="/mypage">
+                  <span>마이페이지&nbsp;</span>
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Link to="/login">
+                  <span>로그인</span>
+                </Link>
+                <span>|</span>
+                <Link to="/signin">
+                  <span>회원가입</span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-
         <SearchBar
           searchWord={searchWord}
           searchWordChange={searchWordChange}
         />
       </UserStyle>
-
       <Navbar bg="info" variant="dark">
         <Container>
           <Navbar.Brand className="fs-3">도서</Navbar.Brand>
@@ -109,16 +109,16 @@ function App() {
         <Wrapper>
           <Route exact path="/api/bestseller">
             <BookContext.Provider value={books}>
-            <SetBookContext.Provider value={setBooks}>
-             <BestSeller />
-            </SetBookContext.Provider>
+              <SetBookContext.Provider value={setBooks}>
+                <BestSeller />
+              </SetBookContext.Provider>
             </BookContext.Provider>
           </Route>
           <Route exact path="/api/newbook">
-          <BookContext.Provider value={books}>
-            <SetBookContext.Provider value={setBooks}>
-              <NewBooks />
-            </SetBookContext.Provider>
+            <BookContext.Provider value={books}>
+              <SetBookContext.Provider value={setBooks}>
+                <NewBooks />
+              </SetBookContext.Provider>
             </BookContext.Provider>
           </Route>
           <Route path="/detail/:isbn">
@@ -134,10 +134,13 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <Login setIsLogin={setIsLogin}/>
+            <Login setIsLogin={setIsLogin} />
           </Route>
           <Route path="/signin">
             <Signin />
+          </Route>
+          <Route path="/goodbye">
+            <Goodbye />
           </Route>
           <Route path="/mypage">
             <DueDateContext.Provider value={dueDate}>
