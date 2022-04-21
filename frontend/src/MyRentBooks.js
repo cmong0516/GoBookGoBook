@@ -4,7 +4,9 @@ import styled from "styled-components";
 import axios from "axios";
 
 let CartStyle = styled.div`
-  width: 250px;
+  width: 33%;
+  max-width: 270px;
+  min-width: 240px;
   margin-top: 1rem;
 `;
 
