@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { DueDateContext } from "./App.js"
+import React from "react";
 import { Card, Button, Row } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
@@ -10,8 +9,6 @@ let CartStyle = styled.div`
 `;
 
 function MyRentBooks(props) {
-
-  let dueDate = useContext(DueDateContext);
 
   let rentBooks = props.rentBooks;
 
@@ -27,7 +24,7 @@ function MyRentBooks(props) {
     })
     .then((res) => {
       alert("반납하셨습니다.");
-      props.setReturnBook(true);
+      props.setReturnCheck(true);
     })
     .catch((error) => {
       alert("반납 서버와의 통신에 실패했습니다.")
@@ -50,14 +47,13 @@ function MyRentBooks(props) {
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text>대여일 : {book.rentDate}</Card.Text>
-                <Card.Text>반납예정일 : {dueDate}</Card.Text>
+                {/* <Card.Text>반납예정일 : {dueDate(book.rentDate)}</Card.Text> */}
                 {
-                  console.log(typeof(book.rentDate))
-                  // book.state == true 
-                  // ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
-                  //     반납하기
-                  //   </Button>
-                  // : null
+                  book.state == true 
+                  ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+                      반납하기
+                    </Button>
+                  : null
                 }
               </Card.Body>
             </Card>
@@ -67,6 +63,11 @@ function MyRentBooks(props) {
     </Row>
   )
   
+}
+
+function dueDate(date) {
+  let newDate = new Date(date)
+  return new Date(newDate.setDate(newDate.getDate() + 7));
 }
 
 // function returnFunc(rentId, props) {

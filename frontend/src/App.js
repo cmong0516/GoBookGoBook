@@ -43,7 +43,6 @@ function App() {
   let [isLogin, setIsLogin] = useState();
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
-  let [dueDate, setDuedate] = useState("");
 
   return (
     <div className="App">
@@ -123,9 +122,7 @@ function App() {
           </Route>
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
-              <DueDateContext.Provider value={setDuedate}>
-                <Detail />
-              </DueDateContext.Provider>
+              <Detail />
             </BookContext.Provider>
           </Route>
 
@@ -143,9 +140,7 @@ function App() {
             <Goodbye />
           </Route>
           <Route path="/mypage">
-            <DueDateContext.Provider value={dueDate}>
-              <Mypage />
-            </DueDateContext.Provider>
+            <Mypage />
           </Route>
         </Wrapper>
       </Switch>
