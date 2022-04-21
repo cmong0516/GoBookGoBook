@@ -138,8 +138,8 @@ function MyInfo(props) {
     if(window.confirm('정말로... 탈퇴하실건가요?')) {
       axios
       .delete("/delete", {
-        userId: myuserId,
-      })
+        data:{userId: myuserId}
+      },)
       .then((res) => {
         console.log(res);
         localStorage.clear();
