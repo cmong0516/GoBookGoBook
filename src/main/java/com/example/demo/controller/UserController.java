@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.User;
+import com.example.demo.service.RentService;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RentService rentService;
 
     //회원가입 로직
     @PostMapping("/signin")
@@ -40,7 +43,7 @@ public class UserController {
     @DeleteMapping("/delete")
     public boolean delete(@RequestBody User user){
 //        System.out.println("id = " + id); //확인
-
+        rentService.deleteRent(user.getUserId());
         return userService.deleteUser(user.getUserId());
     }
 }
