@@ -17,10 +17,10 @@ public class UserService {
 
     @Transactional //변경되는 값이라?
     public boolean joinUser(User user){
-        System.out.println("memberForm = " + user.getUserId());
+        /*System.out.println("memberForm = " + user.getUserId());
         System.out.println("memberForm = " + user.getUserPw());
         System.out.println("memberForm = " + user.getUserName());
-        System.out.println("memberForm = " + user.getUserEmail());
+        System.out.println("memberForm = " + user.getUserEmail());*/
 
         //아이디로 유효성 검사
         List<User> findId = userRepository.findById(user.getUserId());
@@ -47,9 +47,14 @@ public class UserService {
 
         //유효성 검사
         List<User> byId = userRepository.findById(user.getUserId());
+        //찾는 아이디가 없으면 null
+        if (byId.isEmpty()){
+            System.out.println("비었다");
+            return null;
+        }
         User loginUser = byId.get(0);//잘 찾음.
 
-//        System.out.println("loginUser = " + loginUser);
+        System.out.println("loginUser = " + loginUser);
 
         //비밀번호 복호화
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

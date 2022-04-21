@@ -37,9 +37,9 @@ function MyInfo(props) {
   let [pwAlarm, setPwAlarm] = useState('');
   let [pwMatchAlarm, setPwMatchAlarm] = useState('');
   let [account, setAccount] = useState({
-      useremail: '',
-      userpw: '',
-      userpwCheck: ''
+      userId:'',
+      userEmail: '',
+      userPw: ''
   })
 
   // 이메일 : (이메일아이디 영어/숫자 하나 이상) + @(필수) + (영어 하나이상) + .(특수문자이므로 \붙임) + (영어 하나이상)
