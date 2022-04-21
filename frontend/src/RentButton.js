@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { DueDateContext } from "./App.js"
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./App.css";
@@ -13,6 +14,15 @@ function RentButton(props) {
     let [rentStatus, setRentStatus] = useState("rent");
     let [myBook, setMyBook] = useState();
     let [booksNum, setBooksNum] = useState(0);
+
+  // 반납예정일
+  let setDuedate = useContext(DueDateContext);
+  let today = new Date();
+  let duedate = new Date(today.setDate(today.getDate()+7))
+  let year = duedate.getFullYear();
+  let month = ('0' + (duedate.getMonth() + 1)).slice(-2);
+  let day = ('0' + duedate.getDate()).slice(-2);
+  let dateString = year + '-' + month  + '-' + day;
 
     // 이미 빌린 책인지 체크
     useEffect(() => {
@@ -37,11 +47,10 @@ function RentButton(props) {
               .filter(x => x.title == props.book.title)
               .filter(x => x.state==true)
               .length !== 0 ) {
-
-              setRentStatus("return");
               
-              
-            } else {
+                setRentStatus("return");
+           
+              } else {
               booksNum == 5
               ? setRentStatus("forbidden")
               : setRentStatus("rent")
@@ -82,6 +91,7 @@ function RentButton(props) {
         .then((res) => {
           setRentStatus("return")
           alert("대여 성공!");
+          setDuedate(dateString);
         })
         .catch((error) => {
           alert("대여 통신에 실패했습니다.");
@@ -96,7 +106,7 @@ function RentButton(props) {
           rentId : myBook[0].rentId
         })
         .then((res) => {
-          setRentStatus("rent")
+          setRentStatus("rent");
           alert("반납하셨습니다.");
         })
         .catch((error) => {

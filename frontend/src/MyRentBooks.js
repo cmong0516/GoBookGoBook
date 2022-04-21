@@ -1,5 +1,5 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import { DueDateContext } from "./App.js"
 import { Card, Button, Row } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
@@ -8,18 +8,18 @@ let CartStyle = styled.div`
   width: 250px;
   margin-top: 1rem;
 `;
-let BookImg = styled.span``;
-
 
 function MyRentBooks(props) {
 
-  let history = useHistory();
+  let dueDate = useContext(DueDateContext);
+
   let rentBooks = props.rentBooks;
+
   // 이미 2번이상 빌려본 책은 지난 대여내역에서 한번만 나오도록 중복제거
   let rentBook = rentBooks.filter(
     (item, i, arr) => i === arr.findIndex(b => (item.title === b.title))
   );
-
+  
   let returnFunc = (rentId) => {
 
     axios.post("/rent/return", {
@@ -27,9 +27,7 @@ function MyRentBooks(props) {
     })
     .then((res) => {
       alert("반납하셨습니다.");
-      props.setReturnCheck(true);
-      // history.push("/mypage");
-      // window.location.reload();
+      props.setReturnBook(true);
     })
     .catch((error) => {
       alert("반납 서버와의 통신에 실패했습니다.")
@@ -46,24 +44,20 @@ function MyRentBooks(props) {
             <Card key={book.rentId}>
               {
                 book.coverLargeUrl
-                ? <BookImg>
-                    <Card.Img variant="top" src={book.coverLargeUrl} />
-                  </BookImg>
-                : 
-                  <BookImg>
-                    <Card.Img variant="top" src={book.coverSmallUrl} />
-                  </BookImg>
+                ? <Card.Img variant="top" src={book.coverLargeUrl} />
+                : <Card.Img variant="top" src={book.coverSmallUrl} />
               }
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text>대여일 : {book.rentDate}</Card.Text>
-                <Card.Text>반납일 : (D-계산값)</Card.Text>
+                <Card.Text>반납예정일 : {dueDate}</Card.Text>
                 {
-                  book.state == true 
-                  ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
-                      반납하기
-                    </Button>
-                  : null
+                  console.log(typeof(book.rentDate))
+                  // book.state == true 
+                  // ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+                  //     반납하기
+                  //   </Button>
+                  // : null
                 }
               </Card.Body>
             </Card>

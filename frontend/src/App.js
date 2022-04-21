@@ -35,6 +35,7 @@ let UserStyle = styled.div`
 
 export let BookContext = React.createContext();
 export let SetBookContext = React.createContext();
+export let DueDateContext = React.createContext();
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
   let [isLogin, setIsLogin] = useState();
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
+  let [dueDate, setDuedate] = useState("");
 
   return (
     <div className="App">
@@ -59,12 +61,10 @@ function App() {
               userId
               ? (<div>
                   <Link to="/">
-                    <span
-                      onClick={() => {
+                    <span onClick={() => {
                         localStorage.clear();
                         setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                      }}
-                    >
+                    }}>
                       로그아웃
                     </span>
                   </Link>
@@ -123,7 +123,9 @@ function App() {
           </Route>
           <Route path="/detail/:isbn">
             <BookContext.Provider value={books}>
-              <Detail />
+              <DueDateContext.Provider value={setDuedate}>
+                <Detail />
+              </DueDateContext.Provider>
             </BookContext.Provider>
           </Route>
 
@@ -138,7 +140,9 @@ function App() {
             <Signin />
           </Route>
           <Route path="/mypage">
-            <Mypage />
+            <DueDateContext.Provider value={dueDate}>
+              <Mypage />
+            </DueDateContext.Provider>
           </Route>
         </Wrapper>
       </Switch>

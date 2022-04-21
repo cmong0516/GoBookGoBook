@@ -1,6 +1,8 @@
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom";
 import { Button,Form } from "react-bootstrap";
 import styled from 'styled-components';
+import axios from 'axios';
 
 let InfoForm = styled.div`
     width: 80%;
@@ -28,9 +30,11 @@ let Alarm = styled.div`
 
 function MyInfo(props) {
 
-  let userName = localStorage.getItem('userName');
-  let userId = localStorage.getItem('userId');
-  let userEmail = localStorage.getItem('userEmail');
+  let history = useHistory();
+
+  let myuserName = localStorage.getItem('userName');
+  let myuserId = localStorage.getItem('userId');
+  let myuserEmail = localStorage.getItem('userEmail');
 
   let [alarm, setAlarm] = useState('')
   let [emailAlarm, setEmailAlarm] = useState('');
@@ -39,7 +43,8 @@ function MyInfo(props) {
   let [account, setAccount] = useState({
       userId:'',
       userEmail: '',
-      userPw: ''
+      userPw: '',
+      userpwCheck: ''
   })
 
   // 이메일 : (이메일아이디 영어/숫자 하나 이상) + @(필수) + (영어 하나이상) + .(특수문자이므로 \붙임) + (영어 하나이상)
@@ -53,8 +58,8 @@ function MyInfo(props) {
     })
   }
 
-  let submitFunc = (e) => {
-    e.preventDefault();
+  let editUser = (e) => {
+    // e.preventDefault();
     let form = e.currentTarget;
 
     setAlarm('');
@@ -63,52 +68,85 @@ function MyInfo(props) {
     setPwMatchAlarm('');
 
     // 둘 다 작성하지 않는 경우
-    if ( !account.useremail && !account.userpw ) {
+    if ( !account.userEmail && !account.userPw ) {
       setAlarm('수정하실 정보를 작성해주세요.')
     }
     // 이메일만 작성하는 경우
-    if ( account.useremail && !account.userpw ) {
+    if ( account.userEmail && !account.userPw ) {
       // 형식확인
-      if(!emailFormat.test(account.useremail) ) {
+      if(!emailFormat.test(account.userEmail) ) {
         setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
       } else {
-        alert('콘솔창 확인');
-        console.log(account);
+        updateAjax();
       }
     }
     // 비밀번호만 작성하는 경우
-    if ( !account.useremail && account.userpw ) {
+    if ( !account.userEmail && account.userPw ) {
       // 형식확인
-      if( !passwordFormat.test(account.userpw) ) {
+      if( !passwordFormat.test(account.userPw) ) {
         setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
       // 비밀번호 확인란과 일치여부
-      } else if ( account.userpw != account.userpwCheck) {
+      } else if ( account.userPw != account.userpwCheck) {
         setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
       } else {
-        alert('콘솔창 확인');
-        console.log(account);
+        updateAjax();
       }
     }
     // 둘 다 작성한 경우
-    if ( account.useremail && account.userpw ) {
+    if ( account.userEmail && account.userPw ) {
       // 이메일 형식확인
-      if( !emailFormat.test(account.useremail) ) {
+      if( !emailFormat.test(account.userEmail) ) {
         setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
       } 
       // 비밀번호 형식확인
       // 이메일, 비밀번호 둘 다 형식에 맞지 않는 경우를 위해 if문을 따로 작성
-      if( !passwordFormat.test(account.userpw) ) {
+      if( !passwordFormat.test(account.userPw) ) {
         setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
       // 비밀번호 확인란과 일치여부
-      } else if ( account.userpw != account.userpwCheck) {
+      } else if ( account.userPw != account.userpwCheck) {
         setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
       // 비밀번호 형식/확인란 맞은 상태에서 이메일형식까지 맞으면 결과 넘어감
-      } else if ( emailFormat.test(account.useremail) ) {
-        alert('콘솔창 확인');
-        console.log(account);
+      } else if ( emailFormat.test(account.userEmail) ) {
+        updateAjax();
       }
     }
   }
+
+  let updateAjax = () => {
+    axios
+      .put("/mypage", {
+        userId: myuserId,
+        userPw: account.userPw,
+        userEmail: account.userEmail,
+      })
+      .then((res) => {
+        alert("개인정보 수정이 완료되었습니다.")
+        localStorage.setItem('userEmail', account.userEmail);
+        history.push("/");
+        console.log(res);
+      })
+      .catch((error) => {
+        alert("개인정보 수정에 실패했습니다.");
+        console.log(error);
+      });
+  }
+
+  let deleteUser = () => {
+    axios
+      .delete("/delete", {
+        userId: myuserId,
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.clear();
+        alert("탈퇴에 성공하셨습니다🙂");
+        history.push("/");
+      })
+      .catch((error) => {
+        alert("회원 탈퇴에 실패하셨습니다.");
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -116,14 +154,14 @@ function MyInfo(props) {
       <p>고객님의 정보를 정확히 입력해주세요.</p>
       <Alarm>{alarm}</Alarm>
       <InfoForm>
-        <Form noValidate onSubmit={submitFunc}>
+        <Form noValidate onSubmit={editUser}>
         <GroupStyle>
             <Form.Group>
                 <Form.Label>이름</Form.Label>
                 <Form.Control
                     required
                     type="text"
-                    placeholder={userName}
+                    placeholder={myuserName}
                     onChange={onChangeFunc}
                     disabled
                     readOnly
@@ -137,7 +175,7 @@ function MyInfo(props) {
                 <Form.Control
                     required
                     type="text"
-                    placeholder={userId}
+                    placeholder={myuserId}
                     onChange={onChangeFunc}
                     disabled
                     readOnly
@@ -152,8 +190,8 @@ function MyInfo(props) {
                 <Form.Control
                     required
                     type="email"
-                    name="useremail"
-                    placeholder={userEmail}
+                    name="userEmail"
+                    placeholder={myuserEmail}
                     onChange={onChangeFunc}
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>
@@ -167,7 +205,7 @@ function MyInfo(props) {
                 <Form.Control
                     required
                     type="password"
-                    name="userpw"
+                    name="userPw"
                     placeholder="영어/숫자/특수문자 포함 9-20자를 입력해주세요."
                     onChange={onChangeFunc}
                 ></Form.Control>
@@ -190,12 +228,16 @@ function MyInfo(props) {
             </Form.Group>
           </GroupStyle>
 
-          <Button variant="primary" type="submit">
-              수정
+          <Button variant="primary" type="button" onClick={() => editUser(myuserId)}>
+            수정
           </Button>
-          <Button variant="outline-danger" type="button" onClick={() => props.setMenu(0)}>
-              취소
+          <Button variant="outline-warning" type="button" onClick={() => props.setMenu(0)}>
+            취소
           </Button>
+          <Button variant="outline-danger" type="button" onClick={() => deleteUser(myuserId)}>
+            회원 탈퇴
+          </Button>
+         
         </Form>
       </InfoForm>
     </div>
