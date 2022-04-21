@@ -32,30 +32,30 @@ function returnFunc(rentId, props) {
 }
 
 function CardComp({ book }) {
+
   return (
     <CartStyle>
       <Card key={book.rentId}>
-        {book.coverLargeUrl ? (
-          <BookImg>
-            <Card.Img variant="top" src={book.coverLargeUrl} />
-          </BookImg>
-        ) : (
-          <BookImg>
-            <Card.Img variant="top" src={book.coverSmallUrl} />
-          </BookImg>
-        )}
+        {
+          book.coverLargeUrl 
+          ? <BookImg>
+              <Card.Img variant="top" src={book.coverLargeUrl} />
+            </BookImg>
+          : <BookImg>
+              <Card.Img variant="top" src={book.coverSmallUrl} />
+            </BookImg>
+        }
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>대여일 : {book.rentDate}</Card.Text>
           <Card.Text>반납일 : (D-계산값)</Card.Text>
-          {book.state == true ? (
-            <Button
-              variant="outline-danger"
-              onClick={() => returnFunc(book.rentId)}
-            >
-              반납하기
-            </Button>
-          ) : null}
+          {
+            book.state == true 
+            ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+                반납하기
+              </Button>
+            : null
+          }
         </Card.Body>
       </Card>
     </CartStyle>

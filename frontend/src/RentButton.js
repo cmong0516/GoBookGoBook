@@ -27,7 +27,9 @@ function RentButton(props) {
             // 반납 시 서버에 줄 대여책 setState
             setMyBook( res.data.find((x) => x.title == props.book.title) );
 
-            if ( res.data.find((x) => x.title == props.book.title) ) {
+            // 빌렸던 DB테이블에 도서명이 있고
+            // 그중에서 state가 true일 때만 반납하기 버튼 보이기
+            if ( res.data.find((x) => x.title == props.book.title && x.state == true) ) {
               setRentStatus("return")
             } else {
               booksNum == 5
@@ -78,15 +80,10 @@ function RentButton(props) {
     };
 
     let returnFunc = () => {
-
-      if(!userId) {
-        alert('로그인 후 이용할 수 있습니다.');
-        return history.push("/login");
-      }
-
+      
       // console.log(myBook);
       axios.post("/rent/return", {
-        rentId : myBook.rentId
+          rentId : myBook.rentId
         })
         .then((res) => {
           // props.book가 리렌더링되어야 함
