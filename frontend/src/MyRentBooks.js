@@ -52,12 +52,11 @@ function MyRentBooks(props) {
                 <Card.Text>대여일 : {book.rentDate}</Card.Text>
                 <Card.Text>반납예정일 : {dueDate}</Card.Text>
                 {
-                  console.log(typeof(book.rentDate))
-                  // book.state == true 
-                  // ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
-                  //     반납하기
-                  //   </Button>
-                  // : null
+                  book.state == true 
+                  ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
+                      반납하기
+                    </Button>
+                  : null
                 }
               </Card.Body>
             </Card>
