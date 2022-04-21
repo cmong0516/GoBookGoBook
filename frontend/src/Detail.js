@@ -6,7 +6,7 @@ import {BookContext} from "./App.js";
 import RentButton from "./RentButton.js"
 import styled from 'styled-components';
 
-let bookView = styled.div`
+let BookView = styled.div`
   text-align: left;
 `
 
@@ -30,7 +30,7 @@ function DetailView(props) {
   let book = props.books && props.books.find((x) => x.isbn == isbn);
 
   return (
-    <div>
+    <BookView>
       <img src={book.coverLargeUrl} width="350rem" />
       {book.categoryName}
       <br />
@@ -61,7 +61,7 @@ function DetailView(props) {
       <br />
       <RentButton book={book} />
       <Button variant="info" size="lg">뒤로가기</Button>
-    </div>
+    </BookView>
   );
 }
 
