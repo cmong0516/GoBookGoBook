@@ -24,15 +24,15 @@ public class UserRepository {
 
     //아이디로 찾기
     public List<User> findById(String userId){
-        return em.createQuery("select m from User m where m.userId = :userId", User.class)
+        return em.createQuery("select u from User u where u.userId = :userId", User.class)
                 .setParameter("userId",userId)
                 .getResultList();
     }
 
-    //이메일, 비밀번호 수정
-    public List<User> update(User user){
-        List<User> userList = findById(user.getUserId());
+    //delete from User where userId = ?
 
-        return null;
+    //행 삭제
+    public void delete(User user) {
+        em.remove(user);
     }
 }
