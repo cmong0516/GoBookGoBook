@@ -56,11 +56,11 @@ function App() {
             </a>
           </div>
           <div>
-            {userId ? (
-              <div>
-                <Link to="/">
-                  <span
-                    onClick={() => {
+            {userId
+              ? (
+                <div>
+                  <Link to="/">
+                    <span onClick={() => {
                       localStorage.clear();
                       setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
                     }}
