@@ -104,7 +104,6 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      <a href="/goodbye">Hi</a>
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">
