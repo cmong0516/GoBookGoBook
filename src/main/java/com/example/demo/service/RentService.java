@@ -47,4 +47,8 @@ public class RentService {
     public Rent returnBook(Long rentId) {
         return rentRepository.returnBook(rentId);
     }
+
+    public boolean deleteRent(String userId) {
+        return rentRepository.deleteRent(userId);
+    }
 }

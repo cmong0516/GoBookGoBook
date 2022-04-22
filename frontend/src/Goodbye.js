@@ -1,6 +1,9 @@
 import ReactPlayer from "react-player";
 
-function Goodbye() {
+function Goodbye(props) {
+
+  props.setIsLogin(true)
+  
   let goodbye = `It's been a long day without you, my friend
     And I'll tell you all about it when I see you again
     We've come a long way from where we began
@@ -48,12 +51,18 @@ function Goodbye() {
     See you again (yeah, yeah, yeah)
     When I see you again`;
   return (
-    <div>
-      <ReactPlayer url="https://www.youtube.com/watch?v=RgKAFK5djSk" playing />
-      <br></br>
-      <br></br>
-      <br></br>
-      {goodbye}
+    <div className="goodbye">
+      <div>
+        <ReactPlayer
+          url="https://www.youtube.com/watch?v=RgKAFK5djSk"
+          playing
+        />
+      </div>
+      <div>
+        <br></br>
+        {goodbye}
+        <hr></hr>
+      </div>
     </div>
   );
 }

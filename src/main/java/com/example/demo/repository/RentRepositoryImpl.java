@@ -46,4 +46,13 @@ public class RentRepositoryImpl implements RentRepository {
         byRentId.setState(false);
         return save(byRentId);
     }
+
+    @Override
+    public boolean deleteRent(String userId) {
+        List<Rent> allByUserId = findAllByUserId(userId);
+        for (Rent rent : allByUserId) {
+            em.remove(rent);
+        }
+        return true;
+    }
 }

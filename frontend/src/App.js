@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
@@ -40,9 +40,13 @@ export let DueDateContext = React.createContext();
 
 function App() {
   let userId = localStorage.getItem("userId");
-  let [isLogin, setIsLogin] = useState();
+  let [isLogin, setIsLogin] = useState(true);
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem('userId', null);
+  },[isLogin]);
 
   return (
     <div className="App">
@@ -57,23 +61,24 @@ function App() {
           </div>
           <div>
             {userId
-              ? (
+            ? (
                 <div>
                   <Link to="/">
                     <span onClick={() => {
                       localStorage.clear();
                       setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
                     }}
-                  >
-                    로그아웃
-                  </span>
-                </Link>
-                <span>|</span>
-                <Link to="/mypage">
-                  <span>마이페이지&nbsp;</span>
-                </Link>
-              </div>
-            ) : (
+                    >
+                      로그아웃
+                    </span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/mypage">
+                    <span>마이페이지&nbsp;</span>
+                  </Link>
+                </div>
+            ) 
+            : (
               <div>
                 <Link to="/login">
                   <span>로그인</span>
@@ -137,7 +142,7 @@ function App() {
             <Signin />
           </Route>
           <Route path="/goodbye">
-            <Goodbye />
+            <Goodbye setIsLogin={setIsLogin}/>
           </Route>
           <Route path="/mypage">
             <Mypage />

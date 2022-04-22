@@ -41,3 +41,9 @@ a{
 .titleImg img{
   border-radius: 50px;
 }
+
+.goodbye{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
