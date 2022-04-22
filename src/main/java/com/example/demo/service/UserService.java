@@ -130,6 +130,10 @@ public class UserService {
         return true;
     }
 
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
     //암호화 함수
     public String passwordEncoding(String password){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
