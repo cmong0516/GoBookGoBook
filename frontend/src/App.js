@@ -60,26 +60,24 @@ function App() {
             </a>
           </div>
           <div>
-            {userId
-            ? (
-                <div>
-                  <Link to="/">
-                    <span onClick={() => {
-                      localStorage.clear();
-                      setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                    }}
-                    >
-                      로그아웃
-                    </span>
-                  </Link>
-                  <span>|</span>
-                  <Link to="/mypage">
-                    <span>마이페이지&nbsp;</span>
-                  </Link>
-                </div>
-            ) 
-            : (
-              <div>
+            {
+              userId
+              ? (<div>
+                <Link to="/">
+                  <span onClick={() => {
+                    localStorage.clear();
+                    setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
+                  }}
+                  >
+                    로그아웃
+                  </span>
+                </Link>
+                <span>|</span>
+                <Link to="/mypage">
+                  <span>마이페이지&nbsp;</span>
+                </Link>
+                </div>)
+              : (<div>
                 <Link to="/login">
                   <span>로그인</span>
                 </Link>
@@ -87,8 +85,8 @@ function App() {
                 <Link to="/signin">
                   <span>회원가입</span>
                 </Link>
-              </div>
-            )}
+                </div>)
+            }
           </div>
         </div>
         <SearchBar
