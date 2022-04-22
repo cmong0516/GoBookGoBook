@@ -6,8 +6,20 @@ import {BookContext} from "./App.js";
 import RentButton from "./RentButton.js"
 import styled from 'styled-components';
 
+// 여기서 css 작업
+// shift + ~버튼 = ` ` (작은따옴표 아님!)
 let BookView = styled.div`
   text-align: left;
+  display : grid;
+
+  h1 {
+    color : pink;
+    margin-bottom: 0;
+  }
+`
+let 카테고리명 = styled.span`
+  text-weight: bold;
+  color: red;
 `
 
 function Detail() {
@@ -24,16 +36,21 @@ function Detail() {
   );
 }
 
+// 화면단 구성
 function DetailView(props) {
 
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
 
   return (
+    // html 코드
+    // 화면 레이아웃(구조)는 그리드 검색
+    // div태그(블럭요소, 위아래로 자동줄바꿈됨)랑 span태그(인라인요소) 차이 주의
     <BookView>
       <img src={book.coverLargeUrl} width="350rem" />
-      {book.categoryName}
+      <카테고리명>{book.categoryName}</카테고리명>
       <br />
+      태그나 괄호 없이 글자를 쓰면 그냥 화면에 출력<br/>
       카테고리 번호 : {
         book.categoryId
         ? book.categoryId
@@ -48,6 +65,8 @@ function DetailView(props) {
       <h1>{book.title}</h1>
       <br />
       작가 <b>{book.author}</b>
+      <br />
+      <br />
       <br />
       번역가 {book.translator}
       <br />
