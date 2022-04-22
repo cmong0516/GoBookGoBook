@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import "./App.css";
 import {BookContext} from "./App.js";
 import RentButton from "./RentButton.js"
@@ -60,7 +60,7 @@ function DetailView(props) {
       {book.description}
       <br />
       <RentButton book={book} />
-      <Button variant="info" size="lg">뒤로가기</Button>
+      {/* <Button variant="info" size="lg">뒤로가기</Button> */}
     </BookView>
   );
 }

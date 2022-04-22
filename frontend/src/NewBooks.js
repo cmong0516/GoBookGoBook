@@ -17,8 +17,7 @@ function NewBooks() {
   let setBooks = useContext(SetBookContext);
 
   useEffect(() => {
-    axios
-      .post("/api/newbook")
+    axios.post("/api/newbook")
       .then((res) => {
         setBooks(res.data);
       })
