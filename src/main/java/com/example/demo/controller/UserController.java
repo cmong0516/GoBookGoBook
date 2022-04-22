@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -45,5 +47,10 @@ public class UserController {
 //        System.out.println("id = " + id); //확인
         rentService.deleteRent(user.getUserId());
         return userService.deleteUser(user.getUserId());
+    }
+
+    @GetMapping("/test")
+    public List<User> findAll(){
+        return userService.findAll();
     }
 }
