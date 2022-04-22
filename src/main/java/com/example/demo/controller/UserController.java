@@ -49,7 +49,7 @@ public class UserController {
         return userService.deleteUser(user.getUserId());
     }
 
-    @GetMapping("/test")
+    @PostMapping("/all")
     public List<User> findAll(){
         return userService.findAll();
     }
