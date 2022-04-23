@@ -83,10 +83,10 @@ function AllUser(props) {
         </thead>
         <tbody>
           <tr>
-            <td>props.users[0].id</td>
-            <td>props.users[0].userId</td>
-            <td>props.users[0].userName</td>
-            <td>props.users[0].userEmail</td>
+            <td>{props.users[0].id}</td>
+            <td>{props.users[0].userId}</td>
+            <td>{props.users[0].userName}</td>
+            <td>{props.users[0].userEmail}</td>
             <td>
               <Button variant="outline-info" size="sm">초기화</Button>
             </td>

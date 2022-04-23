@@ -1,10 +1,12 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Review;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class ReviewRepositoryImpl implements ReviewRepository{
 
     private final EntityManager em;

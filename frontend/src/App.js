@@ -135,8 +135,9 @@ function App() {
             </BookContext.Provider>
           </Route>
 
-          <Route path="/api/search?query=:searchWord">
+          <Route path="/api/search">
             <Search searchWord={searchWord} />
+            {/* <Search  /> */}
           </Route>
 
           <Route path="/login">
