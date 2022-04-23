@@ -30,7 +30,6 @@ function SearchBar(props) {
                     onClick={()=>{ 
                         props.searchWordChange(word); 
                         history.push('/api/search?query=' + word) }}>검색</Button>
-            {props.searchWord}
             </InputGroup>
             
         </div>
