@@ -35,4 +35,10 @@ public class UserRepository {
     public void delete(User user) {
         em.remove(user);
     }
+
+    //회원조회
+    public List<User> findAll(){
+        return em.createQuery("select u from User u", User.class)
+                .getResultList();
+    }
 }

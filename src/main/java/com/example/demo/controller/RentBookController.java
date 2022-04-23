@@ -35,6 +35,7 @@ public class RentBookController {
     }
 
     @PostMapping("/infoall")
+    @ResponseBody
     public List<Rent> rentBooksAll() {
         return rentService.findAll();
     }
