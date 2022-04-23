@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import RentButton from "./RentButton.js"
 
 function Search(props) {
 
     let [result, setResult] = useState();
-    let searchWord = props.searchWord;
+    // let searchWord = props.searchWord;
     let userId = localStorage.getItem('userId');
+    
+    let {searchWord} = useParams();
 
     // searchWord는 useParams로 사용가능?
+    // https://velog.io/@wiostz98kr/TIL51-l-React-Router-3%ED%83%84
     useEffect(() => {
         axios.get('/api/search', {params : {query : searchWord}})
         .then(res => {

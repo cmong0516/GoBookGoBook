@@ -129,7 +129,7 @@ function App() {
             </BookContext.Provider>
           </Route>
 
-          <Route path="/api/search">
+          <Route path="/api/search?query=:searchWord">
             <Search searchWord={searchWord} />
           </Route>
 
