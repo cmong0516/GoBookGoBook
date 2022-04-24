@@ -62,9 +62,14 @@ function AllUser() {
                     </Button>
                   </td>
                   <td>
-                    <Button variant="outline-danger" size="sm" onClick={() => deleteUser(user)}>
-                      회원삭제
-                    </Button>
+                    {
+                      user.userId == 'admin0'
+                        ? null
+                        : <Button variant="outline-danger" size="sm" onClick={() => deleteUser(user)}>
+                          회원삭제
+                        </Button>
+                    }
+               
                   </td>
                 </tr>
               ))}
