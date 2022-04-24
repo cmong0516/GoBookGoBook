@@ -113,7 +113,7 @@ public class UserService {
     //회원 삭제
     @Transactional
     public boolean deleteUser(String id){
-        System.out.println("id = " + id);
+//        System.out.println("id = " + id);
         List<User> byId = userRepository.findById(id);
         System.out.println("byId = " + byId);
 
