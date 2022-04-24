@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import axios from 'axios';
 import Book from './Book.js'
-import {BookContext, SetBookContext} from "./App.js";
+import {BookContext, SetBookContext} from "../App.js";
 
 export let BestSellerContext = React.createContext();
 

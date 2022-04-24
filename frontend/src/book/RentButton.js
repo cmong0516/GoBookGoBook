@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import "./App.css";
+import "../App.css";
 import axios from "axios";
 
 function RentButton(props) {
@@ -43,8 +43,6 @@ function RentButton(props) {
         } else {
           booksNum >= 5 ? setRentStatus("forbidden") : setRentStatus("rent");
         }
-
-        console.log("여기까지 왔니?");
       })
       .catch((error) => {
         alert("빌린도서 리스트를 받아오는 데 실패했습니다.");

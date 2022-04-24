@@ -2,8 +2,8 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 // import { Button } from "react-bootstrap";
-import "./App.css";
-import {BookContext} from "./App.js";
+import "../App.css";
+import {BookContext} from "../App.js";
 import RentButton from "./RentButton.js"
 import styled from 'styled-components';
 

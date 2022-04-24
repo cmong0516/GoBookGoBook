@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import MyRent from "./MyRent";
+import MyRent from "./MyRent.js";
 import MyInfo from "./MyInfo.js"
 import { Col, Row, ListGroup } from "react-bootstrap";
 import styled from 'styled-components';
@@ -28,11 +28,6 @@ function Mypage() {
   // 로그인하지 않은 경우 url입력 시 출입불가
   let history = useHistory();
   let userId = localStorage.getItem('userId');
-
-  // if (!userId) {
-  //   alert('로그인 후 이용할 수 있습니다.');
-  //   return history.push("/login");
-  // }
 
   return (
     <Row>

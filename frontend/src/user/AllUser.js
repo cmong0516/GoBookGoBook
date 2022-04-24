@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 function AllUser() {
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import Book from "./Book.js";
 import { Nav, Col } from "react-bootstrap";
 import styled from "styled-components";
-import {BookContext, SetBookContext} from "./App.js";
+import {BookContext, SetBookContext} from "../App.js";
 
 export let NewBooksContext = React.createContext();
 
