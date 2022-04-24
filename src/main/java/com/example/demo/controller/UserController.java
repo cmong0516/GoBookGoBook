@@ -33,7 +33,6 @@ public class UserController {
         return userService.loginUser(user);
     }
 
-    //마이페이지
     @PutMapping("/mypage")
     public User update(@RequestBody User user){
 
@@ -43,7 +42,6 @@ public class UserController {
 
     }
 
-    //탈퇴
     @DeleteMapping("/delete")
     public boolean delete(@RequestBody User user){
 //        System.out.println("id = " + id); //확인
@@ -51,8 +49,7 @@ public class UserController {
         return userService.deleteUser(user.getUserId());
     }
 
-    //관리자: 회원 조회
-    @GetMapping("/test")
+    @PostMapping("/all")
     public List<User> findAll(){
         return userService.findAll();
     }

@@ -7,10 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping( "/rent")
 public class RentBookController {
     private final RentService rentService;
@@ -20,14 +21,12 @@ public class RentBookController {
     }
 
     @PostMapping("/add")
-    @ResponseBody
     public RentBook rentBookAdd(@RequestBody RentBook rentBook) {
         rentService.insertRent(rentBook);
         return rentBook;
     }
 
     @PostMapping("/info")
-    @ResponseBody
     public List<Rent> rentBookInfo(@RequestBody Rent rent) {
         String userId = rent.getUserId();
         List<Rent> rentlist = rentService.findByUserId(userId);
@@ -37,10 +36,10 @@ public class RentBookController {
     @PostMapping("/infoall")
     public List<Rent> rentBooksAll() {
         return rentService.findAll();
+
     }
 
     @PostMapping("/return")
-    @ResponseBody
     public Rent rentBookReturn(@RequestBody Rent rent) {
         return rentService.returnBook(rent.getRentId());
     }

@@ -131,7 +131,8 @@ public class UserService {
     }
 
     public List<User> findAll(){
-        return userRepository.findAll();
+        List<User> all = userRepository.findAll();
+        return all;
     }
 
     //암호화 함수

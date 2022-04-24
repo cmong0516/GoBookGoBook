@@ -12,6 +12,8 @@ import Signin from "./Signin.js";
 import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
 import Goodbye from "./Goodbye.js";
+import Admin from "./Admin.js";
+// import axios from "axios";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -47,7 +49,6 @@ function App() {
   // useEffect(() => {
   //   localStorage.setItem('userId', null);
   // },[isLogin]);
-
   return (
     <div className="App">
       {/* <GlobalStyle/> */}
@@ -62,30 +63,48 @@ function App() {
           <div>
             {
               userId
-              ? (<div>
-                <Link to="/">
-                  <span onClick={() => {
-                    localStorage.clear();
-                    setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                  }}
-                  >
-                    로그아웃
-                  </span>
-                </Link>
-                <span>|</span>
-                <Link to="/mypage">
-                  <span>마이페이지&nbsp;</span>
-                </Link>
-                </div>)
-              : (<div>
-                <Link to="/login">
-                  <span>로그인</span>
-                </Link>
-                <span>|</span>
-                <Link to="/signin">
-                  <span>회원가입</span>
-                </Link>
-                </div>)
+                ? (
+                  <div>
+                    <Link to="/">
+                      <span
+                        onClick={() => {
+                          localStorage.clear();
+                          setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
+                        }}
+                      >
+                        로그아웃
+                      </span>
+                    </Link>
+                    <span>|</span>
+                    <Link to="/mypage">
+                      <span>마이페이지&nbsp;</span>
+                    </Link>
+                    <span>|</span>
+                    <Link to="/admin">
+                      <span>Admin</span>
+                    </Link>
+                    {/* {
+                      userId == 'admin0'
+                      ? (<Link to="/admin">
+                        <span>관리자페이지</span>
+                        </Link>)
+                      : (<Link to="/mypage">
+                        <span>마이페이지&nbsp;</span>
+                        </Link>)
+                    } */}
+                  </div>
+                )
+                : (
+                  <div>
+                    <Link to="/login">
+                      <span>로그인</span>
+                    </Link>
+                    <span>|</span>
+                    <Link to="/signin">
+                      <span>회원가입</span>
+                    </Link>
+                  </div>
+                )
             }
           </div>
         </div>
@@ -131,6 +150,7 @@ function App() {
 
           <Route path="/api/search">
             <Search searchWord={searchWord} />
+            {/* <Search  /> */}
           </Route>
 
           <Route path="/login">
@@ -140,10 +160,13 @@ function App() {
             <Signin />
           </Route>
           <Route path="/goodbye">
-            <Goodbye setIsLogin={setIsLogin}/>
+            <Goodbye setIsLogin={setIsLogin} />
           </Route>
           <Route path="/mypage">
             <Mypage />
+          </Route>
+          <Route path="/admin">
+            <Admin />
           </Route>
         </Wrapper>
       </Switch>
