@@ -12,37 +12,39 @@ function AllRent() {
       .then((res) => {
         console.log(res);
         setRent(res.data);
+
+
       })
       .catch((error) => {
         console.log(error);
       });
   }, [stateCheck]);
 
-  let rentFunc = (rent) => {
+  // let rentFunc = (rent) => {
 
-    axios.post("/rent/add", {
-        author: rent.author,
-        categoryName: rent.categoryName,
-        coverLargeUrl: rent.coverLargeUrl,
-        coverSmallUrl: rent.coverSmallUrl,
-        customerReviewRank: rent.customerReviewRank,
-        description: rent.description,
-        isbn: rent.isbn,
-        pubDate: rent.pubDate,
-        publisher: rent.publisher,
-        rank: rent.rank,
-        title: rent.title,
-        userId: rent.userId
-      })
-      .then((res) => {
-        alert("대여 성공!");
-        setStateCheck(!stateCheck);
-      })
-      .catch((error) => {
-          alert("대여 통신에 실패했습니다.");
-          console.log(error);
-      });
-  };
+  //   axios.post("/rent/add", {
+  //       author: rent.author,
+  //       categoryName: rent.categoryName,
+  //       coverLargeUrl: rent.coverLargeUrl,
+  //       coverSmallUrl: rent.coverSmallUrl,
+  //       customerReviewRank: rent.customerReviewRank,
+  //       description: rent.description,
+  //       isbn: rent.isbn,
+  //       pubDate: rent.pubDate,
+  //       publisher: rent.publisher,
+  //       rank: rent.rank,
+  //       title: rent.title,
+  //       userId: rent.userId
+  //     })
+  //     .then((res) => {
+  //       alert("대여 성공!");
+  //       setStateCheck(!stateCheck);
+  //     })
+  //     .catch((error) => {
+  //         alert("대여 통신에 실패했습니다.");
+  //         console.log(error);
+  //     });
+  // };
 
   let returnFunc = (rentId) => {
 
@@ -87,9 +89,10 @@ function AllRent() {
                     ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
                       반납하기
                     </Button>
-                    : <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
-                      대여하기
-                    </Button>
+                    : null
+                    //   <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
+                    //   대여하기
+                    // </Button>
                 }
               </td>
             </tr>
