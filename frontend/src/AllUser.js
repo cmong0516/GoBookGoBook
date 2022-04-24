@@ -20,9 +20,9 @@ function AllUser() {
     let deleteUser = (user) => {
 
       if(window.confirm(user.userName +'님을 탈퇴시키시겠습니까?')) {
-        axios.delete("/delete", {data: {
-          userId: user.id
-          }})
+        axios.delete("/delete", {
+            data: { userId: user.userId }
+          },)
           .then((res) => {
             alert(user.userName + '님이 성공적으로 탈퇴되었습니다.');
           })
