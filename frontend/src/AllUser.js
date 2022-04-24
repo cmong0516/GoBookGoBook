@@ -9,13 +9,12 @@ function AllUser() {
     useEffect(() => {
       axios.post("/all")
         .then((res) => {
-          console.log(res.data);
           setUsers(res.data);
         })
         .catch((error) => {
           console.log(error);
         });
-    }, [users]);
+    }, []);
 
     let deleteUser = (user) => {
 

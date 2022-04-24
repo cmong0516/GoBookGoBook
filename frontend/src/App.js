@@ -75,22 +75,15 @@ function App() {
                     </span>
                   </Link>
                   <span>|</span>
-                  <Link to="/mypage">
-                    <span>마이페이지&nbsp;</span>
-                  </Link>
-                  <span>|</span>
-                  <Link to="/admin">
-                    <span>Admin</span>
-                  </Link>
-                  {/* {
+                  {
                     userId == 'admin0'
-                    ? (<Link to="/admin">
-                      <span>관리자페이지</span>
-                      </Link>)
-                    : (<Link to="/mypage">
-                      <span>마이페이지&nbsp;</span>
-                      </Link>)
-                  } */}
+                      ? <Link to="/admin">
+                        <span>관리자페이지</span>
+                      </Link>
+                      : <Link to="/mypage">
+                        <span>마이페이지&nbsp;</span>
+                      </Link>
+                  }
                 </div>
                 : <div>
                   <Link to="/login">

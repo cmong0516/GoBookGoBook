@@ -99,20 +99,20 @@ function Signin() {
                     userName: account.userName,
                     userEmail: account.userEmail
                 })
-            .then(res => {
-                if (res.data) {
-                    alert('회원가입이 완료되었습니다😇');
-                    history.push("/login");
-                } else {
-                    console.log(res.data.code)
-                    alert('이미 가입된 정보입니다😰');
-                    history.push("/login");
-                }
-            })
-            .catch(error => {
-                alert('통신실패! 에러명 : ' + error);
-                console.log(error);
-            });
+                .then(res => {
+                    if (res.data) {
+                        alert('회원가입이 완료되었습니다😇');
+                        history.push("/login");
+                    } else {
+                        console.log(res.data.code)
+                        alert('이미 가입된 정보입니다😰');
+                        history.push("/login");
+                    }
+                })
+                .catch(error => {
+                    alert('통신실패! 에러명 : ' + error);
+                    console.log(error);
+                });
         }
 
     }

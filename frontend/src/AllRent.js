@@ -74,7 +74,7 @@ function AllRent() {
           </tr>
         </thead>
         <tbody>
-          {rent && rent.map((rent, i) => (
+          {rent && rent.slice(0).reverse().map((rent, i) => (
             <tr>
               <td>{rent.rentId}</td>
               <td>{rent.userId}</td>
