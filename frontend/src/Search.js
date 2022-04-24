@@ -21,6 +21,7 @@ function Search(props) {
       });
   }, [searchWord]);
 
+<<<<<<< HEAD
   return (
     <div>
       {/* 검색결과가 없는 경우도 처리해야함 */}
@@ -62,6 +63,42 @@ function Search(props) {
       </Row>
       {/* 여기까지 html */}
       {/* books state를 만들어 버튼에 넣으면 이미 books값을 가져오기 전에 RentButton으로 넘어가버려서 undefined가 출력되는 것으로 추정
+=======
+    return (
+        <div>
+            {/* 검색결과가 없는 경우도 처리해야함 */}
+            {result && result.map((book, i) => (
+                // 여기부터 html 
+                
+                <div key={book.itemId}>
+                    <img src={book.thumbnail}/>
+                    <h2>{book.title}</h2><br/>
+                    여기가 줄거리 : {book.contents}<br/>
+                    {book.authors}/{book.publisher}/{book.dateTime}/{book.translator}/{book.isbn}
+                   
+                    {
+                        userId != 'admin0'
+                        ?   <RentButton book={{
+                                author: book.authors,
+                                categoryName: book.categoryName,
+                                coverLargeUrl: book.coverLargeUrl,
+                                coverSmallUrl: book.thumbnail,
+                                customerReviewRank: book.customerReviewRank,
+                                description: book.contents,
+                                isbn: book.isbn,
+                                pubDate: book.dateTime,
+                                publisher: book.publisher,
+                                rank: book.rank,
+                                title: book.title,
+                                userId: userId
+                            }} />
+                        : null
+                    }
+                   
+                    {/* 여기까지 html */}
+                     
+                    {/* books state를 만들어 버튼에 넣으면 이미 books값을 가져오기 전에 RentButton으로 넘어가버려서 undefined가 출력되는 것으로 추정
+>>>>>>> 2c2a4b194fe399cfa0fc8f0e36b621c923ba26fc
                     {() => setBooks({
                         author: book.authors,
                         categoryName: book.categoryName,

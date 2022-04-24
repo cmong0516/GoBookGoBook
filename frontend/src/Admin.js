@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Col, Row, ListGroup, Button, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Col, Row, ListGroup } from "react-bootstrap";
 import styled from "styled-components";
-import axios from "axios";
+import AllUser from "./AllUser.js"
+import AllRent from "./AllRent.js"
 
 let MyMenu = styled.div`
   h4 {
@@ -45,6 +46,7 @@ function Admin() {
 }
 
 export default Admin;
+<<<<<<< HEAD
 
 function AllUser() {
   let [users, setUsers] = useState([]);
@@ -154,3 +156,5 @@ function AllRent() {
     </div>
   );
 }
+=======
+>>>>>>> 2c2a4b194fe399cfa0fc8f0e36b621c923ba26fc

@@ -42,6 +42,7 @@ function DetailView(props) {
 
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
+  let userId = localStorage.getItem("userId");
 
   return (
     // html 코드
@@ -79,8 +80,11 @@ function DetailView(props) {
       <br />
       {book.description}
       <br />
-      <RentButton book={book} />
-      {/* <Button variant="info" size="lg">뒤로가기</Button> */}
+      {
+        userId != 'admin0'
+        ? <RentButton book={book} />
+        : null
+      }
     </BookView>
   );
 }
