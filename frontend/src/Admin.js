@@ -46,21 +46,20 @@ function Admin() {
 
 export default Admin;
 
-function AllUser(props) {
+function AllUser() {
   let [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
       .post("/all")
       .then((res) => {
-        console.log(res.data);
-        setUsers(res.data);
+        res && setUsers(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  console.log(users);
+
   return (
     <div>
       <h3>전체 회원관리</h3>
@@ -77,12 +76,12 @@ function AllUser(props) {
         </thead>
         <tbody>
           {users &&
-            users.map((user, i) => (
+            users.map((user, index) => (
               <tr>
-                <td>{user.id}</td>
-                <td>{user.userId}</td>
-                <td>{user.userName}</td>
-                <td>{user.userEmail}</td>
+                <td>{user?.id}</td>
+                <td>{user?.userId}</td>
+                <td>{user?.userName}</td>
+                <td>{user?.userEmail}</td>
                 <td>
                   <Button variant="outline-info" size="sm">
                     초기화
@@ -101,14 +100,13 @@ function AllUser(props) {
   );
 }
 
-function AllRent(props) {
+function AllRent() {
   let [rent, setRent] = useState([]);
   useEffect(() => {
     axios
       .post("/rent/infoall")
       .then((res) => {
-        console.log(res);
-        setRent(res.data);
+        res && setRent(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -131,13 +129,13 @@ function AllRent(props) {
         </thead>
         <tbody>
           {rent &&
-            rent.map((rent, i) => (
+            rent.map((rent) => (
               <tr>
-                <td>{rent.rentId}</td>
-                <td>{rent.userId}</td>
-                <td>{rent.title}</td>
-                <td>{rent.rentDate}</td>
-                <td>{rent.state == true ? "대여중" : "반납완료"}</td>
+                <td>{rent?.rentId}</td>
+                <td>{rent?.userId}</td>
+                <td>{rent?.title}</td>
+                <td>{rent?.rentDate}</td>
+                <td>{rent?.state == true ? "대여중" : "반납완료"}</td>
                 <td>
                   {rent.state == true ? (
                     <Button variant="outline-info" size="sm">

@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
 import Goodbye from "./Goodbye.js";
 import Admin from "./Admin.js";
+// import axios from "axios";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -48,7 +49,6 @@ function App() {
   // useEffect(() => {
   //   localStorage.setItem('userId', null);
   // },[isLogin]);
-
   return (
     <div className="App">
       {/* <GlobalStyle/> */}
