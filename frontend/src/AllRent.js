@@ -5,7 +5,7 @@ import axios from "axios";
 function AllRent() {
 
   let [rent, setRent] = useState([]);
-  let [returnCheck, setReturnCheck] = useState(false);
+  let [stateCheck, setStateCheck] = useState(false);
 
   useEffect(() => {
     axios.post("/rent/infoall")
@@ -16,7 +16,7 @@ function AllRent() {
       .catch((error) => {
         console.log(error);
       });
-  }, [returnCheck]);
+  }, [stateCheck]);
 
   let rentFunc = (rent) => {
 
@@ -35,8 +35,8 @@ function AllRent() {
         userId: rent.userId
       })
       .then((res) => {
-          alert("대여 성공!");
-          setReturnCheck(!returnCheck);
+        alert("대여 성공!");
+        setStateCheck(!stateCheck);
       })
       .catch((error) => {
           alert("대여 통신에 실패했습니다.");
@@ -51,7 +51,7 @@ function AllRent() {
     })
     .then((res) => {
       alert("반납하셨습니다.");
-      setReturnCheck(!returnCheck);
+      setStateCheck(!stateCheck);
     })
     .catch((error) => {
       alert("반납 서버와의 통신에 실패했습니다.")
