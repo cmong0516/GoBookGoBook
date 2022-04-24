@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
 import Goodbye from "./Goodbye.js";
 import Admin from "./Admin.js";
+import Footer from "./Footer.js";
 
 // import axios from "axios";
 
@@ -137,12 +138,9 @@ function App() {
               <Detail />
             </BookContext.Provider>
           </Route>
-
           <Route path="/api/search">
             <Search searchWord={searchWord} />
-            {/* <Search  /> */}
           </Route>
-
           <Route path="/login">
             <Login setIsLogin={setIsLogin} />
           </Route>
@@ -160,6 +158,8 @@ function App() {
           </Route>
         </Wrapper>
       </Switch>
+
+      <Footer />
     </div>
   );
 }

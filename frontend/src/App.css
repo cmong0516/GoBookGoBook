@@ -29,7 +29,7 @@ a{
   display: flex;
   width: 100px;
   justify-content: center;
-  color:lightsteelblue
+  color:lightsteelblue;
 }
 
 .titleImg{
