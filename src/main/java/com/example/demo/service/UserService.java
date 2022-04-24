@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -14,6 +15,22 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
+
+    @Transactional
+    @PostConstruct
+    public void init(){
+        User user = new User();
+        user.setUserId("admin0");
+        user.setUserPw(passwordEncoding("sorkrhksflwkek0!"));
+        user.setUserEmail("admin0@gmail.com");
+        user.setUserName("관리자");
+        user.setEnabled(true);
+//        System.out.println("user = " + user);
+        if(userRepository.findById("admin0").isEmpty()){
+            userRepository.save(user);
+        }
+    }
+
 
     @Transactional //변경되는 값이라?
     public boolean joinUser(User user){
@@ -113,7 +130,7 @@ public class UserService {
     //회원 삭제
     @Transactional
     public boolean deleteUser(String id){
-        System.out.println("id = " + id);
+//        System.out.println("id = " + id);
         List<User> byId = userRepository.findById(id);
         System.out.println("byId = " + byId);
 

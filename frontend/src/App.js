@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar";
 import Mypage from "./Mypage.js";
 import Goodbye from "./Goodbye.js";
 import Admin from "./Admin.js";
+
 // import axios from "axios";
 
 // const GlobalStyle  =  createGlobalStyle`

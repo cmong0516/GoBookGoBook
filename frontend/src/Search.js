@@ -25,7 +25,7 @@ function Search(props) {
   }, [searchWord, stateCheck]);
 
   return (
-    <div>
+    <div className="searchPage">
       {/* 검색결과가 없는 경우도 처리해야함 */}
       <Row xs={1} md={4} className="g-4">
         {result &&
@@ -35,7 +35,11 @@ function Search(props) {
                 <Badge bg="primary" className="searchindex">
                   {i + 1}
                 </Badge>
-                <Card.Img variant="top" src={book.thumbnail} />
+                <Card.Img
+                  variant="top"
+                  src={book.thumbnail}
+                  className="cardImg"
+                />
                 <Card.Body>
                   <Card.Title>{book.title.substr(0, 15)}...</Card.Title>
                   <Card.Text>{book.authors}</Card.Text>
