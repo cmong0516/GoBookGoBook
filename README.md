@@ -6,3 +6,6 @@ Front - frontend 디렉토리 VScode 로 오픈후 작업하시면 됩니다.
 
 Back - build.gradle 로 여시고 작업하시면 됩니다.
 
+관리자
+id: admin0
+pw: sorkrhksflwkek0!

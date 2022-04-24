@@ -10,6 +10,9 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		/*SpringApplication app = new SpringApplication( DemoApplication.class);
+		app.addListeners( new SampleListener());
+		app.run(args);*/
 	}
 
 }
