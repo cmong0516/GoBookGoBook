@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import MyRent from "./MyRent";
 import MyInfo from "./MyInfo.js"
 import { Col, Row, ListGroup } from "react-bootstrap";
@@ -24,8 +25,22 @@ function Mypage() {
   
   let [menu, setMenu] = useState(0);
 
+  // 로그인하지 않은 경우 url입력 시 출입불가
+  let history = useHistory();
+  let userId = localStorage.getItem('userId');
+
+  // if (!userId) {
+  //   alert('로그인 후 이용할 수 있습니다.');
+  //   return history.push("/login");
+  // }
+
   return (
     <Row>
+      {
+        !userId
+          ? history.push("/login")
+          : null
+      }
       <Col sm={3}>
       <MyMenu>
           <h4>마이페이지</h4>

@@ -9,7 +9,6 @@
   font-family: 'Pretendard-Medium';
 }
 
-
 a:hover{
   color: black;
   text-decoration: none;
@@ -54,4 +53,12 @@ table {
 }
 table td {
   width: 100px;
+}
+
+.cardImg{
+  height: 33vh;
+}
+
+.searchPage{
+  margin-bottom: 20px;
 }
