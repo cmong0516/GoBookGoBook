@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Nav, Navbar, Container, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
 import { Link, Route, Switch } from "react-router-dom";
@@ -55,56 +55,52 @@ function App() {
       <UserStyle>
         <div className="nav">
           <div className="titleImg">
-            <a href="/">
+            <Link to="/">
               {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" /> */}
-              <div>Go Book Go Book</div>
-            </a>
+              <span>Go Book Go Book</span>
+            </Link>
           </div>
           <div>
             {
               userId
-                ? (
-                  <div>
-                    <Link to="/">
-                      <span
-                        onClick={() => {
-                          localStorage.clear();
-                          setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                        }}
-                      >
-                        로그아웃
-                      </span>
-                    </Link>
-                    <span>|</span>
-                    <Link to="/mypage">
+                ? <div>
+                  <Link to="/">
+                    <span
+                      onClick={() => {
+                        localStorage.clear();
+                        setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
+                      }}
+                    >
+                      로그아웃
+                    </span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/mypage">
+                    <span>마이페이지&nbsp;</span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/admin">
+                    <span>Admin</span>
+                  </Link>
+                  {/* {
+                    userId == 'admin0'
+                    ? (<Link to="/admin">
+                      <span>관리자페이지</span>
+                      </Link>)
+                    : (<Link to="/mypage">
                       <span>마이페이지&nbsp;</span>
-                    </Link>
-                    <span>|</span>
-                    <Link to="/admin">
-                      <span>Admin</span>
-                    </Link>
-                    {/* {
-                      userId == 'admin0'
-                      ? (<Link to="/admin">
-                        <span>관리자페이지</span>
-                        </Link>)
-                      : (<Link to="/mypage">
-                        <span>마이페이지&nbsp;</span>
-                        </Link>)
-                    } */}
-                  </div>
-                )
-                : (
-                  <div>
-                    <Link to="/login">
-                      <span>로그인</span>
-                    </Link>
-                    <span>|</span>
-                    <Link to="/signin">
-                      <span>회원가입</span>
-                    </Link>
-                  </div>
-                )
+                      </Link>)
+                  } */}
+                </div>
+                : <div>
+                  <Link to="/login">
+                    <span>로그인</span>
+                  </Link>
+                  <span>|</span>
+                  <Link to="/signin">
+                    <span>회원가입</span>
+                  </Link>
+                </div>
             }
           </div>
         </div>
