@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./App.css";
@@ -12,16 +12,18 @@ function RentButton(props) {
     let history = useHistory();
     let [rentStatus, setRentStatus] = useState("rent");
     let [myBook, setMyBook] = useState();
-    let [booksNum, setBooksNum] = useState(0);
 
-    // 이미 빌린 책인지 체크
     useEffect(() => {
         axios.post( "/rent/info", {userId: userId} )
             .then((res) => {
 
+                let booksNum = 0;
+                console.log("------")
+
                 res.data.map((mybooks) => {
                     if (mybooks.state == true) {
-                        setBooksNum(++booksNum)
+                        booksNum++;
+                        console.log(booksNum);
                     }
                 })
 
@@ -30,8 +32,6 @@ function RentButton(props) {
                     .filter((x) => x.title == props.book.title)
                     .filter((x) => x.state == true) );
 
-                // 빌렸던 DB테이블에 도서명이 있고
-                // 그중에서 state가 true인 것만 반납하기 버튼 보이기
                 // 해당하지 않는 값은 null인줄 알았으나 콘솔찍어보니 빈배열이어서 .length로 빈배열판단
                 if ( res.data
                     .filter(x => x.title == props.book.title)
@@ -45,19 +45,18 @@ function RentButton(props) {
                         ? setRentStatus("forbidden")
                         : setRentStatus("rent")
                 }
+                
+                console.log("여기까지 왔니?")
             })
             .catch((error) => {
                 alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
                 console.log(error);
             });
-    }, []);
+    }, [props.stateCheck]);
 
     // function으로 따로 빼기
     let rentFunc = () => {
 
-        // 리렌더링되면 isLogin도 false로 초기화
-        // 이미 로그인상태인데 if(!isLogin)에 걸려버리는 이슈
-        // 로컬스토리지 이용 필요하므로 여기서는 userId를 통해 확인
         if(!userId) {
             alert('로그인 후 이용할 수 있습니다.');
             return history.push("/login");
@@ -79,7 +78,7 @@ function RentButton(props) {
                 userId: userId
             })
             .then((res) => {
-                setRentStatus("return")
+                props.setStateCheck(!props.stateCheck);
                 alert("대여 성공!");
             })
             .catch((error) => {
@@ -95,8 +94,8 @@ function RentButton(props) {
             rentId : myBook[0].rentId
         })
             .then((res) => {
-                setRentStatus("rent");
                 alert("반납하셨습니다.");
+                props.setStateCheck(!props.stateCheck);
             })
             .catch((error) => {
                 alert("반납 서버와의 통신에 실패했습니다.")

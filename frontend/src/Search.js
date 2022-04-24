@@ -5,6 +5,8 @@ import { Row, Col, Card, Badge } from "react-bootstrap";
 
 function Search(props) {
   let [result, setResult] = useState();
+  // 대여상태에 따른 전체 책 하나하나의 버튼상태 업데이트를 위한 state
+  let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
   let userId = localStorage.getItem("userId");
 
@@ -19,7 +21,7 @@ function Search(props) {
         alert("검색결과 데이터를 받아오는 데 실패했습니다.");
         console.log(error);
       });
-  }, [searchWord]);
+  }, [searchWord, stateCheck]);
 
   return (
     <div>
@@ -56,6 +58,8 @@ function Search(props) {
                     title: book.title,
                     userId: userId,
                   }}
+                  stateCheck={stateCheck}
+                  setStateCheck={setStateCheck}
                 />
               ) : null}
             </Col>
