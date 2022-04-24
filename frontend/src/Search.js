@@ -11,11 +11,12 @@ function Search(props) {
   let userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios
-      .get("/api/search", { params: { query: searchWord } })
+    axios.get("/api/search", { params: { query: searchWord } })
       .then((res) => {
         setResult(res.data);
-        console.log(res.data);
+        if (res.data.length == 0) {
+          alert("검색결과가 없습니다🤔");
+        }
       })
       .catch((error) => {
         alert("검색결과 데이터를 받아오는 데 실패했습니다.");
