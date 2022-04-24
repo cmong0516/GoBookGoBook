@@ -82,14 +82,15 @@ function AllRent(props) {
               <td>{rent.rentDate}</td>
               <td>{rent.state == true ? "대여중" : "반납완료"}</td>
               <td>
-                {rent.state == true 
-                ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
-                    반납하기
-                  </Button>
-                : <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
-                    대여하기
-                  </Button>
-                  }
+                {
+                  rent.state == true 
+                  ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
+                      반납하기
+                    </Button>
+                  : <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
+                      대여하기
+                    </Button>
+                }
               </td>
             </tr>
           ))}

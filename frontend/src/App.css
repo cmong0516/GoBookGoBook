@@ -54,17 +54,4 @@ table {
 }
 table td {
   width: 100px;
-  background: #ccc;
-}
-
-.searchindex{
-  text-align: left;
-}
-
-.searchcard{
-  opacity: 0.6;
-}
-
-.searchcard:hover{
-  opacity: 1;
 }

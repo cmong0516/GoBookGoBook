@@ -49,7 +49,7 @@ function MyRentBooks(props) {
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text>대여일 : {book.rentDate}</Card.Text>
-                {/* <Card.Text>반납예정일 : {dueDate(book.rentDate)}</Card.Text> */}
+                <Card.Text>반납예정일 : {dueDate(book.rentDate)}</Card.Text>
                 {
                   book.state == true 
                   ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
@@ -67,9 +67,14 @@ function MyRentBooks(props) {
   
 }
 
-function dueDate(date) {
-  let newDate = new Date(date)
-  return new Date(newDate.setDate(newDate.getDate() + 7));
+function dueDate(rentDate) {
+
+  let date = new Date(rentDate);
+  date.setDate(date.getDate() + 7);
+
+  let duedate = date.getFullYear() + '-' + String(Number(date.getMonth()) + 1) + '-' + date.getDate();
+
+  return duedate;
 }
 
 // function returnFunc(rentId, props) {
