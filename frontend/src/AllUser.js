@@ -15,7 +15,7 @@ function AllUser() {
         .catch((error) => {
           console.log(error);
         });
-    }, []);
+    }, [users]);
 
     let deleteUser = (user) => {
 
@@ -41,12 +41,12 @@ function AllUser() {
         <Table hover>
           <thead>
             <tr>
-              <th>#</th>
-              <th>UserId</th>
-              <th>UserName</th>
-              <th>UserEmail</th>
+              <th>회원번호</th>
+              <th>아이디</th>
+              <th>이름</th>
+              <th>이메일</th>
               <th>비밀번호 변경</th>
-              <th>회원탈퇴</th>
+              <th>회원삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -64,7 +64,7 @@ function AllUser() {
                   </td>
                   <td>
                     <Button variant="outline-danger" size="sm" onClick={() => deleteUser(user)}>
-                      회원 탈퇴
+                      회원삭제
                     </Button>
                   </td>
                 </tr>

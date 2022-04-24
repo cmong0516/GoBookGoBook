@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
 
-function AllRent(props) {
+function AllRent() {
 
   let [rent, setRent] = useState([]);
   let [returnCheck, setReturnCheck] = useState(false);
@@ -65,12 +65,12 @@ function AllRent(props) {
       <Table hover>
         <thead>
           <tr>
-            <th>RentId</th>
-            <th>UserId</th>
-            <th>BookTitle</th>
-            <th>RentDate</th>
-            <th>반납상태</th>
-            <th>#</th>
+            <th>대여번호</th>
+            <th>아이디</th>
+            <th>도서명</th>
+            <th>대여일</th>
+            <th>대여상태</th>
+            <th>대여/반납</th>
           </tr>
         </thead>
         <tbody>
@@ -83,11 +83,11 @@ function AllRent(props) {
               <td>{rent.state == true ? "대여중" : "반납완료"}</td>
               <td>
                 {
-                  rent.state == true 
-                  ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
+                  rent.state == true
+                    ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
                       반납하기
                     </Button>
-                  : <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
+                    : <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
                       대여하기
                     </Button>
                 }
