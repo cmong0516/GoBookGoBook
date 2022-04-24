@@ -39,8 +39,9 @@ public class User {
     }
 
     public User() {
-
     }
+
+
     //상태엔터티 추가 예정
 
     /*Mapping 종류

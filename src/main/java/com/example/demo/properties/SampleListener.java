@@ -13,6 +13,6 @@ public class SampleListener implements ApplicationListener<ApplicationStartedEve
     public void onApplicationEvent(ApplicationStartedEvent event) {
         User user = new User("admin0","admin0!","관리자","admin0@gmail.com",true);
 //        System.out.println("user = " + user);
-        userRepository.save(user);
+//        userRepository.save(user);
     }
 }
