@@ -27,6 +27,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	//프로퍼티사용
+	//email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'

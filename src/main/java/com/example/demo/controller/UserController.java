@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.User;
+import com.example.demo.service.MailService;
 import com.example.demo.service.RentService;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RentService rentService;
+    @Autowired
+    private MailService mailService;
 
     //회원가입 로직
     @PostMapping("/signin")
@@ -59,5 +62,12 @@ public class UserController {
     @PostMapping("/findid")
     public String findId(@RequestBody User user){
         return userService.findId(user);
+    }
+
+    //비밀번호 찾기: 정상적으로 메일 전송 됐는지
+    @PostMapping("/findpw")
+    public boolean findPw(@RequestBody User user){
+
+        return mailService.sendMail(user);
     }
 }
