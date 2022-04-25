@@ -1,11 +1,14 @@
 package com.example.demo.repository;
 
+
 import com.example.demo.domain.Review;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class ReviewRepositoryImpl implements ReviewRepository{
 
@@ -44,7 +47,8 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 
     @Override
     public void deleteByReviewId(Long reviewId) {
-        List<Review> byReviewId = findByReviewId(reviewId);
-        em.remove(byReviewId);
+        Review review = em.find(Review.class, reviewId);
+        log.warn(String.valueOf(review));
+        em.remove(review);
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   ListGroup,
@@ -11,6 +11,20 @@ import {
 import axios from "axios";
 
 function Review(props) {
+  useEffect(() => {
+    axios
+      .post("/review/findbybook", {
+        isbn: book.isbn,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setFindReview(res.data);
+      })
+      .catch((error) => {
+        alert("리뷰 조회에 실패했습니다.");
+        console.log(error);
+      });
+  }, []);
   let [findReview, setFindReview] = useState([]);
   let book = props.book;
   let [review, setReview] = useState({
@@ -44,20 +58,16 @@ function Review(props) {
         console.log(error);
       });
   };
-
   let deleteReview = (review) => {
     axios
       .post("/review/delete", {
-        data: {
-          reviewId: review.reviewId,
-        },
+        reviewId: review.reviewId,
       })
       .then((res) => {
-        console.log(res.data);
-        setFindReview(res.data);
+        alert("리뷰가 삭제되었습니다.");
       })
       .catch((error) => {
-        alert("리뷰 조회에 실패했습니다.");
+        alert("리뷰 삭제에 실패했습니다.");
         console.log(error);
       });
   };
@@ -65,55 +75,84 @@ function Review(props) {
   return (
     <div>
       <Tabs
-        defaultActiveKey="reviewinfo"
+        defaultActiveKey="info"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
+        <Tab eventKey="info" title="책 정보">
+          <Card style={{ width: "25rem" }}>
+            <Card.Body>
+              <Card.Title>{book.title}</Card.Title>
+              <Card.Text>{book.description}</Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>카테고리 : {book.categoryName}</ListGroupItem>
+              <ListGroupItem>저자 : {book.author}</ListGroupItem>
+              <ListGroupItem>
+                출간일 : {book.pubDate.substr(0, 4)}년{" "}
+                {book.pubDate.substr(4, 2)}월 {book.pubDate.substr(6, 2)}일
+              </ListGroupItem>
+              <ListGroupItem>출판사 : {book.publisher}</ListGroupItem>
+              {book.customerReviewRank == 0 ? null : (
+                <ListGroupItem>평점 : {book.customerReviewRank}</ListGroupItem>
+              )}
+            </ListGroup>
+          </Card>
+        </Tab>
+
         <Tab eventKey="reviewinfo" title="리뷰보기">
-          {props.findReview &&
-            props.findReview.map((review, i) => (
+          <Card className="" style={{ width: "25rem" }}>
+            <Card.Body>
+              <Card.Title>첫번째 리뷰</Card.Title>
+              <Card.Text>첫번째 유저입니다 / 2022년 4월 25일</Card.Text>
+              <Card.Text></Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>재밌게 열심히 만들었습니다.</ListGroupItem>
+            </ListGroup>
+          </Card>
+          {findReview &&
+            findReview.map((review, i) => (
               <Card className="" style={{ width: "25rem" }}>
-                <form>
-                  <Card.Body>
-                    <Card.Title>{props.book.title}</Card.Title>
-                    <Card.Text>
-                      {props.review.userId} /{" "}
-                      {props.review.pubDate.substr(0, 4)}년
-                      {props.review.pubDate.substr(5, 2)}월
-                      {props.review.pubDate.substr(8, 2)}일
-                    </Card.Text>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroupItem>{review.content}</ListGroupItem>
-                  </ListGroup>
-                </form>
+                <Card.Body>
+                  <div className="closebutton">
+                    {userId == review.userId ? (
+                      <CloseButton onClick={() => deleteReview(review)} />
+                    ) : null}
+                  </div>
+                  <Card.Title>{book.title}</Card.Title>
+                  <Card.Text>
+                    {review.userId} / {review.pubDate.substr(0, 4)}년
+                    {review.pubDate.substr(5, 2)}월{review.pubDate.substr(8, 2)}
+                    일
+                  </Card.Text>
+                  <Card.Text></Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                  <ListGroupItem>{review.content}</ListGroupItem>
+                </ListGroup>
               </Card>
             ))}
         </Tab>
         <Tab eventKey="reviewadd" title="리뷰작성">
           <Card className="" style={{ width: "25rem" }}>
-            <form>
-              <Card.Body>
-                {userId == review.userId ? (
-                  <CloseButton onClick={() => deleteReview(review)} />
-                ) : null}
-                <Card.Title>{book.title}</Card.Title>
-                <Card.Text>
-                  <textarea
-                    placeholder="책에 대한 자유로운 의견을 남겨주세요"
-                    name="content"
-                    onChange={onChangeFunc}
-                  ></textarea>
-                </Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>
-                  <Button variant="outline-primary" onClick={() => addReview()}>
-                    리뷰등록
-                  </Button>
-                </ListGroupItem>
-              </ListGroup>
-            </form>
+            <Card.Body>
+              <Card.Title>{book.title}</Card.Title>
+              <Card.Text>
+                <textarea
+                  placeholder="책에 대한 자유로운 의견을 남겨주세요"
+                  name="content"
+                  onChange={onChangeFunc}
+                ></textarea>
+              </Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>
+                <Button variant="outline-primary" onClick={() => addReview()}>
+                  리뷰등록
+                </Button>
+              </ListGroupItem>
+            </ListGroup>
           </Card>
         </Tab>
       </Tabs>
