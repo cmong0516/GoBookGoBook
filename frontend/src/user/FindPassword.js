@@ -71,6 +71,7 @@ function FindPassword() {
 
     }
 
+    // 이메일 인증번호입력창 모달로 띄우기
     return (
         <Wrapper>
             <Form noValidate validated={validated} onSubmit={submitFunc}>
