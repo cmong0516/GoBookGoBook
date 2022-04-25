@@ -7,6 +7,15 @@ import axios from "axios";
 let Wrapper = styled.div`
     width: 22rem;
     margin: auto;
+
+    h5 {
+        margin: 1.5vh 0;
+    }
+
+    p {
+        color: gray;
+    }
+
 `
 let GroupStyle = styled.div`
     margin: 1rem 0;
@@ -18,19 +27,14 @@ let Alarm = styled.div`
     font-weight: bold;   
 `
 
-function FindId() {
+function FindPassword() {
 
     // 로그인하지 않은 경우 url입력 시 출입불가
     let history = useHistory();
     let [validated, setValidated] = useState(false);
-    let [nameAlarm, setNameAlarm] = useState('');
     let [account, setAccount] = useState({
-        userId: "",
         userPw: "",
     });
-
-    // 이름 : 한글 2자이상
-    let nameFormat = RegExp(/^[가-힣]{2,}$/);
 
     let onChangeFunc = (e) => {
         setAccount({
@@ -41,25 +45,21 @@ function FindId() {
     let submitFunc = (e) => {
         e.preventDefault();
         let form = e.currentTarget;
-        setNameAlarm('');
 
         if (form.checkValidity() === false) {
             e.preventDefault();
             setValidated(true);
-        } else if (!nameFormat.test(account.userName))
-            setNameAlarm('이름의 형식이 올바르지 않습니다.');
-        else {
-            axios.post('/findid', {
-                userName: account.userName,
+        } else {
+            axios.post('/findpw', {
                 userEmail: account.userEmail
             })
                 .then(res => {
                     if (res.data) {
-                        alert('아이디는 ~ 입니다😇');
+                        alert('비밀번호 변경 메일을 보냈습니다📧');
                         history.push("/login");
                     } else {
                         console.log(res.data.code)
-                        alert('아이디를 찾을 수 없습니다😰');
+                        alert('회원정보에 등록된 이메일이 아닙니다😰');
                         history.push("/signin");
                     }
                 })
@@ -74,23 +74,10 @@ function FindId() {
     return (
         <Wrapper>
             <Form noValidate validated={validated} onSubmit={submitFunc}>
-                <h3>아이디 찾기</h3>
-
-                <GroupStyle>
-                    <Form.Group>
-                        <Form.Label>이름</Form.Label>
-                        <Alarm>{nameAlarm}</Alarm>
-                        <Form.Control
-                            required
-                            type="text"
-                            name="userName"
-                            placeholder="ex) 홍길동"
-                            onChange={onChangeFunc}
-                        ></Form.Control>
-                        <Form.Control.Feedback type="invalid">이름을 입력해주세요.</Form.Control.Feedback>
-                    </Form.Group>
-                </GroupStyle>
-
+                <h3>비밀번호 찾기</h3>
+                <h5>비밀번호를 잊으셨나요?</h5>
+                <p>가입했던 이메일을 적어주세요.<br />
+                    입력하신 이메일 주소로 비밀번호 변경 메일을 보낼게요.</p>
                 <GroupStyle>
                     <Form.Group>
                         <Form.Label>이메일</Form.Label>
@@ -107,11 +94,11 @@ function FindId() {
                 </GroupStyle>
 
                 <Button variant="info" type="submit">
-                    아이디찾기
+                    비밀번호 변경 이메일 보내기
                 </Button>
             </Form>
         </Wrapper>
     );
 }
 
-export default FindId;
+export default FindPassword;

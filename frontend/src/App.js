@@ -14,9 +14,7 @@ import Mypage from "./mypage/Mypage.js";
 import Goodbye from "./user/Goodbye.js";
 import Admin from "./user/Admin.js";
 import Footer from "./Footer.js";
-import FindId from "./user/FindId";
-
-// import axios from "axios";
+import FindMyInfo from "./user/FindMyInfo";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -145,8 +143,8 @@ function App() {
           <Route path="/login">
             <Login setIsLogin={setIsLogin} />
           </Route>
-          <Route path="/findId">
-            <FindId />
+          <Route path="/findmyinfo">
+            <FindMyInfo />
           </Route>
           <Route path="/signin">
             <Signin />
