@@ -66,11 +66,11 @@ function MyRent() {
         ))}
       </ButtonGroup>
 
-      {radioValue == 1 ? (
-        <MyRentBooks rentBooks={nowRent} setReturnCheck={setReturnCheck} />
-      ) : (
-        <MyRentBooks rentBooks={returnBook} />
-      )}
+      {
+        radioValue == 1
+          ? <MyRentBooks rentBooks={nowRent} setReturnCheck={setReturnCheck} />
+          : <MyRentBooks rentBooks={returnBook} />
+      }
     </div>
   );
 }

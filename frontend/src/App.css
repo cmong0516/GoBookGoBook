@@ -62,3 +62,11 @@ table td {
 .searchPage{
   margin-bottom: 20px;
 }
+
+.editnameinput{
+  width: 4vw;
+}
+
+.alluserid{
+  width: 2vw;
+}
