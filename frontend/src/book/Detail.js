@@ -171,16 +171,14 @@ function DetailView(props) {
 
             <Tab eventKey="reviewinfo" title="리뷰보기">
               <Card className="" style={{ width: "25rem" }}>
-                <form>
-                  <Card.Body>
-                    <Card.Title>첫번째 리뷰</Card.Title>
-                    <Card.Text>첫번째 유저입니다 / 2022년 4월 25일</Card.Text>
-                    <Card.Text></Card.Text>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroupItem>재밌게 열심히 만들었습니다.</ListGroupItem>
-                  </ListGroup>
-                </form>
+                <Card.Body>
+                  <Card.Title>첫번째 리뷰</Card.Title>
+                  <Card.Text>첫번째 유저입니다 / 2022년 4월 25일</Card.Text>
+                  <Card.Text></Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                  <ListGroupItem>재밌게 열심히 만들었습니다.</ListGroupItem>
+                </ListGroup>
               </Card>
               {findReview &&
                 findReview.map((review, i) => (
@@ -207,28 +205,26 @@ function DetailView(props) {
             </Tab>
             <Tab eventKey="reviewadd" title="리뷰작성">
               <Card className="" style={{ width: "25rem" }}>
-                <form>
-                  <Card.Body>
-                    <Card.Title>{book.title}</Card.Title>
-                    <Card.Text>
-                      <textarea
-                        placeholder="책에 대한 자유로운 의견을 남겨주세요"
-                        name="content"
-                        onChange={onChangeFunc}
-                      ></textarea>
-                    </Card.Text>
-                  </Card.Body>
-                  <ListGroup className="list-group-flush">
-                    <ListGroupItem>
-                      <Button
-                        variant="outline-primary"
-                        onClick={() => addReview()}
-                      >
-                        리뷰등록
-                      </Button>
-                    </ListGroupItem>
-                  </ListGroup>
-                </form>
+                <Card.Body>
+                  <Card.Title>{book.title}</Card.Title>
+                  <Card.Text>
+                    <textarea
+                      placeholder="책에 대한 자유로운 의견을 남겨주세요"
+                      name="content"
+                      onChange={onChangeFunc}
+                    ></textarea>
+                  </Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                  <ListGroupItem>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => addReview()}
+                    >
+                      리뷰등록
+                    </Button>
+                  </ListGroupItem>
+                </ListGroup>
               </Card>
             </Tab>
           </Tabs>
