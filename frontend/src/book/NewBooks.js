@@ -98,6 +98,24 @@ function NewBooks() {
                 자기계발
               </Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("122");
+                }}
+              >
+                컴퓨터/인터넷
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                onClick={() => {
+                  categoryNewbooks("123");
+                }}
+              >
+                자격서/수험서
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </CategoryStyle>
 
