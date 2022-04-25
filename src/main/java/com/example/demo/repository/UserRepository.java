@@ -24,6 +24,7 @@ public class UserRepository {
         em.persist(user);
     }
 
+    //find 합치기
     //아이디로 찾기
     public List<User> findById(String userId){
         return em.createQuery("select u from User u where u.userId = :userId", User.class)
@@ -31,7 +32,12 @@ public class UserRepository {
                 .getResultList();
     }
 
-    //delete from User where userId = ?
+    //이메일 찾기
+    public List<User> findByEmail(String userEmail){
+        return em.createQuery("select u from User u where u.userEmail = :userEmail", User.class)
+                .setParameter("userEmail",userEmail)
+                .getResultList();
+    }
 
     //행 삭제
     public void delete(User user) {
