@@ -11,6 +11,29 @@ import {
 import axios from "axios";
 
 function Review(props) {
+  useEffect(() => {
+    axios
+      .post("/review/findbybook", {
+        isbn: book.isbn,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setFindReview(res.data);
+      })
+      .catch((error) => {
+        alert("리뷰 조회에 실패했습니다.");
+        console.log(error);
+      });
+  }, []);
+  let [findReview, setFindReview] = useState([]);
+  let book = props.book;
+  let [review, setReview] = useState({
+    userId: "",
+    title: "",
+    content: "",
+    isbn: "",
+  });
+  let userId = localStorage.getItem("userId");
 
     let [findReview, setFindReview] = useState([]);
     let book = props.book;

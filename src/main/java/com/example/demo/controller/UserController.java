@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -69,5 +70,15 @@ public class UserController {
     public boolean findPw(@RequestBody User user){
 
         return mailService.sendMail(user);
+    }
+
+    //비밀번호 찾기: 인증 후 비밀번호 던져주기
+    @PostMapping("/findpw/code")
+    public String checkCode(@RequestBody HashMap<String,String> param){
+        String code = param.get("code");
+        String userEmail = param.get("userEmail");
+//        int code = Integer.parseInt(stringCode); //굳이 바꿔야 하나?
+
+        return mailService.checkCode(code, userEmail);
     }
 }

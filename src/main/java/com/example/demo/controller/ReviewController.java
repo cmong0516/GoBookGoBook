@@ -40,4 +40,10 @@ public class ReviewController {
         return reviewService.findByIsbn(review);
     }
 
+    @PostMapping("/delete")
+    public boolean deleteReview(@RequestBody Review review) {
+        reviewService.deleteReview(review);
+        return true;
+    }
+
 }

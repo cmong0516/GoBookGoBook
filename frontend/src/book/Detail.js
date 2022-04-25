@@ -17,13 +17,17 @@ import styled from "styled-components";
 let BookView = styled.div`
   display: grid;
   justify-items: center;
+<<<<<<< HEAD
   margin-bottom: 10vh;
   margin-top: 2vh;
 
+=======
+  height: 100%;
+>>>>>>> 7ce577a45ebe6cba1b7ce051931101bd2bac8cff
   h4 {
     margin-bottom: 0;
   }
-`
+`;
 
 let DetailWrapper = styled.div`
   text-align: left;
@@ -38,10 +42,13 @@ function Detail() {
 
   return (
     <div>
-      {book
-        ? <DetailView books={book} />
-        : alert("새로고침으로 인해 state가 유지되지 않아 도서데이터 수신에 실패했습니다.")
-      }
+      {book ? (
+        <DetailView books={book} />
+      ) : (
+        alert(
+          "새로고침으로 인해 state가 유지되지 않아 도서데이터 수신에 실패했습니다."
+        )
+      )}
     </div>
   );
 }
@@ -68,7 +75,7 @@ function DetailView(props) {
                   </Badge>
                 </h4>
               </Card.Header>
-            }
+            )}
             <Card.Img variant="top" src={book.coverLargeUrl} />
           </Card>
           <br />
