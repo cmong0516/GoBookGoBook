@@ -2,17 +2,16 @@ package com.example.demo.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Entity
+@Entity(name = "Review")
 @Table(name = "review")
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
     private Long reviewId;
     private String userId;
     private String title;

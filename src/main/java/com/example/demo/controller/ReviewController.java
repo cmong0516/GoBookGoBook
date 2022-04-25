@@ -2,13 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Review;
 import com.example.demo.service.ReviewService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@Slf4j
+@RestController
 @RequestMapping("/review")
 public class ReviewController {
 
@@ -19,23 +19,25 @@ public class ReviewController {
     }
 
     @PostMapping("/add")
-    @ResponseBody
     public Review addReview(@RequestBody Review review) {
         reviewService.addReivew(review);
         return review;
     }
 
     @PostMapping("/infobyuser")
-    @ResponseBody
-    public Review findReivewByUser(@RequestBody Review review) {
-        reviewService.findByUser(review);
-        return review;
+    public List<Review> findReivewByUser(@RequestBody Review review) {
+        return reviewService.findByUser(review);
     }
 
     @PostMapping("/infobyid")
-    @ResponseBody
     public Review findReivewById(@RequestBody Review review) {
         reviewService.findByReviewId(review);
         return review;
     }
+
+    @PostMapping("/findbybook")
+    public List<Review> findByIsbn(@RequestBody Review review) {
+        return reviewService.findByIsbn(review);
+    }
+
 }

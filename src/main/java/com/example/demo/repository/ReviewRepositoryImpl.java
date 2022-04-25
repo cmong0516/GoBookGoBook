@@ -42,7 +42,6 @@ public class ReviewRepositoryImpl implements ReviewRepository{
                 .getResultList();
     }
 
-
     @Override
     public void deleteByReviewId(Long reviewId) {
         List<Review> byReviewId = findByReviewId(reviewId);
