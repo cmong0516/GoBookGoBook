@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import styled from 'styled-components';
 import axios from "axios";
 
@@ -23,14 +23,18 @@ function FindId() {
     // 로그인하지 않은 경우 url입력 시 출입불가
     let history = useHistory();
     let [validated, setValidated] = useState(false);
+    const [show, setShow] = useState(false);
     let [nameAlarm, setNameAlarm] = useState('');
     let [account, setAccount] = useState({
-        userId: "",
-        userPw: "",
+        userName: '',
+        userEmail: '',
     });
+    let [userid, setUserid] = useState('');
 
     // 이름 : 한글 2자이상
     let nameFormat = RegExp(/^[가-힣]{2,}$/);
+
+    const handleClose = () => setShow(false);
 
     let onChangeFunc = (e) => {
         setAccount({
@@ -46,21 +50,21 @@ function FindId() {
         if (form.checkValidity() === false) {
             e.preventDefault();
             setValidated(true);
+
         } else if (!nameFormat.test(account.userName))
             setNameAlarm('이름의 형식이 올바르지 않습니다.');
+
         else {
             axios.post('/findid', {
                 userName: account.userName,
                 userEmail: account.userEmail
             })
                 .then(res => {
-                    if (res.data) {
-                        alert('아이디는 ~ 입니다😇');
-                        history.push("/login");
+                    if (res.data == '유효하지 않은 이메일입니다.' || res.data == '회원을 찾을 수 없습니다.') {
+                        alert('아이디를 찾을 수 없습니다. 입력하신 이름과 이메일을 다시 확인해주세요😵');
                     } else {
-                        console.log(res.data.code)
-                        alert('아이디를 찾을 수 없습니다😰');
-                        history.push("/signin");
+                        setUserid(res.data);
+                        setShow(true);
                     }
                 })
                 .catch(error => {
@@ -110,6 +114,21 @@ function FindId() {
                     아이디찾기
                 </Button>
             </Form>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>아이디 알림</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>회원님의 아이디는 {userid}입니다.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        닫기
+                    </Button>
+                    <Button variant="primary" onClick={() => history.push("/login") }>
+                        로그인 하러가기
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Wrapper>
     );
 }

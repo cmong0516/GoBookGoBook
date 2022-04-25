@@ -43,7 +43,7 @@ export let DueDateContext = React.createContext();
 
 function App() {
   let userId = localStorage.getItem("userId");
-  let [isLogin, setIsLogin] = useState(true);
+  let [isLogin, setIsLogin] = useState("");
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
 
@@ -57,8 +57,8 @@ function App() {
         <div className="nav">
           <div className="titleImg">
             <Link to="/">
-              {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" /> */}
               <span>Go Book Go Book</span>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" />
             </Link>
           </div>
           <div>

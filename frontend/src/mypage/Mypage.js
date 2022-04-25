@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import MyRent from "./MyRent.js";
-import MyInfo from "./MyInfo.js"
+import MyReview from "./MyReview.js";
+import MyInfo from "./MyInfo.js";
 import { Col, Row, ListGroup } from "react-bootstrap";
 import styled from 'styled-components';
 
@@ -43,6 +44,9 @@ function Mypage() {
             나의 대여 관리
           </ListGroup.Item>
           <ListGroup.Item action variant="light" onClick={() => setMenu(1)}>
+            나의 리뷰 관리
+          </ListGroup.Item>
+          <ListGroup.Item action variant="light" onClick={() => setMenu(2)}>
             개인정보 수정
           </ListGroup.Item>
         </MyMenu>
@@ -50,11 +54,12 @@ function Mypage() {
 
       <Col sm={9}>
         <MyList>
-          
           {
-            menu === 0 
-            ? <MyRent/>
-            : <MyInfo setMenu={setMenu}/>
+            {
+              0: <MyRent />,
+              1: <MyReview />,
+              2: <MyInfo setMenu={setMenu} />
+            } [menu]
           }
         </MyList>
       </Col>
