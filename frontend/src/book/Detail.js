@@ -17,13 +17,9 @@ import styled from "styled-components";
 let BookView = styled.div`
   display: grid;
   justify-items: center;
-<<<<<<< HEAD
   margin-bottom: 10vh;
   margin-top: 2vh;
 
-=======
-  height: 100%;
->>>>>>> 7ce577a45ebe6cba1b7ce051931101bd2bac8cff
   h4 {
     margin-bottom: 0;
   }
@@ -75,7 +71,7 @@ function DetailView(props) {
                   </Badge>
                 </h4>
               </Card.Header>
-            )}
+            }
             <Card.Img variant="top" src={book.coverLargeUrl} />
           </Card>
           <br />

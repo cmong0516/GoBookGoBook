@@ -25,15 +25,6 @@ function Review(props) {
         console.log(error);
       });
   }, []);
-  let [findReview, setFindReview] = useState([]);
-  let book = props.book;
-  let [review, setReview] = useState({
-    userId: "",
-    title: "",
-    content: "",
-    isbn: "",
-  });
-  let userId = localStorage.getItem("userId");
 
     let [findReview, setFindReview] = useState([]);
     let book = props.book;
