@@ -72,7 +72,7 @@ public class MailService {
     public String checkCode(String code, String userEmail){
 
 //        System.out.println(num); //인증번호 귀찮으면 쓰세요
-        
+
         //입력한 인증번호 == 메일로 전송된 인증번호
         if(code.equals(num)){
 
