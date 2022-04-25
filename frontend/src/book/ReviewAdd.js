@@ -38,7 +38,7 @@ function ReviewAdd(props) {
 
     return (
         <div>
-            <Card className="" style={{ width: "25rem" }}>
+            <Card>
                 <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
                     <Card.Text>

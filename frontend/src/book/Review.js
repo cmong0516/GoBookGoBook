@@ -29,7 +29,6 @@ function Review(props) {
         <div>
             <Tabs
                 defaultActiveKey="reviewinfo"
-                id="uncontrolled-tab-example"
                 className="mb-3"
             >
                 <Tab eventKey="reviewinfo" title="리뷰보기">
