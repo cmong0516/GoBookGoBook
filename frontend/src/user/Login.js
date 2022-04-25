@@ -128,7 +128,11 @@ function Login(props) {
         <Button variant="primary" type="submit" size="lg">
           로그인
         </Button>
-        아이디가 없으신가요?&nbsp;&nbsp;&nbsp;
+        아이디를 잊으셨나요?&nbsp;&nbsp;&nbsp;
+        <Signin>
+          <Link to="/findId">아이디찾기</Link>
+        </Signin>
+        <span>&nbsp; | &nbsp;</span>
         <Signin>
           <Link to="/signin">회원가입</Link>
         </Signin>

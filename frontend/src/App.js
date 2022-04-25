@@ -14,6 +14,7 @@ import Mypage from "./mypage/Mypage.js";
 import Goodbye from "./user/Goodbye.js";
 import Admin from "./user/Admin.js";
 import Footer from "./Footer.js";
+import FindId from "./user/FindId";
 
 // import axios from "axios";
 
@@ -143,6 +144,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login setIsLogin={setIsLogin} />
+          </Route>
+          <Route path="/findId">
+            <FindId />
           </Route>
           <Route path="/signin">
             <Signin />
