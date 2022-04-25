@@ -48,25 +48,11 @@ a{
 }
 
 table {
-  border-spacing: 10px;
+  border-spacing: 8px;
   border-collapse: separate;
-}
-table td {
-  width: 100px;
 }
 
 .cardImg{
   height: 33vh;
 }
 
-.searchPage{
-  margin-bottom: 20px;
-}
-
-.editnameinput{
-  width: 4vw;
-}
-
-.alluserid{
-  width: 2vw;
-}
