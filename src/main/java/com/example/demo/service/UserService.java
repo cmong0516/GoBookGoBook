@@ -172,7 +172,7 @@ public class UserService {
             return "회원을 찾을 수 없습니다.";
         }
 
-        return userName;
+        return user1.getUserId();
     }
 
     //암호화 함수
