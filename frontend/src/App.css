@@ -89,3 +89,6 @@ textarea{
   height: 15rem;
 }
 
+.closebutton{
+  text-align: end;
+}

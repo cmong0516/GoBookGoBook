@@ -16,6 +16,9 @@ import java.util.List;
 public class RentService {
     private final RentRepository rentRepository;
 
+
+
+
     public Rent insertRent(RentBook rentBook) {
         Rent rent = new Rent();
         LocalDate now = LocalDate.now();
