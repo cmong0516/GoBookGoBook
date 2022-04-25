@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table, Modal } from "react-bootstrap";
+import { Button, Table, FormControl } from "react-bootstrap";
 import axios from "axios";
+import styled from "styled-components";
+
+let Styledth1 = styled.td`
+  width: 4vw;
+`
+let Styledth2 = styled.td`
+  width: 6vw;
+`
 
 function AllUser() {
   let [users, setUsers] = useState([]);
 
   let [account, setAccount] = useState({
-    userId: "",
     userEmail: "",
     userPw: "",
   });
@@ -74,7 +81,7 @@ function AllUser() {
             <th>아이디</th>
             <th>이름</th>
             <th>이메일</th>
-            <th>pw</th>
+            <th>비밀번호</th>
             <th>회원정보 변경</th>
             <th>회원삭제</th>
           </tr>
@@ -83,24 +90,24 @@ function AllUser() {
           {users &&
             users.map((user, i) => (
               <tr>
-                <td className="alluserid">{user.id}</td>
+                <Styledth1>{user.id}</Styledth1>
                 <td>{user.userId}</td>
-                <td>{user.userName}</td>
+                <Styledth1>{user.userName}</Styledth1>
                 <td>
-                  <input
+                  <FormControl 
                     placeholder={user.userEmail}
                     name="userEmail"
                     onChange={onChangeFunc}
-                  ></input>
+                  ></FormControl>
                 </td>
                 <td>
-                  <input
+                  <FormControl 
                     placeholder="PassWord"
                     name="userPw"
                     onChange={onChangeFunc}
-                  ></input>
+                  ></FormControl>
                 </td>
-                <td>
+                <Styledth2>
                   <Button
                     variant="outline-info"
                     size="sm"
@@ -108,8 +115,8 @@ function AllUser() {
                   >
                     EditUser
                   </Button>
-                </td>
-                <td>
+                </Styledth2>
+                <Styledth2>
                   {user.userId == "admin0" ? null : (
                     <Button
                       variant="outline-danger"
@@ -120,7 +127,7 @@ function AllUser() {
                       회원삭제
                     </Button>
                   )}
-                </td>
+                </Styledth2>
               </tr>
             ))}
         </tbody>

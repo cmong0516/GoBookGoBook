@@ -7,7 +7,8 @@ import styled from "styled-components";
 let LoginForm = styled.div`
   width: 22rem;
   margin: auto;
-  padding-bottom: 3rem;
+  padding-top : 8vh;
+  padding-bottom: 10vh;
 
   input,
   button {
@@ -29,7 +30,6 @@ let LoginForm = styled.div`
   }
 `;
 let Signin = styled.span`
-  font-size: 13pt;
   text-decoration: underline;
 `;
 let Alarm = styled.div`
@@ -130,7 +130,7 @@ function Login(props) {
         </Button>
         아이디를 잊으셨나요?&nbsp;&nbsp;&nbsp;
         <Signin>
-          <Link to="/findId">아이디찾기</Link>
+          <Link to="/findmyinfo">내정보찾기</Link>
         </Signin>
         <span>&nbsp; | &nbsp;</span>
         <Signin>

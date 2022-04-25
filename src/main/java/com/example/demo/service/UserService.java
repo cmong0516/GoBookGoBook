@@ -31,7 +31,7 @@ public class UserService {
         }
     }
 
-
+    //회원가입
     @Transactional //변경되는 값이라?
     public boolean joinUser(User user){
         /*System.out.println("memberForm = " + user.getUserId());
@@ -59,6 +59,7 @@ public class UserService {
         return true;
     }
 
+    //login
     public User loginUser(User user) {
         System.out.println("user.getUserId() = " + user.getUserId());
 
@@ -147,9 +148,31 @@ public class UserService {
         return true;
     }
 
+    //조회
     public List<User> findAll(){
         List<User> all = userRepository.findAll();
         return all;
+    }
+
+    //아이디찾기: 아이디, 이름 유효성
+    public String findId(User user){
+        String userEmail = user.getUserEmail();
+        String userName = user.getUserName();
+        List<User> byId = userRepository.findByEmail(userEmail); //아이디로 꺼내오기
+
+        if(byId.isEmpty()){
+            return "유효하지 않은 이메일입니다.";
+        }
+
+        User user1 = byId.get(0);
+
+//        System.out.println("userEmail = " + userEmail);
+
+        if(!(user1.getUserName().equals(userName))){
+            return "회원을 찾을 수 없습니다.";
+        }
+
+        return user1.getUserId();
     }
 
     //암호화 함수

@@ -49,8 +49,15 @@ public class UserController {
         return userService.deleteUser(user.getUserId());
     }
 
+    //회원조회
     @PostMapping("/all")
     public List<User> findAll(){
         return userService.findAll();
+    }
+
+    //아이디찾기
+    @PostMapping("/findid")
+    public String findId(@RequestBody User user){
+        return userService.findId(user);
     }
 }

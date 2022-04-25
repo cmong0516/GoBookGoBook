@@ -50,16 +50,14 @@ a{
 }
 
 table {
-  border-spacing: 10px;
+  border-spacing: 8px;
   border-collapse: separate;
-}
-table td {
-  width: 100px;
 }
 
 .cardImg{
   height: 33vh;
 }
+
 
 .searchPage{
   margin-bottom: 20px;
@@ -90,3 +88,4 @@ textarea{
   resize: none;
   height: 15rem;
 }
+

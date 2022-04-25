@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import axios from "axios";
+import styled from "styled-components";
+
+let Styledth1 = styled.td`
+  width: 4vw;
+`
+let Styledth2 = styled.td`
+  width: 6vw;
+`
 
 function AllRent() {
 
@@ -12,8 +20,6 @@ function AllRent() {
       .then((res) => {
         console.log(res);
         setRent(res.data);
-
-
       })
       .catch((error) => {
         console.log(error);
@@ -78,12 +84,12 @@ function AllRent() {
         <tbody>
           {rent && rent.slice(0).reverse().map((rent, i) => (
             <tr>
-              <td>{rent.rentId}</td>
-              <td>{rent.userId}</td>
+              <Styledth1>{rent.rentId}</Styledth1>
+              <Styledth2>{rent.userId}</Styledth2>
               <td>{rent.title}</td>
-              <td>{rent.rentDate}</td>
-              <td>{rent.state == true ? "대여중" : "반납완료"}</td>
-              <td>
+              <Styledth2>{rent.rentDate}</Styledth2>
+              <Styledth1>{rent.state == true ? "대여중" : "반납완료"}</Styledth1>
+              <Styledth2>
                 {
                   rent.state == true
                     ? <Button variant="outline-info" size="sm" onClick={() => returnFunc(rent.rentId)}>
@@ -94,7 +100,7 @@ function AllRent() {
                     //   대여하기
                     // </Button>
                 }
-              </td>
+              </Styledth2>
             </tr>
           ))}
         </tbody>
