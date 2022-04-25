@@ -1,5 +1,5 @@
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import "../App.css";
@@ -43,6 +43,7 @@ function DetailView(props) {
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
   let userId = localStorage.getItem("userId");
+  let [stateCheck, setStateCheck] = useState(false);
 
   return (
     // html 코드
@@ -82,7 +83,10 @@ function DetailView(props) {
       <br />
       {
         userId != 'admin0'
-        ? <RentButton book={book} />
+          ? <RentButton
+            book={book}
+            stateCheck={stateCheck}
+            setStateCheck={setStateCheck}/>
         : null
       }
     </BookView>
