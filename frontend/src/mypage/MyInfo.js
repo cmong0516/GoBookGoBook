@@ -135,11 +135,12 @@ function MyInfo(props) {
   };
 
   let deleteUser = () => {
-    console.log(myuserId)
-    if(window.confirm('정말로... 탈퇴하실건가요?')) {
-      axios.delete("/delete", {
-        data:{userId: myuserId}
-      },)
+    console.log(myuserId);
+    if (window.confirm("정말로... 탈퇴하실건가요?")) {
+      axios
+        .delete("/delete", {
+          data: { userId: myuserId },
+        })
         .then((res) => {
           console.log(res);
           localStorage.clear();
@@ -153,7 +154,6 @@ function MyInfo(props) {
     } else {
       return false;
     }
-    
   };
 
   return (

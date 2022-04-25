@@ -38,7 +38,9 @@ a{
 }
 
 .titleImg img{
+  padding: 2px;
   border-radius: 50px;
+  margin: auto;
 }
 
 .goodbye{
@@ -69,4 +71,22 @@ table td {
 
 .alluserid{
   width: 2vw;
+}
+
+.detailPage{
+  display: flex;
+  justify-content: center;
+  align-items:flex-start;
+  height: 70vh;
+}
+
+.detailPage div{
+  padding: 0.3rem;
+}
+
+textarea{
+  width: 100%;
+  border: none;
+  resize: none;
+  height: 15rem;
 }
