@@ -17,7 +17,6 @@ function RentButton(props) {
       .post("/rent/info", { userId: userId })
       .then((res) => {
         let booksNum = 0;
-        console.log("------");
 
         res.data.map((mybooks) => {
           if (mybooks.state == true) {

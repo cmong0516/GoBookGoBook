@@ -71,13 +71,6 @@ table {
   width: 2vw;
 }
 
-.detailPage{
-  display: flex;
-  justify-content: center;
-  align-items:flex-start;
-  height: 70vh;
-}
-
 .detailPage div{
   padding: 0.3rem;
 }
