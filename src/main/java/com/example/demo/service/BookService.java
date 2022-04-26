@@ -60,8 +60,13 @@ public class BookService {
             JSONObject obj = documents.getJSONObject(i);
             searchBook.setItemId(++seq);
             searchBook.setAuthors(String.valueOf(obj.getJSONArray("authors").get(0))); //한명만 넣음
-            searchBook.setContents(obj.getString("contents"));
-            searchBook.setDateTime(obj.getString("datetime"));
+            searchBook.setDescription(obj.getString("contents"));
+
+            //0000년 00월 00일
+           String subdate = obj.getString("datetime").substring(0,10);
+           String date = subdate.substring(0,4)+"년 " + subdate.substring(5,7) + "월 "+subdate.substring(8,10)+"일";
+//            System.out.println("datetime = " + date);
+            searchBook.setPubDate(date);
 
             //isbn 뽑기
             String isbn = (String) obj.get("isbn"); //string으로 뽑기
@@ -70,10 +75,8 @@ public class BookService {
             searchBook.setIsbn(split[1]);
 
             searchBook.setPublisher(obj.getString("publisher"));
-            searchBook.setThumbnail(obj.getString("thumbnail"));
+            searchBook.setCoverLargeUrl(obj.getString("thumbnail"));
             searchBook.setTitle(obj.getString("title"));
-            //테스트는 되는데 여기서 안된다..
-//            searchBook.setTranslator(obj.getString("translators")); //없는 경우도 많다..
 
             searchBooks.add(searchBook);
         }

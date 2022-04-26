@@ -29,7 +29,7 @@ public class MailService {
         Random r = new Random();
         int intNum = r.nextInt(999999); //6자리 랜덤 난수
         String num = Integer.toString(intNum);
-        System.out.println("num = " + num);
+//        System.out.println("num = " + num);
 
         //이메일 유효성: 회원이 있는지 확인
         List<User> byEmail = userRepository.findByEmail(userEmail);
