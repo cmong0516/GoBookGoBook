@@ -1,12 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Review;
+import com.example.demo.domain.User;
 import com.example.demo.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,5 +38,10 @@ public class ReviewService {
     public List<Review> findByIsbn(Review review) {
         log.warn(review.getIsbn());
         return reviewRepository.findByIsbn(review.getIsbn());
+    }
+
+    public boolean deleteReview(Review review) {
+        reviewRepository.deleteByReviewId(review.getReviewId());
+        return true;
     }
 }

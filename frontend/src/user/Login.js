@@ -75,7 +75,7 @@ function Login(props) {
       !passwordFormat.test(account.userPw)
     ) {
       setAlarm(
-        "아이디 또는 비밀번호를 잘못 입력하셨습니다. 입력하신 내용을 다시 확인해주세요."
+        "아이디 또는 비밀번호의 형식이 올바르지 않습니다."
       );
     } else {
       axios

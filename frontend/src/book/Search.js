@@ -11,7 +11,8 @@ function Search(props) {
   let userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios.get("/api/search", { params: { query: searchWord } })
+    axios
+      .get("/api/search", { params: { query: searchWord } })
       .then((res) => {
         setResult(res.data);
         if (res.data.length == 0) {
@@ -30,8 +31,8 @@ function Search(props) {
         result.map((book, i) => (
           <Col>
             <Card className="searchcard">
-              <Badge bg="primary" className="searchindex">
-                {i + 1}
+              <Badge bg="primary">
+                {searchWord} 검색 결과 No.{i + 1}
               </Badge>
               <Card.Img
                 variant="top"
@@ -68,7 +69,7 @@ function Search(props) {
           </Col>
         ))}
     </Row>
-  )
+  );
 }
 
 export default Search;

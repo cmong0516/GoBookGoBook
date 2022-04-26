@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BestSellerContext } from "./BestSeller.js";
 import { NewBooksContext } from "./NewBooks.js";
 import { useHistory } from "react-router-dom";
+import {Row} from "react-bootstrap";
 import styled from "styled-components";
 
 let BookWrapper = styled.div`
@@ -54,7 +55,7 @@ function BookList(props) {
   let history = useHistory();
 
   return (
-    <div className="row">
+    <Row>
       {props.books &&
         props.books.map((book, i) => (
           <div
@@ -74,7 +75,7 @@ function BookList(props) {
             </BookWrapper>
           </div>
         ))}
-    </div>
+    </Row>
   );
 }
 
