@@ -7,18 +7,17 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
+// book은 context API로 갖고오기
 function ReviewAdd(props) {
 
     let [myreview, setMyReview] = useState('');
     let book = props.book;
     let userId = localStorage.getItem("userId");
 
-    let onChangeFunc = (e) => {
-        setMyReview(e.target.value)
-    };
-
+    // 리뷰 추가
     let addReview = () => {
-        axios.post("/review/add", {
+        axios
+            .post("/review/add", {
                 userId: userId,
                 title: book.title,
                 content: myreview,
@@ -43,7 +42,7 @@ function ReviewAdd(props) {
                         <textarea
                             placeholder="책에 대한 자유로운 의견을 남겨주세요"
                             name="content"
-                            onChange={onChangeFunc}
+                            onChange={(e) => { setMyReview(e.target.value) }}
                         ></textarea>
                     </Card.Text>
                 </Card.Body>

@@ -139,7 +139,11 @@ function App() {
             </BookContext.Provider>
           </Route>
           <Route path="/api/search">
-            <Search searchWord={searchWord} />
+            <BookContext.Provider value={books}>
+              <SetBookContext.Provider value={setBooks}>
+                <Search searchWord={searchWord} />
+              </SetBookContext.Provider>
+            </BookContext.Provider>
           </Route>
           <Route path="/login">
             <Login setIsLogin={setIsLogin} />

@@ -27,16 +27,9 @@ function FindPassword() {
     let history = useHistory();
     let [validated, setValidated] = useState(false);
     const [show, setShow] = useState(false);
-    let [user, setUser] = useState({
-        userEmail: '',
-        code: ''
-    })
+    let [userEmail, setUserEmail] = useState('')
+    let [code, setCode] = useState(0)
 
-    let onChangeFunc = (e) => {
-        setUser({
-            ...user, [e.target.name]: e.target.value
-        })
-    }
     const handleClose = () => setShow(false);
 
     let submitFunc = (e) => {
@@ -48,7 +41,7 @@ function FindPassword() {
             setValidated(true);
         } else {
             axios.post('/findpw', {
-                userEmail: user.userEmail
+                userEmail: userEmail
             })
                 .then(res => {
                     if (res.data) {
@@ -70,15 +63,16 @@ function FindPassword() {
 
     let checkCode = () => {
         axios.post('/findpw/code', {
-                userEmail: user.userEmail,
-                code: user.code
+                userEmail: userEmail,
             })
             .then(res => {
-                if (res.data == '인증번호 불일치') {
-                    alert(res.data);
-                } else {
-                    alert('회원님의 임시 비밀번호는 ' + res.data + ' 입니다. 로그인 후 변경해주세요.');
+                if (res.data) {
+                    alert('회원님의 임시 비밀번호는 gobook777! 입니다. 로그인 후 변경해주세요.');
                     history.push("/login");
+                } else if (!code) {
+                    alert('인증번호를 입력해주세요.');
+                } else {
+                    alert('인증번호가 올바르지 않습니다. 다시 확인해주세요.')
                 }
             })
             .catch(error => {
@@ -103,7 +97,7 @@ function FindPassword() {
                             type="email"
                             name="userEmail"
                             placeholder="ex) GoBook@naver.com"
-                            onChange={onChangeFunc}
+                            onChange={(e) => { setUserEmail(e.target.value) }}
                         ></Form.Control>
                         <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>
                     </Form.Group>
@@ -129,7 +123,7 @@ function FindPassword() {
                             <Form.Control
                                 name="code"
                                 autoFocus
-                                onChange={onChangeFunc}
+                                onChange={(e) => { setCode(e.target.value) }}
                             />
                         </Form.Group>
                     </Form>
