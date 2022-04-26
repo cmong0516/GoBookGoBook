@@ -11,12 +11,10 @@ function Review(props) {
     let book = props.book;
 
     useEffect(() => {
-        axios
-            .post("/review/findbybook", {
+        axios.post("/review/findbybook", {
                 isbn: book.isbn,
             })
             .then((res) => {
-                console.log(res.data);
                 setReviewList(res.data);
             })
             .catch((error) => {
@@ -34,7 +32,8 @@ function Review(props) {
                 <Tab eventKey="reviewinfo" title="리뷰보기">
                     <ReviewList
                         reviewList={reviewList}
-                        book={book}
+                        stateCheck={stateCheck}
+                        setStateCheck={setStateCheck}
                     />
                 </Tab>
 

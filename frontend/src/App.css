@@ -54,25 +54,8 @@ table {
   border-collapse: separate;
 }
 
-.cardImg{
-  height: 33vh;
-}
-
-
-.searchPage{
-  margin-bottom: 20px;
-}
-
 .editnameinput{
   width: 4vw;
-}
-
-.alluserid{
-  width: 2vw;
-}
-
-.detailPage div{
-  padding: 0.3rem;
 }
 
 textarea{
@@ -80,8 +63,4 @@ textarea{
   border: none;
   resize: none;
   height: 15rem;
-}
-
-.closebutton{
-  text-align: end;
 }

@@ -27,7 +27,6 @@ let BookView = styled.div`
 
 let DetailWrapper = styled.div`
   text-align: left;
-
   span {
     color: grey;
   }
