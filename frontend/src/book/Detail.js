@@ -58,8 +58,7 @@ function DetailView(props) {
   return (
     <BookView>
       <Row>
-        <Col sm={1}></Col>
-        <Col sm={4} className="bookImg">
+        <Col sm={3} className="bookImg">
           <Card className="detailCard">
             {book.rank && (
               <Card.Header>
@@ -83,7 +82,7 @@ function DetailView(props) {
           <br />
         </Col>
 
-        <Col sm={6} className="bookInfo">
+        <Col sm={5} className="bookInfo">
           <DetailWrapper>
             <h3>{book.title}</h3>
             <br />
@@ -118,9 +117,7 @@ function DetailView(props) {
             </Card>
           </DetailWrapper>
         </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
+        <Col sm={4}>
           <Review book={book} />
         </Col>
       </Row>
