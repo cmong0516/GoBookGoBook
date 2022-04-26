@@ -29,9 +29,6 @@ let DetailWrapper = styled.div`
   span {
     color: grey;
   }
-  p {
-    margin: 0;
-  }
 `;
 
 function Detail() {
@@ -52,10 +49,12 @@ function Detail() {
 
 // 화면단 구성
 function DetailView(props) {
+
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
   let userId = localStorage.getItem("userId");
   let [stateCheck, setStateCheck] = useState(false);
+
 
   return (
     <BookView>
@@ -90,32 +89,25 @@ function DetailView(props) {
         <Col sm={5}>
           <DetailWrapper>
             <h3>{book.title}</h3>
-            <br />
             <p>
               <span>카테고리</span> {book.categoryName}({book.categoryId})
               <br />
               <span>isbn</span> {book.isbn}
             </p>
-            <br />
             <Card>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>저자: {book.author}</ListGroupItem>
-                <ListGroupItem>
-                  번역가:
-                  {book.translator ? book.translator : " -"}
-                </ListGroupItem>
-                <ListGroupItem>
-                  출간일: {book.pubDate}
-                </ListGroupItem>
-                <ListGroupItem>출판사: {book.publisher}</ListGroupItem>
-                {
-                  book.customerReviewRank == 0
-                    ? null
-                    : <Card.Footer className="text-muted">
-                      평점 : {book.customerReviewRank}
-                    </Card.Footer>
-                }
-              </ListGroup>
+              <ListGroupItem>저자: {book.author}</ListGroupItem>
+              <ListGroupItem>
+                번역가: {book.translator ? book.translator : " -"}
+              </ListGroupItem>
+              <ListGroupItem>출간일: {book.pubDate}</ListGroupItem>
+              <ListGroupItem>출판사: {book.publisher}</ListGroupItem>
+              {
+                book.customerReviewRank == 0
+                  ? null
+                  : <Card.Footer className="text-muted">
+                    평점 : {book.customerReviewRank}
+                  </Card.Footer>
+              }
               <Card.Body>
                 <Card.Text>{book.description}</Card.Text>
               </Card.Body>
