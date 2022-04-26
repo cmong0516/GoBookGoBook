@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Card, Badge } from "react-bootstrap";
+import { Row, Col, Card, Badge, Button, Offcanvas } from "react-bootstrap";
 import { BookContext, SetBookContext } from "../App.js";
+import Review from "./Review.js";
 
 function Search(props) {
 
@@ -14,6 +15,10 @@ function Search(props) {
   let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
   let userId = localStorage.getItem("userId");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios
@@ -36,24 +41,25 @@ function Search(props) {
     <Row xs={1} md={4} className="g-4">
       {books &&
         books.map((book, i) => (
-          <Col onClick={() => {
-            // alert(book.isbn);
-            history.push("/detail/" + book.isbn);
-          }}>
-            <Card className="searchcard">
+          <Col>
+            <Card className="searchcard" onClick={() => {
+              // alert(book.isbn);
+              history.push("/detail/" + book.isbn);
+            }}>
               <Badge bg="primary">
                 {searchWord} 검색 결과 No.{i + 1}
               </Badge>
               <Card.Img
                 variant="top"
-                src={book.thumbnail}
+                src={book.coverLargeUrl}
                 className="cardImg"
               />
               <Card.Body>
-                <Card.Title>{book.title.substr(0, 15)}...</Card.Title>
-                <Card.Text>{book.authors}</Card.Text>
+                <Card.Title>{book.title}...</Card.Title>
+                <Card.Text>{book.author}</Card.Text>
                 <Card.Text>{book.publisher}</Card.Text>
-                <Card.Text>{book.contents.substr(0, 60)}...</Card.Text>
+                {/* <Card.Text>{book.contents.substr(0, 60)}...</Card.Text> */}
+                <Card.Text>{book.description}...</Card.Text>
               </Card.Body>
             </Card>
             {
@@ -61,12 +67,12 @@ function Search(props) {
                 ?
                 <RentButton
                   book={{
-                    author: book.authors,
+                    author: book.author,
                     categoryName: '',
-                    coverLargeUrl: book.thumbnail,
-                    coverSmallUrl: book.thumbnail,
+                    coverLargeUrl: book.coverLargeUrl,
+                    coverSmallUrl: book.coverLargeUrl,
                     customerReviewRank: '',
-                    description: book.contents,
+                    description: book.description,
                     isbn: book.isbn,
                     pubDate: book.dateTime,
                     publisher: book.publisher,
@@ -79,6 +85,20 @@ function Search(props) {
                 />
                 : null
             }
+            <Button variant="primary" onClick={handleShow}>
+              Launch
+            </Button>
+
+            <Offcanvas show={show} placement={'end'} onHide={handleClose}>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                Some text as placeholder. In real life you can have the elements you
+                have chosen. Like, text, images, lists, etc.
+              </Offcanvas.Body>
+            </Offcanvas>
+            {/* <Review book={book}/> */}
           </Col>
         ))}
     </Row>
