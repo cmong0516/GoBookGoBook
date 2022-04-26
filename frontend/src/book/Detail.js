@@ -105,8 +105,7 @@ function DetailView(props) {
                   {book.translator ? book.translator : " -"}
                 </ListGroupItem>
                 <ListGroupItem>
-                  출간일: {book.pubDate.substr(0, 4)}년{" "}
-                  {book.pubDate.substr(4, 2)}월 {book.pubDate.substr(6, 2)}일
+                  출간일: {book.pubDate}
                 </ListGroupItem>
                 <ListGroupItem>출판사: {book.publisher}</ListGroupItem>
                 {

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
 import { useHistory } from "react-router-dom";
 import { Row, Col, Card, Badge } from "react-bootstrap";
+import { BookContext, SetBookContext } from "../App.js";
 
 function Search(props) {
 
   let history = useHistory();
-  let [result, setResult] = useState();
+  let books = useContext(BookContext);
+  let setBooks = useContext(SetBookContext);
   // 대여상태에 따른 전체 책 하나하나의 버튼상태 업데이트를 위한 state
   let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
@@ -17,7 +19,8 @@ function Search(props) {
     axios
       .get("/api/search", { params: { query: searchWord } })
       .then((res) => {
-        setResult(res.data);
+        console.log(res.data)
+        setBooks(res.data);
         if (res.data.length == 0) {
           alert("검색결과가 없습니다🤔");
         }
@@ -31,11 +34,11 @@ function Search(props) {
   return (
   
     <Row xs={1} md={4} className="g-4">
-      {result &&
-        result.map((book, i) => (
+      {books &&
+        books.map((book, i) => (
           <Col onClick={() => {
-            // history.push("/detail/" + book.isbn);
-            alert('체크');
+            // alert(book.isbn);
+            history.push("/detail/" + book.isbn);
           }}>
             <Card className="searchcard">
               <Badge bg="primary">
@@ -59,10 +62,10 @@ function Search(props) {
                 <RentButton
                   book={{
                     author: book.authors,
-                    categoryName: book.categoryName,
-                    coverLargeUrl: book.coverLargeUrl,
+                    categoryName: '',
+                    coverLargeUrl: book.thumbnail,
                     coverSmallUrl: book.thumbnail,
-                    customerReviewRank: book.customerReviewRank,
+                    customerReviewRank: '',
                     description: book.contents,
                     isbn: book.isbn,
                     pubDate: book.dateTime,
