@@ -3,8 +3,7 @@ HELP.md
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-application-db.properties
-application-mail.properties
+
 apikey.properties
 
 ### STS ###
