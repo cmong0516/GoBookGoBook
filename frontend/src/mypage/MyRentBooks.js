@@ -3,7 +3,7 @@ import { Card, Button, Row } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
 
-let CartStyle = styled.div`
+let CardStyle = styled.div`
   width: 33%;
   max-width: 240px;
   min-width: 210px;
@@ -39,7 +39,7 @@ function MyRentBooks(props) {
       {
         // rentBook && rentBook.map( book => <CardComp book={book} /> )
         rentBook && rentBook.map( book => 
-          <CartStyle>
+          <CardStyle>
             <Card key={book.rentId}>
               {
                 book.coverLargeUrl
@@ -59,7 +59,7 @@ function MyRentBooks(props) {
                 }
               </Card.Body>
             </Card>
-          </CartStyle>
+          </CardStyle>
         )
       }
     </Row>

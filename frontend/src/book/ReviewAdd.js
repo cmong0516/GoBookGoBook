@@ -13,10 +13,7 @@ function ReviewAdd(props) {
     let book = props.book;
     let userId = localStorage.getItem("userId");
 
-    let onChangeFunc = (e) => {
-        setMyReview(e.target.value)
-    };
-
+    // 리뷰 추가
     let addReview = () => {
         axios.post("/review/add", {
                 userId: userId,
@@ -43,7 +40,7 @@ function ReviewAdd(props) {
                         <textarea
                             placeholder="책에 대한 자유로운 의견을 남겨주세요"
                             name="content"
-                            onChange={onChangeFunc}
+                            onChange={(e) => { setMyReview(e.target.value) }}
                         ></textarea>
                     </Card.Text>
                 </Card.Body>

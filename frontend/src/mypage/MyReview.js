@@ -1,20 +1,48 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, CloseButton } from "react-bootstrap";
+import { Card, CloseButton, Row } from "react-bootstrap";
 import styled from 'styled-components';
+import PaginationCustom from "../book/PaginationCustom";
+
+let CardStyle = styled.div`
+    padding: 1vh;
+`;
 
 function MyReview() {
 
-    let deleteReview = () => {
+    let userId = localStorage.getItem("userId");
+    let [stateCheck, setStateCheck] = useState(false);
+    let [myReviews, setMyReviews] = useState([]);
+    // 리뷰 최근작성순으로 나오도록 reverse
+    let myReviewsRev = myReviews.slice(0).reverse();
+    let [nowPage, setNowPage] = useState(1);
+
+    let LastIndex = nowPage * 4;
+    let FirstIndex = LastIndex - 4;
+    let nowPageReviews = myReviewsRev.slice(FirstIndex, LastIndex);
+    
+    useEffect(() => {
+        axios.post("/review/infobyuser", {
+            userId: userId
+            })
+            .then((res) => {
+                setMyReviews(res.data);
+            })
+            .catch((error) => {
+                alert("리뷰 조회에 실패했습니다.");
+                console.log(error);
+            });
+    }, [stateCheck]);
+
+    let deleteReview = (reviewId) => {
 
         if (window.confirm("회원님의 리뷰를 정말로 삭제하실건가요?")) {
-            axios.post("/infobyuser", {
-                // reviewId: review.reviewId,
+            axios.post("/review/delete", {
+                reviewId: reviewId,
             })
                 .then((res) => {
                     alert("리뷰가 삭제되었습니다.");
-                    // props.setStateCheck(!props.stateCheck);
+                    setStateCheck(!stateCheck);
                 })
                 .catch((error) => {
                     alert("리뷰 삭제에 실패했습니다.");
@@ -27,14 +55,23 @@ function MyReview() {
 
     return (
         <div>
-            <Card>
-                <Card.Body>
-                    <CloseButton onClick={() => deleteReview()} />
-                    <Card.Title>도서제목</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted"> 여기에는 날짜</Card.Subtitle>
-                    <Card.Text>여기에 내가 쓴 리뷰내용</Card.Text>
-                </Card.Body>
-            </Card>
+            {
+                nowPageReviews && nowPageReviews.map(myReview => (
+                    <CardStyle>
+                        <Card>
+                            <Card.Body>
+                                <CloseButton
+                                    style={{ float: "right" }}
+                                    onClick={() => deleteReview(myReview.reviewId)} />
+                                <Card.Title>{myReview.title}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">{myReview.pubDate}</Card.Subtitle>
+                                <Card.Text>{myReview.content}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </CardStyle>
+                ))
+            }
+            <PaginationCustom reviewsNum={myReviews.length} setNowPage={setNowPage} />
         </div>
     )
 }
