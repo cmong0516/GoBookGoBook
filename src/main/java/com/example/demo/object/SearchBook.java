@@ -11,6 +11,6 @@ public class SearchBook {
     private String coverLargeUrl;//커버사진 url
     private String pubDate; //발행일
     private String publisher; //출판사
-    private String authors; //작가
+    private String author; //작가
     private String isbn;
 }

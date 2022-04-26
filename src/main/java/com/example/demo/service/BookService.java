@@ -59,7 +59,7 @@ public class BookService {
             SearchBook searchBook = new SearchBook();
             JSONObject obj = documents.getJSONObject(i);
             searchBook.setItemId(++seq);
-            searchBook.setAuthors(String.valueOf(obj.getJSONArray("authors").get(0))); //한명만 넣음
+            searchBook.setAuthor(String.valueOf(obj.getJSONArray("authors").get(0))); //한명만 넣음
             searchBook.setDescription(obj.getString("contents"));
 
             //0000년 00월 00일
