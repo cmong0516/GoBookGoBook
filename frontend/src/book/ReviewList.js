@@ -3,6 +3,7 @@ import { Card, CloseButton } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import PaginationCustom from "./PaginationCustom";
+import SeeMore from "./SeeMore";
 
 let CardWrapper = styled.div`
   margin-top: 1rem;
@@ -12,15 +13,31 @@ let CardWrapper = styled.div`
 
 // book은 context API로 갖고오기
 function ReviewList(props) {
+
   let userId = localStorage.getItem("userId");
   let [reviewList, setReviewList] = useState([]);
   // 리뷰 최근작성순으로 나오도록 reverse
   let reviews = reviewList.slice(0).reverse();
   let [nowPage, setNowPage] = useState(1);
 
+  // 페이징처리
   let LastIndex = nowPage * 4;
   let FirstIndex = LastIndex - 4;
   let nowPageReviews = reviews.slice(FirstIndex, LastIndex);
+  
+    // 리뷰 불러오기
+    useEffect(() => {
+        axios.post("/review/findbybook", {
+                isbn: props.book.isbn,
+            })
+            .then((res) => {
+                setReviewList(res.data);
+            })
+            .catch((error) => {
+                alert("리뷰 조회에 실패했습니다.");
+                console.log(error);
+            });
+    }, [props.stateCheck]);
 
   // 리뷰 불러오기
   useEffect(() => {
@@ -71,13 +88,15 @@ function ReviewList(props) {
           <CardWrapper>
             <Card>
               <Card.Body>
-                {userId == review.userId ? (
-                  <CloseButton
-                    style={{ float: "right" }}
-                    onClick={() => deleteReview(review)}
-                  />
-                ) : null}
-                <Card.Text>{review.content}</Card.Text>
+                {
+                  userId == review.userId
+                    ? <CloseButton
+                      style={{ float: "right" }} onClick={() => deleteReview(review)} />
+                    : null
+                }
+                <Card.Text>
+                  <SeeMore review={review.content}/>
+                </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted">
                 {review.userId}&nbsp; ({review.pubDate.substr(0, 4)}.

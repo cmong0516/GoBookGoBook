@@ -2,9 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Card, Badge, Button, Offcanvas } from "react-bootstrap";
+import { Row, Col, Card, Badge, Button } from "react-bootstrap";
 import { BookContext, SetBookContext } from "../App.js";
-import Review from "./Review.js";
 
 function Search(props) {
 
@@ -15,10 +14,6 @@ function Search(props) {
   let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
   let userId = localStorage.getItem("userId");
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios
@@ -43,7 +38,6 @@ function Search(props) {
         books.map((book, i) => (
           <Col>
             <Card className="searchcard" onClick={() => {
-              // alert(book.isbn);
               history.push("/detail/" + book.isbn);
             }}>
               <Badge bg="primary">
@@ -55,7 +49,7 @@ function Search(props) {
                 className="cardImg"
               />
               <Card.Body>
-                <Card.Title>{book.title}...</Card.Title>
+                <Card.Title>{book.title}</Card.Title>
                 <Card.Text>{book.author}</Card.Text>
                 <Card.Text>{book.publisher}</Card.Text>
                 {/* <Card.Text>{book.contents.substr(0, 60)}...</Card.Text> */}
@@ -85,20 +79,6 @@ function Search(props) {
                 />
                 : null
             }
-            <Button variant="primary" onClick={handleShow}>
-              Launch
-            </Button>
-
-            <Offcanvas show={show} placement={'end'} onHide={handleClose}>
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                Some text as placeholder. In real life you can have the elements you
-                have chosen. Like, text, images, lists, etc.
-              </Offcanvas.Body>
-            </Offcanvas>
-            {/* <Review book={book}/> */}
           </Col>
         ))}
     </Row>
