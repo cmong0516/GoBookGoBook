@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-    Card,
-    ListGroup,
-    ListGroupItem,
-    CloseButton,
-    Pagination
-} from "react-bootstrap";
+import {Card,CloseButton} from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import PaginationCustom from "./PaginationCustom";
@@ -16,6 +10,9 @@ let ReviewListWrapper = styled.div`
 let CardWrapper = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
+`
+let CloseButtonStyle = styled.span`
+    text-algin: right;
 `
 
 function ReviewList(props) {
@@ -29,19 +26,23 @@ function ReviewList(props) {
     let FirstIndex = LastIndex - 4;
     let nowPageReviews = reviews.slice(FirstIndex, LastIndex);
     
-
     let deleteReview = (review) => {
-        axios.post("/review/delete", {
+
+        if (window.confirm("회원님의 리뷰를 정말로 삭제하실건가요?")) {
+            axios.post("/review/delete", {
                 reviewId: review.reviewId,
             })
-            .then((res) => {
-                alert("리뷰가 삭제되었습니다.");
-                props.setStateCheck(!props.stateCheck);
-            })
-            .catch((error) => {
-                alert("리뷰 삭제에 실패했습니다.");
-                console.log(error);
-            });
+                .then((res) => {
+                    alert("리뷰가 삭제되었습니다.");
+                    props.setStateCheck(!props.stateCheck);
+                })
+                .catch((error) => {
+                    alert("리뷰 삭제에 실패했습니다.");
+                    console.log(error);
+                });
+        } else {
+            return false;
+        }
     };
 
     return (
@@ -53,13 +54,17 @@ function ReviewList(props) {
             }
             {nowPageReviews &&
                 nowPageReviews.map((review, i) => (
+                    
                     <CardWrapper>
+                        
                         <Card>
+                            {
+                                userId == review.userIdCloseButtonStyle 
+                                    ? <CloseButton onClick={() => deleteReview(review)} style={{float: "left"}} />
+                                : null
+                            }
                             <Card.Body>
-                                {userId == review.userId
-                                    ? <CloseButton onClick={() => deleteReview(review)} />
-                                    : null
-                                }
+                              
                                 <Card.Text>
                                     {review.content}
                                 </Card.Text>

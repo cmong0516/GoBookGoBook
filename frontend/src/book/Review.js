@@ -9,21 +9,6 @@ function Review(props) {
   let [stateCheck, setStateCheck] = useState(false);
   let book = props.book;
 
-  useEffect(() => {
-    axios
-      .post("/review/findbybook", {
-        isbn: book.isbn,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setReviewList(res.data);
-      })
-      .catch((error) => {
-        alert("리뷰 조회에 실패했습니다.");
-        console.log(error);
-      });
-  }, [stateCheck]);
-
     useEffect(() => {
         axios.post("/review/findbybook", {
                 isbn: book.isbn,
