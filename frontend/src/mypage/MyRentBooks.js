@@ -5,8 +5,8 @@ import axios from "axios";
 
 let CartStyle = styled.div`
   width: 33%;
-  max-width: 270px;
-  min-width: 240px;
+  max-width: 240px;
+  min-width: 210px;
   margin-top: 1rem;
 `;
 

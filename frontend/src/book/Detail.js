@@ -30,6 +30,10 @@ let DetailWrapper = styled.div`
   span {
     color: grey;
   }
+
+  p {
+    margin: 0;
+  }
 `;
 
 function Detail() {
