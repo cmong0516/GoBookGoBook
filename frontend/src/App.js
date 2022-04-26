@@ -116,6 +116,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
       <Switch>
         <Wrapper>
           <Route exact path="/api/bestseller">
@@ -160,8 +161,9 @@ function App() {
           </Route>
         </Wrapper>
       </Switch>
-
-      <Footer />
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 }

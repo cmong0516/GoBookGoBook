@@ -31,7 +31,7 @@ let DetailWrapper = styled.div`
   span {
     color: grey;
   }
-`
+`;
 
 function Detail() {
   let book = useContext(BookContext);
@@ -51,68 +51,67 @@ function Detail() {
 
 // 화면단 구성
 function DetailView(props) {
-
   let { isbn } = useParams();
   let book = props.books && props.books.find((x) => x.isbn == isbn);
   let userId = localStorage.getItem("userId");
   let [stateCheck, setStateCheck] = useState(false);
 
-
   return (
     <BookView>
       <Row>
-        <Col sm={3}>
-          <Card>
-            {
-              book.rank && <Card.Header>
+        <Col sm={1}></Col>
+        <Col sm={4} className="bookImg">
+          <Card className="detailCard">
+            {book.rank && (
+              <Card.Header>
                 <h4>
                   <Badge bg="light" text="dark">
                     베스트셀러 {book.rank}위 🏆
                   </Badge>
                 </h4>
               </Card.Header>
-            }
+            )}
             <Card.Img variant="top" src={book.coverLargeUrl} />
-          </Card>
-          <br />
-          {
-            userId != "admin0"
-              ? <RentButton
+            {userId != "admin0" ? (
+              <RentButton
                 book={book}
                 stateCheck={stateCheck}
                 setStateCheck={setStateCheck}
+                className="detailrent"
               />
-              : null
-          }
+            ) : null}
+          </Card>
+          <br />
         </Col>
 
-        <Col sm={5}>
+        <Col sm={6} className="bookInfo">
           <DetailWrapper>
             <h3>{book.title}</h3>
+            <br />
             <p>
-              <span>카테고리</span> {book.categoryName}({book.categoryId})<br />
+              <span>카테고리</span> {book.categoryName}({book.categoryId})
+              <br />
               <span>isbn</span> {book.isbn}
             </p>
+            <br />
             <Card>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>저자: {book.author}</ListGroupItem>
                 <ListGroupItem>
                   번역가:
-                  {
-                    book.translator
-                      ? book.translator
-                      : ' -'
-                  }
+                  {book.translator ? book.translator : " -"}
                 </ListGroupItem>
                 <ListGroupItem>
-                  출간일: {book.pubDate.substr(0, 4)}년 {book.pubDate.substr(4, 2)}월 {book.pubDate.substr(6, 2)}일
+                  출간일: {book.pubDate.substr(0, 4)}년{" "}
+                  {book.pubDate.substr(4, 2)}월 {book.pubDate.substr(6, 2)}일
                 </ListGroupItem>
                 <ListGroupItem>출판사: {book.publisher}</ListGroupItem>
-                {
-                  book.customerReviewRank == 0
-                    ? null
-                    : <Card.Footer className="text-muted"> 평점 : {book.customerReviewRank}</Card.Footer>
-                }
+                {book.customerReviewRank == 0 ? null : (
+                  <Card.Footer className="text-muted">
+                    {" "}
+                    평점 : {book.customerReviewRank}
+                  </Card.Footer>
+                )}
               </ListGroup>
               <Card.Body>
                 <Card.Text>{book.description}</Card.Text>
@@ -120,11 +119,11 @@ function DetailView(props) {
             </Card>
           </DetailWrapper>
         </Col>
-
-        <Col sm={4}>
+      </Row>
+      <Row>
+        <Col sm={12}>
           <Review book={book} />
         </Col>
-
       </Row>
     </BookView>
   );
