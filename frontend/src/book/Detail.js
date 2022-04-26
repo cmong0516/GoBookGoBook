@@ -29,6 +29,9 @@ let DetailWrapper = styled.div`
   span {
     color: grey;
   }
+  p {
+    margin: 0;
+  }
 `;
 
 function Detail() {
@@ -57,8 +60,8 @@ function DetailView(props) {
   return (
     <BookView>
       <Row>
-        <Col sm={4} className="bookImg">
-          <Card className="detailCard">
+        <Col sm={3}>
+          <Card>
             {book.rank && (
               <Card.Header>
                 <h4>
@@ -81,7 +84,7 @@ function DetailView(props) {
           <br />
         </Col>
 
-        <Col sm={6} className="bookInfo">
+        <Col sm={5}>
           <DetailWrapper>
             <h3>{book.title}</h3>
             <br />
@@ -116,9 +119,7 @@ function DetailView(props) {
             </Card>
           </DetailWrapper>
         </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
+        <Col sm={4}>
           <Review book={book} />
         </Col>
       </Row>
