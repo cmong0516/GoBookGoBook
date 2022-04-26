@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Card,
-  ListGroup,
   ListGroupItem,
   Row,
   Col,
@@ -15,8 +14,6 @@ import RentButton from "./RentButton.js";
 import styled from "styled-components";
 
 let BookView = styled.div`
-  display: grid;
-  justify-items: center;
   margin-bottom: 10vh;
   margin-top: 2vh;
   h4 {
@@ -60,7 +57,7 @@ function DetailView(props) {
   return (
     <BookView>
       <Row>
-        <Col sm={4}>
+        <Col sm={3}>
           <Card>
             {book.rank ? (
               <Card.Header>
@@ -84,7 +81,7 @@ function DetailView(props) {
           <br />
         </Col>
 
-        <Col sm={4}>
+        <Col sm={5}>
           <DetailWrapper>
             <h3>{book.title}</h3>
             <p>

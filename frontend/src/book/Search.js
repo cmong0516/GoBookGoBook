@@ -28,7 +28,6 @@ function Search(props) {
   let history = useHistory();
   let books = useContext(BookContext);
   let setBooks = useContext(SetBookContext);
-  // 대여상태에 따른 전체 책 하나하나의 버튼상태 업데이트를 위한 state
   let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
   let userId = localStorage.getItem("userId");

@@ -3,7 +3,7 @@ import { Card, CloseButton } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import PaginationCustom from "./PaginationCustom";
-import SeeMore from "./SeeMore";
+import SeeMoreText from "./SeeMoreText";
 
 let CardWrapper = styled.div`
   margin-top: 1rem;
@@ -95,7 +95,7 @@ function ReviewList(props) {
                     : null
                 }
                 <Card.Text>
-                  <SeeMore review={review.content}/>
+                  <SeeMoreText review={review.content}/>
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted">

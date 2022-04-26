@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function SeeMore({review}) {
+function SeeMoreText({review}) {
 
     let [seeMore, setSeeMore] = useState(false);
 
@@ -24,4 +24,4 @@ function SeeMore({review}) {
     );
 }
 
-export default SeeMore;
+export default SeeMoreText;
