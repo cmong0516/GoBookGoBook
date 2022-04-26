@@ -67,7 +67,7 @@ public class UserController {
 
     //비밀번호 찾기: 정상적으로 메일 전송 됐는지
     @PostMapping("/findpw")
-    public boolean findPw(@RequestBody User user){
+    public String findPw(@RequestBody User user){
 
         return mailService.sendMail(user);
     }
@@ -75,10 +75,10 @@ public class UserController {
     //비밀번호 찾기: 인증 후 비밀번호 던져주기
     @PostMapping("/findpw/code")
     public String checkCode(@RequestBody HashMap<String,String> param){
-        String code = param.get("code");
+//        String code = param.get("code");
         String userEmail = param.get("userEmail");
 //        int code = Integer.parseInt(stringCode); //굳이 바꿔야 하나?
 
-        return mailService.checkCode(code, userEmail);
+        return mailService.checkCode(userEmail);
     }
 }
