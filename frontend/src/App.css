@@ -64,3 +64,27 @@ textarea{
   resize: none;
   height: 15rem;
 }
+
+.closebutton{
+  text-align: end;
+}
+
+.footer{
+  position: relative;
+  bottom: 0;
+  width: 100vw;
+}
+
+.reviewTap{
+  width: 60vw;
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.bookInfo{
+  margin: auto;
+}
+
+.bookImg{
+  margin: auto;
+}

@@ -1,87 +1,72 @@
-import React, { useState } from "react";
-import {Card,CloseButton} from "react-bootstrap";
+import React, { useContext } from "react";
+import { Card, ListGroup, ListGroupItem, CloseButton } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
-import PaginationCustom from "./PaginationCustom";
 
-let ReviewListWrapper = styled.div`
-
-`
 let CardWrapper = styled.div`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-`
-let CloseButtonStyle = styled.span`
-    text-algin: right;
-`
+  margin-top: 1rem;
+`;
 
+// book은 context API로 갖고오기
 function ReviewList(props) {
+  let reviews = props.reviewList;
+  let book = props.book;
+  let userId = localStorage.getItem("userId");
 
-    // 리뷰 최근작성순으로 나오도록 reverse
-    let reviews = props.reviewList.slice(0).reverse();
-    let userId = localStorage.getItem("userId");
-    let [nowPage, setNowPage] = useState(1);
+  let deleteReview = (reviewId) => {
+    axios
+      .post("/review/delete", {
+        reviewId: reviewId,
+      })
+      .then((res) => {
+        alert("리뷰가 삭제되었습니다.");
+        props.setStateCheck(!props.stateCheck);
+      })
+      .catch((error) => {
+        alert("리뷰 삭제에 실패했습니다.");
+        console.log(error);
+      });
+  };
 
-    let LastIndex = nowPage * 4;
-    let FirstIndex = LastIndex - 4;
-    let nowPageReviews = reviews.slice(FirstIndex, LastIndex);
-    
-    let deleteReview = (review) => {
+  return (
+    <div>
+      <Card>
+        <Card.Body>
+          <Card.Title>첫번째 리뷰</Card.Title>
+          <Card.Text>첫번째 유저입니다 / 2022년 4월 25일</Card.Text>
+          <Card.Text></Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroupItem>재밌게 열심히 만들었습니다.</ListGroupItem>
+        </ListGroup>
+      </Card>
 
-        if (window.confirm("회원님의 리뷰를 정말로 삭제하실건가요?")) {
-            axios.post("/review/delete", {
-                reviewId: review.reviewId,
-            })
-                .then((res) => {
-                    alert("리뷰가 삭제되었습니다.");
-                    props.setStateCheck(!props.stateCheck);
-                })
-                .catch((error) => {
-                    alert("리뷰 삭제에 실패했습니다.");
-                    console.log(error);
-                });
-        } else {
-            return false;
-        }
-    };
-
-    return (
-        <ReviewListWrapper>
-            {
-                reviews.length == 0
-                    ? <div>아직 리뷰가 없습니다.<br/>첫 리뷰의 주인공이 되어보세요!</div>
-                    : null
-            }
-            {nowPageReviews &&
-                nowPageReviews.map((review, i) => (
-                    
-                    <CardWrapper>
-                        
-                        <Card>
-                            {
-                                userId == review.userIdCloseButtonStyle 
-                                    ? <CloseButton onClick={() => deleteReview(review)} style={{float: "left"}} />
-                                : null
-                            }
-                            <Card.Body>
-                              
-                                <Card.Text>
-                                    {review.content}
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Footer className="text-muted">
-                                {review.userId}&nbsp;
-                                ({review.pubDate.substr(0, 4)}.
-                                {review.pubDate.substr(5, 2)}.
-                                {review.pubDate.substr(8, 2)})
-                            </Card.Footer>
-                        </Card>
-                    </CardWrapper>
-                ))}
-            
-            <PaginationCustom reviewsNum={reviews.length} setNowPage={setNowPage}/>
-        </ReviewListWrapper>
-    );
+      {reviews &&
+        reviews
+          .slice(0)
+          .reverse()
+          .map((review, i) => (
+            <CardWrapper>
+              <Card>
+                <Card.Body>
+                  <div className="closebutton">
+                    {userId == review.userId ? (
+                      <CloseButton
+                        onClick={() => deleteReview(review.reviewId)}
+                      />
+                    ) : null}
+                  </div>
+                  <Card.Text>{review.content}</Card.Text>
+                </Card.Body>
+                <Card.Footer className="text-muted">
+                  {review.userId}&nbsp; ({review.pubDate.substr(0, 4)}.
+                  {review.pubDate.substr(5, 2)}.{review.pubDate.substr(8, 2)})
+                </Card.Footer>
+              </Card>
+            </CardWrapper>
+          ))}
+    </div>
+  );
 }
 
 export default ReviewList;

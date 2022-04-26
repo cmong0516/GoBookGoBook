@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
+// book은 context API로 갖고오기
 function ReviewAdd(props) {
 
     let [myreview, setMyReview] = useState('');
@@ -18,7 +19,8 @@ function ReviewAdd(props) {
     };
 
     let addReview = () => {
-        axios.post("/review/add", {
+        axios
+            .post("/review/add", {
                 userId: userId,
                 title: book.title,
                 content: myreview,
