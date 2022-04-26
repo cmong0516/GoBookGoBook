@@ -20,14 +20,14 @@ public class BookService {
         this.properties = properties;
     }
 
-    public ArrayList<SearchBook> search(String query) throws JSONException {
+    public ArrayList<SearchBook> search(String query, Integer page) throws JSONException {
         Mono<String> stringMono = WebClient.builder().baseUrl("https://dapi.kakao.com") //호스트
                 .build().get()
                 .uri(builder -> builder.path("/v3/search/book") //호스트 뒤에 api주소를 붙인다.
                                 //우선 필수 파라미터만 넣겠다.
                                 .queryParam("query", query)
                                 .queryParam("size",16)
-//                        .queryParam("page",page)
+                                .queryParam("page",page)
                                 .build()
                 )
                 .header("Authorization", "KakaoAK "+properties.getKakaoRestApi()) //원래 키는 프로퍼티에서 꺼내오도록 하자
@@ -38,8 +38,8 @@ public class BookService {
         String block = stringMono.block(); //정보 들어있음
 
         JSONObject jsonObject = new JSONObject(block);
-
         JSONArray documents = jsonObject.getJSONArray("documents");
+
         /*System.out.println("documents = " + documents);
         JSONObject jsonArray = documents.getJSONObject(0);
         System.out.println("jsonArray = " + jsonArray.get("authors"));

@@ -25,11 +25,12 @@ let BookView = styled.div`
 `;
 
 let DetailWrapper = styled.div`
+  margin-top: 1rem;
   text-align: left;
   span {
     color: grey;
   }
-`;
+`
 
 function Detail() {
   let book = useContext(BookContext);
@@ -59,34 +60,31 @@ function DetailView(props) {
   return (
     <BookView>
       <Row>
-        <Col sm={3}>
+        <Col sm={4}>
           <Card>
-            {book.rank
-             ? <Card.Header>
+            {book.rank ? (
+              <Card.Header>
                 <h4>
                   <Badge bg="light" text="dark">
                     베스트셀러 {book.rank}위 🏆
                   </Badge>
                 </h4>
               </Card.Header>
-             : null
-            }
+            ) : null}
             <Card.Img variant="top" src={book.coverLargeUrl} />
-            {
-              userId != "admin0"
-                ? <RentButton
-                  book={book}
-                  stateCheck={stateCheck}
-                  setStateCheck={setStateCheck}
-                  className="detailrent"
-                />
-                : null
-            }
+            {userId != "admin0" ? (
+              <RentButton
+                book={book}
+                stateCheck={stateCheck}
+                setStateCheck={setStateCheck}
+                className="detailrent"
+              />
+            ) : null}
           </Card>
           <br />
         </Col>
 
-        <Col sm={5}>
+        <Col sm={4}>
           <DetailWrapper>
             <h3>{book.title}</h3>
             <p>
