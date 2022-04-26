@@ -14,7 +14,7 @@ function Clock() {
   };
 
   const startTimer = () => {
-    setInterval(currentTimer, 59999);
+    setInterval(currentTimer, 1000);
   };
   startTimer();
   return (
