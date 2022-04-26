@@ -2,8 +2,26 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Card, Badge, Button } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import { BookContext, SetBookContext } from "../App.js";
+import styled from "styled-components";
+
+let Wrapper = styled.div`
+  text-align: left;
+
+  h3 {
+    padding: 0;
+  }
+`
+let BookWrapper = styled.div`
+  padding: 0.5rem;
+  cursor: pointer;
+
+  hr {
+    margin-top: 0.5rem;
+    padding: 0;
+  }
+`
 
 function Search(props) {
 
@@ -32,57 +50,73 @@ function Search(props) {
   }, [searchWord, stateCheck]);
 
   return (
-  
-    <Row xs={1} md={4} className="g-4">
-      {books &&
-        books.map((book, i) => (
-          <Col>
-            <Card className="searchcard" onClick={() => {
-              history.push("/detail/" + book.isbn);
-            }}>
-              <Badge bg="primary">
-                {searchWord} 검색 결과 No.{i + 1}
-              </Badge>
-              <Card.Img
-                variant="top"
-                src={book.coverLargeUrl}
-                className="cardImg"
-              />
-              <Card.Body>
-                <Card.Title>{book.title}</Card.Title>
-                <Card.Text>{book.author}</Card.Text>
-                <Card.Text>{book.publisher}</Card.Text>
-                {/* <Card.Text>{book.contents.substr(0, 60)}...</Card.Text> */}
-                <Card.Text>{book.description}...</Card.Text>
-              </Card.Body>
-            </Card>
-            {
-              userId != "admin0"
-                ?
-                <RentButton
-                  book={{
-                    author: book.author,
-                    categoryName: '',
-                    coverLargeUrl: book.coverLargeUrl,
-                    coverSmallUrl: book.coverLargeUrl,
-                    customerReviewRank: '',
-                    description: book.description,
-                    isbn: book.isbn,
-                    pubDate: book.dateTime,
-                    publisher: book.publisher,
-                    rank: '',
-                    title: book.title,
-                    userId: userId,
-                  }}
-                  stateCheck={stateCheck}
-                  setStateCheck={setStateCheck}
-                />
-                : null
-            }
-          </Col>
+    <Wrapper>
+      {
+        books && books.map((book) => (
+          <BookWrapper>
+            <Row style={{ alignItems: "center" }}>
+
+              <Col sm={12} md={10}>
+                <Row onClick={() => { history.push("/detail/" + book.isbn) }}>
+                  <Col sm={6} md={2}>
+                    <img
+                      variant="top"
+                      width="100%"
+                      src={book.coverLargeUrl}
+                    />
+                  </Col>
+                  <Col sm={6} md={10}>
+                    <Card style={{ height: '100%'}}>
+                      <Card.Body>
+                        <Card.Title>{book.title}</Card.Title>
+                        <Card.Subtitle className="mt-2 mb-2 text-muted">{book.author} 지음&nbsp; | &nbsp;{book.publisher}</Card.Subtitle>
+                        <Card.Text>
+                          <footer className="blockquote-footer mt-1">
+                            {book.description.substr(0, 200)}
+                            {
+                              book.description.length > 200
+                                ? '...'
+                                : null
+                            }
+                          </footer>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              </Col>
+
+              {
+                userId != 'admin0'
+                  ?
+                  <Col sm={0} md={2} >
+                    <RentButton
+                      book={{
+                        author: book.author,
+                        categoryName: '',
+                        coverLargeUrl: book.coverLargeUrl,
+                        coverSmallUrl: book.coverLargeUrl,
+                        customerReviewRank: '',
+                        description: book.description,
+                        isbn: book.isbn,
+                        pubDate: book.dateTime,
+                        publisher: book.publisher,
+                        rank: '',
+                        title: book.title,
+                        userId: userId,
+                      }}
+                      stateCheck={stateCheck}
+                      setStateCheck={setStateCheck}
+                    />
+                  </Col>
+                  : null
+              }
+
+            </Row>
+          </BookWrapper>
         ))}
-    </Row>
-  );
+    </Wrapper>
+  )
 }
 
 export default Search;

@@ -165,9 +165,7 @@ function App() {
           </Route>
         </Wrapper>
       </Switch>
-      <div className="footer">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

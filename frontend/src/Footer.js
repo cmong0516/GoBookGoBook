@@ -5,7 +5,7 @@ let Wrapper = styled.div`
   background-color: rgb(42, 46, 46);
   color: Gray;
   margin-top: 6rem;
-  padding: 1rem 11rem;
+  padding: 4rem 10rem;
   text-align: left;
   span {
     color: DarkGrey;
