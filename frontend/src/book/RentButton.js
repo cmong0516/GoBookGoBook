@@ -21,7 +21,6 @@ function RentButton(props) {
         res.data.map((mybooks) => {
           if (mybooks.state == true) {
             booksNum++;
-            console.log(booksNum);
           }
         });
 

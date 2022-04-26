@@ -62,24 +62,27 @@ function DetailView(props) {
       <Row>
         <Col sm={3}>
           <Card>
-            {book.rank && (
-              <Card.Header>
+            {book.rank
+             ? <Card.Header>
                 <h4>
                   <Badge bg="light" text="dark">
                     베스트셀러 {book.rank}위 🏆
                   </Badge>
                 </h4>
               </Card.Header>
-            )}
+             : null
+            }
             <Card.Img variant="top" src={book.coverLargeUrl} />
-            {userId != "admin0" ? (
-              <RentButton
-                book={book}
-                stateCheck={stateCheck}
-                setStateCheck={setStateCheck}
-                className="detailrent"
-              />
-            ) : null}
+            {
+              userId != "admin0"
+                ? <RentButton
+                  book={book}
+                  stateCheck={stateCheck}
+                  setStateCheck={setStateCheck}
+                  className="detailrent"
+                />
+                : null
+            }
           </Card>
           <br />
         </Col>
@@ -106,12 +109,13 @@ function DetailView(props) {
                   {book.pubDate.substr(4, 2)}월 {book.pubDate.substr(6, 2)}일
                 </ListGroupItem>
                 <ListGroupItem>출판사: {book.publisher}</ListGroupItem>
-                {book.customerReviewRank == 0 ? null : (
-                  <Card.Footer className="text-muted">
-                    {" "}
-                    평점 : {book.customerReviewRank}
-                  </Card.Footer>
-                )}
+                {
+                  book.customerReviewRank == 0
+                    ? null
+                    : <Card.Footer className="text-muted">
+                      평점 : {book.customerReviewRank}
+                    </Card.Footer>
+                }
               </ListGroup>
               <Card.Body>
                 <Card.Text>{book.description}</Card.Text>

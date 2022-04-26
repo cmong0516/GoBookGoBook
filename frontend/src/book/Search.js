@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
+import { useHistory } from "react-router-dom";
 import { Row, Col, Card, Badge } from "react-bootstrap";
 
 function Search(props) {
+
+  let history = useHistory();
   let [result, setResult] = useState();
   // 대여상태에 따른 전체 책 하나하나의 버튼상태 업데이트를 위한 state
   let [stateCheck, setStateCheck] = useState(false);
@@ -26,10 +29,14 @@ function Search(props) {
   }, [searchWord, stateCheck]);
 
   return (
+  
     <Row xs={1} md={4} className="g-4">
       {result &&
         result.map((book, i) => (
-          <Col>
+          <Col onClick={() => {
+            // history.push("/detail/" + book.isbn);
+            alert('체크');
+          }}>
             <Card className="searchcard">
               <Badge bg="primary">
                 {searchWord} 검색 결과 No.{i + 1}
@@ -46,26 +53,29 @@ function Search(props) {
                 <Card.Text>{book.contents.substr(0, 60)}...</Card.Text>
               </Card.Body>
             </Card>
-            {userId != "admin0" ? (
-              <RentButton
-                book={{
-                  author: book.authors,
-                  categoryName: book.categoryName,
-                  coverLargeUrl: book.coverLargeUrl,
-                  coverSmallUrl: book.thumbnail,
-                  customerReviewRank: book.customerReviewRank,
-                  description: book.contents,
-                  isbn: book.isbn,
-                  pubDate: book.dateTime,
-                  publisher: book.publisher,
-                  rank: book.rank,
-                  title: book.title,
-                  userId: userId,
-                }}
-                stateCheck={stateCheck}
-                setStateCheck={setStateCheck}
-              />
-            ) : null}
+            {
+              userId != "admin0"
+                ?
+                <RentButton
+                  book={{
+                    author: book.authors,
+                    categoryName: book.categoryName,
+                    coverLargeUrl: book.coverLargeUrl,
+                    coverSmallUrl: book.thumbnail,
+                    customerReviewRank: book.customerReviewRank,
+                    description: book.contents,
+                    isbn: book.isbn,
+                    pubDate: book.dateTime,
+                    publisher: book.publisher,
+                    rank: '',
+                    title: book.title,
+                    userId: userId,
+                  }}
+                  stateCheck={stateCheck}
+                  setStateCheck={setStateCheck}
+                />
+                : null
+            }
           </Col>
         ))}
     </Row>
