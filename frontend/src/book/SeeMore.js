@@ -9,13 +9,16 @@ function SeeMore({review}) {
             {
                 seeMore
                     ? review
-                    : review.slice(0,50)
+                    : review.slice(0, 50)
             }
             {
-                review.length > 100 &&
-                    !seeMore
-                    ? <span onClick={() => setSeeMore(true)}>... [더보기]</span>
-                    : <span onClick={() => setSeeMore(false)}>[닫기]</span>
+                review.length > 50
+                    ? (
+                        !seeMore
+                            ? <span onClick={() => setSeeMore(true)}>... [더보기]</span>
+                            : <span onClick={() => setSeeMore(false)}>[닫기]</span>
+                    )
+                    : null
             }
         </div>
     );
