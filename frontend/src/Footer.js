@@ -4,8 +4,8 @@ import styled from "styled-components";
 let Wrapper = styled.div`
   background-color: rgb(42, 46, 46);
   color: Gray;
-  margin-top: 3rem;
-  padding: 3rem 15rem;
+  margin-top: 6rem;
+  padding: 1rem 11rem;
   text-align: left;
   span {
     color: DarkGrey;
@@ -18,11 +18,9 @@ function Footer() {
       <span>
         서비스 이용약관 | 개인정보 처리방침 | 회사 안내
         <br />
+        고객센터 : 1544-9001, 평일 08:00 ~ 20:00 (점심시간 12:00 ~ 13:00)
         <br />
-        고객센터 | 1544-9001, 평일 08:00 ~ 20:00 휴일 09:00 ~ 18:00 (점심시간
-        12:00 ~ 13:00 제외)
-        <br />
-        광고문의 | ad@gobook.com
+        광고문의 : ad@gobook.com
         <br />
       </span>
       <br />
