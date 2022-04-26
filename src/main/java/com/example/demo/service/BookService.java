@@ -39,7 +39,7 @@ public class BookService {
 
         JSONObject jsonObject = new JSONObject(block);
         JSONArray documents = jsonObject.getJSONArray("documents");
-        
+
         /*System.out.println("documents = " + documents);
         JSONObject jsonArray = documents.getJSONObject(0);
         System.out.println("jsonArray = " + jsonArray.get("authors"));
