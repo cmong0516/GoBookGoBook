@@ -15,6 +15,7 @@ import Goodbye from "./user/Goodbye.js";
 import Admin from "./user/Admin.js";
 import Footer from "./Footer.js";
 import FindMyInfo from "./user/FindMyInfo";
+import Clock from "./Clock";
 
 // const GlobalStyle  =  createGlobalStyle`
 //   font-family: 'Pretendard-Medium';
@@ -62,6 +63,7 @@ function App() {
             </Link>
           </div>
           <div>
+            <Clock />
             {userId ? (
               <div>
                 <Link to="/">
