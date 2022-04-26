@@ -59,9 +59,10 @@ public class APIController {
     private BookService bookService;
 
     @GetMapping("/search")
-    public ArrayList<SearchBook> search(@RequestParam String query) throws JSONException {
+    public ArrayList<SearchBook> search(@RequestParam String query,
+                                        @RequestParam(required = false) Integer page) throws JSONException {
 
-        return bookService.search(query);
+        return bookService.search(query, page);
     }
 
     @PostMapping("/newbook")
@@ -74,7 +75,6 @@ public class APIController {
                 .block();
         JSONObject jsonObject = new JSONObject(result);
         JSONArray test1 = jsonObject.getJSONArray("item");
-        ;
 
         ArrayList<NewBook> newBooks = new ArrayList<>();
 
