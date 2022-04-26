@@ -3,14 +3,12 @@ package com.example.demo.service;
 import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,13 +20,16 @@ public class MailService {
     private JavaMailSender javaMailSender;
     private UserRepository userRepository;
 
-    //인증번호 6자리: 난수 발생
-    static Random r = new Random();
-    static int intNum = r.nextInt(999999); //6자리 랜덤 난수
-    static String num = Integer.toString(intNum);
+
     //비밀번호 인증: 메일 보내기
-    public boolean sendMail(User user){
+    public String sendMail(User user){
         String userEmail = user.getUserEmail(); //유저 메일
+
+        //인증번호 6자리: 난수 발생
+        Random r = new Random();
+        int intNum = r.nextInt(999999); //6자리 랜덤 난수
+        String num = Integer.toString(intNum);
+        System.out.println("num = " + num);
 
         //이메일 유효성: 회원이 있는지 확인
         List<User> byEmail = userRepository.findByEmail(userEmail);
@@ -62,34 +63,26 @@ public class MailService {
                 System.out.println(e.getMessage());
             }
 
-            return true; //전송 성공
+            return num; //전송 성공
         }else{
-            return false; //전송 실패
+            return null; //전송 실패
         }
     }
 
     //인증번호 처리 후 비번 보내기
-    public String checkCode(String code, String userEmail){
+    public String checkCode(String userEmail){
 
-//        System.out.println(num); //인증번호 귀찮으면 쓰세요
 
-        //입력한 인증번호 == 메일로 전송된 인증번호
-        if(code.equals(num)){
+        List<User> byEmail = userRepository.findByEmail(userEmail);
+        User user = byEmail.get(0);
 
-            List<User> byEmail = userRepository.findByEmail(userEmail);
-            User user = byEmail.get(0);
+        //비밀번호 암호화
+        String password = passwordEncoding("gobook777!");
+        user.setUserPw(password);
 
-            //비밀번호 암호화
-            String password = passwordEncoding("gobook777!");
-            user.setUserPw(password);
+        userRepository.save(user);
 
-            userRepository.save(user);
-
-            return "gobook777!";
-        }else{
-            return "인증번호 불일치";
-        }
-
+        return "gobook777!";
     }
 
     //암호화 함수
