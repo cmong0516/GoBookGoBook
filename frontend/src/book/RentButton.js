@@ -5,41 +5,45 @@ import "../App.css";
 import axios from "axios";
 
 function RentButton(props) {
+
   let userId = localStorage.getItem("userId");
 
-  // myBook은 전역state로 관리??
   let history = useHistory();
   let [rentStatus, setRentStatus] = useState("rent");
   let [myBook, setMyBook] = useState();
 
+  // 나의 전체 대여/반납 도서목록 가져오기
   useEffect(() => {
-    axios
-      .post("/rent/info", { userId: userId })
+    axios.post("/rent/info", { userId: userId })
       .then((res) => {
         let booksNum = 0;
 
+        // 대여한 도서 수 판단
         res.data.map((mybooks) => {
           if (mybooks.state == true) {
             booksNum++;
           }
         });
 
-        // 반납 시 서버에 줄 대여책정보 (한번더 빌리는 경우 state가 true인 데이터로 주기)
+        // 반납 시 서버에 줄 대여책정보 
+        // (같은 책을 한번 더 빌리는 경우를 고려해 state가 true(현재 대여중)인 데이터)
         setMyBook(
           res.data
             .filter((x) => x.title == props.book.title)
             .filter((x) => x.state == true)
         );
 
-        // 해당하지 않는 값은 null인줄 알았으나 콘솔찍어보니 빈배열이어서 .length로 빈배열판단
         if (
           res.data
-            .filter((x) => x.title == props.book.title)
-            .filter((x) => x.state == true).length !== 0
+            .filter((x) => x.title == props.book.title)  // 현재 보는 책의 도서명과 나의 대여/반납도서들 중 도서명이 같은 것 
+            .filter((x) => x.state == true).length !== 0  // 그 중 대여중인 책
         ) {
           setRentStatus("return");
+          // 그렇지 않고 대여 도서 수가 5개라면 대여금지, 5개 미만이면 대여
         } else {
-          booksNum >= 5 ? setRentStatus("forbidden") : setRentStatus("rent");
+          booksNum >= 5
+            ? setRentStatus("forbidden")
+            : setRentStatus("rent")
         }
       })
       .catch((error) => {
@@ -47,30 +51,31 @@ function RentButton(props) {
         console.log(error);
       });
   }, [props.stateCheck]);
+  // 대여버튼의 상위컴포넌트 리렌더링을 위함
 
-  // function으로 따로 빼기
   let rentFunc = () => {
+
+    // 로그인하지 않고 대여버튼 클릭 시 로그인으로 이동
     if (!userId) {
       alert("로그인 후 이용할 수 있습니다.");
       return history.push("/login");
     }
 
-    axios
-      .post("/rent/add", {
-        author: props.book.author,
-        categoryName: props.book.categoryName,
-        coverLargeUrl: props.book.coverLargeUrl,
-        coverSmallUrl: props.book.coverSmallUrl,
-        customerReviewRank: props.book.customerReviewRank,
-        description: props.book.description,
-        isbn: props.book.isbn,
-        pubDate: props.book.pubDate,
-        publisher: props.book.publisher,
-        rank: props.book.rank,
-        title: props.book.title,
-        userId: userId,
-      })
-      .then((res) => {
+    axios.post("/rent/add", {
+      author: props.book.author,
+      categoryName: props.book.categoryName,
+      coverLargeUrl: props.book.coverLargeUrl,
+      coverSmallUrl: props.book.coverSmallUrl,
+      customerReviewRank: props.book.customerReviewRank,
+      description: props.book.description,
+      isbn: props.book.isbn,
+      pubDate: props.book.pubDate,
+      publisher: props.book.publisher,
+      rank: props.book.rank,
+      title: props.book.title,
+      userId: userId,
+    })
+      .then(() => {
         props.setStateCheck(!props.stateCheck);
         alert("대여 성공!");
       })
@@ -80,13 +85,11 @@ function RentButton(props) {
       });
   };
 
-  // function으로 따로 빼기
   let returnFunc = () => {
-    axios
-      .post("/rent/return", {
-        rentId: myBook[0].rentId,
-      })
-      .then((res) => {
+    axios.post("/rent/return", {
+      rentId: myBook[0].rentId,
+    })
+      .then(() => {
         alert("반납하셨습니다.");
         props.setStateCheck(!props.stateCheck);
       })

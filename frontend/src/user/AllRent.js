@@ -13,12 +13,13 @@ let Styledth2 = styled.td`
 function AllRent() {
 
   let [rent, setRent] = useState([]);
+
+  // 반납 시 리스트 리렌더링을 위한 state
   let [stateCheck, setStateCheck] = useState(false);
 
   useEffect(() => {
     axios.post("/rent/infoall")
       .then((res) => {
-        console.log(res);
         setRent(res.data);
       })
       .catch((error) => {
@@ -26,58 +27,32 @@ function AllRent() {
       });
   }, [stateCheck]);
 
-  // let rentFunc = (rent) => {
-
-  //   axios.post("/rent/add", {
-  //       author: rent.author,
-  //       categoryName: rent.categoryName,
-  //       coverLargeUrl: rent.coverLargeUrl,
-  //       coverSmallUrl: rent.coverSmallUrl,
-  //       customerReviewRank: rent.customerReviewRank,
-  //       description: rent.description,
-  //       isbn: rent.isbn,
-  //       pubDate: rent.pubDate,
-  //       publisher: rent.publisher,
-  //       rank: rent.rank,
-  //       title: rent.title,
-  //       userId: rent.userId
-  //     })
-  //     .then((res) => {
-  //       alert("대여 성공!");
-  //       setStateCheck(!stateCheck);
-  //     })
-  //     .catch((error) => {
-  //         alert("대여 통신에 실패했습니다.");
-  //         console.log(error);
-  //     });
-  // };
-
   let returnFunc = (rentId) => {
 
     axios.post("/rent/return", {
       rentId: rentId,
     })
-    .then((res) => {
-      alert("반납하셨습니다.");
-      setStateCheck(!stateCheck);
-    })
-    .catch((error) => {
-      alert("반납 서버와의 통신에 실패했습니다.")
-      console.log(error);
-    });
+      .then(() => {
+        alert("반납하셨습니다.");
+        setStateCheck(!stateCheck);
+      })
+      .catch((error) => {
+        alert("반납 서버와의 통신에 실패했습니다.")
+        console.log(error);
+      });
   }
 
   return (
     <div>
       <h3>전체 대여관리</h3>
-      <Table hover>
+      <Table hover style={{ borderSpacing: '7px', borderCollapse: 'separate' }}>
         <thead>
           <tr>
-            <th>대여번호</th>
+            <th>No</th>
             <th>아이디</th>
             <th>도서명</th>
             <th>대여일</th>
-            <th>대여상태</th>
+            <th>상태</th>
             <th>대여/반납</th>
           </tr>
         </thead>
@@ -85,10 +60,10 @@ function AllRent() {
           {rent && rent.slice(0).reverse().map((rent, i) => (
             <tr>
               <Styledth1>{rent.rentId}</Styledth1>
-              <Styledth2>{rent.userId}</Styledth2>
+              <Styledth1>{rent.userId}</Styledth1>
               <td>{rent.title}</td>
               <Styledth2>{rent.rentDate}</Styledth2>
-              <Styledth1>{rent.state == true ? "대여중" : "반납완료"}</Styledth1>
+              <Styledth2>{rent.state == true ? "대여중" : "반납완료"}</Styledth2>
               <Styledth2>
                 {
                   rent.state == true
@@ -96,9 +71,6 @@ function AllRent() {
                       반납하기
                     </Button>
                     : null
-                    //   <Button variant="outline-success" size="sm" onClick={() => rentFunc(rent)}>
-                    //   대여하기
-                    // </Button>
                 }
               </Styledth2>
             </tr>

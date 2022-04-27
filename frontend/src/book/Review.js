@@ -5,9 +5,10 @@ import ReviewAdd from "./ReviewAdd.js";
 
 function Review(props) {
 
-    let [stateCheck, setStateCheck] = useState(false);
-    let book = props.book;
-    
+  // 리렌더링을 위한 state
+  let [stateCheck, setStateCheck] = useState(false);
+  let book = props.book;
+
   return (
     <div>
       <Tabs

@@ -25,12 +25,15 @@ let LoginForm = styled.div`
     font-weight: bold;
     text-align: left;
   }
-  p {
-    text-align: left;
+  p { text-align: left }
+  a {
+    color: black;
+    text-decoration: none;
+
+    &:hover{ 
+      text-decoration: underline;
+    }
   }
-`;
-let Signin = styled.span`
-  text-decoration: underline;
 `;
 let Alarm = styled.div`
   width: 100%;
@@ -78,8 +81,8 @@ function Login(props) {
         "아이디 또는 비밀번호의 형식이 올바르지 않습니다."
       );
     } else {
-      axios
-        .post("/login", {
+
+      axios.post("/login", {
           userId: account.userId,
           userPw: account.userPw,
         })
@@ -129,13 +132,9 @@ function Login(props) {
           로그인
         </Button>
         아이디를 잊으셨나요?&nbsp;&nbsp;&nbsp;
-        <Signin>
           <Link to="/findmyinfo">내정보찾기</Link>
-        </Signin>
         <span>&nbsp; | &nbsp;</span>
-        <Signin>
           <Link to="/signin">회원가입</Link>
-        </Signin>
       </form>
     </LoginForm>
   );

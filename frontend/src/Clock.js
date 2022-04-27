@@ -1,25 +1,23 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 function Clock() {
-  const [timer, setTimer] = useState("00:00");
-  const date = new Date();
-  const year = String(date.getFullYear());
-  const month = String(date.getMonth() + 1);
-  const tdate = String(date.getDate());
-  const currentTimer = () => {
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    setTimer(`${hours} : ${minutes}`);
-  };
+  let timer: any = null;
+  const [time, setTime] = useState(moment());
 
-  const startTimer = () => {
-    setInterval(currentTimer, 1000);
-  };
-  startTimer();
+  useEffect(() => {
+    timer = setInterval(() => {
+      setTime(moment());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <div>
-      {year}년 {month}월 {tdate}일 <h4>{timer}</h4>
+        {time.format("YYYY년 MM월 DD일")}
+      <h4> {time.format("HH : mm : ss")}</h4>
     </div>
   );
 }

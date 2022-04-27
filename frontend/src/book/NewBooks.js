@@ -16,6 +16,7 @@ function NewBooks() {
   let books = useContext(BookContext);
   let setBooks = useContext(SetBookContext);
 
+  // 전체 신간정보
   useEffect(() => {
     axios.post("/api/newbook")
       .then((res) => {
@@ -27,9 +28,9 @@ function NewBooks() {
       });
   }, []);
 
+  // 카테고리별 신간도서정보
   function categoryNewbooks(categoryId) {
-    axios
-      .get("/api/newbook/" + categoryId)
+    axios.get("/api/newbook/" + categoryId)
       .then((res) => {
         setBooks(res.data);
       })

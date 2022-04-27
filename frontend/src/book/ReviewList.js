@@ -3,7 +3,7 @@ import { Card, CloseButton } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import PaginationCustom from "./PaginationCustom";
-import SeeMore from "./SeeMore";
+import SeeMoreText from "./SeeMoreText";
 
 let CardWrapper = styled.div`
   margin-top: 1rem;
@@ -39,22 +39,6 @@ function ReviewList(props) {
             });
     }, [props.stateCheck]);
 
-  // 리뷰 불러오기
-  useEffect(() => {
-    axios
-      .post("/review/findbybook", {
-        isbn: props.book.isbn,
-      })
-      .then((res) => {
-        console.log(res.data);
-        setReviewList(res.data);
-      })
-      .catch((error) => {
-        alert("리뷰 조회에 실패했습니다.");
-        console.log(error);
-      });
-  }, [props.stateCheck]);
-
   // 리뷰 삭제
   let deleteReview = (review) => {
     if (window.confirm("회원님의 리뷰를 정말로 삭제하실건가요?")) {
@@ -80,7 +64,7 @@ function ReviewList(props) {
       {reviews.length == 0 ? (
         <div>
           아직 리뷰가 없습니다.
-          <br />첫 리뷰의 주인공이 되어보세요!
+          <br />첫 리뷰를 작성해보세요!
         </div>
       ) : null}
       {nowPageReviews &&
@@ -95,7 +79,8 @@ function ReviewList(props) {
                     : null
                 }
                 <Card.Text>
-                  <SeeMore review={review.content}/>
+                  {/* 리뷰내용이 50자를 넘는 경우 더보기 처리를 위한 컴포넌트 */}
+                  <SeeMoreText review={review.content}/>
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted">

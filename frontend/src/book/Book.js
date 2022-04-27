@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { BestSellerContext } from "./BestSeller.js";
 import { NewBooksContext } from "./NewBooks.js";
 import { useHistory } from "react-router-dom";
-import {Row} from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import styled from "styled-components";
 
 let BookWrapper = styled.div`
   width: 80%;
-  margin-top: 2rem;
+  margin: 1rem 0;
   text-align: left;
   cursor: pointer;
 
@@ -42,11 +42,10 @@ function Book() {
 
   return (
     <div>
-      {bestSeller ? (
-        <BookList books={bestSeller} />
-      ) : (
-        <BookList books={newBooks} />
-      )}
+      {bestSeller
+        ? <BookList books={bestSeller} />
+        : <BookList books={newBooks} />
+      }
     </div>
   );
 }
