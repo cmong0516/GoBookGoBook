@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     Card,
     ListGroup,
     ListGroupItem,
-    Button
+    Button,
+    Form
 } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -19,19 +20,19 @@ function ReviewAdd(props) {
     // 리뷰 추가
     let addReview = () => {
 
+        // 로그인하고 리뷰 작성버튼 누르면 로그인화면으로
         if (!userId) {
             alert("로그인 후 이용할 수 있습니다.");
             return history.push("/login");
         }
 
-        axios
-            .post("/review/add", {
-                userId: userId,
-                title: book.title,
-                content: myreview,
-                isbn: book.isbn,
-            })
-            .then((res) => {
+        axios.post("/review/add", {
+            userId: userId,
+            title: book.title,
+            content: myreview,
+            isbn: book.isbn,
+        })
+            .then(() => {
                 alert("리뷰 등록 성공!");
                 props.setStateCheck(!props.stateCheck)
             })
@@ -45,14 +46,13 @@ function ReviewAdd(props) {
         <div>
             <Card>
                 <Card.Body>
-                    <Card.Title>{book.title}</Card.Title>
-                    <Card.Text>
-                        <textarea
-                            placeholder="책에 대한 자유로운 의견을 남겨주세요"
-                            name="content"
-                            onChange={(e) => { setMyReview(e.target.value) }}
-                        ></textarea>
-                    </Card.Text>
+                    <Card.Title>{book.title} review</Card.Title>
+                    <Form.Control as="textarea"
+                        placeholder="책에 대한 자유로운 의견을 남겨주세요"
+                        name="content"
+                        onChange={(e) => { setMyReview(e.target.value) }}
+                        style={{ height: '15rem' }}>
+                    </Form.Control>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                     <ListGroupItem>

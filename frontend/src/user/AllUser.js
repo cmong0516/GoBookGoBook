@@ -26,8 +26,7 @@ function AllUser() {
   };
 
   useEffect(() => {
-    axios
-      .post("/all")
+    axios.post("/all")
       .then((res) => {
         setUsers(res.data);
       })
@@ -36,12 +35,11 @@ function AllUser() {
       });
   }, []);
 
-  let updateAjax = (user) => {
-    axios
-      .put("/mypage", {
+  let updateUser = (user) => {
+    axios.put("/mypage", {
         userId: user.userId,
         userPw: account.userPw,
-        userEmail: account.userEmail,
+        userEmail: account.userEmail
       })
       .then((res) => {
         alert("개인정보 수정이 완료되었습니다.");
@@ -55,11 +53,10 @@ function AllUser() {
 
   let deleteUser = (user) => {
     if (window.confirm(user.userName + "님을 탈퇴시키시겠습니까?")) {
-      axios
-        .delete("/delete", {
-          data: { userId: user.userId },
+      axios.delete("/delete", {
+          data: { userId: user.userId }
         })
-        .then((res) => {
+        .then(() => {
           alert(user.userName + "님이 성공적으로 탈퇴되었습니다.");
         })
         .catch((error) => {
@@ -74,7 +71,7 @@ function AllUser() {
   return (
     <div>
       <h3>전체 회원관리</h3>
-      <Table>
+      <Table style={{ borderSpacing: '7px', borderCollapse: 'separate' }}>
         <thead>
           <tr>
             <th>No</th>
@@ -82,7 +79,7 @@ function AllUser() {
             <th>이름</th>
             <th>이메일</th>
             <th>비밀번호</th>
-            <th>회원정보 변경</th>
+            <th>변경하기</th>
             <th>회원삭제</th>
           </tr>
         </thead>
@@ -111,7 +108,7 @@ function AllUser() {
                   <Button
                     variant="outline-info"
                     size="sm"
-                    onClick={() => updateAjax(user)}
+                    onClick={() => updateUser(user)}
                   >
                     EditUser
                   </Button>

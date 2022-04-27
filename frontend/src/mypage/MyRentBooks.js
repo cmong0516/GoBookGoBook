@@ -20,7 +20,6 @@ function MyRentBooks(props) {
   );
   
   let returnFunc = (rentId) => {
-
     axios.post("/rent/return", {
       rentId: rentId,
     })
@@ -37,7 +36,6 @@ function MyRentBooks(props) {
   return (
     <Row>
       {
-        // rentBook && rentBook.map( book => <CardComp book={book} /> )
         rentBook && rentBook.map( book => 
           <CardStyle>
             <Card key={book.rentId}>
@@ -67,6 +65,7 @@ function MyRentBooks(props) {
   
 }
 
+// 반납예정일 계산
 function dueDate(rentDate) {
 
   let date = new Date(rentDate);
@@ -76,55 +75,5 @@ function dueDate(rentDate) {
 
   return duedate;
 }
-
-// function returnFunc(rentId, props) {
-
-//   let history = useHistory();
-
-//   axios.post("/rent/return", {
-//       rentId: rentId,
-//     })
-//     .then((res) => {
-//       alert("반납하셨습니다.");
-//       props?.setReturnCheck(...1);
-//       history.push("/mypage");
-//     })
-//     .catch((error) => {
-//       alert("반납 서버와의 통신에 실패했습니다.")
-//       console.log(error);
-//     });
-// }
-
-// function CardComp({ book }) {
-
-//   return (
-//     <CartStyle>
-//       <Card key={book.rentId}>
-//         {
-//           book.coverLargeUrl
-//           ? <BookImg>
-//               <Card.Img variant="top" src={book.coverLargeUrl} />
-//             </BookImg>
-//           : 
-//             <BookImg>
-//               <Card.Img variant="top" src={book.coverSmallUrl} />
-//             </BookImg>
-//         }
-//         <Card.Body>
-//           <Card.Title>{book.title}</Card.Title>
-//           <Card.Text>대여일 : {book.rentDate}</Card.Text>
-//           <Card.Text>반납일 : (D-계산값)</Card.Text>
-//           {
-//             book.state == true 
-//             ? <Button variant="outline-danger" onClick={() => returnFunc(book.rentId)}>
-//                 반납하기
-//               </Button>
-//             : null
-//           }
-//         </Card.Body>
-//       </Card>
-//     </CartStyle>
-//   );
-// }
 
 export default MyRentBooks;

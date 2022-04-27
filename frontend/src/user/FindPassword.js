@@ -8,22 +8,13 @@ let Wrapper = styled.div`
     width: 22rem;
     margin: auto;
 
-    h5 {
-        margin: 1.5vh 0;
-    }
+    h5 { margin: 1.5vh 0 }
 
-    p {
-        color: gray;
-    }
-
-`
-let GroupStyle = styled.div`
-    margin: 1rem 0;
+    p { color: gray }
 `
 
 function FindPassword() {
 
-    // 로그인하지 않은 경우 url입력 시 출입불가
     let history = useHistory();
     let [validated, setValidated] = useState(false);
     const [show, setShow] = useState(false);
@@ -32,6 +23,7 @@ function FindPassword() {
 
     const handleClose = () => setShow(false);
 
+    // 이메일 전송
     let submitFunc = (e) => {
         e.preventDefault();
         let form = e.currentTarget;
@@ -61,6 +53,7 @@ function FindPassword() {
 
     }
 
+    // 이메일 보낸 후 인증번호 확인 
     let checkCode = () => {
         axios.post('/findpw/code', {
                 userEmail: userEmail,
@@ -88,20 +81,17 @@ function FindPassword() {
                 <h5>비밀번호를 잊으셨나요?</h5>
                 <p>가입했던 이메일을 적어주세요.<br />
                     입력하신 이메일 주소로 비밀번호 변경 메일을 보낼게요.</p>
-                <GroupStyle>
-                    <Form.Group>
-                        <Form.Label>이메일</Form.Label>
-                        {/* <Alarm>{emailAlarm}</Alarm> */}
-                        <Form.Control
-                            required
-                            type="email"
-                            name="userEmail"
-                            placeholder="ex) GoBook@naver.com"
-                            onChange={(e) => { setUserEmail(e.target.value) }}
-                        ></Form.Control>
-                        <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>
-                    </Form.Group>
-                </GroupStyle>
+                <Form.Group style={{ margin: '1rem 0'}}>
+                    <Form.Label>이메일</Form.Label>
+                    <Form.Control
+                        required
+                        type="email"
+                        name="userEmail"
+                        placeholder="ex) GoBook@naver.com"
+                        onChange={(e) => { setUserEmail(e.target.value) }}
+                    ></Form.Control>
+                    <Form.Control.Feedback type="invalid">이메일을 입력해주세요.</Form.Control.Feedback>
+                </Form.Group>
 
                 <Button variant="info" type="submit">
                     비밀번호 변경 이메일 보내기

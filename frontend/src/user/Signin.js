@@ -7,12 +7,12 @@ import axios from "axios";
 let Wrapper = styled.div`
     width: 22rem;
     margin: auto;
-    padding-bottom: 3rem;
+    padding: 1rem 0;
     text-align: left;
+    
     input, button {
         width: 100%;
         height: 3rem;
-        // margin-bottom: 1rem;
     }
     button {
         margin-top: 1rem;
@@ -38,7 +38,6 @@ function Signin() {
     let [validated, setValidated] = useState(false);
     let [nameAlarm, setNameAlarm] = useState('');
     let [idAlarm, setIdAlarm] = useState('');
-    // let [emailAlarm, setEmailAlarm] = useState('');
     let [pwAlarm, setPwAlarm] = useState('');
     let [pwMatchAlarm, setPwMatchAlarm] = useState('');
     let [account, setAccount] = useState({
@@ -70,7 +69,6 @@ function Signin() {
         let form = e.currentTarget;
         setNameAlarm('');
         setIdAlarm('');
-        // setEmailAlarm('');
         setPwAlarm('');
         setPwMatchAlarm('');
 
@@ -78,21 +76,16 @@ function Signin() {
             e.preventDefault();
             setValidated(true);
         } else if (!nameFormat.test(account.userName) || !idFormat.test(account.userId) || !passwordFormat.test(account.userPw)) {
-            // || !emailFormat.test(account.useremail) || !passwordFormat.test(account.userpw) ) {
-
             if (!nameFormat.test(account.userName))
                 setNameAlarm('이름의 형식이 올바르지 않습니다.');
             if (!idFormat.test(account.userId))
                 setIdAlarm('아이디의 형식이 올바르지 않습니다.');
-            // if( !emailFormat.test(account.useremail) )
-            //     setEmailAlarm('이메일의 형식이 올바르지 않습니다.');
             if (!passwordFormat.test(account.userPw))
                 setPwAlarm('비밀번호의 형식이 올바르지 않습니다.');
 
         } else if (account.userPw != account.userPwCheck) {
             setPwMatchAlarm('비밀번호가 일치하지 않습니다.');
         } else {
-            console.log(account);
             axios.post('/signin', {
                 userId: account.userId,
                 userPw: account.userPw,
@@ -155,7 +148,6 @@ function Signin() {
                 <GroupStyle>
                     <Form.Group>
                         <Form.Label>이메일</Form.Label>
-                        {/* <Alarm>{emailAlarm}</Alarm> */}
                         <Form.Control
                             required
                             type="email"
