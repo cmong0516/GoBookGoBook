@@ -20,7 +20,7 @@ public class Review {
     private LocalDate pubDate;
     private String isbn;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="id")
     private User user;
 }
