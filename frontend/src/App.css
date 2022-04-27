@@ -1,4 +1,4 @@
-clock{@font-face {
+@font-face {
   font-family: 'Pretendard-Medium';
   src: url('./font/Pretendard-Medium.woff2') format("woff2");
   font-weight: 400;
@@ -13,40 +13,4 @@ clock{@font-face {
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< HEAD
-}
-
-table {
-  border-spacing: 8px;
-  border-collapse: separate;
-}
-
-.editnameinput{
-  width: 4vw;
-}
-
-textarea{
-  width: 100%;
-  border: none;
-  resize: none;
-  height: 15rem;
-}
-
-.date{
-  text-align: center;
-}
-
-.
-  text-align: center;
-}
-
-.time{
-  display: flex;
-  flex-direction: column;
-}
-
-.time div{
-  margin: 0.3rem;
-=======
->>>>>>> fb916f5d5ad48b78c7ff9395769b89a16636b000
 }

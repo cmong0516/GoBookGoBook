@@ -16,7 +16,7 @@ function Clock() {
 
   return (
     <div>
-        {time.format("YYYY년 MM월 DD일")}
+      {time.format("YYYY년 MM월 DD일")}
       <h4> {time.format("HH : mm : ss")}</h4>
     </div>
   );

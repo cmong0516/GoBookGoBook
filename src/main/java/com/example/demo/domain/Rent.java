@@ -42,6 +42,8 @@ public class Rent {
     private boolean state;
     @Column(name = "rent_date")
     private LocalDate rentDate;
+    @Column(name = "return_date")
+    private LocalDate returnDate;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="id")
