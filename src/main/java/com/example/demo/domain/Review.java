@@ -19,4 +19,8 @@ public class Review {
     private String content;
     private LocalDate pubDate;
     private String isbn;
+
+    @ManyToOne
+    @JoinColumn(name="id")
+    private User user;
 }

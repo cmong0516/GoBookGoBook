@@ -5,6 +5,7 @@ build/
 !**/src/test/**/build/
 application-db.properties
 application-mail.properties
+application-kakao.properties
 apikey.properties
 
 ### STS ###

@@ -42,4 +42,12 @@ public class Rent {
     private boolean state;
     @Column(name = "rent_date")
     private LocalDate rentDate;
+
+    @ManyToOne
+    @JoinColumn(name="id")
+    private User user;
+
+    public void setUser(User user){
+       this.user = user;
+    }
 }

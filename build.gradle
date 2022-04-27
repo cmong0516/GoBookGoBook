@@ -29,7 +29,11 @@ dependencies {
 	//프로퍼티사용
 	//email
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
