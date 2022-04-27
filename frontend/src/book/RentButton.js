@@ -138,7 +138,7 @@ function RentButton(props) {
     return (
       <span>
         <OverlayTrigger show={tooltip} placement="right" overlay={popover}>
-          <Button variant="danger" size="lg">
+          <Button variant="danger" size="lg" style={{ width: "100%" }}>
             대여불가
           </Button>
         </OverlayTrigger>
