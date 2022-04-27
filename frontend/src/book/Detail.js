@@ -77,7 +77,6 @@ function DetailView(props) {
                 book={book}
                 stateCheck={stateCheck}
                 setStateCheck={setStateCheck}
-                className="detailrent"
               />
             ) : null}
           </Card>

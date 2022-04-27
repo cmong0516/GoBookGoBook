@@ -62,7 +62,6 @@ function RentButton(props) {
         ) {
           setRentStatus("return");
         } else if (already) {
-          console.log(res.data.filter((x) => x.title == props.book.title).filter((x) => x.state == true).length)
           setRentStatus("forbidden");
           setTooltip('show');
         } else if (booksNum >= 5) {
