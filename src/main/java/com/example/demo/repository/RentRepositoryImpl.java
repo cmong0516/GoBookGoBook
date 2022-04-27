@@ -4,6 +4,7 @@ import com.example.demo.domain.Rent;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -49,7 +50,9 @@ public class RentRepositoryImpl implements RentRepository {
     @Override
     public Rent returnBook(Long rentId) {
         Rent byRentId = findByRentId(rentId);
+        LocalDate now = LocalDate.now();
         byRentId.setState(false);
+        byRentId.setReturnDate(now);
         return save(byRentId);
     }
 

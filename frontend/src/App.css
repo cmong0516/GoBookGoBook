@@ -3,7 +3,7 @@
   src: url('./font/Pretendard-Medium.woff2') format("woff2");
   font-weight: 400;
 }
- 
+
 .App {
   text-align: center;
   font-family: 'Pretendard-Medium';
