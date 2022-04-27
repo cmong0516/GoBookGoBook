@@ -6,16 +6,24 @@ import {
     Button
 } from "react-bootstrap";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 // book은 context API로 갖고오기
 function ReviewAdd(props) {
 
+    let history = useHistory();
     let [myreview, setMyReview] = useState('');
     let book = props.book;
     let userId = localStorage.getItem("userId");
 
     // 리뷰 추가
     let addReview = () => {
+
+        if (!userId) {
+            alert("로그인 후 이용할 수 있습니다.");
+            return history.push("/login");
+        }
+
         axios
             .post("/review/add", {
                 userId: userId,
