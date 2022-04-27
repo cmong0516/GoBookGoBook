@@ -50,6 +50,18 @@ public class RentService {
         return rentRepository.findAllByUserId(userId);
     }
 
+    public boolean findByIsbn(Rent rent){
+        String isbn = rent.getIsbn();
+
+        List<Rent> byIsbn = rentRepository.findByIsbn(isbn);
+        if(byIsbn.isEmpty()){
+            return false;
+        }
+//        System.out.println("byIsbn = " + byIsbn);
+
+        return true;
+    }
+
     public List<Rent> findAll() {
         return rentRepository.findAll();
     }
