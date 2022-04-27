@@ -13,6 +13,8 @@ public interface RentRepository{
 
     Rent findByRentId(Long rentId);
 
+    List<Rent> findByIsbn(String isbn);
+
     List<Rent> findAll();
 
     Rent returnBook(Long rentId);
