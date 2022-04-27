@@ -124,13 +124,13 @@ function RentButton(props) {
 
   if (rentStatus == "rent") {
     return (
-      <Button variant="success" size="lg" onClick={rentFunc}>
+      <Button variant="success" size="lg" onClick={rentFunc} style={{ width: "100%" }}>
         대여하기
       </Button>
     );
   } else if (rentStatus == "return") {
     return (
-      <Button variant="dark" size="lg" onClick={returnFunc}>
+      <Button variant="dark" size="lg" onClick={returnFunc} style={{ width: "100%" }}>
         반납하기
       </Button>
     );
