@@ -1,9 +1,9 @@
-@font-face {
+clock{@font-face {
   font-family: 'Pretendard-Medium';
   src: url('./font/Pretendard-Medium.woff2') format("woff2");
   font-weight: 400;
 }
- 
+
 .App {
   text-align: center;
   font-family: 'Pretendard-Medium';
@@ -69,7 +69,7 @@ textarea{
   text-align: center;
 }
 
-.clock{
+.
   text-align: center;
 }
 
