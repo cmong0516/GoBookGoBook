@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Overlay, Tooltip, OverlayTrigger } from "react-bootstrap";
 import "../App.css";
 import axios from "axios";
 
@@ -11,7 +11,30 @@ function RentButton(props) {
   let history = useHistory();
   let [rentStatus, setRentStatus] = useState("rent");
   let [myBook, setMyBook] = useState();
+  let [tooltip, setTooltip] = useState('none');
 
+  let popover = (
+    <Tooltip id="overlay-example" {...props}>
+      다른사용자가 보고있어요🙄
+    </Tooltip>
+  );
+
+  useEffect(() => {
+    axios.post("/rent/check", { isbn: props.book.isbn })
+      .then((res) => {
+        if (res.data == true) {
+          setRentStatus("forbidden");
+          setTooltip('click')
+        } else {
+          setTooltip('none');
+        }
+      })
+      .catch((error) => {
+        alert("이미 다른 사용자에 의해 빌려진 도서인지 확인하지 못했습니다.");
+        console.log(error);
+      })
+  },[]);
+ 
   // 나의 전체 대여/반납 도서목록 가져오기
   useEffect(() => {
     axios.post("/rent/info", { userId: userId })
@@ -113,9 +136,13 @@ function RentButton(props) {
     );
   } else if (rentStatus == "forbidden") {
     return (
-      <Button variant="danger" size="lg">
-        대여불가
-      </Button>
+      <span>
+        <OverlayTrigger trigger={tooltip} placement="right" overlay={popover}>
+          <Button variant="danger" size="lg">
+            대여불가
+          </Button>
+        </OverlayTrigger>
+      </span>
     );
   }
 }
