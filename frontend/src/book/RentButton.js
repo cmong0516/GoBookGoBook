@@ -11,7 +11,7 @@ function RentButton(props) {
   let history = useHistory();
   let [rentStatus, setRentStatus] = useState("rent");
   let [myBook, setMyBook] = useState();
-  let [tooltip, setTooltip] = useState('none');
+  let [tooltip, setTooltip] = useState('');
 
   let popover = (
     <Tooltip id="overlay-example" {...props}>
@@ -24,16 +24,16 @@ function RentButton(props) {
       .then((res) => {
         if (res.data == true) {
           setRentStatus("forbidden");
-          setTooltip('click')
+          setTooltip('show');
         } else {
-          setTooltip('none');
+          setTooltip('');
         }
       })
       .catch((error) => {
-        alert("이미 다른 사용자에 의해 빌려진 도서인지 확인하지 못했습니다.");
+        alert("다른 사용자에 의해 빌려진 도서인지 확인하지 못했습니다.");
         console.log(error);
       })
-  },[]);
+  }, []);
  
   // 나의 전체 대여/반납 도서목록 가져오기
   useEffect(() => {
@@ -74,7 +74,7 @@ function RentButton(props) {
         console.log(error);
       });
   }, [props.stateCheck]);
-  // 대여버튼의 상위컴포넌트 리렌더링을 위함
+  // }, []);
 
   let rentFunc = () => {
 
@@ -137,7 +137,7 @@ function RentButton(props) {
   } else if (rentStatus == "forbidden") {
     return (
       <span>
-        <OverlayTrigger trigger={tooltip} placement="right" overlay={popover}>
+        <OverlayTrigger show={tooltip} placement="right" overlay={popover}>
           <Button variant="danger" size="lg">
             대여불가
           </Button>
