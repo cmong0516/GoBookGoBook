@@ -64,3 +64,20 @@ textarea{
   resize: none;
   height: 15rem;
 }
+
+.date{
+  text-align: center;
+}
+
+.clock{
+  text-align: center;
+}
+
+.time{
+  display: flex;
+  flex-direction: column;
+}
+
+.time div{
+  margin: 0.3rem;
+}
