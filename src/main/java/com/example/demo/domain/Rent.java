@@ -43,7 +43,7 @@ public class Rent {
     @Column(name = "rent_date")
     private LocalDate rentDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name="id")
     private User user;
 
