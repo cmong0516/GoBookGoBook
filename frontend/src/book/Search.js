@@ -2,13 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import RentButton from "./RentButton.js";
 import { useHistory } from "react-router-dom";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import { BookContext, SetBookContext } from "../App.js";
 import styled from "styled-components";
 
 let Wrapper = styled.div`
-  text-align: left;
-
   h3 {
     padding: 0;
   }
@@ -16,6 +14,7 @@ let Wrapper = styled.div`
 let BookWrapper = styled.div`
   padding: 0.5rem;
   cursor: pointer;
+  text-align: left;
 
   hr {
     margin-top: 0.5rem;
@@ -32,12 +31,18 @@ function Search(props) {
   let searchWord = props.searchWord;
   let userId = localStorage.getItem("userId");
 
+  let [nowPage, setNowPage] = useState(1);
+  let LastIndex = nowPage * 5 - 1;
+  let slicebooks = [];
+  books && ( slicebooks = books.slice(0, LastIndex) )
+
   useEffect(() => {
-    axios
-      .get("/api/search", { params: { query: searchWord } })
+    axios.get("/api/search", { params: { query: searchWord } })
       .then((res) => {
-        console.log(res.data)
+
+        setNowPage(1);
         setBooks(res.data);
+
         if (res.data.length == 0) {
           alert("검색결과가 없습니다🤔");
         }
@@ -51,7 +56,7 @@ function Search(props) {
   return (
     <Wrapper>
       {
-        books && books.map((book) => (
+        slicebooks && slicebooks.map((book) => (
           <BookWrapper>
             <Row style={{ alignItems: "center" }}>
 
@@ -114,6 +119,19 @@ function Search(props) {
             </Row>
           </BookWrapper>
         ))}
+      
+      {
+        // 마지막 결과까지 도달하면 더보기버튼을 보이지 않음
+        LastIndex >= (books && books.length)
+          ? null
+          : <Button
+            variant="dark"
+            onClick={() => setNowPage(++nowPage)}
+            style={{ borderRadius: "2rem", marginTop:"1rem" }}>
+            ▼ 더보기
+          </Button>
+      }
+
     </Wrapper>
   )
 }
