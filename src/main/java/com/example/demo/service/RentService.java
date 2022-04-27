@@ -57,9 +57,10 @@ public class RentService {
         if(byIsbn.isEmpty()){
             return false;
         }
-//        System.out.println("byIsbn = " + byIsbn);
 
-        return true;
+        Rent rent1 = byIsbn.get(0);
+        System.out.println("rent1 = " + rent1);
+        return rent1.isState();
     }
 
     public List<Rent> findAll() {
