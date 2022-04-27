@@ -46,4 +46,10 @@ public class RentBookController {
     public Rent rentBookReturn(@RequestBody Rent rent) {
         return rentService.returnBook(rent.getRentId());
     }
+
+    @PostMapping("/check")
+    public boolean rentCheck(@RequestBody Rent rent){
+
+        return rentService.findByIsbn(rent);
+    }
 }

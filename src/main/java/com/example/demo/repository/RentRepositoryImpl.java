@@ -34,6 +34,12 @@ public class RentRepositoryImpl implements RentRepository {
         return rent;
     }
 
+    public List<Rent> findByIsbn(String isbn){
+        return em.createQuery("select r from Rent r where r.isbn=:isbn",Rent.class)
+                .setParameter("isbn",isbn)
+                .getResultList();
+    }
+
     @Override
     public List<Rent> findAll() {
         return em.createQuery("select r from Rent r", Rent.class)
