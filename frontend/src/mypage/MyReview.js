@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, CloseButton, Row } from "react-bootstrap";
-import styled from 'styled-components';
+import { Card, CloseButton } from "react-bootstrap";
 import PaginationCustom from "../book/PaginationCustom";
 
 function MyReview() {
