@@ -40,6 +40,7 @@ function MyInfo(props) {
   let [emailAlarm, setEmailAlarm] = useState("");
   let [pwAlarm, setPwAlarm] = useState("");
   let [pwMatchAlarm, setPwMatchAlarm] = useState("");
+
   let [account, setAccount] = useState({
     userId: "",
     userEmail: "",
@@ -62,9 +63,8 @@ function MyInfo(props) {
   };
 
   let editUser = (e) => {
-    // e.preventDefault();
-    let form = e.currentTarget;
 
+    // 수정버튼을 누를 때마다 알림말 초기화
     setAlarm("");
     setEmailAlarm("");
     setPwAlarm("");
@@ -80,7 +80,7 @@ function MyInfo(props) {
       if (!emailFormat.test(account.userEmail)) {
         setEmailAlarm("이메일의 형식이 올바르지 않습니다.");
       } else {
-        updateAjax();
+        updateUser();
       }
     }
     // 비밀번호만 작성하는 경우
@@ -92,7 +92,7 @@ function MyInfo(props) {
       } else if (account.userPw != account.userpwCheck) {
         setPwMatchAlarm("비밀번호가 일치하지 않습니다.");
       } else {
-        updateAjax();
+        updateUser();
       }
     }
     // 둘 다 작성한 경우
@@ -110,23 +110,22 @@ function MyInfo(props) {
         setPwMatchAlarm("비밀번호가 일치하지 않습니다.");
         // 비밀번호 형식/확인란 맞은 상태에서 이메일형식까지 맞으면 결과 넘어감
       } else if (emailFormat.test(account.userEmail)) {
-        updateAjax();
+        updateUser();
       }
     }
   };
 
-  let updateAjax = () => {
-    axios
-      .put("/mypage", {
-        userId: myuserId,
-        userPw: account.userPw,
-        userEmail: account.userEmail,
-      })
+  // 개인정보 수정 Ajax
+  let updateUser = () => {
+    axios.put("/mypage", {
+      userId: myuserId,
+      userPw: account.userPw,
+      userEmail: account.userEmail
+    })
       .then((res) => {
         alert("개인정보 수정이 완료되었습니다.");
         localStorage.setItem("userEmail", account.userEmail);
         history.push("/");
-        console.log(res);
       })
       .catch((error) => {
         alert("개인정보 수정에 실패했습니다.");
@@ -134,15 +133,13 @@ function MyInfo(props) {
       });
   };
 
+  // 회원탈퇴 Ajax
   let deleteUser = () => {
-    console.log(myuserId);
     if (window.confirm("정말로... 탈퇴하실건가요?")) {
-      axios
-        .delete("/delete", {
-          data: { userId: myuserId },
-        })
+      axios.delete("/delete", {
+        data: { userId: myuserId },
+      })
         .then((res) => {
-          console.log(res);
           localStorage.clear();
           alert("탈퇴에 성공하셨습니다🙂");
           history.push("/goodbye");

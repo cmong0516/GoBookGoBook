@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-function SeeMoreText({review}) {
+function SeeMoreText({ review }) {
 
     let [seeMore, setSeeMore] = useState(false);
 

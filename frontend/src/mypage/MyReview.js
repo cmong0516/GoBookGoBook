@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, CloseButton, Row } from "react-bootstrap";
-import styled from 'styled-components';
+import { Card, CloseButton } from "react-bootstrap";
 import PaginationCustom from "../book/PaginationCustom";
-
-let CardStyle = styled.div`
-    padding: 1vh;
-`;
 
 function MyReview() {
 
@@ -17,6 +12,7 @@ function MyReview() {
     let myReviewsRev = myReviews.slice(0).reverse();
     let [nowPage, setNowPage] = useState(1);
 
+    // 페이징 처리
     let LastIndex = nowPage * 4;
     let FirstIndex = LastIndex - 4;
     let nowPageReviews = myReviewsRev.slice(FirstIndex, LastIndex);
@@ -40,7 +36,7 @@ function MyReview() {
             axios.post("/review/delete", {
                 reviewId: reviewId,
             })
-                .then((res) => {
+                .then(() => {
                     alert("리뷰가 삭제되었습니다.");
                     setStateCheck(!stateCheck);
                 })
@@ -55,20 +51,20 @@ function MyReview() {
 
     return (
         <div>
+            <h2>나의 도서 리뷰</h2>
+            <p>고객님의 리뷰를 확인하고 관리해보세요.</p>
             {
                 nowPageReviews && nowPageReviews.map(myReview => (
-                    <CardStyle>
-                        <Card>
-                            <Card.Body>
-                                <CloseButton
-                                    style={{ float: "right" }}
-                                    onClick={() => deleteReview(myReview.reviewId)} />
-                                <Card.Title>{myReview.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{myReview.pubDate}</Card.Subtitle>
-                                <Card.Text>{myReview.content}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </CardStyle>
+                    <Card style={{marginBottom: '1rem'}}>
+                        <Card.Body>
+                            <CloseButton
+                                style={{ float: "right" }}
+                                onClick={() => deleteReview(myReview.reviewId)} />
+                            <Card.Title>{myReview.title}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{myReview.pubDate}</Card.Subtitle>
+                            <Card.Text>{myReview.content}</Card.Text>
+                        </Card.Body>
+                    </Card>
                 ))
             }
             <PaginationCustom reviewsNum={myReviews.length} setNowPage={setNowPage} />

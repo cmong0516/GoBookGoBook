@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Rent;
+import com.example.demo.domain.User;
 import com.example.demo.object.RentBook;
 import com.example.demo.service.RentService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,8 @@ public class RentBookController {
 
     @PostMapping("/info")
     public List<Rent> rentBookInfo(@RequestBody Rent rent) {
+//        User user = rent.getUser();
+//        String userId = user.getUserId();
         String userId = rent.getUserId();
         List<Rent> rentlist = rentService.findByUserId(userId);
         return rentlist;
@@ -42,5 +45,11 @@ public class RentBookController {
     @PostMapping("/return")
     public Rent rentBookReturn(@RequestBody Rent rent) {
         return rentService.returnBook(rent.getRentId());
+    }
+
+    @PostMapping("/check")
+    public boolean rentCheck(@RequestBody Rent rent){
+
+        return rentService.findByIsbn(rent);
     }
 }

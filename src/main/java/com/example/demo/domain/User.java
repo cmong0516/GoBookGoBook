@@ -20,14 +20,14 @@ public class User {
     private String userEmail;
     private boolean enabled;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
 
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();*/
 
     @Builder
     public User(String userId, String userPw, String userName, String userEmail, boolean enabled) {

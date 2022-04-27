@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { Nav, Navbar, Container, Col, Row } from "react-bootstrap";
 import "./App.css";
 import styled from "styled-components";
 import { Link, Route, Switch } from "react-router-dom";
@@ -17,10 +17,6 @@ import Footer from "./Footer.js";
 import FindMyInfo from "./user/FindMyInfo";
 import Clock from "./Clock";
 
-// const GlobalStyle  =  createGlobalStyle`
-//   font-family: 'Pretendard-Medium';
-// `
-
 let Wrapper = styled.div`
   width: 70%;
   margin: auto;
@@ -28,16 +24,23 @@ let Wrapper = styled.div`
   min-height: 100%;
 `;
 let UserStyle = styled.div`
-  text-align: right;
   padding: 2rem;
-  font-size: 13pt;
+  font-size: 14pt;
   background-color: rgb(13, 202, 240);
   color: floralwhite;
+  
   span {
-    margin: 0.5rem;
+    margin-right: 1rem;
+  }
+  a {
+    color: floralwhite;
+    text-decoration: none;
+
+    &:hover{ 
+      color : black;
+    }
   }
 `;
-
 export let BookContext = React.createContext();
 export let SetBookContext = React.createContext();
 export let DueDateContext = React.createContext();
@@ -48,36 +51,31 @@ function App() {
   let [books, setBooks] = useState();
   let [searchWord, searchWordChange] = useState("");
 
-  // useEffect(() => {
-  //   localStorage.setItem('userId', null);
-  // },[isLogin]);
   return (
     <div className="App">
-      {/* <GlobalStyle/> */}
       <UserStyle>
-        <div className="nav">
-          <div className="titleImg">
+        <Row>
+          <Col>
             <Link to="/">
-              <span>Go Book Go Book</span>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIJDl-BNU7poDMxewQcEWm7ZLBeoxSfvVlQ&usqp=CAU" />
+              <span> GOBOOK GOBOOK</span>
             </Link>
-          </div>
-          <div>
-            <Clock />
-            {userId ? (
-              <div>
-                <Link to="/">
-                  <span
-                    onClick={() => {
-                      localStorage.clear();
-                      setIsLogin(false); // 얘를 주석처리하면 로그아웃 눌러도 로그인으로 돌아오지 않음
-                    }}
-                  >
-                    로그아웃
-                  </span>
-                </Link>
-                <span>|</span>
-                {userId == "admin0" ? (
+          </Col>
+        {userId
+          ? (
+            <Col>
+              <Link to="/">
+                <span
+                  onClick={() => {
+                    localStorage.clear();
+                    setIsLogin(false);
+                  }}
+                >
+                  로그아웃
+                </span>
+              </Link>
+              <span>|</span>
+              {userId == "admin0"
+                ? (
                   <Link to="/admin">
                     <span>관리자페이지</span>
                   </Link>
@@ -86,25 +84,28 @@ function App() {
                     <span>마이페이지&nbsp;</span>
                   </Link>
                 )}
-              </div>
-            ) : (
-              <div>
-                <Link to="/login">
-                  <span>로그인</span>
-                </Link>
-                <span>|</span>
-                <Link to="/signin">
-                  <span>회원가입</span>
-                </Link>
-              </div>
+            </Col>
+          )
+          : (
+              <Col>
+              <Link to="/login">
+                <span>로그인</span>
+              </Link>
+              <span>|</span>
+              <Link to="/signin">
+                <span>회원가입</span>
+              </Link>
+              </Col>
             )}
-          </div>
-        </div>
+        </Row>
+        <img src="/GreenTurtle.png" width="100rem" />
+        <Clock />
         <SearchBar
           searchWord={searchWord}
           searchWordChange={searchWordChange}
         />
       </UserStyle>
+
       <Navbar bg="info" variant="dark">
         <Container>
           <Navbar.Brand className="fs-3">도서</Navbar.Brand>
@@ -121,6 +122,9 @@ function App() {
 
       <Switch>
         <Wrapper>
+          <Route exact path="/">
+            여기에 발표동영상!
+          </Route>
           <Route exact path="/api/bestseller">
             <BookContext.Provider value={books}>
               <SetBookContext.Provider value={setBooks}>
@@ -167,6 +171,7 @@ function App() {
           </Route>
         </Wrapper>
       </Switch>
+      
       <Footer />
     </div>
   );

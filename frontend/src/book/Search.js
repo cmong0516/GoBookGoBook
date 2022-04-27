@@ -6,11 +6,6 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { BookContext, SetBookContext } from "../App.js";
 import styled from "styled-components";
 
-let Wrapper = styled.div`
-  h3 {
-    padding: 0;
-  }
-`
 let BookWrapper = styled.div`
   padding: 0.5rem;
   cursor: pointer;
@@ -24,22 +19,24 @@ let BookWrapper = styled.div`
 
 function Search(props) {
 
+  let userId = localStorage.getItem("userId");
   let history = useHistory();
   let books = useContext(BookContext);
   let setBooks = useContext(SetBookContext);
-  let [stateCheck, setStateCheck] = useState(false);
   let searchWord = props.searchWord;
-  let userId = localStorage.getItem("userId");
+  let [stateCheck, setStateCheck] = useState(false);
 
+  // 더보기를 위한 state
   let [nowPage, setNowPage] = useState(1);
   let LastIndex = nowPage * 5 - 1;
   let slicebooks = [];
-  books && ( slicebooks = books.slice(0, LastIndex) )
+  books && (slicebooks = books.slice(0, LastIndex))
 
   useEffect(() => {
     axios.get("/api/search", { params: { query: searchWord } })
       .then((res) => {
 
+        // 다른 검색어를 검색할 때마다 nowPage를 1로 초기화
         setNowPage(1);
         setBooks(res.data);
 
@@ -54,7 +51,7 @@ function Search(props) {
   }, [searchWord, stateCheck]);
 
   return (
-    <Wrapper>
+    <div>
       {
         slicebooks && slicebooks.map((book) => (
           <BookWrapper>
@@ -70,7 +67,7 @@ function Search(props) {
                     />
                   </Col>
                   <Col sm={6} md={10}>
-                    <Card style={{ height: '100%'}}>
+                    <Card style={{ height: '100%' }}>
                       <Card.Body>
                         <Card.Title>{book.title}</Card.Title>
                         <Card.Subtitle className="mt-2 mb-2 text-muted">{book.author} 지음&nbsp; | &nbsp;{book.publisher}</Card.Subtitle>
@@ -90,6 +87,7 @@ function Search(props) {
                 </Row>
               </Col>
 
+              {/* 관리자인 경우 대여버튼 보이지 않도록 */}
               {
                 userId != 'admin0'
                   ?
@@ -115,24 +113,23 @@ function Search(props) {
                   </Col>
                   : null
               }
-
             </Row>
           </BookWrapper>
         ))}
-      
+
       {
-        // 마지막 결과까지 도달하면 더보기버튼을 보이지 않음
+        // 마지막 검색결과까지 도달하면 더보기버튼을 보이지 않음
         LastIndex >= (books && books.length)
           ? null
           : <Button
             variant="dark"
             onClick={() => setNowPage(++nowPage)}
-            style={{ borderRadius: "2rem", marginTop:"1rem" }}>
+            style={{ borderRadius: "2rem", marginTop: "1rem" }}>
             ▼ 더보기
           </Button>
       }
 
-    </Wrapper>
+    </div>
   )
 }
 

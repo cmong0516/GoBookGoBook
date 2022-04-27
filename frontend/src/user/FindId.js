@@ -20,7 +20,6 @@ let Alarm = styled.div`
 
 function FindId() {
 
-    // 로그인하지 않은 경우 url입력 시 출입불가
     let history = useHistory();
     let [validated, setValidated] = useState(false);
     const [show, setShow] = useState(false);
@@ -72,7 +71,6 @@ function FindId() {
                     console.log(error);
                 });
         }
-
     }
 
     return (
@@ -98,7 +96,6 @@ function FindId() {
                 <GroupStyle>
                     <Form.Group>
                         <Form.Label>이메일</Form.Label>
-                        {/* <Alarm>{emailAlarm}</Alarm> */}
                         <Form.Control
                             required
                             type="email"
@@ -124,7 +121,7 @@ function FindId() {
                     <Button variant="secondary" onClick={handleClose}>
                         닫기
                     </Button>
-                    <Button variant="primary" onClick={() => history.push("/login") }>
+                    <Button variant="primary" onClick={() => history.push("/login")}>
                         로그인 하러가기
                     </Button>
                 </Modal.Footer>
