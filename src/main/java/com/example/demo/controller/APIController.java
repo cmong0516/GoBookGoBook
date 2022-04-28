@@ -100,9 +100,8 @@ public class APIController {
         return newBooks;
     }
 
-    //국내도서 소설
     @GetMapping("/newbook/{categoryId}")
-    public ArrayList<NewBook> newBooks101(@PathVariable int categoryId) {
+    public ArrayList<NewBook> newBooksCategory(@PathVariable int categoryId) {
         newUrl = "http://book.interpark.com/api/newBook.api?key=84307E117F37CDE1C3265CDC603058B7E3EAB77A1F3708DEDB8D52E951E3224F&categoryId=" + categoryId + "&output=json";
         String result = WebClient.create(newUrl)
                 .get()
