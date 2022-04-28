@@ -102,7 +102,7 @@ function Search(props) {
                         customerReviewRank: '',
                         description: book.description,
                         isbn: book.isbn,
-                        pubDate: book.dateTime,
+                        pubDate: book.pubdate,
                         publisher: book.publisher,
                         rank: '',
                         title: book.title,
