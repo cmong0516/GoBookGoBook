@@ -36,7 +36,7 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     public List<Rent> findByIsbn(String isbn){
-        return em.createQuery("select r from Rent r where r.isbn=:isbn and r.state=1",Rent.class)
+        return em.createQuery("select r from Rent r where r.isbn=:isbn and r.state=true",Rent.class)
                 .setParameter("isbn",isbn)
                 .getResultList();
     }

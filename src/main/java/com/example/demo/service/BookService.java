@@ -26,7 +26,7 @@ public class BookService {
                 .uri(builder -> builder.path("/v3/search/book") //호스트 뒤에 api주소를 붙인다.
                                 //우선 필수 파라미터만 넣겠다.
                                 .queryParam("query", query)
-                                .queryParam("size",16)
+                                .queryParam("size",30)
                                 .queryParam("page",page)
                                 .build()
                 )
