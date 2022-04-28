@@ -88,7 +88,6 @@ function Login(props) {
         })
         .then((res) => {
           if (res) {
-            console.log(res);
 
             if (res.data.userName) {
               alert(res.data.userName + "님, 로그인되었습니다🐢");

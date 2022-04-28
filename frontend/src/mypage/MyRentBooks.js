@@ -25,7 +25,7 @@ function MyRentBooks(props) {
       })
       .then((res) => {
         alert("반납하셨습니다.");
-        props.setReturnCheck(true);
+        props.setReturnCheck(!props.returnCheck);
       })
       .catch((error) => {
         alert("반납 서버와의 통신에 실패했습니다.");

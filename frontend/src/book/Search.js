@@ -49,7 +49,7 @@ function Search(props) {
         alert("검색결과 데이터를 받아오는 데 실패했습니다.");
         console.log(error);
       });
-  }, [searchWord, stateCheck]);
+  }, [searchWord]);
 
   return (
     <div>

@@ -62,7 +62,7 @@ function MyRent() {
 
       {
         radioValue == 1
-          ? <MyRentBooks rentBooks={nowRent} setReturnCheck={setReturnCheck} />
+          ? <MyRentBooks rentBooks={nowRent} returnCheck={returnCheck} setReturnCheck={setReturnCheck} />
           : <MyRentBooks rentBooks={returnBook} />
       }
     </div>
