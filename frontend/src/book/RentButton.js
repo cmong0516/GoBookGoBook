@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import "../App.css";
@@ -20,9 +20,7 @@ function RentButton(props) {
     </Tooltip>
   );
 
-  console.log('------')
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     axios.post("/rent/check", { isbn: props.book.isbn })
       .then((res) => {
         if (res.data == true) {
@@ -30,57 +28,51 @@ function RentButton(props) {
         } else {
           already = false;
         }
+        axios.post("/rent/info", { userId: userId })
+          .then((res) => {
+            let booksNum = 0;
+
+            // 대여한 도서 수 판단
+            res.data.map((mybooks) => {
+              if (mybooks.state == true) {
+                booksNum++;
+              }
+            });
+
+            // 반납 시 서버에 줄 대여책정보 
+            // (같은 책을 한번 더 빌리는 경우를 고려해 state가 true(현재 대여중)인 데이터)
+            setMyBook(
+              res.data
+                .filter((x) => x.title == props.book.title)
+                .filter((x) => x.state == true)
+            );
+
+            console.log(already)
+            if (res.data
+              .filter((x) => x.title == props.book.title)  // 현재 보는 책의 도서명과 나의 대여/반납도서들 중 도서명이 같은 것 
+              .filter((x) => x.state == true).length != 0  // 그 중 대여중인 책
+            ) {
+              setRentStatus("return");
+            } else if (already) {
+              setRentStatus("forbidden");
+              setTooltip('show');
+            } else if (booksNum >= 5) {
+              setRentStatus("forbidden");
+              setTooltip('');
+            } else {
+              setRentStatus("rent");
+            }
+          })
+          .catch((error) => {
+            alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
+            console.log(error);
+          });
       })
       .catch((error) => {
         alert("다른 사용자에 의해 빌려진 도서인지 확인하지 못했습니다.");
         console.log(error);
       })
   }, [props.stateCheck]);
-
-  // 나의 전체 대여/반납 도서목록 가져오기
-  useEffect(() => {
-    axios.post("/rent/info", { userId: userId })
-      .then((res) => {
-        let booksNum = 0;
-
-        // 대여한 도서 수 판단
-        res.data.map((mybooks) => {
-          if (mybooks.state == true) {
-            booksNum++;
-          }
-        });
-
-        // 반납 시 서버에 줄 대여책정보 
-        // (같은 책을 한번 더 빌리는 경우를 고려해 state가 true(현재 대여중)인 데이터)
-        setMyBook(
-          res.data
-            .filter((x) => x.title == props.book.title)
-            .filter((x) => x.state == true)
-        );
-
-        console.log(already)
-        if (res.data
-          .filter((x) => x.title == props.book.title)  // 현재 보는 책의 도서명과 나의 대여/반납도서들 중 도서명이 같은 것 
-          .filter((x) => x.state == true).length != 0  // 그 중 대여중인 책
-        ) {
-          setRentStatus("return");
-        } else if (already) {
-          setRentStatus("forbidden");
-          setTooltip('show');
-        } else if (booksNum >= 5) {
-          setRentStatus("forbidden");
-          setTooltip('');
-        } else {
-          setRentStatus("rent");
-        }
-      })
-      .catch((error) => {
-        alert("빌린도서 리스트를 받아오는 데 실패했습니다.");
-        console.log(error);
-      });
-    }, [props.stateCheck]);
-    // }, []);
-    // });
 
   let rentFunc = () => {
 
