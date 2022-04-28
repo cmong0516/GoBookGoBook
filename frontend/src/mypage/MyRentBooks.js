@@ -39,28 +39,25 @@ function MyRentBooks(props) {
         rentBook.map((book) => (
           <CardStyle>
             <Card key={book.rentId}>
-              {book.coverLargeUrl ? (
-                <Card.Img variant="top" src={book.coverLargeUrl} />
-              ) : (
-                <Card.Img variant="top" src={book.coverSmallUrl} />
-              )}
+              {book.coverLargeUrl
+                ? <Card.Img variant="top" src={book.coverLargeUrl} />
+                : <Card.Img variant="top" src={book.coverSmallUrl} />
+              }
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text>대여일 : {book.rentDate}</Card.Text>
-                {book.returnDate ? (
-                  <Card.Text>반납일 : {book.returnDate}</Card.Text>
-                ) : (
-                  <Card.Text>반납예정일 : {dueDate(book.rentDate)}</Card.Text>
-                )}
+                {book.returnDate
+                  ? <Card.Text>반납일 : {book.returnDate}</Card.Text>
+                  : <Card.Text>반납예정일 : {dueDate(book.rentDate)}</Card.Text>
+                }
 
-                {book.state == true ? (
-                  <Button
+                {book.state == true
+                  ? <Button
                     variant="outline-danger"
-                    onClick={() => returnFunc(book.rentId)}
-                  >
+                    onClick={() => returnFunc(book.rentId)}>
                     반납하기
                   </Button>
-                ) : null}
+                  : null}
               </Card.Body>
             </Card>
           </CardStyle>

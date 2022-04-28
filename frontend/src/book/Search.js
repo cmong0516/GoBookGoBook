@@ -36,6 +36,7 @@ function Search(props) {
     axios.get("/api/search", { params: { query: searchWord } })
       .then((res) => {
 
+        setStateCheck(!stateCheck);
         // 다른 검색어를 검색할 때마다 nowPage를 1로 초기화
         setNowPage(1);
         setBooks(res.data);
