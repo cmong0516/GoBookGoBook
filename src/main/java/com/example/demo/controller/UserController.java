@@ -52,7 +52,6 @@ public class UserController {
     @DeleteMapping("/delete")
     public boolean delete(@RequestBody User user){
 //        System.out.println("id = " + user.getUserId()); //확인
-        reviewService.deleteReview1(user.getUserId());
         rentService.deleteRent(user.getUserId());
         return userService.deleteUser(user.getUserId());
     }
