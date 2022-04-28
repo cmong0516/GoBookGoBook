@@ -45,7 +45,7 @@ public class Rent {
     @Column(name = "return_date")
     private LocalDate returnDate;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="id")
     private User user;
 

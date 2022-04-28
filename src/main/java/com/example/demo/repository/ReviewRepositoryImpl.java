@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 
 import com.example.demo.domain.Review;
+import com.example.demo.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -50,5 +51,10 @@ public class ReviewRepositoryImpl implements ReviewRepository{
         Review review = em.find(Review.class, reviewId);
         log.warn(String.valueOf(review));
         em.remove(review);
+    }
+
+    @Override
+    public void delete(User user) {
+        em.remove(user);
     }
 }

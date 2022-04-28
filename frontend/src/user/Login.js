@@ -72,7 +72,7 @@ function Login(props) {
     if (!account.userId) {
       setAlarm("아이디가 입력되지 않았습니다.");
     } else if (!account.userPw) {
-      setAlarm("비밀번호가 입력되지 않았습ㄹ니다.");
+      setAlarm("비밀번호가 입력되지 않았습니다.");
     } else if (
       !idFormat.test(account.userId) ||
       !passwordFormat.test(account.userPw)
