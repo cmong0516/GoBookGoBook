@@ -15,10 +15,9 @@ let BookWrapper = styled.div`
     margin-top: 0.5rem;
     padding: 0;
   }
-`
+`;
 
 function Search(props) {
-
   let userId = localStorage.getItem("userId");
   let history = useHistory();
   let books = useContext(BookContext);
@@ -30,12 +29,12 @@ function Search(props) {
   let [nowPage, setNowPage] = useState(1);
   let LastIndex = nowPage * 5 - 1;
   let slicebooks = [];
-  books && (slicebooks = books.slice(0, LastIndex))
+  books && (slicebooks = books.slice(0, LastIndex));
 
   useEffect(() => {
-    axios.get("/api/search", { params: { query: searchWord } })
+    axios
+      .get("/api/search", { params: { query: searchWord } })
       .then((res) => {
-
         setStateCheck(!stateCheck);
         // 다른 검색어를 검색할 때마다 nowPage를 1로 초기화
         setNowPage(1);
@@ -53,33 +52,30 @@ function Search(props) {
 
   return (
     <div>
-      {
-        slicebooks && slicebooks.map((book) => (
+      {slicebooks &&
+        slicebooks.map((book) => (
           <BookWrapper>
             <Row style={{ alignItems: "center" }}>
-
               <Col sm={12} md={10}>
-                <Row onClick={() => { history.push("/detail/" + book.isbn) }}>
+                <Row
+                  onClick={() => {
+                    history.push("/detail/" + book.isbn);
+                  }}
+                >
                   <Col sm={6} md={2}>
-                    <img
-                      variant="top"
-                      width="100%"
-                      src={book.coverLargeUrl}
-                    />
+                    <img variant="top" width="100%" src={book.coverLargeUrl} />
                   </Col>
                   <Col sm={6} md={10}>
-                    <Card style={{ height: '100%' }}>
+                    <Card style={{ height: "100%" }}>
                       <Card.Body>
                         <Card.Title>{book.title}</Card.Title>
-                        <Card.Subtitle className="mt-2 mb-2 text-muted">{book.author} 지음&nbsp; | &nbsp;{book.publisher}</Card.Subtitle>
+                        <Card.Subtitle className="mt-2 mb-2 text-muted">
+                          {book.author} 지음&nbsp; | &nbsp;{book.publisher}
+                        </Card.Subtitle>
                         <Card.Text>
                           <footer className="blockquote-footer mt-1">
                             {book.description.substr(0, 200)}
-                            {
-                              book.description.length > 200
-                                ? '...'
-                                : null
-                            }
+                            {book.description.length > 200 ? "..." : null}
                           </footer>
                         </Card.Text>
                       </Card.Body>
@@ -88,7 +84,6 @@ function Search(props) {
                 </Row>
               </Col>
 
-              {/* 관리자인 경우 대여버튼 보이지 않도록 */}
               {
                 userId != 'admin0'
                   ?
@@ -120,18 +115,18 @@ function Search(props) {
 
       {
         // 마지막 검색결과까지 도달하면 더보기버튼을 보이지 않음
-        LastIndex >= (books && books.length)
-          ? null
-          : <Button
+        LastIndex >= (books && books.length) ? null : (
+          <Button
             variant="dark"
             onClick={() => setNowPage(++nowPage)}
-            style={{ borderRadius: "2rem", marginTop: "1rem" }}>
+            style={{ borderRadius: "2rem", marginTop: "1rem" }}
+          >
             ▼ 더보기
           </Button>
+        )
       }
-
     </div>
-  )
+  );
 }
 
 export default Search;

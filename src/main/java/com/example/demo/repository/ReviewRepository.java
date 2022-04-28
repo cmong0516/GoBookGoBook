@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Review;
+import com.example.demo.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ReviewRepository {
     List<Review> findByReviewId(Long reviewId);
 
     void deleteByReviewId(Long reviewId);
+
+    void delete(User user);
 }

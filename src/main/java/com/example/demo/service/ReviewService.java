@@ -49,4 +49,10 @@ public class ReviewService {
         reviewRepository.deleteByReviewId(review.getReviewId());
         return true;
     }
+
+    public void deleteReview1(String userId) {
+        List<User> byId = userRepository.findById(userId);
+        User user = byId.get(0);
+        reviewRepository.delete(user);
+    }
 }
