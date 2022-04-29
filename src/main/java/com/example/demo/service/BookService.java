@@ -64,7 +64,7 @@ public class BookService {
 
             //0000년 00월 00일
            String subdate = obj.getString("datetime").substring(0,10);
-           String date = subdate.substring(0,4)+"년 " + subdate.substring(5,7) + "월 "+subdate.substring(8,10)+"일";
+           String date = subdate.substring(0,4) + subdate.substring(5,7) + subdate.substring(8,10);
 //            System.out.println("datetime = " + date);
             searchBook.setPubDate(date);
 
