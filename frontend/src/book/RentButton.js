@@ -47,7 +47,6 @@ function RentButton(props) {
                 .filter((x) => x.state == true)
             );
 
-            console.log(already)
             if (res.data
               .filter((x) => x.title == props.book.title)  // 현재 보는 책의 도서명과 나의 대여/반납도서들 중 도서명이 같은 것 
               .filter((x) => x.state == true).length != 0  // 그 중 대여중인 책

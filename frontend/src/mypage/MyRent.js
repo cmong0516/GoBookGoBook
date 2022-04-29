@@ -22,7 +22,6 @@ function MyRent() {
   useEffect(() => {
     axios.post("/rent/info", { userId: userId })
       .then((res) => {
-        console.log(returnCheck);
 
         setNowRent(res.data.filter((x) => x.state == true));
         setReturnBook(res.data.filter((x) => x.state == false));

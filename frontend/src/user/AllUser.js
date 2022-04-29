@@ -12,6 +12,7 @@ let Styledth2 = styled.td`
 
 function AllUser() {
   let [users, setUsers] = useState([]);
+  let [stateCheck, setStateCheck] = useState(false);
 
   let [account, setAccount] = useState({
     userEmail: "",
@@ -43,7 +44,7 @@ function AllUser() {
       })
       .then((res) => {
         alert("개인정보 수정이 완료되었습니다.");
-        console.log(res);
+        setStateCheck(!stateCheck);
       })
       .catch((error) => {
         alert("개인정보 수정에 실패했습니다.");
@@ -58,6 +59,7 @@ function AllUser() {
         })
         .then(() => {
           alert(user.userName + "님이 성공적으로 탈퇴되었습니다.");
+          setStateCheck(!stateCheck);
         })
         .catch((error) => {
           alert(user.userName + "님의 회원 탈퇴에 실패하셨습니다.");

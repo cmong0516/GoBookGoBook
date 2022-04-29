@@ -123,7 +123,6 @@ function App() {
       <Switch>
         <Wrapper>
           <Route exact path="/">
-            여기에 발표동영상!
           </Route>
           <Route exact path="/api/bestseller">
             <BookContext.Provider value={books}>
