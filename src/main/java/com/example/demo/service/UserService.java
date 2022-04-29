@@ -25,9 +25,53 @@ public class UserService {
         user.setUserEmail("admin0@gmail.com");
         user.setUserName("관리자");
         user.setEnabled(true);
+
+        User user1 = new User();
+        user1.setUserId("cmong0516");
+        user1.setUserPw(passwordEncoding("cmong111!"));
+        user1.setUserEmail("cmong0516@gmail.com");
+        user1.setUserName("김창모");
+        user1.setEnabled(true);
+
+        User user2 = new User();
+        user2.setUserId("wndo222");
+        user2.setUserPw(passwordEncoding("rnwndo222!"));
+        user2.setUserEmail("jool0129@gmail.com");
+        user2.setUserName("구주애");
+        user2.setEnabled(true);
+
+        User user3 = new User();
+        user3.setUserId("godus333");
+        user3.setUserPw(passwordEncoding("godus333!"));
+        user3.setUserEmail("godus333!@gmail.com");
+        user3.setUserName("김혜연");
+        user3.setEnabled(true);
+
+        User user4 = new User();
+        user4.setUserId("dnjstjr444");
+        user4.setUserPw(passwordEncoding("dnjstjr444!"));
+        user4.setUserEmail("wsji9409@gmail.com");
+        user4.setUserName("지원석");
+        user4.setEnabled(true);
 //        System.out.println("user = " + user);
         if(userRepository.findById("admin0").isEmpty()){
             userRepository.save(user);
+        }
+
+        if(userRepository.findById("cmong0516").isEmpty()){
+            userRepository.save(user1);
+        }
+
+        if(userRepository.findById("wndo222").isEmpty()){
+            userRepository.save(user2);
+        }
+
+        if(userRepository.findById("godus333").isEmpty()){
+            userRepository.save(user3);
+        }
+
+        if(userRepository.findById("dnjstjr444").isEmpty()){
+            userRepository.save(user4);
         }
     }
 
